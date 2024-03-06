@@ -61,7 +61,7 @@ module Admin
       params.require(:ml_model)
             .permit(
               :title, :explanation, :description, :notebook, :notebook_html, :model_diagram,
-              :model_type, parameters_with_order: []
+              :model_type, :identifier, parameters_with_order: []
             )
             .merge(account: current_account)
     end

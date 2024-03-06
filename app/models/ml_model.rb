@@ -10,5 +10,6 @@ class MlModel < ApplicationRecord
 
   enum :model_type, { classification: 0, regression: 1 }
 
-  validates :title, :description, :model_type, :explanation, :parameters_with_order, presence: true
+  validates :title, :description, :model_type, :identifier, :explanation, :parameters_with_order, presence: true
+  validates :identifier, downcase: true, alphanumeric: true, length: { minimum: 2, maxiumum: 60 }
 end

@@ -5,8 +5,13 @@
   </div>
 
   <div>
+    <%= form.label :identifier %>
+    <%= form.text_field :identifier %>
+  </div>
+
+  <div>
     <%= form.label :model_type %>
-    <%= form.select :model_type, ['classification', 'regression'] %>
+    <%= form.select :model_type, %w[classification regression] %>
   </div>
 
   <div>
