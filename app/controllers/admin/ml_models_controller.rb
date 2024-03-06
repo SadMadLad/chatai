@@ -40,7 +40,7 @@ module Admin
 
     def destroy
       @ml_model.destroy
-      redirect_to %i[admin models]
+      redirect_to %i[admin ml_models]
     end
 
     def prediction
@@ -59,7 +59,10 @@ module Admin
 
     def ml_model_params
       params.require(:ml_model)
-            .permit(:title, :explanation, :description, :notebook, :model_diagram, parameters: {}, config: {})
+            .permit(
+              :title, :explanation, :description, :notebook, :notebook_html, :model_diagram,
+              :model_type, parameters_with_order: []
+            )
             .merge(account: current_account)
     end
   end

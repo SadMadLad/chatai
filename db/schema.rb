@@ -106,8 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_211813) do
   create_table "ml_models", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.jsonb "parameters", null: false
-    t.jsonb "config", null: false
+    t.integer "model_type", null: false
+    t.jsonb "parameters_with_order", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

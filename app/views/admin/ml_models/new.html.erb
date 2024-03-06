@@ -5,6 +5,11 @@
   </div>
 
   <div>
+    <%= form.label :model_type %>
+    <%= form.select :model_type, ['classification', 'regression'] %>
+  </div>
+
+  <div>
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
@@ -19,13 +24,16 @@
     <%= form.rich_text_area :explanation %>
   </div>
 
-  <%= form.fields_for :parameters do |parameters_form| %>
-    <%= parameters_form.text_field :parameter_one %>
-  <% end %>
+  <div data-controller="clone">
+    <%= form.label :parameters_with_order %>
 
-  <%= form.fields_for :config do |config_form| %>
-    <%= config_form.text_field :config_one %>
-  <% end %>
+    <div data-clone-target="cloneContainer">
+      <button type="button" data-action="clone#cloneTargetToContainer">Add Order Param</button>
+      <%= form.fields_for :parameters_with_order do |parameters_order_form| %>
+        <%= parameters_order_form.text_field '', id: nil, data: { clone_target: 'toBeCloned' } %>
+      <% end %>
+    </div>
+  </div>
 
   <%= @ml_model.errors.full_messages %>
 
