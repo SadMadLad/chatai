@@ -1,0 +1,31 @@
+<%= link_to 'Create new Ml Model' %>
+
+<hr />
+
+<table class="table-auto text-sm">
+  <thead class="bg-gray-100">
+    <tr>
+      <th>Title</th>
+      <th>Uploader</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ml_models.each do |ml_model| %>
+      <tr class="border-b">
+        <td><%= ml_model.title %></td>
+        <td><%= ml_model.account.full_name %></td>
+        <td><%= ml_model.created_at %></td>
+        <td><%= ml_model.updated_at %></td>
+        <td>
+          <%= link_to 'Show', ml_model %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_nav(@pagy) %>
+

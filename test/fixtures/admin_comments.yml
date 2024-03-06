@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  admin_commentable: one
+  admin_commentable_type: Admin commentable
+
+two:
+  body: MyText
+  admin_commentable: two
+  admin_commentable_type: Admin commentable

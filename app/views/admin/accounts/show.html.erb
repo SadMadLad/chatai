@@ -1,0 +1,12 @@
+<%= spread_record(@account) %>
+
+<hr />
+
+<%= render 'shared/admin_comments_section', admin_commentable: @account, admin_comments: @admin_comments, pagy: @pagy %>
+
+<hr />
+
+<%= link_to 'Account user\'s path', [:admin, @account.user] %>
+<%= link_to 'Accounts Path', [:admin, :accounts] %>
+<%= link_to 'Edit Account Path', [:edit, :admin, @account] %>
+

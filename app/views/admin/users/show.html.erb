@@ -1,0 +1,10 @@
+<%== spread_record(@user, except: ['encrypted_password']) %>
+<hr />
+
+<%= render 'shared/admin_comments_section', admin_commentable: @user, admin_comments: @admin_comments, pagy: @pagy %>
+
+<hr />
+
+<%= link_to 'User\'s account path', [:admin, @user.account] %>
+<%= link_to 'Users Path', [:admin, :users] %>
+<%= link_to 'Edit User Path', [:edit, :admin, @user] %>

@@ -1,0 +1,32 @@
+<%= link_to 'Add new chat', [:new, :admin, :chat] %>
+<hr />
+
+<table class="table-auto text-sm">
+  <thead class="bg-gray-100">
+    <tr>
+      <th>Chat Type</th>
+      <th>Participants Count</th>
+      <th>Latest Message At</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @chats.each do |chat| %>
+      <tr class="border-b">
+        <td><%= chat.chat_type %></td>
+        <td><%= chat.account_chat_maps.length %></td>
+        <td><%= chat.latest_message_at %></td>
+        <td><%= chat.created_at %></td>
+        <td><%= chat.updated_at %></td>
+        <td>
+          <%= link_to 'Show', [:admin, chat] %>
+          <%= button_to 'Delete', [:admin, chat], method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_nav(@pagy) %>

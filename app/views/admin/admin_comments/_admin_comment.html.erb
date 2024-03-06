@@ -1,0 +1,6 @@
+<%= turbo_frame_tag dom_id(admin_comment) do %>
+  <%= "#{admin_comment.body},  #{admin_comment.commenter.full_name}" %>
+  <%= link_to 'Edit', [:edit, :admin, admin_comment], class: 'bg-yellow-500' %>
+  <%= button_to 'Delete', [:admin, admin_comment], method: :delete, class: 'bg-red-500', form: { data: { turbo_frame: 'admin_comments' } } %>
+  <br />
+<% end %>

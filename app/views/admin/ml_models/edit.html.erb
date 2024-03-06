@@ -1,0 +1,31 @@
+<%= form_with model: @ml_model, url: [:admin, @ml_model], method: :patch do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :model_diagram %>
+    <%= form.file_field :model_diagram %>
+  </div>
+
+  <div>
+    <%= form.label :explanation %>
+    <%= form.rich_text_area :explanation %>
+  </div>
+
+  <%= form.fields_for :parameters do |parameters_form| %>
+    <%= parameters_form.text_field :parameter_one %>
+  <% end %>
+
+  <%= form.fields_for :config do |config_form| %>
+    <%= config_form.text_field :config_one %>
+  <% end %>
+
+  <%= form.submit %>
+<% end %>

@@ -1,0 +1,39 @@
+<div>
+  <h1 class="font-bold text-4xl">Chats#index</h1>
+  <p>Find me in app/views/chats/index.html.erb</p>
+  <%= link_to 'Go To Group Chats', [:group, :chats] %>
+</div>
+
+<div class="w-full flex h-96" data-controller="chats frames">
+  <section class="w-1/3 bg-purple-200 h-96 overflow-scroll">
+    <%= turbo_frame_tag 'chats' do %>
+      <% unless @no_chats %>
+        <% @chats.zip(@accounts).each do |chat, account| %>
+          <%= link_to chat, data: { turbo_frame: 'chat', chats_target: 'chatTab', id: dom_id(chat) }, class: "shadow border p-3 block #{'bg-orange-500' if selected_chat?(chat)}" do %>
+            <%= account.full_name %>
+          <% end %>
+        <% end %>
+
+        <% if @pagy.page < @pagy.pages %>
+          <%= turbo_frame_tag 'chats', src: chats_path({ page: @pagy.page + 1 }), loading: 'lazy', data: { action: 'turbo:before-frame-render->frames#morphChildren' } do %>
+            Load More Chats
+          <% end %>
+        <% end %>
+
+      <% else %>
+        No Chats for you right now
+      <% end %>
+    <% end %>
+  </section>
+  <section class="w-2/3 bg-orange-200">
+    <% unless @is_paginated || @no_chats %>
+      <%= turbo_frame_tag 'chat', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
+        <% @messages.each do |message| %>
+          <div class=<%= chat_message_class(message) %>>
+            <%= message.body %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </section>
+</div>

@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "new_admin_comment" do %>
+  <%= render 'form', admin_commentable: @admin_comment.admin_commentable, method: :post %>
+<% end %>

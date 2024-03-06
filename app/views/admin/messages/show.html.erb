@@ -1,0 +1,12 @@
+<%= spread_record(@message) %>
+
+<hr />
+
+<%= link_to @account.full_name, admin_account_path(@account) %>
+<%= link_to @chat.id, admin_chat_path(@chat) %>
+
+<hr />
+
+<%= render 'shared/admin_comments_section', admin_commentable: @message, admin_comments: @admin_comments, pagy: @pagy %>
+
+<%= link_to 'Messages Path', [:admin, :messages] %>

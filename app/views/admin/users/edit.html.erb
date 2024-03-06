@@ -1,0 +1,15 @@
+<%= form_with model: @user, url: [:admin, @user], method: :patch do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+    <%= @user.errors.full_messages_for(:email) %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+    <%= @user.errors.full_messages_for(:password) %>
+  </div>
+
+  <%= form.submit %>
+<% end %>

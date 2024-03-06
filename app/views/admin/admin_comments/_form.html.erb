@@ -1,0 +1,14 @@
+<%= form_with **admin_comment_form_options(@admin_comment, method, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#clear' }) do |form| %>
+  <%= form.hidden_field :admin_commentable_type, value: admin_commentable.class.name %>
+  <%= form.hidden_field :admin_commentable_id, value: admin_commentable.id %>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_field :body %>
+    <% if @admin_comment.errors.present? %>
+      <span data-form-target="errorField"><%= @admin_comment.errors.full_messages %></span>
+    <% end %>
+  </div>
+
+  <%= form.submit %>
+<% end %>

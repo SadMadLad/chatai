@@ -1,0 +1,4 @@
+
+<div data-controller="flash" class="<%= %i[bg_light text].map { |color_type| flash_color(color_type) }.join(' ') %>">
+  <%= flash[:alert] || flash[:notice] %>
+</div>

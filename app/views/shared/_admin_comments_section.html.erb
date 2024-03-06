@@ -1,0 +1,54 @@
+<%= turbo_frame_tag 'new_admin_comment' do %>
+  <%= render 'admin/admin_comments/form', admin_commentable:, method: :post %>
+<% end %>
+
+<hr />
+
+<%= form_with scope: :admin_comments_q, url: [:admin, admin_commentable], class: 'bg-pink-500', method: :get, data: { turbo_frame: 'admin_comments' } do |form| %>
+  <div>
+    <%= form.label :commenter_id %>
+    <%= form.collection_select :commenter_id, @admins, :id, :full_name, { prompt: '' }, {} %>
+  </div>
+
+  <div>
+    <%= form.label :min_created_at %>
+    <%= form.date_field :min_created_at %>
+  </div>
+
+  <div>
+    <%= form.label :max_created_at %>
+    <%= form.date_field :max_created_at %>
+  </div>
+
+  <div>
+    <%= form.label :min_updated_at %>
+    <%= form.date_field :min_updated_at %>
+  </div>
+
+  <div>
+    <%= form.label :max_updated_at %>
+    <%= form.date_field :max_updated_at %>
+  </div>
+
+  <div>
+    <%= form.label :sort_by %>
+    <%= form.select :sort_by, %w[created_at updated_at] %>
+  </div>
+
+  <div>
+    <%= form.label :sort_by_direction %>
+    <%= form.select :sort_by_direction, [['Ascending', 'asc'], ['Descending', 'desc']], {}, {} %>
+  </div>
+
+  <%= form.submit 'Search' %>
+<% end %>
+
+<div>
+  <%= link_to 'Reset Filters', [:admin, admin_commentable] %>
+</div>
+
+<%= turbo_frame_tag 'admin_comments' do %>
+  <%= render partial: 'admin/admin_comments/admin_comment', collection: admin_comments %>
+
+  <%== pagy_nav(pagy) %>
+<% end %>

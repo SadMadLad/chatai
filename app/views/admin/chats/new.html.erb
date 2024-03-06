@@ -1,0 +1,20 @@
+<%= form_with model: @chat, url: [:admin, :chats], data: { controller: 'clone' } do |form| %>
+  <%= form.fields_for :account_ids do |f| %>
+    <div data-clone-target="cloneContainer">
+      <div data-clone-target="toBeCloned">
+        <%= f.collection_select '', @accounts, :id, :full_name, { prompt: '' } %>
+        <button type="button" data-action="clone#removeCloneTarget">Remove Participant</button>
+      </div>
+      <div data-clone-target="toBeCloned">
+        <%= f.collection_select '', @accounts, :id, :full_name, { prompt: '' } %>
+        <button type="button" data-action="clone#removeCloneTarget">Remove Participant</button>
+      </div>
+    </div>
+  <% end %>
+  <br />
+
+  <button type="button" data-action="clone#cloneTargetToContainer">Add more participants</button>
+  <%= @chat.errors.full_messages %>
+
+  <%= form.submit %>
+<% end %>

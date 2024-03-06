@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chatai</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'tailwind', 'inter-font', data: { turbo_track: 'reload' } %>
+    <%= stylesheet_link_tag 'application', data: { turbo_track: 'reload'} %>
+    <meta name="turbo-refresh-method" content="morph">
+
+    <%= javascript_importmap_tags %>
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <main class="flex min-h-screen" data-controller="sidebar" data-sidebar-show-value="true">
+      <%= render 'shared/admin_sidebar' %>
+      <div class="flex-grow">
+        <%= turbo_frame_tag 'main', data: { action: 'turbo:frame-render->sidebar#colorTab' } do %>
+          <%= hidden_field_tag :controller, params[:controller], { data: { sidebar_target: 'controllerField' } } %>
+          <%= yield %>
+        <% end %>
+      </div>
+    </main>
+    <div id="flash" class="fixed top-0 right-0">
+      <%= render 'shared/flash' %>
+    </div>
+  </body>
+</html>

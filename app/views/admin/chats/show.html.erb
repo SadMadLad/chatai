@@ -1,0 +1,20 @@
+<%= spread_record(@chat) %>
+
+<hr />
+  <h4>Accounts: </h4>
+  <% @accounts.each do |participant| %>
+    <%= link_to participant.full_name, [:admin, participant] %>
+  <% end %>
+<hr />
+  <h4>Messages: </h4>
+  <% @messages.each do |message| %>
+    <%= link_to [:admin, message] do %>
+      <%= message.body %> - <%= message.account.full_name %>
+    <% end %>
+  <% end %>
+<hr />
+
+<%= render 'shared/admin_comments_section', admin_commentable: @chat, admin_comments: @admin_comments, pagy: @pagy %>
+
+
+<%= link_to 'Chats Path', [:admin, :chats] %>

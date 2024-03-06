@@ -1,0 +1,17 @@
+<h1 class="text-2xl font-black"><%= @ml_model.title %></h1>
+
+<h2 class="text-xl font-bold">Creator: <%= @ml_model.account.full_name %></h2>
+
+<code class="bg-gray-50">
+  <%= @ml_model.parameters %>
+</code>
+
+<code class="bg-orange-50">
+  <%= @ml_model.config %>
+</code>
+
+<% if @ml_model.model_diagram.attached? %>
+  <%= image_tag @ml_model.model_diagram %>
+<% end %>
+
+<%= @ml_model.explanation %>

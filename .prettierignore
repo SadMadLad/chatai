@@ -1,0 +1,6 @@
+*.yml
+package.json
+package-lock.json
+*.md
+
+vendor/

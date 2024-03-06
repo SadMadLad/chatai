@@ -1,0 +1,26 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/migrate/**/*
+    - db/schema.rb
+    - script/**/*
+    - bin/**/*
+    - test/**/*
+    - app/admin/**/*
+    - app/channels/**/*
+    - app/jobs/**/*
+    - node_modules/**/*
+    - Rakefile
+    - config.ru
+    - config/initializers/**/*
+    - config/environments/**/*
+
+require:
+  - rubocop-capybara
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rails
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
