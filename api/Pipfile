@@ -22,10 +22,12 @@ seaborn = "*"
 xgboost = "*"
 catboost = "*"
 lightgbm = "*"
+cloudpickle = "*"
+dill = "*"
 
 [dev-packages]
-black = "*"
 flake8 = "*"
+black = {extras = ["jupyter"], version = "*"}
 
 [requires]
 python_version = "3.12"

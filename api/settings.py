@@ -9,10 +9,12 @@ load_dotenv(find_dotenv())
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 API_CLIENT_SECRET = os.getenv("API_CLIENT_SECRET")
+MODELS_HTML_PATH = os.getenv("MODELS_HTML_PATH")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
 
 # Dependency
 def get_db():
