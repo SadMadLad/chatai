@@ -2,7 +2,9 @@
 
 module Admin
   class MlModelsController < AdminController
-    before_action :set_model, only: %i[show edit update destroy]
+    layout 'admin', except: :notebook_html
+
+    before_action :set_model, only: %i[show edit update destroy notebook_html]
     before_action :authorize_ml_model
 
     before_action -> { define_model_name('ml_model') }
@@ -45,6 +47,13 @@ module Admin
 
     def prediction
       @prediction = 123
+    end
+
+    def notebook_html
+      client = Clients::ApiClient.new.client
+      @html = client.get("ml_models/#{@ml_model.id}/notebook_html").body
+
+      render inline: @html
     end
 
     private

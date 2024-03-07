@@ -12,13 +12,14 @@ Rails.application.routes.draw do
     get :dashboard, to: 'dashboard#index'
 
     resources :chats, only: %i[index show create destroy] do
-      collection do
-        get :group
-      end
+      collection { get :group }
     end
 
     resources :ml_models, only: %i[index show] do
-      member { post :prediction }
+      member do
+        get :notebook_html
+        post :prediction
+      end
     end
   end
 
@@ -33,7 +34,10 @@ Rails.application.routes.draw do
       resources :chats, only: %i[index show new create destroy]
       resources :messages
       resources :ml_models do
-        member { post :prediction }
+        member do
+          get :notebook_html
+          post :prediction
+        end
       end
     end
   end
