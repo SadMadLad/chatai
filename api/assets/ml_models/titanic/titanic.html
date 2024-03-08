@@ -7802,19 +7802,19 @@ a.anchor-link {
 <pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
 Index: 668 entries, 28 to 235
 Data columns (total 11 columns):
- #   Column       Non-Null Count  Dtype  
----  ------       --------------  -----  
- 0   PassengerId  668 non-null    int64  
- 1   Pclass       668 non-null    int64  
- 2   Name         668 non-null    object 
- 3   Sex          668 non-null    object 
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   PassengerId  668 non-null    int64
+ 1   Pclass       668 non-null    int64
+ 2   Name         668 non-null    object
+ 3   Sex          668 non-null    object
  4   Age          527 non-null    float64
- 5   SibSp        668 non-null    int64  
- 6   Parch        668 non-null    int64  
- 7   Ticket       668 non-null    object 
+ 5   SibSp        668 non-null    int64
+ 6   Parch        668 non-null    int64
+ 7   Ticket       668 non-null    object
  8   Fare         668 non-null    float64
- 9   Cabin        163 non-null    object 
- 10  Embarked     666 non-null    object 
+ 9   Cabin        163 non-null    object
+ 10  Embarked     666 non-null    object
 dtypes: float64(2), int64(4), object(5)
 memory usage: 62.6+ KB
 </pre>
@@ -7972,11 +7972,11 @@ memory usage: 62.6+ KB
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">RemoveStringColumnsTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
-    
+
     <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="n">numeric_columns_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
         <span class="n">numeric_data</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">numeric_columns_mask</span><span class="p">]</span>
-        
+
         <span class="k">return</span> <span class="n">numeric_data</span>
 
 <span class="n">final_preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>

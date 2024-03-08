@@ -18,11 +18,9 @@
         <td><%= ml_model.created_at %></td>
         <td><%= ml_model.updated_at %></td>
         <td>
-          <%= link_to 'Show', ml_model %>
+          <%= link_to 'Show', [:admin, ml_model] %>
           <%= link_to 'Edit', [:edit, :admin, ml_model] %>
-          <% if current_account.superadmin? %>
-            <%= button_to 'Destroy', [:admin, ml_model], method: :delete %>
-          <% end %>
+          <%= button_to('Destroy', [:admin, ml_model], method: :delete) if current_account.superadmin? %>
         </td>
       </tr>
     <% end %>

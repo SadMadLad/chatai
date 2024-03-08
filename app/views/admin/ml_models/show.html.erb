@@ -9,10 +9,15 @@
 
 <hr />
 
+<h3>Get Prediction</h3>
+
+<hr />
+
 <%= render 'shared/admin_comments_section', admin_commentable: @ml_model, admin_comments: @admin_comments, pagy: @pagy %>
 
 <hr />
 
 <%= link_to 'ML Models', [:admin, :ml_models] %>
 <%= link_to 'Edit ML Model', [:edit, :admin, @ml_model] %>
+<%= link_to 'Go To Notebook', [:notebook_html, :admin, @ml_model], data: { turbo_frame: '_top' } %>
 <%= button_to 'Destroy ML Model', [:admin, @ml_model], method: :delete %>
