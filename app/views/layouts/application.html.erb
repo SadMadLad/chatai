@@ -32,6 +32,8 @@
         <%= render 'shared/flash' %>
       </div>
       <%= yield %>
+
+      <%= turbo_frame_tag 'dialog' %>
     </main>
   </body>
 </html>
