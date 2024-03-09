@@ -32,10 +32,11 @@ async def get_model_prediction(
     required_parameters = ml_model.parameters_with_order
     prediction_params = list(incoming_json.keys())
 
-    if any(param not in required_parameters for param in prediction_params):
-        missing_parameters = [
-            param for param in required_parameters if param not in prediction_params
-        ]
+    missing_parameters = [
+        param for param in required_parameters if param not in prediction_params
+    ]
+
+    if len(missing_parameters) != 0:
         raise HTTPException(
             status_code=422,
             detail=f"Incorrect parameters. Missing are: {', '.join(missing_parameters)}",
@@ -55,6 +56,7 @@ async def get_model_prediction(
         return prediction.tolist()
 
     except Exception as e:
+        print(e)
         raise HTTPException(
             status_code=500, detail="Something went wrong. Please try later."
         )
