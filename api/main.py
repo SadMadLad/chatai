@@ -6,9 +6,6 @@ from settings import engine, Base, get_db
 
 from routers.embeddings_router import router as embeddings_router
 from routers.ml_models_router import router as ml_models_router
-# from assets.transformers.remove_string_columns_transformer import (
-#     RemoveStringColumnsTransformer,
-# )
 
 
 Base.metadata.create_all(bind=engine)
