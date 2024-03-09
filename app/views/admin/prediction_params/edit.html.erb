@@ -1,0 +1,23 @@
+<%= dialog_frame do %>
+  <%= form_with model: @prediction_param, url: [:admin, @ml_model, @prediction_param] do |form| %>
+    <h4>Adding a paramter for <%= @ml_model.title %></h4>
+    <%= @prediction_param.errors.full_messages %>
+
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, value: @prediction_param.name, readonly: true %>
+    </div>
+
+    <div>
+      <%= form.label :param_type %>
+      <%= form.select :param_type, PredictionParam.param_types.keys %>
+    </div>
+
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+    <%= form.submit %>
+  <% end %>
+  <button data-action="click->dialog#removeDialog" data-dialog-target="closeButton">Close Modal</button>
+<% end %>

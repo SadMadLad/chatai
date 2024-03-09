@@ -4,7 +4,7 @@ module Admin
   class MlModelsController < AdminController
     layout 'admin', except: :notebook_html
 
-    before_action :set_model, only: %i[show edit update destroy notebook_html]
+    before_action :set_model, only: %i[show edit update destroy prediction notebook_html]
     before_action :authorize_ml_model
 
     before_action -> { define_model_name('ml_model') }
@@ -14,11 +14,16 @@ module Admin
       @pagy, @ml_models = pagy(MlModel.includes(:account).all)
     end
 
-    def show; end
+    def show
+      @prediction_params = @ml_model.prediction_params
+      @prediction_params_names = @prediction_params.pluck(:name)
+    end
 
     def new
       @ml_model = MlModel.new
     end
+
+    def edit; end
 
     def create
       @ml_model = MlModel.new(ml_model_params)
@@ -29,8 +34,6 @@ module Admin
         render :new, status: :unprocessable_entity, alert: t(:failed_create, model:)
       end
     end
-
-    def edit; end
 
     def update
       if @ml_model.update(ml_model_params)
@@ -46,7 +49,8 @@ module Admin
     end
 
     def prediction
-      @prediction = 123
+      @response = Clients::ApiClient.new(ml_model: @ml_model).prediction(prediction_params)
+      @prediction = JSON.parse(@response.body).first
     end
 
     def notebook_html
@@ -73,6 +77,10 @@ module Admin
               :model_type, :identifier, parameters_with_order: []
             )
             .merge(account: current_account)
+    end
+
+    def prediction_params
+      params.require(:prediction).permit(*@ml_model.parameters_with_order).compact_blank
     end
   end
 end

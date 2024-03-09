@@ -2,7 +2,7 @@
 
 module Admin
   class MlModelPolicy < AdminPolicy
-    RESOURCEFUL_ACTIONS + %w[notebook_html].each do |action|
+    RESOURCEFUL_ACTIONS + %w[notebook_html prediction].each do |action|
       define_method(:"#{action}?") do
         user.superadmin?
       end

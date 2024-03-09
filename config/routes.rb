@@ -33,7 +33,9 @@ Rails.application.routes.draw do
       resources :admin_comments, except: :new
       resources :chats, only: %i[index show new create destroy]
       resources :messages
+      resources :prediction_params, only: %i[index show]
       resources :ml_models do
+        resources :prediction_params, except: %i[index show]
         member do
           get :notebook_html
           post :prediction

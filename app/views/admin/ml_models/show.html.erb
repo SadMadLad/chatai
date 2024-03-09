@@ -11,6 +11,12 @@
 
 <h3>Get Prediction</h3>
 
+
+<%= render 'admin/prediction_params/prediction_params_section', ml_model: @ml_model, prediction_params: @prediction_params %>
+
+<hr />
+
+<div id="prediction"></div>
 <hr />
 
 <%= render 'shared/admin_comments_section', admin_commentable: @ml_model, admin_comments: @admin_comments, pagy: @pagy %>

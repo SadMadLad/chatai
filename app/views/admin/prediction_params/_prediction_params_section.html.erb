@@ -1,0 +1,41 @@
+<div id="prediction_params_section">
+  <% if (ml_model.parameters_with_order - prediction_params.pluck(:name)).blank? %>
+    <%= form_with scope: :prediction, url: [:prediction, :admin, ml_model] do |form| %>
+      <% prediction_params.each do |prediction_param| %>
+        <div>
+          <%= form.label prediction_param.name %>
+          <% case prediction_param.param_type %>
+          <% when 'integer' %>
+            <%= form.number_field prediction_param.name, step: 1 %>
+          <% when 'float' %>
+            <%= form.number_field prediction_param.name %>
+          <% when 'string' %>
+            <%= form.text_field prediction_param.name %>
+          <% when 'text' %>
+            <%= form.text_area prediction_param.name %>
+          <% when 'options' %>
+            <%= form.select prediction_param.name, prediction_param.possible_values %>
+          <% when 'image' %>
+            <%= form.file_field prediction_param.name, accept: '.jpg,.png,.jpeg' %>
+          <% else %>
+            <%= form.text_field prediction_param.name %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= form.submit %>
+    <% end %>
+  <% end %>
+
+  <% ml_model.parameters_with_order.each do |model_param| %>
+    <%- prediction_param = prediction_params.find{ |prediction_param| prediction_param.name == model_param } %>
+
+    <div class="<%= prediction_param.nil? ? 'bg-red-500' : 'bg-green-500' %> text-white">
+      <% if prediction_param.nil? %>
+        <%= link_to "Add param details for #{model_param.capitalize}", new_admin_ml_model_prediction_param_path(ml_model, { name: model_param }), data: { turbo_frame: 'dialog' } %>
+      <% else %>
+        <%= link_to "Edit the parameter #{prediction_param.name.capitalize}", edit_admin_ml_model_prediction_param_path(ml_model, prediction_param), data: { turbo_frame: 'dialog' } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

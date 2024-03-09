@@ -4,9 +4,7 @@ class CreateAccounts < ActiveRecord::Migration[7.1]
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :username, null: false
-
       t.integer :role, null: false, default: 0
-
       t.datetime :latest_message_at
 
       t.belongs_to :user, null: false, foreign_key: true

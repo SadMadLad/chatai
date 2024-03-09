@@ -1,0 +1,33 @@
+<table class="table-auto text-sm">
+  <thead class="bg-gray-100">
+    <tr>
+      <th>Name</th>
+      <th>Parameter Type</th>
+      <th>Description</th>
+      <th>Machine Learning Model</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @prediction_params.each do |prediction_param| %>
+      <tr class="border-b">
+        <td><%= prediction_param.name %></td>
+        <td><%= prediction_param.param_type %></td>
+        <td><%= prediction_param.description.truncate(20) %></td>
+        <td><%= prediction_param.ml_model.title.truncate(10) %></td>
+        <td><%= prediction_param.created_at %></td>
+        <td><%= prediction_param.updated_at %></td>
+        <td>
+          <%= link_to 'Show', [:admin, prediction_param.ml_model, prediction_param] %>
+          <%= link_to 'Edit', [:edit, :admin, prediction_param.ml_model, prediction_param] %>
+          <%= button_to('Destroy', [:admin, :admin, prediction_param.ml_model, prediction_param], method: :delete) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_nav(@pagy) %>
+

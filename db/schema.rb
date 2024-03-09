@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_211813) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_08_155349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,6 +114,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_211813) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ml_models_on_account_id"
     t.index ["identifier"], name: "index_ml_models_on_identifier", unique: true
+  end
+
+  create_table "prediction_params", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "param_type", null: false
+    t.text "description", null: false
+    t.jsonb "possible_values"
+    t.bigint "ml_model_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ml_model_id"], name: "index_prediction_params_on_ml_model_id"
+    t.index ["name"], name: "index_prediction_params_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|

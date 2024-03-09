@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MlModel < ApplicationRecord
+  has_many :prediction_params
   belongs_to :account
 
   has_one_attached :model_diagram

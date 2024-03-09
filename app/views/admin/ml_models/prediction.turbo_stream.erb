@@ -1,0 +1,7 @@
+<%= turbo_stream.update 'prediction' do %>
+  <% if @response.success? %>
+    Response: <%= @prediction %>
+  <% else %>
+    Request failed. Please try it later.
+  <% end %>
+<% end %>

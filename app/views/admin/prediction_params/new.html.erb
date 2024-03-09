@@ -1,0 +1,31 @@
+<%= dialog_frame do %>
+  <%= form_with model: @prediction_param, url: [:admin, @ml_model, :prediction_params] do |form| %>
+    <h4>Adding a paramter for <%= @ml_model.title %></h4>
+    <%= @prediction_param.errors.full_messages %>
+
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, value: @prediction_param.name, readonly: true %>
+    </div>
+
+    <div data-controller="toggle" data-toggle-toggled-id-value="<%= @prediction_param.param_type %>">
+      <%= form.label :param_type %>
+      <%= form.select :param_type, PredictionParam.param_types.keys, {}, data: { action: 'toggle#toggle' } %>
+
+      <div data-toggle-target="toggleable" data-toggle-id="options" data-controller="clone" data-clone-target="cloneContainer">
+        <button type="button" data-action="clone#cloneTargetToContainer">Add more possible values</button>
+        <%= form.fields_for :possible_values do |possible_values_form| %>
+          <%= possible_values_form.text_field '', data: { toggle_id: 'options', toggle_target: 'toggleable', clone_target: 'toBeCloned' }, id: nil %>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+    <%= form.submit %>
+  <% end %>
+  <button data-action="click->dialog#removeDialog" data-dialog-target="closeButton">Close Modal</button>
+<% end %>

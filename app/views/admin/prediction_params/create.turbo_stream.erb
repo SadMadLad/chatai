@@ -1,0 +1,5 @@
+<%= turbo_stream.replace 'prediction_params_section' do %>
+  <%= render 'prediction_params_section', ml_model: @ml_model, prediction_params: @ml_model.prediction_params %>
+<% end %>
+
+<%= turbo_stream.update 'dialog' %>
