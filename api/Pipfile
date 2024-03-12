@@ -7,7 +7,6 @@ name = "pypi"
 sqlalchemy = "*"
 fastapi = {extras = ["all"], version = "*"}
 uvicorn = {extras = ["standard"], version = "*"}
-torch = "*"
 numpy = "*"
 pandas = "*"
 python-dotenv = "*"
@@ -24,7 +23,9 @@ catboost = "*"
 lightgbm = "*"
 cloudpickle = "*"
 dill = "*"
-torchvision = "*"
+torch = "==2.2.0"
+torchvision = "==0.17.0"
+torchaudio = "==2.2.0"
 
 [dev-packages]
 flake8 = "*"
