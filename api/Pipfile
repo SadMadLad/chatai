@@ -24,6 +24,7 @@ catboost = "*"
 lightgbm = "*"
 cloudpickle = "*"
 dill = "*"
+torchvision = "*"
 
 [dev-packages]
 flake8 = "*"
