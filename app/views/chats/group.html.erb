@@ -26,13 +26,8 @@
   </section>
   <section class="w-2/3 bg-orange-200 overflow-scroll">
     <% unless @is_paginated || @no_chats %>
-      <%= turbo_frame_tag 'chat', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
-        <% @messages.each do |message| %>
-          <div class=<%= chat_message_class(message) %>>
-            <%= message.body %>
-          </div>
-        <% end %>
-      <% end %>
+      <%= render 'chat', chat: @chat, messages: @messages, message: @message %>
+
     <% end %>
   </section>
 </div>
