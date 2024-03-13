@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_account
-    current_user.account
+    @account ||= current_user.account
   end
 
   def configure_permitted_parameters
