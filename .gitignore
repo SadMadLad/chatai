@@ -11,6 +11,9 @@
 /.env*
 !/.env*.erb
 
+# Ignore the dump
+dump.rdb
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
