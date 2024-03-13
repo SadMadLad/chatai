@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MlModel < ApplicationRecord
-  has_many :prediction_params
+  has_many :prediction_params, dependent: :destroy
   belongs_to :account
 
   has_one_attached :model_diagram

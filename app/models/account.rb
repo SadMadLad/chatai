@@ -29,7 +29,7 @@ class Account < ApplicationRecord
     def conversing_accounts(account, chats)
       joins(:chats)
         .where(chats: { id: chats })
-        .where.not(id: account.id)
+        .excluding(account)
         .order('chats.latest_message_at DESC')
     end
   end

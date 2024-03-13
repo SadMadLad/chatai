@@ -7,8 +7,7 @@ class Chat < ApplicationRecord
   has_many :account_chat_maps, dependent: :destroy
   has_many :accounts, through: :account_chat_maps
 
-  validates :chat_type, presence: true
-  validates :latest_message_at, presence: true
+  validates :chat_type, :latest_message_at, presence: true
 
   enum :chat_type, { two_person: 0, multi_person: 1 }
 
