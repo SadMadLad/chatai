@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatPolicy < ApplicationPolicy
   def index?
     true
