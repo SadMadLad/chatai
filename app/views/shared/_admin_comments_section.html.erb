@@ -47,7 +47,7 @@
   <%= link_to 'Reset Filters', [:admin, admin_commentable] %>
 </div>
 
-<%= turbo_frame_tag 'admin_comments' do %>
+<%= turbo_frame_with_flash_message 'admin_comments' do %>
   <%= render partial: 'admin/admin_comments/admin_comment', collection: admin_comments %>
 
   <%== pagy_nav(pagy) %>

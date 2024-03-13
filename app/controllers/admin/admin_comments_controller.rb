@@ -27,7 +27,9 @@ module Admin
 
     def update
       if @admin_comment.update(admin_comment_params)
-        redirect_to [:admin, @admin_commentable], notice: t(:update, model:)
+        render turbo_stream: turbo_stream.replace(
+          @admin_comment, partial: 'admin_comment', locals: { admin_comment: @admin_comment }
+        )
       else
         render :edit, status: :unprocessable_entity, alert: t(:failed_update, model:)
       end
