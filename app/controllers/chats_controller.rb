@@ -2,6 +2,7 @@
 
 class ChatsController < AuthenticatedController
   before_action :set_chat, only: %i[show destroy]
+  before_action :set_new_message, only: %i[index group show]
   before_action :authorize_chat
   before_action -> { define_model_name('chat') }
 
@@ -17,6 +18,7 @@ class ChatsController < AuthenticatedController
 
   def show
     @messages = @chat.messages.includes(:account)
+    @message = Message.new
   end
 
   def create
@@ -40,6 +42,10 @@ class ChatsController < AuthenticatedController
     @chat = Chat.find(params[:id])
   end
 
+  def set_new_message
+    @message = Message.new
+  end
+
   def authorize_chat
     authorize @chat, policy_class: ChatPolicy
   end
@@ -47,8 +53,8 @@ class ChatsController < AuthenticatedController
   def paginate_chats
     @pagy, @chats = pagy(@chats)
     @accounts = Account.conversing_accounts(current_account, @chats)
-    @is_paginated = @pagy.page > 1
 
+    @is_paginated = @pagy.page > 1
     @no_chats = @chats.blank?
 
     return if @is_paginated || @no_chats

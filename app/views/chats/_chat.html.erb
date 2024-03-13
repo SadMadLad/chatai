@@ -1,0 +1,8 @@
+<%= turbo_frame_tag 'chat', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
+  <%= turbo_stream_from chat %>
+  <div id=<%= dom_id(chat) %>>
+    <%= render partial: 'messages/message', collection: messages %>
+  </div>
+
+  <%= render 'messages/form', chat:, message: %>
+<% end %>

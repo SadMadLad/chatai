@@ -6,6 +6,7 @@ module ChatsHelper
   end
 
   def chat_message_class(message)
-    message.account == current_account ? 'text-right' : 'text-left'
+    'text-right'
+    # message.account == current_account ? 'text-right' : 'text-left'
   end
 end

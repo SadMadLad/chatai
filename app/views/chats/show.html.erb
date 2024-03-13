@@ -3,10 +3,4 @@
   <p>Find me in app/views/chats/show.html.erb</p>
 </div>
 
-<%= turbo_frame_tag 'chat', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
-  <% @messages.each do |message| %>
-    <div class=<%= chat_message_class(message) %>>
-      <%= message.body %>
-    </div>
-  <% end %>
-<% end %>
+<%= render 'chat', chat: @chat, messages: @messages, message: @message %>

@@ -6,7 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :meta_tags %>
-    <%= yield :style %>
+
+    <style>
+      <%= yield :style %>
+    </style>
 
     <%= stylesheet_link_tag 'tailwind', 'inter-font', data: { turbo_track: 'reload' } %>
     <%= stylesheet_link_tag 'application', data: { turbo_track: 'reload'} %>
