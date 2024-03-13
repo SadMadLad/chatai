@@ -2,7 +2,7 @@
 
 class ChatsController < AuthenticatedController
   before_action :set_chat, only: %i[show destroy]
-
+  before_action :authorize_chat
   before_action -> { define_model_name('chat') }
 
   def index
@@ -15,7 +15,9 @@ class ChatsController < AuthenticatedController
     paginate_chats
   end
 
-  def show; end
+  def show
+    @messages = @chat.messages.includes(:account)
+  end
 
   def create
     other_account = Account.find(params[:account_id])
@@ -28,6 +30,7 @@ class ChatsController < AuthenticatedController
 
   def destroy
     @chat.destroy
+
     redirect_to :chats, notice: t(:destroy, model:)
   end
 
@@ -35,7 +38,10 @@ class ChatsController < AuthenticatedController
 
   def set_chat
     @chat = Chat.find(params[:id])
-    @messages = @chat.messages
+  end
+
+  def authorize_chat
+    authorize @chat, policy_class: ChatPolicy
   end
 
   def paginate_chats
@@ -48,7 +54,7 @@ class ChatsController < AuthenticatedController
     return if @is_paginated || @no_chats
 
     @chat = @chats.first
-    @messages = @chat.messages
+    @messages = @chat.messages.includes(:account)
 
     params[:id] = @chat.id
   end

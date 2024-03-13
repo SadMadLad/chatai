@@ -29,7 +29,7 @@ module Admin
     end
 
     def authorize_account_chat_map
-      authorize @account_chat_map, policy_class: Admin::AdminPolicy
+      authorize @account_chat_map, policy_class: Admin::AccountChatMapPolicy
     end
   end
 end

@@ -53,7 +53,7 @@ module Admin
     end
 
     def authorize_chat
-      authorize @chat, policy_class: Admin::AdminPolicy
+      authorize @chat, policy_class: Admin::ChatPolicy
     end
   end
 end
