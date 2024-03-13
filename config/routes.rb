@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     resources :chats, only: %i[index show create destroy] do
       collection { get :group }
+      resources :messages, only: %i[create edit update destroy]
     end
 
     resources :ml_models, only: %i[index show] do
