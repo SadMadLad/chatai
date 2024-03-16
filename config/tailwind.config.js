@@ -11,12 +11,13 @@ module.exports = {
   theme: {
     colors: {
       primary: colors.sky,
-      secondary: colors.emerald,
+      secondary: colors.yellow,
       ...colors,
     },
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        serif: ["Sail", ...defaultTheme.fontFamily.serif]
       },
     },
   },

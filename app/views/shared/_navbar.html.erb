@@ -1,0 +1,18 @@
+<header class="w-full flex items-between justify-between border-b px-4 md:px-8">
+  <div class="flex items-center gap-8 md:gap-16">
+    <%= link_to root_path, class: 'flex-center gap-1.5 hover:text-primary-500' do %>
+      <i class="fa-lg fab fa-rocketchat"></i>
+      <strong class="text-2xl font-serif">Chatai</strong>
+    <% end %>
+
+    <nav class="flex items-center gap-5">
+      <% ApplicationHelper::NAVIGATION_LINKS.each do |route_text, route_data| %>
+        <%= link_to route_text, route_data[:route], class: "font-semibold hover:text-primary-500 py-4 #{'border-b-2 border-b-primary-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
+      <% end %>
+    </nav>
+  </div>
+
+  <nav class="flex-center">
+    <%= account_avatar(current_account) %>
+  </nav>
+</header>

@@ -7,10 +7,24 @@ module ApplicationHelper
     alert: { bg: 'bg-red-500', text: 'text-red-500', bg_light: 'bg-red-100' },
     notice: { bg: 'bg-green-500', text: 'text-green-500', bg_light: 'bg-green-100' }
   }.freeze
+
   DIALOG_FRAME_ATTRIBUTES = {
     class: 'p-0 rounded-xl',
     data: { controller: 'dialog', dialog_target: 'dialog', action: 'click->dialog#removeDialog' }
   }.freeze
+
+  NAVIGATION_LINKS = {
+    'Chats' => {
+      route: %i[chats],
+      controller: 'chats',
+      action: 'index'
+    },
+    'Group Chats' => {
+      route: %i[group chats],
+      controller: 'chats',
+      action: 'group'
+    }
+}.freeze
 
   def spread_record(record, except: [])
     content_tag(:div) do
@@ -35,5 +49,9 @@ module ApplicationHelper
       concat turbo_stream.append('flash', partial: 'shared/flash')
       concat capture(&block) if block
     end
+  end
+
+  def random_bg_color
+    %w[bg-blue-500 bg-red-500 bg-green-500 bg-purple-500 bg-cyan-500].sample
   end
 end

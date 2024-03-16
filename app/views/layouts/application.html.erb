@@ -20,7 +20,11 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 flex flex-col px-5">
+    <main class="flex flex-col items-center">
+      <% if user_signed_in? %>
+        <%= render 'shared/navbar' %>
+      <% end %>
+
       <% if user_signed_in? %>
         <%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
       <% else %>
@@ -33,7 +37,7 @@
         <br />
       <% end %>
 
-      <div id="flash">
+      <div class="fixed top-12 right-12" id="flash">
         <%= render 'shared/flash' %>
       </div>
 

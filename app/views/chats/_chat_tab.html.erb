@@ -1,11 +1,16 @@
-<%= link_to chat, data: { turbo_frame: 'chat', chats_target: 'chatTab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' }, id: chat_tab_id(chat), class: "shadow border p-3 block" do %>
-  <% if account.present? || chat.two_person? %>
-    <%= account.full_name %>
-  <% else %>
-    <%= chat.accounts.length %>
-  <% end %>
+<%= link_to chat, id: chat_tab_id(chat), class: 'flex items-center transition-all p-2.5 block', data: { turbo_frame: 'chat', chats_target: 'chatTab', sidebar_target: 'tab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' } do %>
+  <%= account_avatar(account) %>
+  <div class="whitespace-nowrap">
+    <% if account.present? || chat.two_person? %>
+      <div>
+        <p class="font-semibold"><%= account.full_name %></p>
+      </div>
+    <% else %>
+      <%= chat.accounts.length %>
+    <% end %>
 
-  <% if notification %>
-    <i class="fas fa-exclamation"></i>
-  <% end %>
+    <% if notification %>
+      <i class="fas fa-exclamation"></i>
+    <% end %>
+  </div>
 <% end %>

@@ -8,6 +8,8 @@ class Account < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :ml_models, dependent: :destroy
 
+  has_one_attached :avatar, dependent: :destroy
+
   belongs_to :user, dependent: :destroy
 
   enum :role, { user: 0, admin: 1, superadmin: 2 }
@@ -19,6 +21,10 @@ class Account < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def initials
+    [first_name, last_name].map{ |name| name.first.upcase }.join(' ')
   end
 
   def can_moderate?

@@ -7,8 +7,8 @@ export default class extends Controller {
     const selectedId = e.detail.newFrame.dataset.id;
     this.chatTabTargets.forEach((target) => {
       target.dataset.id === `chat_${selectedId}`
-          ? target.classList.add("bg-orange-500")
-          : target.classList.remove("bg-orange-500")
+          ? target.classList.add("bg-gray-100")
+          : target.classList.remove("bg-gray-100")
     });
   }
 

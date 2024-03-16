@@ -1,29 +1,51 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["tab", "sidebar", "controllerField"];
-  static values = { show: Boolean };
+  static targets = ["tab", "sidebar", "controllerField", "showButton", "hideButton"];
+  static values = {
+    show: { type: Boolean, default: true },
+    tabShowClasses: { type: Array, default: ['gap-5'] },
+    tabHideClasses: { type: Array, default: ['gap-20'] },
+    sidebarShowClasses: { type: Array, default: ['w-60'] },
+    sidebarHideClasses: { type: Array, default: ['md:w-20', 'w-12'] }
+  };
 
   showValueChanged(showValue) {
     if(showValue) {
       this.tabTargets.forEach((tab) => {
-        tab.classList.add("gap-5")
-        tab.classList.remove("gap-20");
+        tab.classList.add(...this.tabShowClassesValue);
+        tab.classList.remove(...this.tabHideClassesValue);
       });
-      this.sidebarTarget.classList.add("w-60");
-      this.sidebarTarget.classList.remove("md:w-20", "w-12");
+      this.sidebarTarget.classList.add(...this.sidebarShowClassesValue);
+      this.sidebarTarget.classList.remove(...this.sidebarHideClassesValue);
     } else {
       this.tabTargets.forEach((tab) => {
-        tab.classList.remove("gap-5")
-        tab.classList.add("gap-20");
+        tab.classList.remove(...this.tabShowClassesValue);
+        tab.classList.add(...this.tabHideClassesValue);
       })
-      this.sidebarTarget.classList.add("md:w-20", "w-12");
-      this.sidebarTarget.classList.remove("w-60");
+      this.sidebarTarget.classList.add(...this.sidebarHideClassesValue);
+      this.sidebarTarget.classList.remove(...this.sidebarShowClassesValue);
+    }
+
+    this.#toggleSidebarButtons(showValue);
+  }
+
+  #toggleSidebarButtons(showValue) {
+
+    if(!this.hasShowButtonTarget || !this.hasHideButtonTarget)
+      return;
+
+    if(showValue) {
+      this.showButtonTarget.classList.remove('hidden');
+      this.hideButtonTarget.classList.add('hidden');
+    } else {
+      this.showButtonTarget.classList.add('hidden');
+      this.hideButtonTarget.classList.remove('hidden');
     }
   }
 
   colorTab() {
-    let src = this.controllerFieldTarget.value;
+    const src = this.controllerFieldTarget.value;
 
     this.tabTargets.forEach(tab => {
       if (tab.dataset.id === src) {
