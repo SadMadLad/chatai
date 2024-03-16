@@ -21,15 +21,20 @@
         </button>
       <% end %>
 
-      <%= turbo_frame_tag 'chats' do %>
-        <%= turbo_stream_from chat_tab_stream(current_account) %>
+      <section class="rounded-xl border h-96 overflow-x-hidden overflow-y-hidden hover:overflow-y-scroll transition-all duration-300" data-sidebar-target="sidebar">
+        <nav class="flex flex-wrap border-b">
+          <%= link_to 'Chats', [:chats], class: 'flex-shrink-0 flex-1 text-sm text-center py-2.5 font-semibold border-b-2 border-gray-500' %>
+          <%= link_to 'Group Chats', [:group, :chats], class: 'flex-shrink-0 text-sm flex-1 text-center py-2.5' %>
+        </nav>
 
-        <div id="chat_tabs" class="rounded-xl border h-96 overflow-x-hidden overflow-y-hidden hover:overflow-y-scroll transition-all duration-300" data-sidebar-target="sidebar">
-          <% @chats.zip(@accounts).each do |chat, account| %>
-            <%= render 'chat_tab', chat:, account:, notification: false %>
-          <% end %>
-        </div>
-      <% end %>
+        <%= turbo_frame_tag 'chats' do %>
+          <%= turbo_stream_from chat_tab_stream(current_account) %>
+
+          <div id="chat_tabs">
+            <%= render partial: 'chat_tab', collection: @chats.zip(@accounts), as: :chat_and_account, locals: { notification: false, latest_message: false } %>
+          </div>
+        <% end %>
+      </section>
     </section>
     <section class="h-96 w-full bg-orange-200 overflow-scroll">
       <% if @chat.present? %>
