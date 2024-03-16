@@ -1,3 +1,4 @@
-<div class="msg-<%= message.account.id %>">
-  <%= message.body %>
+<div id=<%= dom_id(message) %> class="msg-<%= message.account.id %>">
+  <%= message.body %><br />
+  <%= button_to 'Delete', [message.chat, message], method: :delete, class: 'bg-pink-500' %>
 </div>

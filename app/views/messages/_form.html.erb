@@ -1,8 +1,10 @@
-<%= form_with model: message, url: [chat, :messages] do |form| %>
+<%= form_with model: message, url: [chat, :messages], id: 'message-form' do |form| %>
   <div>
     <%= form.label :body %>
     <%= form.text_field :body %>
   </div>
+
+  <%= message.errors.full_messages %>
 
   <%= form.submit %>
 <% end %>

@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 class ChatsController < AuthenticatedController
+  include ChatPagination
+
   before_action :set_chat, only: %i[show destroy]
   before_action :set_new_message, only: %i[index group show]
   before_action :authorize_chat
   before_action -> { define_model_name('chat') }
 
   def index
-    @chats = current_account.chats.where(chat_type: :two_person).order(latest_message_at: :desc)
-    paginate_chats
+    paginate_account_chats(current_account, :two_person)
   end
 
   def group
-    @chats = current_account.chats.where(chat_type: :multi_person).order(latest_message_at: :desc)
-    paginate_chats
+    paginate_account_chats(current_account, :multi_person)
   end
 
   def show
@@ -48,20 +48,5 @@ class ChatsController < AuthenticatedController
 
   def authorize_chat
     authorize @chat, policy_class: ChatPolicy
-  end
-
-  def paginate_chats
-    @pagy, @chats = pagy(@chats)
-    @accounts = Account.conversing_accounts(current_account, @chats)
-
-    @is_paginated = @pagy.page > 1
-    @no_chats = @chats.blank?
-
-    return if @is_paginated || @no_chats
-
-    @chat = @chats.first
-    @messages = @chat.messages.includes(:account)
-
-    params[:id] = @chat.id
   end
 end
