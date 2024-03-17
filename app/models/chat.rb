@@ -3,7 +3,7 @@
 class Chat < ApplicationRecord
   after_initialize { self.latest_message_at = DateTime.now if new_record? }
 
-  has_many :messages, dependent: :destroy
+  has_many :messages, dependent: :destroy, strict_loading: true
   has_many :account_chat_maps, dependent: :destroy
   has_many :accounts, through: :account_chat_maps
 

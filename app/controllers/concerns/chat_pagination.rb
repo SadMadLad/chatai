@@ -5,7 +5,7 @@ module ChatPagination
 
   def paginate_account_chats(account, chat_type)
     @chats = account.chats.where(chat_type:)
-                    .includes(:messages, accounts: { avatar_attachment: :blob })
+                    .include_messages_accounts_avatars
                     .order(latest_message_at: :desc)
     @accounts = Account.conversing_accounts(account, @chats)
 

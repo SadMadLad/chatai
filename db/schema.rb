@@ -94,9 +94,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_155349) do
   end
 
   create_table "messages", force: :cascade do |t|
+    t.text "body", null: false
     t.bigint "chat_id", null: false
     t.bigint "account_id", null: false
-    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_messages_on_account_id"
