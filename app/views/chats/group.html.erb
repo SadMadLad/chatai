@@ -1,24 +1,40 @@
-<div>
-  <h1 class="font-bold text-4xl">Chats#group_chats</h1>
-  <p>Find me in app/views/chats/group_chats.html.erb</p>
-  <%= link_to 'Go To Chats', :chats %>
-</div>
+<section class="container">
+  <%= content_for :style do %>
+    <%= ".msg-#{current_account.id}" %> {
+      background-color: red;
+      text-align: right;
+    }
+  <% end %>
 
-<div class="w-full flex h-96" data-controller="chats frames">
-  <section class="w-1/3 bg-purple-200 overflow-scroll">
-    <%= turbo_frame_tag 'chats' do %>
-      <%= turbo_stream_from chat_tab_stream(current_account, chat_type: :multi_person) %>
+  <div class="w-full flex" data-controller="chats">
+    <section class="relative" data-controller="sidebar" data-sidebar-show-value="true" data-sidebar-tab-show-classes-value=<%= ['gap-2.5'].to_json %> data-sidebar-sidebar-hide-classes-value=<%= ['w-16'].to_json %>>
+      <% [{ direction: 'right', button: 'hideButton'}, { direction: 'left', button: 'showButton'}].each do |toggle_button| %>
+        <button class="z-50 w-8 h-8 shadow-md bg-white rounded-full p-1 absolute -top-2 -right-4 text-primary-500" data-sidebar-target=<%= toggle_button[:button] %> data-action="sidebar#toggleSidebar">
+          <i class="fas fa-angle-double-<%= toggle_button[:direction] %> fa-sm"></i>
+        </button>
+      <% end %>
 
-      <div id="chat_tabs">
-        <% @chats.each do |chat| %>
-          <%= render 'chat_tab', chat:, account: false, notification: false %>
+      <section class="rounded-xl border h-[30rem] overflow-x-hidden overflow-y-hidden hover:overflow-y-scroll transition-all duration-100" data-sidebar-target="sidebar">
+        <nav class="flex flex-wrap border-b sticky top-0 bg-white backdrop-blur-sm bg-opacity-80" data-sidebar-target="hideable">
+          <% ['Chats', 'Group Chats'].map { |route| { route => ApplicationHelper::NAVIGATION_LINKS[route] } }.reduce({}, :merge).each do |route_text, route_data| %>
+            <%= link_to route_text, route_data[:route], class: "flex-shrink-0 text-sm flex-1 text-center py-2.5 #{'font-semibold border-b-2 border-gray-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
+          <% end %>
+        </nav>
+
+        <%= turbo_frame_tag 'chats' do %>
+          <%= turbo_stream_from chat_tab_stream(current_account) %>
+
+          <div id="chat_tabs">
+            <%= render partial: 'group_chat_tab', collection: @chats, as: :chat, locals: { notification: nil, latest_message: nil, accounts: nil } %>
+          </div>
         <% end %>
-      </div>
-    <% end %>
-  </section>
-  <section class="w-2/3 bg-orange-200 overflow-scroll">
-    <% if @chat.present? %>
-      <%= render 'chat', chat: @chat, messages: @messages, message: @message %>
-    <% end %>
-  </section>
-</div>
+      </section>
+    </section>
+    <section class="h-[30rem] w-full bg-orange-200 overflow-scroll">
+      <% if @chat.present? %>
+        <%= render 'chat', chat: @chat, messages: @messages, message: @message %>
+      <% end %>
+    </section>
+  </div>
+</section>
+

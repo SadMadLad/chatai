@@ -4,10 +4,10 @@ module ChatPagination
   extend ActiveSupport::Concern
 
   def paginate_account_chats(account, chat_type)
-    @chats = account.chats.includes(:messages).where(chat_type:).order(latest_message_at: :desc)
-    @accounts = Account
-                  .includes(avatar_attachment: :blob)
-                  .conversing_accounts(account, @chats)
+    @chats = account.chats.where(chat_type:)
+                    .includes(:messages, accounts: { avatar_attachment: :blob })
+                    .order(latest_message_at: :desc)
+    @accounts = Account.conversing_accounts(account, @chats)
 
     return if @chats.blank?
 

@@ -22,5 +22,9 @@ class Chat < ApplicationRecord
 
       return_chat ? chat : chat.persisted?
     end
+
+    def include_messages_accounts_avatars
+      includes(:messages, accounts: { avatar_attachment: :blob })
+    end
   end
 end

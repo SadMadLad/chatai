@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["tab", "sidebar", "controllerField", "showButton", "hideButton"];
+  static targets = ["tab", "sidebar", "controllerField", "showButton", "hideButton", "hideable"];
   static values = {
     show: { type: Boolean, default: true },
     tabShowClasses: { type: Array, default: ['gap-5'] },
@@ -18,6 +18,7 @@ export default class extends Controller {
       });
       this.sidebarTarget.classList.add(...this.sidebarShowClassesValue);
       this.sidebarTarget.classList.remove(...this.sidebarHideClassesValue);
+      this.hideableTargets.forEach((hideable) => hideable.classList.remove('hidden'));
     } else {
       this.tabTargets.forEach((tab) => {
         tab.classList.remove(...this.tabShowClassesValue);
@@ -25,6 +26,7 @@ export default class extends Controller {
       })
       this.sidebarTarget.classList.add(...this.sidebarHideClassesValue);
       this.sidebarTarget.classList.remove(...this.sidebarShowClassesValue);
+      this.hideableTargets.forEach((hideable) => hideable.classList.add('hidden'));
     }
 
     this.#toggleSidebarButtons(showValue);

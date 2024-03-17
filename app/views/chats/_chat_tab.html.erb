@@ -2,21 +2,13 @@
 <%- account = chat_and_account.second %>
 <%- latest_message = latest_message || chat.messages.last %>
 
-<%= link_to chat, id: chat_tab_id(chat), class: 'flex items-center transition-all p-2.5 block', data: { turbo_frame: 'chat', chats_target: 'chatTab', sidebar_target: 'tab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' } do %>
+<%= link_to chat, id: chat_tab_id(chat), class: 'flex items-center transition-all p-2.5 block gap-2.5', data: { turbo_frame: 'chat', chats_target: 'chatTab', sidebar_target: 'tab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' } do %>
   <%= account_avatar(account) %>
   <div class="whitespace-nowrap">
-    <% if account.present? || chat.two_person? %>
-      <div>
-        <p class="font-semibold"><%= account.full_name %></p>
-        <p class="text-sm text-gray-700"><%= latest_message.body %></p>
-        <p class="text-xs text-gray-600"><%= chat.updated_at %></p>
-      </div>
-    <% else %>
-      <%= chat.accounts.length %>
-    <% end %>
-
-    <% if notification %>
-      <i class="fas fa-exclamation"></i>
-    <% end %>
+    <div>
+      <p class="font-semibold"><%= account.full_name %></p>
+      <p class="text-sm text-gray-700"><%= latest_message.body %></p>
+      <p class="text-xs text-gray-600"><%= chat.updated_at %></p>
+    </div>
   </div>
 <% end %>

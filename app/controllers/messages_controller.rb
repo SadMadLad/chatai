@@ -64,10 +64,14 @@ class MessagesController < AuthenticatedController
     conversing_accounts = @chat.accounts
     conversing_accounts.each do |account|
       chat_stream = chat_tab_stream(account, chat_type: @chat.chat_type.to_sym)
-      locals = { chat: @chat, account: @chat.two_person? ? conversing_accounts.excluding(account).first : false }
+      locals = {
+        chat_and_account: [@chat, conversing_accounts.excluding(account).first],
+        accounts: conversing_accounts, latest_message: @message, chat: @chat
+      }
+      partial = "chats/#{'group_' if @chat.multi_person? }chat_tab"
 
       @message.broadcast_remove_to(chat_stream, target: chat_tab_id(@chat))
-      @message.broadcast_prepend_to(chat_stream, target: 'chat_tabs', partial: 'chats/chat_tab', locals:)
+      @message.broadcast_prepend_to(chat_stream, target: 'chat_tabs', partial: partial, locals: locals)
     end
   end
 end

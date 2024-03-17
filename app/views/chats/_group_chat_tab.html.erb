@@ -1,0 +1,20 @@
+<%- latest_message = latest_message || chat.messages.last %>
+<%- accounts = accounts || chat.accounts %>
+
+<%= link_to chat, id: chat_tab_id(chat), class: 'flex items-center transition-all p-2.5 block', data: { turbo_frame: 'chat', chats_target: 'chatTab', sidebar_target: 'tab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' } do %>
+  <div class="whitespace-nowrap">
+    <div>
+      <div class="w-full flex items-center gap-0 hover:gap-4 transition-all">
+        <% accounts.first(5).each_with_index do |account, index| %>
+          <%= account_avatar(account, other_classes: "-mr-4 #{TailwindHelper::DYNAMIC_OPACITY[100 - (index+1)*10]}") %>
+        <% end %>
+        <% if accounts.length > 5 %>
+          <span class="ml-[1.25rem] text-sm text-gray-500">+<%= accounts.length - 5 %></span>
+        <% end %>
+      </div>
+
+      <p class="text-sm text-gray-700" data-sidebar-target="hideable"><%= latest_message.body %></p>
+      <p class="text-xs text-gray-600" data-sidebar-target="hideable"><%= chat.updated_at %></p>
+    </div>
+  </div>
+<% end %>

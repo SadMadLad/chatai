@@ -17,7 +17,7 @@ class ChatsController < AuthenticatedController
   end
 
   def show
-    @messages = @chat.messages.includes(:account)
+    @messages = @chat.messages.includes(account: { avatar_attachment: :blob })
     @message = Message.new
   end
 

@@ -24,7 +24,7 @@ module ApplicationHelper
       controller: 'chats',
       action: 'group'
     }
-}.freeze
+  }.freeze
 
   def spread_record(record, except: [])
     content_tag(:div) do

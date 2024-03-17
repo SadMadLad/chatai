@@ -8,7 +8,9 @@ class Account < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :ml_models, dependent: :destroy
 
-  has_one_attached :avatar, dependent: :destroy
+  default_scope { includes(avatar_attachment: :blob) }
+
+  has_one_attached :avatar, dependent: :destroy, strict_loading: true
 
   belongs_to :user, dependent: :destroy
 
@@ -24,7 +26,7 @@ class Account < ApplicationRecord
   end
 
   def initials
-    [first_name, last_name].map{ |name| name.first.upcase }.join(' ')
+    [first_name, last_name].map { |name| name.first.upcase }.join(' ')
   end
 
   def can_moderate?
