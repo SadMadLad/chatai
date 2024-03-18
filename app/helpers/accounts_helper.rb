@@ -11,7 +11,7 @@ module AccountsHelper
     TAILWIND
     content_tag(:div, class: tailwind_classes, **other_options) do
       if account.avatar.attached?
-        image_tag(account.avatar, class: 'w-full h-full object-cover')
+        image_tag(account.avatar.variant(:thumb), class: 'w-full h-full object-cover')
       else
         content_tag(:b, account.initials, class: "#{text_size_class} tracking-tighter")
       end

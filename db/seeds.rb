@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+PROFILE_PICS = Dir['app/assets/images/faker/*']
+
 def generate_account_attributes(index)
   { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, role: 0, username: "#{Random.hex}#{index}" }
 end
@@ -18,9 +20,16 @@ end
 
 User.create(normal_users)
 
-# Creating Chat Messages
-
 normal_accounts = Account.where(role: :user)
+normal_accounts.each do |account|
+  profile_pic = PROFILE_PICS.sample
+  account.avatar.attach(
+    io: File.open(File.join(Rails.root, profile_pic)),
+    filename: profile_pic
+  )
+end
+
+# Creating Chat Messages
 
 first_account = normal_accounts.first
 

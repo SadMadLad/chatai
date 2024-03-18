@@ -54,7 +54,7 @@
         <% end %>
       </section>
     </section>
-    <section class="h-[30rem] w-full bg-gray-50 border overflow-auto">
+    <section class="h-[30rem] rounded-xl w-full bg-gray-50 border overflow-auto">
       <% if @chat.present? %>
         <%= render 'chat', chat: @chat, messages: @messages, message: @message %>
       <% end %>

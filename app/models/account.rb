@@ -10,7 +10,9 @@ class Account < ApplicationRecord
 
   default_scope { includes(avatar_attachment: :blob) }
 
-  has_one_attached :avatar, dependent: :destroy, strict_loading: true
+  has_one_attached :avatar, dependent: :destroy do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
+  end
 
   belongs_to :user, dependent: :destroy
 
