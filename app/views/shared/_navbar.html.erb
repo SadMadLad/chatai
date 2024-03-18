@@ -1,4 +1,4 @@
-<header class="w-full flex items-between justify-between border-b px-4 md:px-8">
+<header class="w-full flex items-center justify-between border-b px-4 md:px-8">
   <div class="flex items-center gap-8 md:gap-16">
     <%= link_to root_path, class: 'flex-center gap-1.5 hover:text-primary-500' do %>
       <i class="fa-lg fab fa-rocketchat"></i>
@@ -12,7 +12,34 @@
     </nav>
   </div>
 
-  <nav class="flex-center">
-    <%= account_avatar(current_account) %>
-  </nav>
+  <div
+    class="relative"
+    data-controller="dropdown"
+    data-dropdown-other-toggle-classes-value=<%= %w[px-4 py-2.5].to_json %>
+  >
+    <%= account_avatar(
+      current_account,
+      other_classes: 'cursor-pointer',
+      other_options: {
+        data: {
+          action: 'click->dropdown#toggle'
+        }
+      }
+    ) %>
+    <nav
+      class="absolute border w-0 h-0 bg-white shadow z-[60] right-0 top-12 rounded-xl transition-all duration-100 overflow-hidden"
+      data-dropdown-target="dropdown"
+    >
+      <ul>
+        <li class="flex items-center gap-1.5">
+          <i class="fas fa-user-circle"></i>
+          <%= link_to 'Account', current_account %>
+        </li>
+        <li class="flex items-center gap-1.5">
+          <i class="fas fa-sign-out-alt"></i>
+          <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'whitespace-nowrap' %>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>

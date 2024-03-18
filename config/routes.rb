@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       collection { get :group }
       resources :messages, only: %i[create edit update destroy]
     end
+    resources :accounts, only: %i[show edit update destroy]
 
     resources :ml_models, only: %i[index show] do
       member do

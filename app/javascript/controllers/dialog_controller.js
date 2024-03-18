@@ -9,7 +9,7 @@ export default class extends Controller {
 
   removeDialog(e) {
     if (e.target === this.dialogTarget || e.target === this.closeButtonTarget) {
-      this.dialogTarget.remove()
+      this.dialogTarget.remove();
     }
   }
 }

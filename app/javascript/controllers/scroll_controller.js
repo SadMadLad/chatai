@@ -10,12 +10,12 @@ export default class extends Controller {
   scrollContainerTargetConnected(scrollContainer) {
     if (!this.scrollContainerToBottomValue) return;
 
-    scrollContainer.scrollIntoView({ block: 'end' });
+    scrollContainer.scrollIntoView({ block: "end" });
   }
 
   scrollableTargetConnected(scrollable) {
     if (!this.scrollableIntoViewValue) return;
 
-    scrollable.scrollIntoView(true)
+    scrollable.scrollIntoView(true);
   }
 }

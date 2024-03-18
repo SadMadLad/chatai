@@ -1,5 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
@@ -18,11 +18,11 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-        serif: ["Sail", ...defaultTheme.fontFamily.serif]
+        serif: ["Sail", ...defaultTheme.fontFamily.serif],
       },
       maxWidth: {
-        '3/4': '75%',
-        '4/5': '80%',
+        "3/4": "75%",
+        "4/5": "80%",
       },
     },
   },
