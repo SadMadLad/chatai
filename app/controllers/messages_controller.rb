@@ -3,7 +3,7 @@
 class MessagesController < AuthenticatedController
   include ChatPagination
   include ActionView::RecordIdentifier
-  include MessagesHelper
+  include ChatsHelper
 
   before_action :set_chat
   before_action :set_message, only: %i[edit update destroy]

@@ -1,7 +1,18 @@
 <%- latest_message = latest_message || chat.messages.last %>
 <%- accounts = accounts || chat.accounts %>
 
-<%= link_to chat, id: chat_tab_id(chat), class: 'flex items-center transition-all p-2.5 block', data: { turbo_frame: 'chat', chats_target: 'chatTab', sidebar_target: 'tab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' } do %>
+<%=
+  link_to chat,
+    id: chat_tab_id(chat),
+    class: 'flex items-center transition-all p-2.5 block',
+    data: {
+      turbo_frame: 'chat',
+      chats_target: 'chatTab',
+      sidebar_target: 'tab',
+      id: dom_id(chat),
+      action: 'click->chats#removeNotificationIcon'
+    } do
+%>
   <div class="whitespace-nowrap">
     <div>
       <div class="relative w-full flex items-center gap-0 hover:gap-4 transition-all">
