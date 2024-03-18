@@ -1,4 +1,16 @@
-<div id=<%= dom_id(message) %> class="msg-<%= message.account.id %>">
-  <%= message.body %><br />
-  <%= button_to 'Delete', [message.chat, message], method: :delete, class: 'bg-pink-500' %>
-</div>
+<span id=<%= dom_id(message) %> data-controller="scroll" data-scroll-target="scrollable" data-scroll-scroll-into-view-value='true'>
+  <div class="flex items-end gap-2 msg-<%= message.account.id %>">
+    <div class="md:block hidden">
+      <%= account_avatar(message.account, other_classes: 'my-2.5') %>
+    </div>
+    <div class="flex items-center my-3 gap-1.5 msg-<%= message.account.id %>">
+      <p class="relative rounded-xl border text-sm p-2.5 bg-white overflow-break-word msg-color-<%= message.account.id %> msg-text-<%= message.account.id %> max-w-4/5 text-left">
+        <%= message.body %>
+        <span class="text-gray-500 text-xs absolute -bottom-5 whitespace-nowrap left-0 created-at-alignment-<%= message.account.id %>"><%= message.created_at.strftime("%b %d, %Y - %I:%M %p") %></span>
+      </p>
+      <button class="hidden edit-ellipsis-<%= message.account.id %>">
+        <i class="fas fa-ellipsis-h fa-xl cursor-pointer text-gray-500"></i>
+      </button>
+    </div>
+  </div>
+</span>

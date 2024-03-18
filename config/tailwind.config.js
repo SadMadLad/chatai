@@ -10,14 +10,19 @@ module.exports = {
   ],
   theme: {
     colors: {
-      primary: colors.sky,
+      primary: colors.violet,
       secondary: colors.yellow,
+      danger: colors.red,
       ...colors,
     },
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
         serif: ["Sail", ...defaultTheme.fontFamily.serif]
+      },
+      maxWidth: {
+        '3/4': '75%',
+        '4/5': '80%',
       },
     },
   },

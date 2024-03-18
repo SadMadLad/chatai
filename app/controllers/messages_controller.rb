@@ -58,7 +58,7 @@ class MessagesController < AuthenticatedController
 
   def broadcast_new_message
     @message.broadcast_append_to(
-      @chat, partial: 'messages/message', locals: { message: @message }, target: @chat
+      @chat, partial: 'messages/message', locals: { message: @message, scroll_into_view: true }, target: @chat
     )
 
     conversing_accounts = @chat.accounts

@@ -1,8 +1,19 @@
-<%= turbo_frame_tag 'chat', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
+<%= turbo_frame_tag 'chat', class: 'h-full', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
   <%= turbo_stream_from chat %>
-  <div id=<%= dom_id(chat) %>>
-    <%= render partial: 'messages/message', collection: messages %>
-  </div>
 
-  <%= render 'messages/form', chat:, message: %>
+  <div class="flex flex-col justify-between h-full">
+    <header class="z-50 sticky top-0 rounded-lg shadow-sm bg-white px-4 py-2.5 border-b flex justify-between items-center">
+      <div class="flex items-center gap-2.5">
+        <%= account_avatar(current_account) %>
+        <p class="text-xl font-bold"><%= @other_account.full_name %></p>
+      </div>
+      <i class="fas fa-info-circle text-primary-500 cursor-pointer fa-xl"></i>
+    </header>
+
+    <div id=<%= dom_id(chat) %> class="px-4 flex flex-col gap-3 py-8">
+      <%= render partial: 'messages/message', collection: messages, locals: { scroll_into_view: false } %>
+    </div>
+
+    <%= render 'messages/form', chat:, message: %>
+  </div>
 <% end %>

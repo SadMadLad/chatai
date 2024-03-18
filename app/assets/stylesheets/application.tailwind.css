@@ -20,6 +20,10 @@
   background: #555;
 }
 
+.overflow-break-word {
+  overflow-wrap: break-word;
+}
+
 @layer utilities {
   .flex-center {
     @apply flex items-center justify-center;

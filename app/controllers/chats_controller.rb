@@ -18,6 +18,7 @@ class ChatsController < AuthenticatedController
 
   def show
     @messages = @chat.messages.includes(account: { avatar_attachment: :blob })
+    @other_account = @chat.other_account(current_account) if @chat.two_person?
     @message = Message.new
   end
 

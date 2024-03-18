@@ -11,6 +11,12 @@ class Chat < ApplicationRecord
 
   enum :chat_type, { two_person: 0, multi_person: 1 }
 
+  def other_account(account)
+    raise NoMethodError unless two_person?
+
+    accounts.excluding(account).first
+  end
+
   class << self
     def create_chat(accounts, return_chat: false)
       return return_chat ? Chat.new : false if accounts.size < 2

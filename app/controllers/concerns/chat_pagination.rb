@@ -12,6 +12,7 @@ module ChatPagination
     return if @chats.blank?
 
     @chat = @chats.first
+    @other_account = @chat.other_account(current_account) if @chat.two_person?
     @messages = @chat.messages.includes(:account)
     params[:id] = @chat.id
   end
