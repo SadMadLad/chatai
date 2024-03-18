@@ -12,7 +12,6 @@
 
 ## Setup
 
-
 ### Rails setup
 
 1. Install the Ruby Version.
