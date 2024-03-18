@@ -4,12 +4,18 @@
 <%= link_to chat, id: chat_tab_id(chat), class: 'flex items-center transition-all p-2.5 block', data: { turbo_frame: 'chat', chats_target: 'chatTab', sidebar_target: 'tab', id: dom_id(chat), action: 'click->chats#removeNotificationIcon' } do %>
   <div class="whitespace-nowrap">
     <div>
-      <div class="w-full flex items-center gap-0 hover:gap-4 transition-all">
+      <div class="relative w-full flex items-center gap-0 hover:gap-4 transition-all">
         <% accounts.first(5).each_with_index do |account, index| %>
           <%= account_avatar(account, other_classes: "-mr-4 border border-white") %>
         <% end %>
         <% if accounts.length > 5 %>
           <span class="ml-[1.25rem] text-sm text-gray-500">+<%= accounts.length - 5 %></span>
+        <% end %>
+        <% if notification %>
+          <span class="absolute top-0 left-0 flex h-3 w-3 notification-pulse">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary-500"></span>
+          </span>
         <% end %>
       </div>
 
