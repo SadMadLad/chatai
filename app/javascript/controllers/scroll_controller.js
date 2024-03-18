@@ -1,12 +1,21 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static target = ["scrollable"];
-  static values = { scrollIntoView: { type: Boolean, default: false } };
+  static target = ["scrollable", "scrollContainer"];
+  static values = {
+    scrollableIntoView: { type: Boolean, default: false },
+    scrollContainerToBottom: { type: Boolean, default: false },
+  };
+
+  scrollContainerTargetConnected(scrollContainer) {
+    if (!this.scrollContainerToBottomValue) return;
+
+    scrollContainer.scrollIntoView({ block: 'end' });
+  }
 
   scrollableTargetConnected(scrollable) {
-    if (this.scrollIntoViewValue) {
-      scrollable.scrollIntoView(true, { behavior: 'smooth' })
-    }
+    if (!this.scrollableIntoViewValue) return;
+
+    scrollable.scrollIntoView(true)
   }
 }

@@ -2,12 +2,12 @@
 
 module AccountsHelper
   def account_avatar(
-    account, width_class: 'w-10', height_class: 'h-10', display_classes: 'flex-center',
+    account, size_classes: 'w-10 h-10', display_classes: 'flex-center',
     text_size_class: 'text-lg', other_classes: '', other_options: {}
   )
     tailwind_classes = <<-TAILWIND
-        #{width_class} #{height_class} #{display_classes} rounded-full
-        flex-shrink-0 overflow-hidden text-white bg-primary-400 #{other_classes}
+        #{size_classes} #{display_classes} rounded-full flex-shrink-0
+        overflow-hidden text-white bg-primary-400 #{other_classes}
     TAILWIND
     content_tag(:div, class: tailwind_classes, **other_options) do
       if account.avatar.attached?

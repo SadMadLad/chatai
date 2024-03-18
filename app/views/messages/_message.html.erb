@@ -1,4 +1,9 @@
-<span id=<%= dom_id(message) %> data-controller="scroll" data-scroll-target="scrollable" data-scroll-scroll-into-view-value='true'>
+<div
+  id=<%= dom_id(message) %>
+  <% if scroll_into_view %>
+    data-scroll-target="scrollable"
+  <% end %>
+>
   <div class="flex items-end gap-2 msg-<%= message.account.id %>">
     <div class="md:block hidden">
       <%= account_avatar(message.account, other_classes: 'my-2.5') %>
@@ -13,4 +18,4 @@
       </button>
     </div>
   </div>
-</span>
+</div>

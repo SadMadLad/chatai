@@ -10,7 +10,14 @@
       <i class="fas fa-info-circle text-primary-500 cursor-pointer fa-xl"></i>
     </header>
 
-    <div id=<%= dom_id(chat) %> class="px-4 flex flex-col gap-3 py-8">
+    <div
+      id=<%= dom_id(chat) %>
+      class="px-4 flex flex-col gap-3 py-8"
+      data-controller="scroll"
+      data-scroll-target="scrollContainer"
+      data-scroll-scrollable-into-view-value="true"
+      data-scroll-scroll-container-to-bottom-value="true"
+    >
       <%= render partial: 'messages/message', collection: messages, locals: { scroll_into_view: false } %>
     </div>
 

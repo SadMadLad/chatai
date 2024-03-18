@@ -2,6 +2,9 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["chatTab"];
+  static values = {
+    notificationQuery: { type: String, default: '' }
+  }
 
   activateChatTab(e) {
     const selectedId = e.detail.newFrame.dataset.id;
@@ -13,9 +16,11 @@ export default class extends Controller {
   }
 
   removeNotificationIcon(e) {
-    const notificationIcon = e.currentTarget.querySelector('i');
-    if (notificationIcon) {
-      notificationIcon.remove();
+    if (this.notificationQueryValue === '') return;
+
+    const notificationElement = e.currentTarget.querySelector(this.notificationQueryValue);
+    if (notificationElement) {
+      notificationElement.remove();
     }
   }
 }
