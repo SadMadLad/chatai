@@ -6,6 +6,12 @@ export default class extends Controller {
     notificationQuery: { type: String, default: "" },
   };
 
+  chatTabTargetConnected(chatTab) {
+    if (chatTab.dataset.notification === "0") return;
+
+    chatTab.scrollIntoView({ block: 'end', behavior: "smooth" })
+  }
+
   activateChatTab(e) {
     const selectedId = e.detail.newFrame.dataset.id;
     this.chatTabTargets.forEach((target) => {
@@ -21,6 +27,7 @@ export default class extends Controller {
     const notificationElement = e.currentTarget.querySelector(
       this.notificationQueryValue,
     );
+
     if (notificationElement) {
       notificationElement.remove();
     }

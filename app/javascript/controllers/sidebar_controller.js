@@ -15,24 +15,43 @@ export default class extends Controller {
     tabHideClasses: { type: Array, default: ["gap-20"] },
     sidebarShowClasses: { type: Array, default: ["w-60"] },
     sidebarHideClasses: { type: Array, default: ["md:w-20", "w-12"] },
+    sidebarToggleButtonClasses: { type: Array, default: ["hidden", "md:block"] }
   };
 
+  tabTargetConnected(tab) {
+    if (this.loading) return;
+
+    this.toggleTabClasses(tab);
+  }
+
+  initialize() {
+    this.loading = true;
+  }
+
+  connect() {
+    this.loading = false;
+  }
+
+  toggleTabClasses(tab) {
+    if(this.showValue) {
+      tab.classList.add(...this.tabShowClassesValue);
+      tab.classList.remove(...this.tabHideClassesValue);
+    } else {
+      tab.classList.remove(...this.tabShowClassesValue);
+      tab.classList.add(...this.tabHideClassesValue);
+    }
+  }
+
+
   showValueChanged(showValue) {
+    this.tabTargets.forEach((tab) => this.toggleTabClasses(tab))
     if (showValue) {
-      this.tabTargets.forEach((tab) => {
-        tab.classList.add(...this.tabShowClassesValue);
-        tab.classList.remove(...this.tabHideClassesValue);
-      });
       this.sidebarTarget.classList.add(...this.sidebarShowClassesValue);
       this.sidebarTarget.classList.remove(...this.sidebarHideClassesValue);
       this.hideableTargets.forEach((hideable) =>
         hideable.classList.remove("hidden"),
       );
     } else {
-      this.tabTargets.forEach((tab) => {
-        tab.classList.remove(...this.tabShowClassesValue);
-        tab.classList.add(...this.tabHideClassesValue);
-      });
       this.sidebarTarget.classList.add(...this.sidebarHideClassesValue);
       this.sidebarTarget.classList.remove(...this.sidebarShowClassesValue);
       this.hideableTargets.forEach((hideable) =>
@@ -47,11 +66,11 @@ export default class extends Controller {
     if (!this.hasShowButtonTarget || !this.hasHideButtonTarget) return;
 
     if (showValue) {
-      this.showButtonTarget.classList.remove("hidden");
-      this.hideButtonTarget.classList.add("hidden");
+      this.showButtonTarget.classList.remove(...this.sidebarToggleButtonClassesValue);
+      this.hideButtonTarget.classList.add(...this.sidebarToggleButtonClassesValue);
     } else {
-      this.showButtonTarget.classList.add("hidden");
-      this.hideButtonTarget.classList.remove("hidden");
+      this.showButtonTarget.classList.add(...this.sidebarToggleButtonClassesValue);
+      this.hideButtonTarget.classList.remove(...this.sidebarToggleButtonClassesValue);
     }
   }
 

@@ -22,6 +22,7 @@ gem 'pundit'
 gem 'redis', '>= 4.0.1'
 gem 'requestjs-rails'
 gem 'sprockets-rails'
+gem 'solid_queue'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
 gem 'turbo-rails'
@@ -42,6 +43,7 @@ end
 
 group :development do
   gem 'web-console'
+  gem 'bullet'
 end
 
 group :test do

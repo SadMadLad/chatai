@@ -5,13 +5,14 @@
 <%=
   link_to chat,
     id: chat_tab_id(chat),
-    class: 'flex items-center transition-all p-2.5 block gap-2.5',
+    class: 'flex items-center transition-all p-2.5 block',
     data: {
       turbo_frame: 'chat',
       chats_target: 'chatTab',
       sidebar_target: 'tab',
       id: dom_id(chat),
-      action: 'click->chats#removeNotificationIcon'
+      action: 'click->chats#removeNotificationIcon',
+      **({ notification: notification ? '1' : '0' })
     } do
 %>
   <div class="relative">
