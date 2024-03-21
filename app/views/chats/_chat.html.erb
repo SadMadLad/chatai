@@ -8,7 +8,9 @@
           <%= account_avatar(@other_account) %>
           <p class="text-xl font-bold"><%= @other_account.full_name %></p>
         </div>
-        <i class="fas fa-info-circle text-primary-500 cursor-pointer fa-xl"></i>
+        <%= link_to [:details, chat], data: { turbo_frame: 'dialog' } do %>
+          <i class="fas fa-info-circle text-primary-500 cursor-pointer fa-xl"></i>
+        <% end %>
       </header>
     <% end %>
 

@@ -1,0 +1,15 @@
+<%= dialog_frame do %>
+  <section class="flex flex-col gap-2.5 max-w-72">
+    <h3 class="font-bold text-2xl">Participants</h3>
+    <div class="flex flex-wrap justify-center gap-2">
+      <% @accounts.each do |account| %>
+        <div class="relative group -mx-2">
+          <span class="absolute min-w-full hidden group-hover:inline-flex text-white text-[0.5rem] bg-gray-700 text-center shadow-md rounded py-0.5 px-1.5 -top-4 whitespace-nowrap"><%= account.full_name %></span>
+          <%= account_avatar(account, size_classes: 'w-16 h-16', other_classes: 'border-2 border-black') %>
+        </div>
+      <% end %>
+    </div>
+    <hr />
+    <p><strong>Latest Message:</strong> <%= @messages.last.body %></p>
+  </section>
+<% end %>

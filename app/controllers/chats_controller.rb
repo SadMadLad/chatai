@@ -3,7 +3,7 @@
 class ChatsController < AuthenticatedController
   include ChatPagination
 
-  before_action :set_chat, only: %i[show destroy]
+  before_action :set_chat, only: %i[show details destroy]
   before_action :set_new_message, only: %i[index group show]
   before_action :authorize_chat
   before_action -> { define_model_name('chat') }
@@ -20,6 +20,11 @@ class ChatsController < AuthenticatedController
     @messages = @chat.messages.includes(account: { avatar_attachment: :blob })
     @other_account = @chat.other_account(current_account) if @chat.two_person?
     @message = Message.new
+  end
+
+  def details
+    @accounts = @chat.accounts
+    @messages = @chat.messages
   end
 
   def create

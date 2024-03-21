@@ -1,23 +1,17 @@
 # frozen_string_literal: true
 
 class ChatPolicy < ApplicationPolicy
-  def index?
-    true
+  %w[index group create].each do |action|
+    define_method(:"#{action}?") { true }
   end
 
-  def group?
-    true
+  %w[show details destroy].each do |action|
+    define_method(:"#{action}?") { account_chat? }
   end
 
-  def show?
-    account.chats.exists?(id: record.id)
-  end
+  private
 
-  def create?
-    true
-  end
-
-  def destroy?
+  def account_chat?
     account.chats.exists?(id: record.id)
   end
 end

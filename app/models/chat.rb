@@ -8,8 +8,11 @@ class Chat < ApplicationRecord
   has_many :accounts, through: :account_chat_maps
 
   validates :chat_type, :latest_message_at, presence: true
+  validates :group_title, presence: true, if: :multi_person?
 
   enum :chat_type, { two_person: 0, multi_person: 1 }
+
+  default_scope -> { includes(:messages) }
 
   def other_account(account)
     raise NoMethodError unless two_person?
@@ -21,8 +24,10 @@ class Chat < ApplicationRecord
     def create_chat(accounts, return_chat: false)
       return return_chat ? Chat.new : false if accounts.size < 2
 
-      chat_type = accounts.size == 2 ? :two_person : :multi_person
-      chat = new(chat_type:)
+      accounts_count = accounts.size
+      chat_type = accounts_count == 2 ? :two_person : :multi_person
+      group_title = chat_type == :multi_person ? "Group Chat #{accounts_count}" : nil
+      chat = new(chat_type:, group_title:)
 
       AccountChatMap.create(accounts.map { |account| { account:, chat: } }) if chat.save
 
