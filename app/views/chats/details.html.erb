@@ -4,7 +4,7 @@
     <div class="flex flex-wrap justify-center gap-2">
       <% @accounts.each do |account| %>
         <div class="relative group -mx-2">
-          <span class="absolute min-w-full hidden group-hover:inline-flex text-white text-[0.5rem] bg-gray-700 text-center shadow-md rounded py-0.5 px-1.5 -top-4 whitespace-nowrap"><%= account.full_name %></span>
+          <span class="absolute min-w-full hidden group-hover:inline text-white text-[0.5rem] bg-gray-700 text-center shadow-md rounded py-0.5 px-1.5 -top-4 whitespace-nowrap"><%= account.full_name %></span>
           <%= account_avatar(account, size_classes: 'w-16 h-16', other_classes: 'border-2 border-black') %>
         </div>
       <% end %>
