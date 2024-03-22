@@ -45,7 +45,8 @@ Rails.application.routes.draw do
           post :prediction
         end
       end
-      resources :solid_queue, only: :index do
+
+      resources :solid_queues, only: :index do
         collection do
           get :blocked_executions
           get :claimed_executions

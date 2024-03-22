@@ -12,7 +12,7 @@ module Admin
       ml_models: 'fa-solid fa-braille',
       prediction_params: 'fas fa-brain',
       users: 'fas fa-users',
-      solid_queue_index: 'fas fa-users'
+      solid_queues: 'fas fa-users'
     }.freeze
   end
 end

@@ -1,5 +1,5 @@
 module Admin
-  class SolidQueueController < AdminController
+  class SolidQueuesController < AdminController
     def index
       @jobs = SolidQueue::Job.all
     end
