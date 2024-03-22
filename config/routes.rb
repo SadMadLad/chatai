@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   mount Lookbook::Engine, at: '/lookbook' if Rails.env.development?
 
   devise_for :users
-  get 'up' => 'rails/health#show', as: :rails_health_check
 
   root 'static#index'
 
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   authenticated :user, ->(user) { user.account.can_moderate? } do
+    get 'up' => 'rails/health#show', as: :rails_health_check
     namespace :admin do
       get :dashboard, to: 'dashboard#index'
 
@@ -37,11 +37,24 @@ Rails.application.routes.draw do
       resources :chats, only: %i[index show new create destroy]
       resources :messages
       resources :prediction_params, only: %i[index show]
+
       resources :ml_models do
         resources :prediction_params, except: %i[index show]
         member do
           get :notebook_html
           post :prediction
+        end
+      end
+      resources :solid_queue, only: :index do
+        collection do
+          get :blocked_executions
+          get :claimed_executions
+          get :failed_executions
+          get :pauses
+          get :processes
+          get :ready_executions
+          get :scheduled_executions
+          get :semaphores
         end
       end
     end

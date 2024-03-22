@@ -4,14 +4,15 @@ module Admin
   module AdminHelper
     ADMIN_LINKS = {
       dashboard: 'fas fa-chart-line',
-      users: 'fas fa-users',
       accounts: 'fas fa-user-circle',
-      chats: 'fas fa-comments',
-      messages: 'fas fa-envelope',
       account_chat_maps: 'fas fa-link',
       admin_comments: 'fas fa-comment-alt',
+      chats: 'fas fa-comments',
+      messages: 'fas fa-envelope',
       ml_models: 'fa-solid fa-braille',
-      prediction_params: 'fas fa-brain'
+      prediction_params: 'fas fa-brain',
+      users: 'fas fa-users',
+      solid_queue_index: 'fas fa-users'
     }.freeze
   end
 end
