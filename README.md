@@ -1,5 +1,15 @@
 # README
 
+**Chatai** is my playground where I build anything I like. Right now, it has following features:
+
+* A basic chat app that allows one-on-one as well as group chats. The chat uses Turbo broadcasts with redis.
+* A page for Machine Learning models and get their predictions.
+* Admin Dashboard for all the models.
+* Solid Queue for job processing.
+* A Python App that uses FastAPI:
+    - Has Jupyter Notebook's HTML which is served in the Rails app.
+    - Basic ML models that output result.
+
 ## Specifications
 
 * Ruby version 3.3.0
@@ -12,7 +22,7 @@
 
 ## Setup
 
-### Rails setup
+### Rails Setup
 
 1. Install the Ruby Version.
 2. Install the gems using bundler: `bundle install`
@@ -25,7 +35,7 @@
 9. Run the `Procfile.dev` using the `bin/dev` command. This will watch for live tailwind and rails server changes.
 10. Visit `localhost:3000`. You can login as `user@0.com` with password `password` to sign in as the seeded user.
 
-### FastAPI setup
+### Python Setup
 
 ---
 
