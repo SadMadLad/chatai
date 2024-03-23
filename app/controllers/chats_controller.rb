@@ -16,6 +16,10 @@ class ChatsController < AuthenticatedController
     paginate_account_chats(current_account, :multi_person)
   end
 
+  def ai_chats
+    @chats = current_user.chats.where(chat_type: :ai_chats)
+  end
+
   def show
     @messages = @chat.messages.includes(account: { avatar_attachment: :blob })
     @other_account = @chat.other_account(current_account) if @chat.two_person?

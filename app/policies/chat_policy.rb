@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChatPolicy < ApplicationPolicy
-  %w[index group create].each do |action|
+  %w[index group ai_chats create].each do |action|
     define_method(:"#{action}?") { true }
   end
 

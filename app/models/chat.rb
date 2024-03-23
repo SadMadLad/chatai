@@ -8,9 +8,9 @@ class Chat < ApplicationRecord
   has_many :accounts, through: :account_chat_maps
 
   validates :chat_type, :latest_message_at, presence: true
-  validates :group_title, presence: true, if: :multi_person?
+  validates :group_title, presence: true, unless: :two_person?
 
-  enum :chat_type, { two_person: 0, multi_person: 1 }
+  enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2 }
 
   default_scope -> { includes(:messages) }
 
