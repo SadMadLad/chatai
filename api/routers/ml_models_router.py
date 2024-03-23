@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import __main__
 
-from settings import get_db
+from db.config import get_db
 from crud import ml_model_crud
 from settings import MODELS_HTML_PATH
 

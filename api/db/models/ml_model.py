@@ -1,5 +1,5 @@
 from sqlalchemy import Integer, Column, String, DateTime, Text, JSON
-from settings import Base
+from db.config import Base
 
 
 class MlModel(Base):
