@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     get :dashboard, to: 'dashboard#index'
 
     resources :chats, only: %i[index show create destroy] do
-      collection { get :group }
+      collection do
+        get :group
+        get :ai_chats
+      end
       member { get :details }
       resources :messages, only: %i[create edit update destroy]
     end
