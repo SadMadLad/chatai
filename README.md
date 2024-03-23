@@ -4,8 +4,7 @@
 
 * A basic chat app that allows one-on-one as well as group chats. The chat uses Turbo broadcasts with redis.
 * A page for Machine Learning models and get their predictions.
-* Admin Dashboard for all the models.
-* Solid Queue for job processing.
+* Admin Dashboard for most of the models.
 * A Python App that uses FastAPI:
     - Has Jupyter Notebook's HTML which is served in the Rails app.
     - Basic ML models that output result.
@@ -19,6 +18,7 @@
 * PostgreSQL Database
 * Devise for authentication
 * Pundit for authorization
+* Solid Queue for Jobs
 
 ## Setup
 
