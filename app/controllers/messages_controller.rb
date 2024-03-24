@@ -13,18 +13,9 @@ class MessagesController < AuthenticatedController
   def edit; end
 
   def create
-    @message = Message.new(**message_params, account: current_account, chat: @chat)
-    @message_saved = @message.save
+    @message = @chat.messages.create(message_params)
 
-    broadcast_new_message if @message_saved
-
-    render turbo_stream: turbo_stream.replace(
-      'message-form', partial: 'messages/form',
-                      locals: {
-                        chat: @chat,
-                        message: @message_saved ? Message.new : @message
-                      }
-    ), status: @message_saved ? :created : :unprocessable_entity
+    broadcast_new_message if @message.save && !@chat.ai_chat?
   end
 
   def update
@@ -50,7 +41,7 @@ class MessagesController < AuthenticatedController
   end
 
   def message_params
-    params.require(:message).permit(:body)
+    params.require(:message).permit(:body).merge(account: current_account)
   end
 
   def authorize_message
@@ -59,7 +50,7 @@ class MessagesController < AuthenticatedController
 
   def broadcast_new_message
     @message.broadcast_append_to(
-      @chat, partial: 'messages/message', locals: { message: @message, scroll_into_view: true }, target: @chat
+      @chat, partial: 'messages/message', locals: { message: @message, chat: @chat, scroll_into_view: true }, target: @chat
     )
 
     conversing_accounts = @chat.accounts

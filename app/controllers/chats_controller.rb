@@ -17,7 +17,7 @@ class ChatsController < AuthenticatedController
   end
 
   def ai_chats
-    @chats = current_user.chats.where(chat_type: :ai_chats)
+    @chats = current_user.chats.where(chat_type: :ai_chat)
   end
 
   def show

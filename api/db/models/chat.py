@@ -8,7 +8,7 @@ class Chat(Base):
 
     id = Column(Integer, primary_key=True)
     chat_type = Column(Integer, nullable=False)
-    group_title = Column(String)
+    chat_title = Column(String)
     latest_message_at = Column(DateTime, nullable=False)
 
     messages = relationship(Message, back_populates='chat')

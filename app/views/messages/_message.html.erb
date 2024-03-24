@@ -4,18 +4,21 @@
     data-scroll-target="scrollable"
   <% end %>
 >
-  <div class="flex items-end gap-2 msg-<%= message.account.id %>">
-    <div class="md:block hidden">
-      <%= account_avatar(message.account, other_classes: 'my-2.5') %>
-    </div>
-    <div class="flex items-center my-3 gap-1.5 msg-<%= message.account.id %>">
-      <p class="relative rounded-xl border text-sm p-2.5 bg-white overflow-break-word msg-color-<%= message.account.id %> msg-text-<%= message.account.id %> max-w-4/5 text-left">
+  <div class="flex items-end gap-2 msg-<%= message.account&.id %>">
+    <% unless chat.ai_chat? %>
+      <div class="md:block hidden">
+        <%= account_avatar(message.account, other_classes: 'my-2.5') %>
+      </div>
+    <% end %>
+    <div class="flex items-center my-3 gap-1.5 msg-<%= message.account&.id %>">
+      <p class="relative rounded-xl border text-sm p-2.5 bg-white overflow-break-word msg-color-<%= message.account&.id %> msg-text-<%= message.account&.id %> max-w-4/5 text-left">
         <%= message.body %>
-        <span class="text-gray-500 text-xs absolute -bottom-5 whitespace-nowrap left-0 created-at-alignment-<%= message.account.id %>"><%= message.created_at.strftime("%b %d, %Y - %I:%M %p") %></span>
+        <span class="text-gray-500 text-xs absolute -bottom-5 whitespace-nowrap left-0 created-at-alignment-<%= message.account&.id %>"><%= message.created_at.strftime("%b %d, %Y - %I:%M %p") %></span>
       </p>
-      <button class="hidden edit-ellipsis-<%= message.account.id %>">
+      <button class="hidden edit-ellipsis-<%= message.account&.id %>">
         <i class="fas fa-ellipsis-h fa-xl cursor-pointer text-gray-500"></i>
       </button>
     </div>
   </div>
 </div>
+

@@ -47,3 +47,14 @@ end
   chat = Chat.create_chat(group_chat_accounts, return_chat: true)
   chat.messages.create(group_chat_accounts.map { |account| { account:, body: Faker::Movies::TheRoom.quote } })
 end
+
+# Creating AI chats
+
+5.times do |i|
+  chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat)
+  AccountChatMap.create(chat:, account: first_account)
+
+  [7, 9, 12].sample.times do |j|
+    chat.messages.create(role: j.even? ? :user : :assistant, body: Faker::Movies::TheRoom.quote, account: j.even? ? first_account : nil)
+  end
+end

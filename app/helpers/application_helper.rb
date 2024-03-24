@@ -23,6 +23,11 @@ module ApplicationHelper
       route: %i[group chats],
       controller: 'chats',
       action: 'group'
+    },
+    'AI Chats' => {
+      route: %i[ai_chats chats],
+      controller: 'chats',
+      action: 'ai_chats'
     }
   }.freeze
 

@@ -1,5 +1,7 @@
 <%= turbo_frame_tag 'chat', class: 'h-full', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
-  <%= turbo_stream_from chat %>
+  <% unless chat.ai_chat? %>
+    <%= turbo_stream_from chat %>
+  <% end %>
 
   <div class="flex flex-col justify-between h-full">
     <% if chat.two_person? %>
@@ -22,7 +24,7 @@
       data-scroll-scrollable-into-view-value="true"
       data-scroll-scroll-container-to-bottom-value="true"
     >
-      <%= render partial: 'messages/message', collection: messages, locals: { scroll_into_view: false } %>
+      <%= render partial: 'messages/message', collection: messages, locals: { chat:, scroll_into_view: false } %>
     </div>
 
     <%= render 'messages/form', chat:, message: %>

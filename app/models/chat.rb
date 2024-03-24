@@ -8,7 +8,7 @@ class Chat < ApplicationRecord
   has_many :accounts, through: :account_chat_maps
 
   validates :chat_type, :latest_message_at, presence: true
-  validates :group_title, presence: true, unless: :two_person?
+  validates :chat_title, presence: true, unless: :two_person?
 
   enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2 }
 
@@ -26,8 +26,8 @@ class Chat < ApplicationRecord
 
       accounts_count = accounts.size
       chat_type = accounts_count == 2 ? :two_person : :multi_person
-      group_title = chat_type == :multi_person ? "Group Chat #{accounts_count}" : nil
-      chat = new(chat_type:, group_title:)
+      chat_title = chat_type == :multi_person ? "Group Chat #{accounts_count}" : nil
+      chat = new(chat_type:, chat_title:)
 
       AccountChatMap.create(accounts.map { |account| { account:, chat: } }) if chat.save
 

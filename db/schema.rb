@@ -89,7 +89,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_135641) do
   create_table "chats", force: :cascade do |t|
     t.integer "chat_type", default: 0, null: false
     t.datetime "latest_message_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.string "group_title"
+    t.string "chat_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

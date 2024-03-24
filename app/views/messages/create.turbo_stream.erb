@@ -1,0 +1,9 @@
+<%= turbo_stream.replace 'message-form' do %>
+  <%= render 'messages/form', chat: @chat, message: @message.persisted? ? Message.new : @message %>
+<% end %>
+
+<% if @chat.ai_chat? %>
+  <%= turbo_stream.append @chat do %>
+    <%= render 'messages/message', chat: @chat, message: @message, scroll_into_view: true %>
+  <% end %>
+<% end %>
