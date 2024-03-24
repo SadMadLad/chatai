@@ -3,6 +3,9 @@
   <% if scroll_into_view %>
     data-scroll-target="scrollable"
   <% end %>
+  <% if chat.ai_chat? && new_message %>
+    data-ai-chats-target="newUserMessage"
+  <% end %>
 >
   <div class="flex items-end gap-2 msg-<%= message.account&.id %>">
     <% unless chat.ai_chat? %>

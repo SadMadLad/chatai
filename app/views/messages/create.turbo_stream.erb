@@ -3,7 +3,7 @@
 <% end %>
 
 <% if @chat.ai_chat? %>
-  <%= turbo_stream.append @chat do %>
-    <%= render 'messages/message', chat: @chat, message: @message, scroll_into_view: true %>
+  <%= turbo_stream.append @chat, data: { action: 'turbo:before-stream-render->ai-chats#ping' } do %>
+    <%= render 'messages/message', chat: @chat, message: @message, scroll_into_view: true, new_message: true %>
   <% end %>
 <% end %>
