@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class MessageBase(BaseModel):
-    body: str
+    content: str
     role: int
 
 class MessageCreate(MessageBase):
