@@ -27,6 +27,12 @@ export default class extends Controller {
     this.toggleTabClasses(tab);
   }
 
+  hideableTargetConnected(hideable) {
+    if (this.loading) return;
+
+    this.showValue ? hideable.classList.remove('hidden') : hideable.classList.add('hidden');
+  }
+
   initialize() {
     this.loading = true;
   }
