@@ -24,7 +24,7 @@ normal_accounts = Account.where(role: :user)
 normal_accounts.each do |account|
   profile_pic = PROFILE_PICS.sample
   account.avatar.attach(
-    io: File.open(File.join(Rails.root, profile_pic)),
+    io: File.open(Rails.root.join(profile_pic).to_s),
     filename: profile_pic
   )
 end
@@ -55,6 +55,7 @@ end
   AccountChatMap.create(chat:, account: first_account)
 
   [7, 9, 12].sample.times do |j|
-    chat.messages.create(role: j.even? ? :user : :assistant, content: Faker::Movies::TheRoom.quote, account: j.even? ? first_account : nil)
+    chat.messages.create(role: j.even? ? :user : :assistant, content: Faker::Movies::TheRoom.quote,
+                         account: j.even? ? first_account : nil)
   end
 end

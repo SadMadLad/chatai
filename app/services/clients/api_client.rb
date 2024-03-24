@@ -22,7 +22,7 @@ module Clients
     end
 
     def autocomplete(messages)
-      @client.post("chats/autocomplete", messages.to_json(only: %i[role content]))
+      @client.post('chats/autocomplete', messages.to_json(only: %i[role content]))
     end
   end
 end

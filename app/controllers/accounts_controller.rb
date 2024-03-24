@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccountsController < AuthenticatedController
   before_action :set_account
   before_action :authorize_account

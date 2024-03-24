@@ -23,8 +23,8 @@ gem 'redcarpet'
 gem 'redis', '>= 4.0.1'
 gem 'requestjs-rails'
 gem 'rouge'
-gem 'sprockets-rails'
 gem 'solid_queue'
+gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
 gem 'turbo-rails'
@@ -44,8 +44,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console'
   gem 'bullet'
+  gem 'web-console'
 end
 
 group :test do
