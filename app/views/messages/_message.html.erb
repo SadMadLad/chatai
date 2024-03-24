@@ -1,11 +1,10 @@
 <div
   id=<%= dom_id(message) %>
-  data-role=<%= message.role %>
   <% if scroll_into_view %>
     data-scroll-target="scrollable"
   <% end %>
-  <% if chat.ai_chat? && new_message %>
-    data-ai-chats-target="newUserMessage"
+  <% if chat.ai_chat? && message.assistant? && new_message %>
+    data-ai-chats-target="newAssistantMessage"
   <% end %>
 >
   <div class="flex items-end gap-2 msg-<%= message.account&.id %>">

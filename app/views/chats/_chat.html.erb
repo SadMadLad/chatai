@@ -34,6 +34,12 @@
     </div>
 
     <%= render 'messages/form', chat:, message: %>
+
+    <% if chat.ai_chat? %>
+      <div data-ai-chats-target="spinner" class="hidden">
+        <i class="fas fa-circle-notch fa-xl animate-spin"></i>
+      </div>
+    <% end %>
   </div>
 <% end %>
 

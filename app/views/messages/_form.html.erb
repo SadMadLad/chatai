@@ -6,13 +6,7 @@
     <% end %>
   </div>
 
-  <%= button_tag type: 'submit', class: 'bg-primary-500 text-white px-4 py-2.5 rounded-xl font-semibold' do %>
+  <%= button_tag type: 'submit', class: 'disabled:bg-primary-200 bg-primary-500 text-white px-4 py-2.5 rounded-xl font-semibold', data: { ai_chats_target: 'submitButton' } do %>
     Send <i class="fas fa-paper-plane"></i>
-  <% end %>
-
-  <% if chat.ai_chat? %>
-    <div data-ai-chats-target="spinner" class="hidden">
-      <i class="fas fa-circle-notch fa-xl animate-spin"></i>
-    </div>
   <% end %>
 <% end %>

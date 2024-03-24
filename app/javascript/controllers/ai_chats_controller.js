@@ -2,20 +2,33 @@ import { Controller } from "@hotwired/stimulus";
 import { FetchRequest } from '@rails/request.js'
 
 export default class extends Controller {
-  static targets = ['newUserMessage', 'form', 'spinner'];
+  static targets = ['newAssistantMessage', 'form', 'submitButton', 'spinner'];
   static values = {
     chatId: String,
     loading: { type: Boolean, default: false }
   }
 
-  loadingValueChanged(loading) {
+  formTargetConnected(form) {
+    form.inert = this.loadingValue
+  }
+
+  submitButtonTargetConnected(button) {
+    button.disabled = this.loadingValue
+  }
+
+  newAssistantMessageTargetConnected() {
+    this.loadingValue = false;
+  }
+
+  loadingValueChanged() {
     if (!this.hasFormTarget || !this.hasSpinnerTarget) return;
 
-    if (loading) {
-      this.formTarget.inert = true;
+    this.formTarget.inert = this.loadingValue;
+    this.submitButtonTarget.disabled = this.loadingValue;
+
+    if (this.loadingValue) {
       this.spinnerTarget.classList.remove('hidden')
     } else {
-      this.formTarget.inert = false;
       this.spinnerTarget.classList.add('hidden');
     }
   }
@@ -26,13 +39,10 @@ export default class extends Controller {
 
   submitEnd(e) {
     if (!this.chatIdValue || this.chatIdValue === '') return;
-
     if (e.detail.success) {
       const request = new FetchRequest('post', `/chats/${this.chatIdValue}/autocomplete`, { responseKind: 'turbo-stream' })
-      const response = request.perform()
 
-      if (response.ok) this.loadingValue = false
+      request.perform()
     }
-
   }
 }
