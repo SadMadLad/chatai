@@ -15,7 +15,10 @@ Rails.application.routes.draw do
         get :group
         get :ai_chats
       end
-      member { get :details }
+      member do
+        get :details
+        post :autocomplete
+      end
       resources :messages, only: %i[create edit update destroy]
     end
     resources :accounts, only: %i[show edit update destroy]

@@ -41,7 +41,7 @@ class MessagesController < AuthenticatedController
   end
 
   def message_params
-    params.require(:message).permit(:body).merge(account: current_account)
+    params.require(:message).permit(:content).merge(account: current_account)
   end
 
   def authorize_message

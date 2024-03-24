@@ -5,7 +5,7 @@
 <table class="table-auto text-sm">
   <thead class="bg-gray-100">
     <tr>
-      <th>Body</th>
+      <th>Content</th>
       <th>Sender</th>
       <th>Chat</th>
       <th>Created At</th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @messages.each do |message| %>
       <tr class="border-b">
-        <td><%= message.body %></td>
+        <td><%= message.content %></td>
         <td><%= message.account.full_name %></td>
         <td><%= message.chat.id %></td>
         <td><%= message.created_at %></td>

@@ -3,7 +3,7 @@
 class ChatsController < AuthenticatedController
   include ChatPagination
 
-  before_action :set_chat, only: %i[show details destroy]
+  before_action :set_chat, only: %i[show details autocomplete destroy]
   before_action :set_new_message, only: %i[index group show]
   before_action :authorize_chat
   before_action -> { define_model_name('chat') }
@@ -38,6 +38,14 @@ class ChatsController < AuthenticatedController
     else
       redirect_to :chats, alert: t(:failed_create, model:)
     end
+  end
+
+  def autocomplete
+    messages = @chat.messages.order(:created_at).last(params[:limit] || 5)
+    client = Clients::ApiClient.new
+    response = client.autocomplete(messages)
+
+    @message = Message.create(content: JSON.parse(response.body), role: :assistant, chat: @chat)
   end
 
   def destroy

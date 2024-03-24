@@ -9,7 +9,7 @@
   <h4>Messages: </h4>
   <% @messages.each do |message| %>
     <%= link_to [:admin, message] do %>
-      <%= message.body %> - <%= message.account.full_name %>
+      <%= message.content %> - <%= message.account.full_name %>
     <% end %>
   <% end %>
 <hr />

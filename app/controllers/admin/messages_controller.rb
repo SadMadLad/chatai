@@ -50,7 +50,7 @@ module Admin
     private
 
     def message_params
-      params.require(:message).permit(:account_id, :chat_id, :body)
+      params.require(:message).permit(:account_id, :chat_id, :content)
     end
 
     def set_message

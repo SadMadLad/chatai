@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   belongs_to :chat, touch: :latest_message_at
   belongs_to :account, touch: :latest_message_at, optional: true
 
-  validates :body, presence: true
+  validates :content, presence: true
   validates :account_id, presence: true, if: :user?
 
   enum :role, { user: 0, assistant: 1, system: 2 }

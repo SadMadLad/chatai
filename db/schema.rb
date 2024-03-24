@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_135641) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "body", null: false
+    t.text "content", null: false
     t.integer "role", default: 0, null: false
     t.bigint "chat_id", null: false
     t.bigint "account_id"

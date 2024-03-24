@@ -20,5 +20,9 @@ module Clients
 
       @client.post("ml_models/#{@ml_model.id}/prediction", prediction_params.to_json)
     end
+
+    def autocomplete(messages)
+      @client.post("chats/autocomplete", messages.to_json(only: %i[role content]))
+    end
   end
 end

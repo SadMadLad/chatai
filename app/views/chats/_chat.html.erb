@@ -3,7 +3,13 @@
     <%= turbo_stream_from chat %>
   <% end %>
 
-  <div class="flex flex-col justify-between h-full">
+  <div
+    class="flex flex-col justify-between h-full"
+    <% if chat.ai_chat? %>
+      data-controller="ai-chats"
+      data-ai-chats-chat-id-value="<%= @chat.id %>"
+    <% end %>
+  >
     <% if chat.two_person? %>
       <header class="z-40 sticky top-0 rounded-lg shadow-sm bg-white px-4 py-2.5 border-b flex justify-between items-center">
         <div class="flex items-center gap-2.5">
@@ -19,10 +25,7 @@
     <div
       id=<%= dom_id(chat) %>
       class="px-4 flex flex-col gap-3 py-8"
-      data-controller="scroll <%= 'ai-chats' if chat.ai_chat? %>"
-      <% if chat.ai_chat? %>
-        data-ai-chats-chat-id-value="<%= @chat.id %>"
-      <% end %>
+      data-controller="scroll"
       data-scroll-target="scrollContainer"
       data-scroll-scrollable-into-view-value="true"
       data-scroll-scroll-container-to-bottom-value="true"
@@ -33,3 +36,4 @@
     <%= render 'messages/form', chat:, message: %>
   </div>
 <% end %>
+

@@ -39,13 +39,13 @@ last_n_accounts = normal_accounts.last(n)
 chats_accounts = last_n_accounts.map { |account| [first_account, account] }
 chats_accounts.each do |accounts|
   chat = Chat.create_chat(accounts, return_chat: true)
-  chat.messages.create(accounts.map { |account| { account:, body: account.full_name } })
+  chat.messages.create(accounts.map { |account| { account:, content: account.full_name } })
 end
 
 4.upto 9 do |i|
   group_chat_accounts = normal_accounts.last(i) + [first_account]
   chat = Chat.create_chat(group_chat_accounts, return_chat: true)
-  chat.messages.create(group_chat_accounts.map { |account| { account:, body: Faker::Movies::TheRoom.quote } })
+  chat.messages.create(group_chat_accounts.map { |account| { account:, content: Faker::Movies::TheRoom.quote } })
 end
 
 # Creating AI chats
@@ -55,6 +55,6 @@ end
   AccountChatMap.create(chat:, account: first_account)
 
   [7, 9, 12].sample.times do |j|
-    chat.messages.create(role: j.even? ? :user : :assistant, body: Faker::Movies::TheRoom.quote, account: j.even? ? first_account : nil)
+    chat.messages.create(role: j.even? ? :user : :assistant, content: Faker::Movies::TheRoom.quote, account: j.even? ? first_account : nil)
   end
 end

@@ -5,7 +5,7 @@ class ChatPolicy < ApplicationPolicy
     define_method(:"#{action}?") { true }
   end
 
-  %w[show details destroy].each do |action|
+  %w[show autocomplete details destroy].each do |action|
     define_method(:"#{action}?") { account_chat? }
   end
 

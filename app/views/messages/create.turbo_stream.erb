@@ -2,8 +2,8 @@
   <%= render 'messages/form', chat: @chat, message: @message.persisted? ? Message.new : @message %>
 <% end %>
 
-<% if @chat.ai_chat? %>
-  <%= turbo_stream.append @chat, data: { action: 'turbo:before-stream-render->ai-chats#ping' } do %>
+<% if @chat.ai_chat? && @message.persisted? %>
+  <%= turbo_stream.append @chat do %>
     <%= render 'messages/message', chat: @chat, message: @message, scroll_into_view: true, new_message: true %>
   <% end %>
 <% end %>

@@ -25,6 +25,7 @@
     <%= link_to chat.chat_title, chat, class: random_bg_color, data: { turbo_frame: 'chat' } %>
   <% end %>
 
-  <%= turbo_frame_tag 'chat' %>
+  <div data-controller="ai-chats">
+    <%= turbo_frame_tag 'chat' %>
+  </div>
 </section>
-
