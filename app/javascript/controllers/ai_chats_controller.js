@@ -43,6 +43,8 @@ export default class extends Controller {
       const request = new FetchRequest('post', `/chats/${this.chatIdValue}/autocomplete`, { responseKind: 'turbo-stream' })
 
       request.perform()
+    } else {
+        this.loadingValue = false;
     }
   }
 }

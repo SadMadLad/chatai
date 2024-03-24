@@ -14,10 +14,17 @@
       </div>
     <% end %>
     <div class="flex items-center my-3 gap-1.5 msg-<%= message.account&.id %>">
-      <p class="relative rounded-xl border text-sm p-2.5 bg-white overflow-break-word msg-color-<%= message.account&.id %> msg-text-<%= message.account&.id %> max-w-4/5 text-left">
-        <%= message.content %>
+      <div class="relative rounded-xl border text-sm p-2.5 bg-white overflow-break-word msg-color-<%= message.account&.id %> msg-text-<%= message.account&.id %> max-w-4/5 text-left">
+        <div
+        >
+        <% if message.assistant? && chat.ai_chat? %>
+          <%== markdown_render(message.content) %>
+        <% else %>
+          <%= message.content %>
+        <% end %>
+        </div>
         <span class="text-gray-500 text-xs absolute -bottom-5 whitespace-nowrap left-0 created-at-alignment-<%= message.account&.id %>"><%= message.created_at.strftime("%b %d, %Y - %I:%M %p") %></span>
-      </p>
+      </div>
       <button class="hidden edit-ellipsis-<%= message.account&.id %>">
         <i class="fas fa-ellipsis-h fa-xl cursor-pointer text-gray-500"></i>
       </button>
