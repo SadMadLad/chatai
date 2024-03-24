@@ -13,6 +13,6 @@ async def autocomplete(messages: List[Dict]):
     try:
         response = await G4fClient().get_response(messages)
         return response
-    except Exception as e:
+    except:
         return 'Message generation failed. Please try again later.'
 

@@ -7,27 +7,13 @@ class MessagesController < AuthenticatedController
   include AccountsHelper
 
   before_action :set_chat
-  before_action :set_message, only: %i[edit update destroy]
   before_action :authorize_message
-
-  def edit; end
 
   def create
     @message = @chat.messages.create(message_params)
 
     broadcast_new_message if @message.save && !@chat.ai_chat?
-  end
-
-  def update
-    @message.update(message_params)
-
-    @message.broadcast_replace_to(@chat)
-  end
-
-  def destroy
-    @message.destroy
-
-    @message.broadcast_remove_to(@chat)
+    render status: @message.persisted? ? :created : :unprocessable_entity
   end
 
   private
