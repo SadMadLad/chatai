@@ -22,15 +22,15 @@ class Chat < ApplicationRecord
 
   class << self
     def create_chat(accounts, return_chat: false)
-      return return_chat ? Chat.new : false if accounts.size < 2
+      return false if accounts.size < 2
 
-      accounts_count = accounts.size
-      chat_type = accounts_count == 2 ? :two_person : :multi_person
-      chat_title = chat_type == :multi_person ? "Group Chat #{accounts_count}" : nil
+      chat_type = accounts.size == 2 ? :two_person : :multi_person
+      chat_title = chat_type == :multi_person ? "Group Chat #{accounts.size}" : nil
       chat = new(chat_type:, chat_title:)
 
-      AccountChatMap.create(accounts.map { |account| { account:, chat: } }) if chat.save
+      return false unless chat.save
 
+      AccountChatMap.create(accounts.map { |account| { account:, chat: } })
       return_chat ? chat : chat.persisted?
     end
 
