@@ -15,7 +15,10 @@ export default class extends Controller {
     tabHideClasses: { type: Array, default: ["gap-20"] },
     sidebarShowClasses: { type: Array, default: ["w-60"] },
     sidebarHideClasses: { type: Array, default: ["md:w-20", "w-12"] },
-    sidebarToggleButtonClasses: { type: Array, default: ["hidden", "md:block"] }
+    sidebarToggleButtonClasses: {
+      type: Array,
+      default: ["hidden", "md:block"],
+    },
   };
 
   tabTargetConnected(tab) {
@@ -33,7 +36,7 @@ export default class extends Controller {
   }
 
   toggleTabClasses(tab) {
-    if(this.showValue) {
+    if (this.showValue) {
       tab.classList.add(...this.tabShowClassesValue);
       tab.classList.remove(...this.tabHideClassesValue);
     } else {
@@ -42,9 +45,8 @@ export default class extends Controller {
     }
   }
 
-
   showValueChanged(showValue) {
-    this.tabTargets.forEach((tab) => this.toggleTabClasses(tab))
+    this.tabTargets.forEach((tab) => this.toggleTabClasses(tab));
     if (showValue) {
       this.sidebarTarget.classList.add(...this.sidebarShowClassesValue);
       this.sidebarTarget.classList.remove(...this.sidebarHideClassesValue);
@@ -66,11 +68,19 @@ export default class extends Controller {
     if (!this.hasShowButtonTarget || !this.hasHideButtonTarget) return;
 
     if (showValue) {
-      this.showButtonTarget.classList.remove(...this.sidebarToggleButtonClassesValue);
-      this.hideButtonTarget.classList.add(...this.sidebarToggleButtonClassesValue);
+      this.showButtonTarget.classList.remove(
+        ...this.sidebarToggleButtonClassesValue,
+      );
+      this.hideButtonTarget.classList.add(
+        ...this.sidebarToggleButtonClassesValue,
+      );
     } else {
-      this.showButtonTarget.classList.add(...this.sidebarToggleButtonClassesValue);
-      this.hideButtonTarget.classList.remove(...this.sidebarToggleButtonClassesValue);
+      this.showButtonTarget.classList.add(
+        ...this.sidebarToggleButtonClassesValue,
+      );
+      this.hideButtonTarget.classList.remove(
+        ...this.sidebarToggleButtonClassesValue,
+      );
     }
   }
 

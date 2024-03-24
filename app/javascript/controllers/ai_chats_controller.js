@@ -1,19 +1,19 @@
 import { Controller } from "@hotwired/stimulus";
-import { FetchRequest } from '@rails/request.js'
+import { FetchRequest } from "@rails/request.js";
 
 export default class extends Controller {
-  static targets = ['newAssistantMessage', 'form', 'submitButton', 'spinner'];
+  static targets = ["newAssistantMessage", "form", "submitButton", "spinner"];
   static values = {
     chatId: String,
-    loading: { type: Boolean, default: false }
-  }
+    loading: { type: Boolean, default: false },
+  };
 
   formTargetConnected(form) {
-    form.inert = this.loadingValue
+    form.inert = this.loadingValue;
   }
 
   submitButtonTargetConnected(button) {
-    button.disabled = this.loadingValue
+    button.disabled = this.loadingValue;
   }
 
   newAssistantMessageTargetConnected() {
@@ -27,9 +27,9 @@ export default class extends Controller {
     this.submitButtonTarget.disabled = this.loadingValue;
 
     if (this.loadingValue) {
-      this.spinnerTarget.classList.remove('hidden')
+      this.spinnerTarget.classList.remove("hidden");
     } else {
-      this.spinnerTarget.classList.add('hidden');
+      this.spinnerTarget.classList.add("hidden");
     }
   }
 
@@ -38,13 +38,17 @@ export default class extends Controller {
   }
 
   submitEnd(e) {
-    if (!this.chatIdValue || this.chatIdValue === '') return;
+    if (!this.chatIdValue || this.chatIdValue === "") return;
     if (e.detail.success) {
-      const request = new FetchRequest('post', `/chats/${this.chatIdValue}/autocomplete`, { responseKind: 'turbo-stream' })
+      const request = new FetchRequest(
+        "post",
+        `/chats/${this.chatIdValue}/autocomplete`,
+        { responseKind: "turbo-stream" },
+      );
 
-      request.perform()
+      request.perform();
     } else {
-        this.loadingValue = false;
+      this.loadingValue = false;
     }
   }
 }

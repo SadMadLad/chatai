@@ -9,7 +9,7 @@ export default class extends Controller {
   chatTabTargetConnected(chatTab) {
     if (chatTab.dataset.notification === "0") return;
 
-    chatTab.scrollIntoView({ block: 'end', behavior: "smooth" })
+    chatTab.scrollIntoView({ block: "end", behavior: "smooth" });
   }
 
   activateChatTab(e) {
