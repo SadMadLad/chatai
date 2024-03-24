@@ -46,6 +46,8 @@ class ChatsController < AuthenticatedController
     response = client.autocomplete(messages)
 
     @message = Message.create(content: JSON.parse(response.body), role: :assistant, chat: @chat)
+  rescue Faraday::ConnectionFailed
+    @message = Message.create(content: 'Service not available right now', role: :assistant, chat: @chat)
   end
 
   def destroy
