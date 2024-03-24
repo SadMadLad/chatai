@@ -400,6 +400,7 @@ DEPENDENCIES
   redcarpet
   redis (>= 4.0.1)
   requestjs-rails
+  rouge
   rubocop-capybara
   rubocop-minitest
   rubocop-performance

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module MessagesHelper
+  RENDERER = Redcarpet::Markdown.new(RougeHelper::HTML, fenced_code_blocks: true, highlight: true)
+
   def markdown_render(message)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    markdown.render(sanitize(message))
+    RENDERER.render(sanitize(message))
   end
 end
