@@ -224,4 +224,6 @@
 .highlight {
   color: #f8f8f2;
   background-color: #49483e;
+  padding: 0.25rem;
+  margin: 0.25rem 0;
 }

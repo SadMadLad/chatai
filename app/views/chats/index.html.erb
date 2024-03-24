@@ -50,7 +50,7 @@
         </nav>
 
         <%= turbo_frame_tag 'chats' do %>
-          <%= turbo_stream_from chat_tab_stream(current_account) %>
+          <%= turbo_stream_from current_account.sidebar_stream_id %>
 
           <div id="chat_tabs">
             <%= render partial: 'chat_tab', collection: @chats.zip(@accounts), as: :chat_and_account, locals: { notification: nil, latest_message: nil } %>

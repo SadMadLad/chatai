@@ -46,7 +46,7 @@
         </nav>
 
         <%= turbo_frame_tag 'chats' do %>
-          <%= turbo_stream_from chat_tab_stream(current_account, chat_type: :multi_person) %>
+          <%= turbo_stream_from current_account.sidebar_stream_id(chat_type: :multi_person) %>
 
           <div id="chat_tabs">
             <%= render partial: 'group_chat_tab', collection: @chats, as: :chat, locals: { notification: nil, latest_message: nil, accounts: nil } %>

@@ -35,6 +35,10 @@ class Account < ApplicationRecord
     admin? || superadmin?
   end
 
+  def sidebar_stream_id(chat_type: :two_person)
+    "account_#{id}_chat_sidebar#{'_group' if chat_type == :multi_person}"
+  end
+
   class << self
     def conversing_accounts(account, chats)
       joins(:chats)

@@ -20,6 +20,10 @@ class Chat < ApplicationRecord
     accounts.excluding(account).first
   end
 
+  def tab_id
+    "chat_#{id}_tab"
+  end
+
   class << self
     def create_chat(accounts, return_chat: false)
       return false if accounts.size < 2

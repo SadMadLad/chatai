@@ -3,7 +3,6 @@
 class MessagesController < AuthenticatedController
   include ChatPagination
   include ActionView::RecordIdentifier
-  include ChatsHelper
   include AccountsHelper
 
   before_action :set_chat
@@ -42,14 +41,14 @@ class MessagesController < AuthenticatedController
 
     conversing_accounts = @chat.accounts
     conversing_accounts.each do |account|
-      chat_stream = chat_tab_stream(account, chat_type: @chat.chat_type.to_sym)
+      chat_stream = account.sidebar_stream_id(chat_type: @chat.chat_type.to_sym)
       locals = {
         chat_and_account: [@chat, conversing_accounts.excluding(account).first],
         accounts: conversing_accounts, latest_message: @message, chat: @chat, notification: true
       }
       partial = "chats/#{'group_' if @chat.multi_person?}chat_tab"
 
-      @message.broadcast_remove_to(chat_stream, target: chat_tab_id(@chat))
+      @message.broadcast_remove_to(chat_stream, target: @chat.tab_id)
       @message.broadcast_prepend_to(chat_stream, target: 'chat_tabs', partial:, locals:)
     end
   end
