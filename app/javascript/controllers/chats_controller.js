@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["chatTab"];
   static values = {
     notificationQuery: { type: String, default: "" },
-    toggleClasses: { type: Array, default: ['bg-gray-100'] }
+    toggleClasses: { type: Array, default: ["bg-gray-100"] },
   };
 
   chatTabTargetConnected(chatTab) {
@@ -17,7 +17,7 @@ export default class extends Controller {
 
   activateChatTab(e) {
     const selectedId = e.detail.newFrame.dataset.id;
-    if (!selectedId || selectedId === '') return;
+    if (!selectedId || selectedId === "") return;
 
     this.chatTabTargets.forEach((target) => {
       target.dataset.id === `chat_${selectedId}`

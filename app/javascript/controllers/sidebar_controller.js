@@ -30,7 +30,9 @@ export default class extends Controller {
   hideableTargetConnected(hideable) {
     if (this.loading) return;
 
-    this.showValue ? hideable.classList.remove('hidden') : hideable.classList.add('hidden');
+    this.showValue
+      ? hideable.classList.remove("hidden")
+      : hideable.classList.add("hidden");
   }
 
   initialize() {
