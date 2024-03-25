@@ -9,6 +9,7 @@ gem 'rails', '~> 7.1.3'
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'dotenv-rails'
+gem 'faker'
 gem 'faraday'
 gem 'font-awesome-sass'
 gem 'image_processing'
@@ -33,7 +34,6 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 group :development, :test do
   gem 'annotate'
   gem 'debug', platforms: %i[mri windows]
-  gem 'faker'
   gem 'letter_opener'
   gem 'lookbook'
   gem 'pry-rails'

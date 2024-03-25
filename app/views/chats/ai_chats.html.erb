@@ -1,14 +1,20 @@
 
-<section class="container">
+<section
+  class="container"
+  data-controller="chats"
+  data-chats-toggle-classes-value= <%= ['bg-primary-500', 'text-white', 'font-semibold'].to_json %>
+>
   <%= content_for :style do %>
     <%= ChatsHelper::ChatStyleBuilder.new(current_account).build %>
   <% end %>
 
-  <% @chats.each do |chat| %>
-    <%= link_to chat.chat_title, chat, class: random_bg_color, data: { turbo_frame: 'chat' } %>
-  <% end %>
+  <nav class="flex flex-nowrap overflow-x-auto gap-1.5">
+    <% @chats.each do |chat| %>
+      <%= link_to chat.chat_title, chat, class: 'border rounded px-2.5 py-1.5', data: { turbo_frame: 'chat', chats_target: 'chatTab', id: dom_id(chat) } %>
+    <% end %>
+  </nav>
 
   <div data-controller="ai-chats">
-    <%= turbo_frame_tag 'chat' %>
+    <%= turbo_frame_tag 'chat', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: '' } %>
   </div>
 </section>
