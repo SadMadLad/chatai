@@ -1,8 +1,8 @@
-<section class="container">
-  <%= content_for :style do %>
-    <%= ChatsHelper::ChatStyleBuilder.new(current_account).build %>
-  <% end %>
+<%= content_for :style do %>
+  <%= ChatsHelper::ChatStyleBuilder.build(current_account) %>
+<% end %>
 
+<section class="container">
   <div
     class="w-full flex flex-col items-center md:flex-row md:items-center gap-2.5"
     data-controller="chats"

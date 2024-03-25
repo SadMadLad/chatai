@@ -2,8 +2,6 @@
 
 class MessagesController < AuthenticatedController
   include ChatPagination
-  include ActionView::RecordIdentifier
-  include AccountsHelper
 
   before_action :set_chat
   before_action :authorize_message
@@ -11,7 +9,7 @@ class MessagesController < AuthenticatedController
   def create
     @message = @chat.messages.create(message_params)
 
-    broadcast_new_message if @message.save && !@chat.ai_chat?
+    broadcast_new_message if @message.save
     render status: @message.persisted? ? :created : :unprocessable_entity
   end
 
@@ -34,22 +32,48 @@ class MessagesController < AuthenticatedController
   end
 
   def broadcast_new_message
-    @message.broadcast_append_to(
-      @chat, partial: 'messages/message', locals: { message: @message, chat: @chat,
-                                                    scroll_into_view: true }, target: @chat
-    )
+    return if @chat.ai_chat?
 
+    broadcast_append_message
     conversing_accounts = @chat.accounts
-    conversing_accounts.each do |account|
-      chat_stream = account.sidebar_stream_id(chat_type: @chat.chat_type.to_sym)
-      locals = {
-        chat_and_account: [@chat, conversing_accounts.excluding(account).first],
-        accounts: conversing_accounts, latest_message: @message, chat: @chat, notification: true
-      }
-      partial = "chats/#{'group_' if @chat.multi_person?}chat_tab"
 
-      @message.broadcast_remove_to(chat_stream, target: @chat.tab_id)
-      @message.broadcast_prepend_to(chat_stream, target: 'chat_tabs', partial:, locals:)
+    conversing_accounts.each do |account|
+      account_chat_stream = account.sidebar_stream_id(chat_type: @chat.chat_type.to_sym)
+      locals = build_locals(conversing_accounts, account)
+      partial = set_partial
+
+      update_chat_tabs(account_chat_stream, partial, locals)
     end
+  end
+
+  def broadcast_append_message
+    locals = { message: @message, chat: @chat, scroll_into_view: true }
+
+    @message.broadcast_append_to(@chat, partial: 'messages/message', locals:, target: @chat)
+  end
+
+  def update_chat_tabs(account_chat_stream, partial, locals)
+    @message.broadcast_remove_to(account_chat_stream, target: @chat.tab_id)
+    @message.broadcast_prepend_to(account_chat_stream, target: 'chat_tabs', partial:, locals:)
+  end
+
+  def build_locals(chat_accounts, exclude_account)
+    locals = {}
+
+    locals[:latest_message] = @message
+    locals[:chat] = @chat
+    locals[:notification] = true
+
+    if @chat.two_person?
+      locals[:chat_and_account] = [@chat, chat_accounts.excluding(exclude_account).first]
+    else
+      locals[:accounts] = chat_accounts
+    end
+
+    locals
+  end
+
+  def set_partial
+    "chats/#{@chat.multi_person? ? 'group_' : ''}chat_tab"
   end
 end

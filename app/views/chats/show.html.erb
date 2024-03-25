@@ -1,5 +1,5 @@
 <%= content_for :style do %>
-  <%= ChatsHelper::ChatStyleBuilder.new(current_account).build %>
+  <%= ChatsHelper::ChatStyleBuilder.build(current_account) %>
 <% end %>
 
 <div class="container border rounded-lg">

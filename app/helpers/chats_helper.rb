@@ -2,47 +2,44 @@
 
 module ChatsHelper
   class ChatStyleBuilder
-    attr_reader :account, :color
+    class << self
+      def build(account, color: '#8b5cf6')
+        message_direction(account) +
+          message_color(account, color) +
+          message_text(account) +
+          message_ellipsis(account) +
+          message_alignment(account)
+      end
 
-    def initialize(account, color: '#8b5cf6')
-      @account = account
-      @color = color
-    end
+      def message_direction(account)
+        ".msg-#{account.id} { flex-direction: row-reverse !important; }"
+      end
 
-    def build
-      message_direction + message_color + message_text + message_ellipsis + message_alignment
-    end
+      def message_color(account, color)
+        ".msg-color-#{account.id} { background-color: #{color} !important; }"
+      end
 
-    private
+      def message_text(account)
+        <<-TEXT
+        .msg-text-#{account.id} {
+          color: white !important;
+          text-align: right !important;
+        }
+        TEXT
+      end
 
-    def message_direction
-      ".msg-#{account.id} { flex-direction: row-reverse !important; }"
-    end
+      def message_ellipsis(account)
+        ".msg-ellipsis-#{account.id} { display: block !important; }"
+      end
 
-    def message_color
-      ".msg-color-#{account.id} { background-color: #{color} !important; }"
-    end
-
-    def message_text
-      <<-TEXT
-      .msg-text-#{account.id} {
-        color: white !important;
-        text-align: right !important;
-      }
-      TEXT
-    end
-
-    def message_ellipsis
-      ".msg-ellipsis-#{account.id} { display: block !important; }"
-    end
-
-    def message_alignment
-      <<-TEXT
-      .created-at-alignment-#{account.id} {
-        right: 0 !important;
-        left: auto !important;
-      }
-      TEXT
+      def message_alignment(account)
+        <<-TEXT
+        .created-at-alignment-#{account.id} {
+          right: 0 !important;
+          left: auto !important;
+        }
+        TEXT
+      end
     end
   end
 end
