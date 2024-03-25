@@ -1,24 +1,7 @@
 
 <section class="container">
   <%= content_for :style do %>
-    <%- primary_color = '#8b5cf6' %>
-    <%= ".msg-#{current_account.id}" %> {
-      flex-direction: row-reverse !important;
-    }
-    <%= ".msg-color-#{current_account.id}" %> {
-      background-color: <%= primary_color %> !important;
-    }
-    <%= ".msg-text-#{current_account.id}" %> {
-      color: white !important;
-      text-align: right !important;
-    }
-    <%= ".edit-ellipsis-#{current_account.id}" %> {
-      display: block !important;
-    }
-    <%= ".created-at-alignment-#{current_account.id}" %> {
-      right: 0 !important;
-      left: auto !important;
-    }
+    <%= ChatsHelper::ChatStyleBuilder.new(current_account).build %>
   <% end %>
 
   <% @chats.each do |chat| %>
