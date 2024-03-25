@@ -4,6 +4,7 @@ from g4f.Provider import Bing
 from g4f.models import gpt_4_turbo
 from g4f import ChatCompletion
 
+
 class G4fClient:
     def __init__(self, model=gpt_4_turbo, provider=Bing):
         self.model = model
@@ -11,10 +12,7 @@ class G4fClient:
 
     async def get_response(self, messages: List[Dict], stream: bool = True):
         response = ChatCompletion.create_async(
-            model=self.model,
-            provider=self.provider,
-            messages=messages,
-            stream=stream
+            model=self.model, provider=self.provider, messages=messages, stream=stream
         )
         if stream is False:
             return response
@@ -24,4 +22,3 @@ class G4fClient:
             full_response.append(message)
 
         return "".join(full_response)
-

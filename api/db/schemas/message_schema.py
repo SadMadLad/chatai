@@ -1,11 +1,14 @@
 from pydantic import BaseModel
 
+
 class MessageBase(BaseModel):
     content: str
     role: int
 
+
 class MessageCreate(MessageBase):
     pass
+
 
 class Message(MessageBase):
     id: int
