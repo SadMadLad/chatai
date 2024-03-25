@@ -74,6 +74,6 @@ class MessagesController < AuthenticatedController
   end
 
   def set_partial
-    "chats/#{@chat.multi_person? ? 'group_' : ''}chat_tab"
+    "chats/#{'group_' if @chat.multi_person?}chat_tab"
   end
 end
