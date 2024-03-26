@@ -14,14 +14,14 @@ module Clients
         url: COMPLETIONS_ENDPOINT,
         headers: {
           'Content-Type' => 'application/json',
-          'Authorization' => "Bearer #{ENV.fetch('OPEN_AI_CLIENT', nil)}"
+          'Authorization' => "Bearer #{ENV.fetch('OPEN_AI_KEY', nil)}"
         }
       )
       @messages = messages
     end
 
-    def autocomplete(messages)
-      return if messages.blank?
+    def autocomplete
+      return if @messages.blank?
 
       @client.post(COMPLETIONS_ENDPOINT, body.to_json)
     end
@@ -33,7 +33,7 @@ module Clients
         model: GPT_MODEL,
         max_tokens: MAX_TOKENS,
         temperature: TEMPERATURE,
-        messages: @messages,
+        messages: @messages.to_json(only: %i[role content]),
       }
     end
   end
