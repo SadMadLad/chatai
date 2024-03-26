@@ -51,7 +51,7 @@ end
 # Creating AI chats
 
 5.times do |i|
-  chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat)
+  chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat, chat_status: 0)
   AccountChatMap.create(chat:, account: first_account)
 
   [7, 9, 12].sample.times do |j|

@@ -3,30 +3,28 @@ import { FetchRequest } from "@rails/request.js";
 
 export default class extends Controller {
   static targets = ["newAssistantMessage", "form", "submitButton", "spinner"];
-  static values = {
-    chatId: String,
-    loading: { type: Boolean, default: false },
-  };
+  static validChatStatuses = ["AwaitingUserReply", "Processing"];
+  static values = { chatId: String, chatStatus: String };
 
   formTargetConnected(form) {
-    form.inert = this.loadingValue;
+    form.inert = this.#isProcessing();
   }
 
   submitButtonTargetConnected(button) {
-    button.disabled = this.loadingValue;
+    button.disabled = this.#isProcessing();
   }
 
   newAssistantMessageTargetConnected() {
-    this.loadingValue = false;
+    this.chatStatusValue = "AwaitingUserReply";
   }
 
-  loadingValueChanged() {
+  chatStatusValueChanged() {
     if (!this.hasFormTarget || !this.hasSpinnerTarget) return;
 
-    this.formTarget.inert = this.loadingValue;
-    this.submitButtonTarget.disabled = this.loadingValue;
+    this.formTarget.inert = this.#isProcessing();
+    this.submitButtonTarget.disabled = this.#isProcessing();
 
-    if (this.loadingValue) {
+    if (this.#isProcessing()) {
       this.spinnerTarget.classList.remove("hidden");
     } else {
       this.spinnerTarget.classList.add("hidden");
@@ -34,7 +32,7 @@ export default class extends Controller {
   }
 
   submitStart() {
-    this.loadingValue = true;
+    this.chatStatusValue = "Processing";
   }
 
   submitEnd(e) {
@@ -48,7 +46,11 @@ export default class extends Controller {
 
       request.perform();
     } else {
-      this.loadingValue = false;
+      this.chatStatusValue = "AwaitingUserReply"
     }
+  }
+
+  #isProcessing() {
+    return this.chatStatusValue === "Processing";
   }
 }

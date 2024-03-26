@@ -9,8 +9,10 @@ class Chat < ApplicationRecord
 
   validates :chat_type, :latest_message_at, presence: true
   validates :chat_title, presence: true, unless: :two_person?
+  validates :chat_status, presence: true, if: :ai_chat?
 
   enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2 }
+  enum :chat_status, { awaiting_user_reply: 0, processing: 1 }
 
   default_scope -> { includes(:messages) }
 

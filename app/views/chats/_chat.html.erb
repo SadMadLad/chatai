@@ -1,13 +1,12 @@
 <%= turbo_frame_tag 'chat', class: 'h-full', data: { action: 'turbo:before-frame-render->chats#activateChatTab', id: @chat.id } do %>
-  <% unless chat.ai_chat? %>
-    <%= turbo_stream_from chat %>
-  <% end %>
+  <%= turbo_stream_from chat %>
 
   <div
     class="flex flex-col justify-between h-full"
     <% if chat.ai_chat? %>
       data-controller="ai-chats"
       data-ai-chats-chat-id-value="<%= @chat.id %>"
+      data-ai-chats-chat-status-value=<%= @chat.chat_status.underscore.camelize %>
     <% end %>
   >
     <% if chat.two_person? %>

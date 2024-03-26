@@ -7,7 +7,7 @@ class MessagesController < AuthenticatedController
   before_action :authorize_message
 
   def create
-    @message = @chat.messages.create(message_params)
+    @message = @chat.messages.new(message_params)
 
     broadcast_new_message if @message.save
     render status: @message.persisted? ? :created : :unprocessable_entity
@@ -32,9 +32,9 @@ class MessagesController < AuthenticatedController
   end
 
   def broadcast_new_message
+    broadcast_append_message
     return if @chat.ai_chat?
 
-    broadcast_append_message
     conversing_accounts = @chat.accounts
 
     conversing_accounts.each do |account|
@@ -47,7 +47,7 @@ class MessagesController < AuthenticatedController
   end
 
   def broadcast_append_message
-    locals = { message: @message, chat: @chat, scroll_into_view: true }
+    locals = { message: @message, chat: @chat, scroll_into_view: true, new_message: true }
 
     @message.broadcast_append_to(@chat, partial: 'messages/message', locals:, target: @chat)
   end
