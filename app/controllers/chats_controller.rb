@@ -41,13 +41,9 @@ class ChatsController < AuthenticatedController
   end
 
   def autocomplete
-    messages = @chat.messages.order(:created_at).last(params[:limit] || 5)
-    client = Clients::ApiClient.new
-    response = client.autocomplete(messages)
+    AutocompletionJob.perform_later(@chat)
 
-    @message = Message.create(content: JSON.parse(response.body), role: :assistant, chat: @chat)
-  rescue Faraday::ConnectionFailed
-    @message = Message.create(content: 'Service not available right now', role: :assistant, chat: @chat)
+    render status: :ok
   end
 
   def destroy

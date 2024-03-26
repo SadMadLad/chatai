@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module Clients
-  class ApiClient < Clients::BaseClient
+  class ApiClient
+    attr_reader :client
+
     def initialize(ml_model: nil)
       @client = Faraday.new(
         url: ENV.fetch('API_CLIENT_URL', nil),

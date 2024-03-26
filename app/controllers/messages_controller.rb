@@ -36,7 +36,6 @@ class MessagesController < AuthenticatedController
     return if @chat.ai_chat?
 
     conversing_accounts = @chat.accounts
-
     conversing_accounts.each do |account|
       account_chat_stream = account.sidebar_stream_id(chat_type: @chat.chat_type.to_sym)
       locals = build_locals(conversing_accounts, account)
