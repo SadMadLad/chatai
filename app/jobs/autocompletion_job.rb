@@ -1,21 +1,7 @@
 class AutocompletionJob < ApplicationJob
   queue_as :default
 
-  rescue_from Faraday::ConnectionFailed do
-    chat = arguments[0]
-    message = Message.create(chat:, role: :assistant, content: 'Service not available')
-
-    broadcast_message(chat, message)
-    chat.update_column(:chat_status, 'awaiting_user_reply')
-  end
-
-  rescue_from StandardError do
-    chat = arguments[0]
-    message = Message.create(chat:, role: :assistant, content: 'Something bad happened. Later!')
-
-    broadcast_message(chat, message)
-    chat.update_column(:chat_status, 'awaiting_user_reply')
-  end
+  rescue_from Faraday::ConnectionFailed, with: -> { respond_error_to_user('Service not available') }
 
   def perform(chat, limit: 5)
     return unless chat.ai_chat?
@@ -42,5 +28,12 @@ class AutocompletionJob < ApplicationJob
     message.broadcast_append_to(chat, partial: 'messages/message', locals:, target: chat)
 
     chat.update_column(:chat_status, 'awaiting_user_reply')
+  end
+
+  def respond_error_to_user(error_message)
+    chat = arguments[0]
+    message = Message.create(chat:, content: error_message, role: :assistant)
+
+    broadcast_message(chat, message)
   end
 end

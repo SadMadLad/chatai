@@ -43,7 +43,7 @@ class ChatsController < AuthenticatedController
   def autocomplete
     AutocompletionJob.perform_later(@chat)
 
-    render status: :ok
+    head :ok
   end
 
   def destroy
