@@ -1,7 +1,0 @@
-<%= turbo_stream.append @chat do %>
-  <% if @message.persisted? %>
-    <%= render 'messages/message', chat: @chat, message: @message, scroll_into_view: true, new_message: true %>
-  <% else %>
-    <p class="text-red-500 bg-red-50">Error when autocompletion</p>
-  <% end %>
-<% end %>
