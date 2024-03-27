@@ -3,7 +3,15 @@
 # Mark the database schema as having been generated.
 db/schema.rb linguist-generated
 
+# Mark Pipfile.lock and Gemfile.lock as having been generated.
+Gemfile.lock linguist-generated
+Pipfile.lock linguist-generated
+
 # Mark any vendored files as having been vendored.
 vendor/* linguist-vendored
 config/credentials/*.yml.enc diff=rails_credentials
 config/credentials.yml.enc diff=rails_credentials
+
+# Mark Jupyter Notebooks and their HTML as vendored
+api/assets/ml_models/**.html linguist-vendored
+api/notebooks/**.ipynb linguist-vendored

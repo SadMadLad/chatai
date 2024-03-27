@@ -9,6 +9,14 @@ class AutocompletionJob < ApplicationJob
     chat.update_column(:chat_status, 'awaiting_user_reply')
   end
 
+  rescue_from StandardError do
+    chat = arguments[0]
+    message = Message.create(chat:, role: :assistant, content: 'Something bad happened. Later!')
+
+    broadcast_message(chat, message)
+    chat.update_column(:chat_status, 'awaiting_user_reply')
+  end
+
   def perform(chat, limit: 5)
     return unless chat.ai_chat?
 
