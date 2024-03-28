@@ -17,27 +17,28 @@ module ApplicationHelper
     'Chats' => {
       route: %i[chats],
       controller: 'chats',
-      action: 'index'
+      action: 'index',
+      auth: :auth_only
     },
     'Group Chats' => {
       route: %i[group chats],
       controller: 'chats',
-      action: 'group'
+      action: 'group',
+      auth: :auth_only
     },
     'AI Chats' => {
       route: %i[ai_chats chats],
       controller: 'chats',
-      action: 'ai_chats'
-    }
+      action: 'ai_chats',
+      auth: :auth_only
+    },
+    'Blogs' => {
+      route: %i[pages],
+      controller: 'static',
+      action: 'pages',
+      auth: :both
+    },
   }.freeze
-
-  def spread_record(record, except: [])
-    content_tag(:div) do
-      record.attributes.except(*except).map do |attribute, value|
-        content_tag(:div, "#{attribute}: #{value}")
-      end.join.html_safe
-    end
-  end
 
   def flash_color(color_type)
     FLASH_COLORS[flash[:alert] ? :alert : :notice][color_type]
@@ -58,5 +59,25 @@ module ApplicationHelper
 
   def random_bg_color
     %w[bg-blue-500 bg-red-500 bg-green-500 bg-purple-500 bg-cyan-500].sample
+  end
+
+  def authed_routes
+    filter_routes(%i[auth_only both])
+  end
+
+  def unauthed_routes
+    filter_routes(%i[unauth_only both])
+  end
+
+  def both_routes
+    filter_routes(:both)
+  end
+
+  def filter_routes(auth)
+    return NAVIGATION_LINKS if auth.blank?
+
+    NAVIGATION_LINKS.select do |_, info|
+      auth.is_a?(Array) ? info[:auth].in?(auth) : info[:auth] == auth 
+    end
   end
 end

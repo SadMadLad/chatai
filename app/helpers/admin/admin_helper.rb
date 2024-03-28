@@ -15,4 +15,12 @@ module Admin
       solid_queues: 'fas fa-users'
     }.freeze
   end
+
+  def spread_record(record, except: [])
+    content_tag(:div) do
+      record.attributes.except(*except).map do |attribute, value|
+        content_tag(:div, "#{attribute}: #{value}")
+      end.join.html_safe
+    end
+  end
 end
