@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'static#index'
+  
+  controller :static do
+    get :pages
+  end
 
   authenticated :user do
     get :dashboard, to: 'dashboard#index'
