@@ -46,7 +46,7 @@ export default class extends Controller {
 
       request.perform();
     } else {
-      this.chatStatusValue = "AwaitingUserReply"
+      this.chatStatusValue = "AwaitingUserReply";
     }
   }
 
