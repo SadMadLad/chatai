@@ -37,7 +37,7 @@ module ApplicationHelper
       controller: 'static',
       action: 'pages',
       auth: :both
-    },
+    }
   }.freeze
 
   def flash_color(color_type)
@@ -77,7 +77,7 @@ module ApplicationHelper
     return NAVIGATION_LINKS if auth.blank?
 
     NAVIGATION_LINKS.select do |_, info|
-      auth.is_a?(Array) ? info[:auth].in?(auth) : info[:auth] == auth 
+      auth.is_a?(Array) ? info[:auth].in?(auth) : info[:auth] == auth
     end
   end
 end

@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_20_135641) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_29_092323) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "account_chat_maps", primary_key: ["account_id", "chat_id"], force: :cascade do |t|
@@ -22,6 +23,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_135641) do
     t.index ["account_id", "chat_id"], name: "index_account_chat_maps_on_account_id_and_chat_id", unique: true
     t.index ["account_id"], name: "index_account_chat_maps_on_account_id"
     t.index ["chat_id"], name: "index_account_chat_maps_on_chat_id"
+  end
+
+  create_table "account_tokens", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.integer "scope", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "scope"], name: "index_account_tokens_on_account_id_and_scope", unique: true
+    t.index ["account_id"], name: "index_account_tokens_on_account_id"
   end
 
   create_table "accounts", force: :cascade do |t|
@@ -244,6 +254,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_20_135641) do
 
   add_foreign_key "account_chat_maps", "accounts"
   add_foreign_key "account_chat_maps", "chats"
+  add_foreign_key "account_tokens", "accounts"
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"

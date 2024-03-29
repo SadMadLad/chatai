@@ -33,7 +33,7 @@ module Clients
         model: GPT_MODEL,
         max_tokens: MAX_TOKENS,
         temperature: TEMPERATURE,
-        messages: @messages.to_json(only: %i[role content]),
+        messages: @messages.to_json(only: %i[role content])
       }
     end
   end

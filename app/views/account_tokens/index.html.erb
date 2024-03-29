@@ -1,0 +1,12 @@
+<div class="bg-rose-300">
+  <%= render partial: 'account_token', collection: @account_tokens %>
+</div>
+
+<div class="bg-yellow-300">
+  <%= form_with model: @account_token do |form| %>
+    <%= form.label :scope %>
+    <%= form.select :scope, AccountToken.scopes.keys %>
+    <%= @account_token.errors.full_messages %>
+    <%= form.submit %>
+  <% end %>
+</div>

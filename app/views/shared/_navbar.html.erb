@@ -40,6 +40,10 @@
             <i class="fas fa-sign-out-alt"></i>
             <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'whitespace-nowrap' %>
           </li>
+          <li class="flex items-center gap-1.5">
+            <i class="fas fa-key"></i>
+            <%= link_to 'Account Tokens', [:account_tokens] %>
+          </li>
         </ul>
       </nav>
     </div>

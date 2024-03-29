@@ -7,6 +7,7 @@ class Account < ApplicationRecord
                       inverse_of: :commenter
   has_many :messages, dependent: :destroy, strict_loading: true
   has_many :ml_models, dependent: :destroy
+  has_many :account_tokens, dependent: :destroy
 
   default_scope { includes(avatar_attachment: :blob) }
 

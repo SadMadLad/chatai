@@ -6,14 +6,22 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'static#index'
-  
+
   controller :static do
     get :pages
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resource :sessions, only: :create
+    end
   end
 
   authenticated :user do
     get :dashboard, to: 'dashboard#index'
 
+    resources :accounts, only: %i[show edit update destroy]
+    resources :account_tokens, only: %i[index create destroy]
     resources :chats, only: %i[index show create destroy] do
       collection do
         get :group
@@ -25,8 +33,6 @@ Rails.application.routes.draw do
       end
       resources :messages, only: %i[create edit update destroy]
     end
-    resources :accounts, only: %i[show edit update destroy]
-
     resources :ml_models, only: %i[index show] do
       member do
         get :notebook_html
