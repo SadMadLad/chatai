@@ -1,7 +1,10 @@
 <!doctype html>
 <html>
   <head>
-    <title>Chatai</title>
+    <title>
+      <%= content_for?(:title) ? yield(:title) : 'Chatai' %>
+    </title>
+    
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -22,18 +25,13 @@
 
   <body>
     <main class="flex flex-col items-center">
-      <% if user_signed_in? %>
-        <%= render 'shared/navbar' %>
-      <% else %>
-        <%= link_to 'Register', new_user_registration_path %>
-        <%= link_to 'Login', new_user_session_path %>
-      <% end %>
+      <%= render 'shared/navbar' %>
 
       <div class="fixed top-12 right-12" id="flash">
         <%= render 'shared/flash' %>
       </div>
 
-      <section class="mt-8 container"><%= yield %></section>
+      <section class="container"><%= yield %></section>
 
       <%= turbo_frame_tag 'dialog' %>
     </main>
