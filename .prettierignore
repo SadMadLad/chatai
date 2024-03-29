@@ -2,6 +2,7 @@
 package.json
 package-lock.json
 *.md
+node_modules/
 
 vendor/
 api/
