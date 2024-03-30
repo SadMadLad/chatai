@@ -53,7 +53,7 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="hidden bg-muted lg:block min-h-screen">
-        <img className="object-cover h-full w-full" src="/leaf.jpg" alt="img" />
+        <img className="object-cover h-full w-full" src="/loop.gif" alt="Dark Gif" />
       </div>
     </div>
   )
