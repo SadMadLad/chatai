@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/Input";
 
 export default function NavBar() {
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="bg-background sticky top-0 flex h-16 items-center gap-4 border-b px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
           to="#"
@@ -25,42 +25,38 @@ export default function NavBar() {
         </Link>
         <Link
           to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           Dashboard
         </Link>
         <Link
           to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           Orders
         </Link>
         <Link
           to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           Products
         </Link>
         <Link
           to="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground transition-colors"
         >
           Customers
         </Link>
         <Link
           to="#"
-          className="text-foreground transition-colors hover:text-foreground"
+          className="text-foreground hover:text-foreground transition-colors"
         >
           Settings
         </Link>
       </nav>
       <Sheet>
         <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="shrink-0 md:hidden"
-          >
+          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
@@ -125,5 +121,5 @@ export default function NavBar() {
         </div>
       </div>
     </header>
-  )
+  );
 }
