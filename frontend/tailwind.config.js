@@ -22,7 +22,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Geist", "Inter", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
