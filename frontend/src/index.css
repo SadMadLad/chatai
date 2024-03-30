@@ -33,7 +33,7 @@
   @font-face {
     font-family: "Geist";
     font-weight: 600;
-    src: url("./assets/fonts/geist/Geist-SemiBold.woff") format("woff2");
+    src: url("./assets/fonts/geist/Geist-SemiBold.woff2") format("woff2");
   }
   @font-face {
     font-family: "Geist";
@@ -47,7 +47,7 @@
   }
   @font-face {
     font-family: "Geist";
-    font-weight: 500;
+    font-weight: 900;
     src: url("./assets/fonts/geist/Geist-UltraBlack.woff2") format("woff2");
   }
 }
