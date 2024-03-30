@@ -17,40 +17,49 @@ export default function Services() {
     {
       icon: <ActivityIcon />,
       title: "Activity Icon",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     },
     {
       icon: <AccessibilityIcon />,
       title: "Accessibility Icon",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     },
     {
       icon: <AirVentIcon />,
       title: "Air Vent Icon",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet."
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
     },
     {
       icon: <AlarmClockOffIcon />,
       title: "Alarm Clock Off Icon",
-      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-    }
+      content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    },
   ];
 
   return (
-    <section className="bg-black flex flex-wrap pt-24 pb-28">
-      <h3 className="text-white text-4xl font-black text-center mb-8 w-full">Our Service</h3>
-      <div className="container px-8 flex flex-wrap gap-4 justify-center">
-        {cardsData.map(cardData =>
-          <Card key={cardData.title} className="w-72 flex flex-col justify-center">
+    <section className="flex flex-wrap bg-black pb-28 pt-24">
+      <h3 className="mb-8 w-full text-center text-4xl font-black text-white">
+        Our Service
+      </h3>
+      <div className="container flex flex-wrap justify-center gap-4 px-8">
+        {cardsData.map((cardData) => (
+          <Card
+            key={cardData.title}
+            className="flex w-72 flex-col justify-center"
+          >
             <CardHeader className="flex items-center">
               <CardTitle>{cardData.icon}</CardTitle>
-              <CardDescription className="text-lg">{cardData.title}</CardDescription>
+              <CardDescription className="text-lg">
+                {cardData.title}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-center">{cardData.content}</p>
             </CardContent>
-          </Card>)}
+          </Card>
+        ))}
       </div>
     </section>
-  )
+  );
 }

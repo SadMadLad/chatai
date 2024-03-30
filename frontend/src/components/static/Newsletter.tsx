@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/Input";
 export default function Newsletter() {
   return (
     <section className="flex items-center justify-center p-12 sm:p-20">
-      <div className="container bg-black rounded-xl p-8 flex items-center justify-center">
+      <div className="container flex items-center justify-center rounded-xl bg-black p-8">
         <form>
-          <Label className="text-white font-bold text-xl mb-2">Subscribe to our Newsletter</Label>
+          <Label className="mb-2 text-xl font-bold text-white">
+            Subscribe to our Newsletter
+          </Label>
           <div className="relative mt-2.5">
             <Input
               type="search"
@@ -17,5 +19,5 @@ export default function Newsletter() {
         </form>
       </div>
     </section>
-  )
+  );
 }
