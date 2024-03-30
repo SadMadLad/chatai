@@ -3,3 +3,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Geist";
+    font-weight: 100;
+    src: url("./assets/fonts/geist/Geist-Thin.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 200;
+    src: url("./assets/fonts/geist/Geist-UltraLight.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 300;
+    src: url("./assets/fonts/geist/Geist-Light.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 400;
+    src: url("./assets/fonts/geist/Geist-Regular.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 500;
+    src: url("./assets/fonts/geist/Geist-Medium.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 600;
+    src: url("./assets/fonts/geist/Geist-SemiBold.woff") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 700;
+    src: url("./assets/fonts/geist/Geist-Bold.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 800;
+    src: url("./assets/fonts/geist/Geist-Black.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Geist";
+    font-weight: 500;
+    src: url("./assets/fonts/geist/Geist-UltraBlack.woff2") format("woff2");
+  }
+}
