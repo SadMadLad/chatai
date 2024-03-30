@@ -16,7 +16,7 @@ module.exports = {
   theme: {
     colors: {
       primary: colors.slate,
-      ...colors
+      ...colors,
     },
     container: {
       center: true,

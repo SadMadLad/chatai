@@ -7,5 +7,5 @@ export default function StaticPage() {
       <NavBar />
       <Hero />
     </>
-  )
+  );
 }

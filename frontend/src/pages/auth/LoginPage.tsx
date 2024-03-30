@@ -6,12 +6,12 @@ import { Label } from "@/components/ui/Label";
 
 export default function LoginPage() {
   return (
-    <div className="w-screen h-screen lg:grid lg:grid-cols-2">
+    <div className="h-screen w-screen lg:grid lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
+            <p className="text-muted-foreground text-balance">
               Enter your email below to login to your account
             </p>
           </div>
@@ -52,9 +52,13 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block min-h-screen">
-        <img className="object-cover h-full w-full" src="/loop.gif" alt="Dark Gif" />
+      <div className="bg-muted hidden min-h-screen lg:block">
+        <img
+          className="h-full w-full object-cover"
+          src="/loop.gif"
+          alt="Dark Gif"
+        />
       </div>
     </div>
-  )
+  );
 }
