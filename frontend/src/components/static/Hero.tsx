@@ -7,7 +7,7 @@ export default function Hero() {
         <h1 className="max-w-3xl px-4 text-3xl font-black leading-none drop-shadow md:text-5xl">
           The Best Coolest Stuff That You Will Ever See
         </h1>
-        <p className="text-primary-800 text-lg md:text-xl mt-8 mb-4">
+        <p className="text-primary-800 mb-4 mt-8 text-lg md:text-xl">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate
           totam ea rerum laboriosam ut quae vitae suscipit mollitia temporibus
           nobis.
