@@ -1,5 +1,5 @@
 module Structures
-  class AvlTree
+  class AvlTree < Structures::BinarySearchTree
     attr_accessor :head
 
     class Node
@@ -15,5 +15,6 @@ module Structures
     def initialize
       @head = nil
     end
+    
   end
 end
