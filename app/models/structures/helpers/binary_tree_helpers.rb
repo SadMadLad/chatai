@@ -1,6 +1,17 @@
 module Structures
   module Helpers
     module BinaryTreeHelpers
+      class Node
+        attr_accessor :left, :right, :key, :height
+
+        def initialize(key)
+          @key = key
+          @left = nil
+          @right = nil
+          @height = 1
+        end
+      end
+
       def search(key)
         if key.is_a?(Array)
           key.map { |k| _search(@head, k) }
