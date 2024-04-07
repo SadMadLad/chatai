@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_092323) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_07_002239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -250,6 +250,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_092323) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weather_reports", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "region", null: false
+    t.string "country", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "timezone_id"
+    t.bigint "localtime_epoch"
+    t.datetime "localtime"
+    t.bigint "last_updated_epoch"
+    t.datetime "last_updated"
+    t.float "temperature", null: false
+    t.string "condition_text"
+    t.float "wind_kph", null: false
+    t.float "wind_degree"
+    t.string "wind_direction"
+    t.float "pressure_mb"
+    t.float "precip_mm"
+    t.float "humidity"
+    t.float "cloud"
+    t.float "feels_like_temperature"
+    t.float "vis_km"
+    t.float "uv"
+    t.float "gust_kph"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "account_chat_maps", "accounts"

@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  region: MyString
+  country: MyString
+  latitude: 1.5
+  longitude: 1.5
+  timezone_id: MyString
+  localtime_epoch: 
+  localtime: 2024-04-07 05:22:39
+  last_updated_epoch: 
+  last_updated: 2024-04-07 05:22:39
+  temperature: 1.5
+  wind_kph: 1.5
+  wind_degree: 1.5
+  wind_direction: MyString
+  pressure_mb: 1.5
+  precip_mm: 1.5
+  humidity: 1.5
+  cloud: 1.5
+  feels_like_temperature: 1.5
+  vis_km: 1.5
+  uv: 1.5
+  gust_kph: 1.5
+
+two:
+  name: MyString
+  region: MyString
+  country: MyString
+  latitude: 1.5
+  longitude: 1.5
+  timezone_id: MyString
+  localtime_epoch: 
+  localtime: 2024-04-07 05:22:39
+  last_updated_epoch: 
+  last_updated: 2024-04-07 05:22:39
+  temperature: 1.5
+  wind_kph: 1.5
+  wind_degree: 1.5
+  wind_direction: MyString
+  pressure_mb: 1.5
+  precip_mm: 1.5
+  humidity: 1.5
+  cloud: 1.5
+  feels_like_temperature: 1.5
+  vis_km: 1.5
+  uv: 1.5
+  gust_kph: 1.5
