@@ -2,6 +2,7 @@ class AutocompletionJob < ApplicationJob
   queue_as :default
 
   rescue_from Faraday::ConnectionFailed, with: -> { respond_error_to_user('Service not available') }
+  rescue_from Faraday::TimeoutError, with: -> { respond_error_to_user('Connection Failed. Try again later') }
 
   def perform(chat, limit: 5)
     return unless chat.ai_chat?
