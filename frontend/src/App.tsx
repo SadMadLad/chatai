@@ -1,14 +1,15 @@
 import StaticPage from "@/pages/static/StaticPage";
-import LoginPage from "./pages/auth/LoginPage";
-import { BrowserRouter } from "react-router-dom";
+import LoginPage from "@/pages/auth/LoginPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
-  return (
-    <BrowserRouter>
-      {/* <LoginPage /> */}
-      <StaticPage />
-    </BrowserRouter>
-  );
+  const routes = [
+    { path: "/", element: <StaticPage /> },
+    { path: "/login", element: <LoginPage /> },
+  ];
+  const router = createBrowserRouter(routes);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
