@@ -9,8 +9,7 @@ const loginSchema = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 letters long" }),
-  scope: z
-    .string()
+  scope: z.string(),
 });
 
 export default loginSchema;
