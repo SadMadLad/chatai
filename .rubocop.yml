@@ -6,13 +6,14 @@ AllCops:
     - script/**/*
     - bin/**/*
     - test/**/*
-    # TEMP: app/models/structures is ignored temporarily for Rubocop.
-    - app/models/structures/**/*
     - node_modules/**/*
     - Rakefile
     - config.ru
     - config/initializers/**/*
     - config/environments/**/*
+
+    # TEMP: These files are ignored temporarily.
+    - app/models/structures/**/*
 
 require:
   - rubocop-capybara
