@@ -6,17 +6,6 @@ module Api
 
     before_action :authenticate_account_token!
 
-    def parse_auth_header
-      auth_header = request.headers['Authorization']
-      return if auth_header.blank?
-
-      split_auth_header = auth_header.split
-      bearer = split_auth_header.first
-      token = split_auth_header.second
-
-      bearer.blank? || token.blank? || bearer != 'Bearer' ? nil : token
-    end
-
     def authenticate_account_token!
       token = parse_auth_header
       if token.present?
@@ -27,6 +16,19 @@ module Api
       end
     rescue StandardError
       render json: { error: 'Could not authenticate user' }, status: :unauthorized
+    end
+
+    private
+
+    def parse_auth_header
+      auth_header = request.headers['Authorization']
+      return if auth_header.blank?
+
+      split_auth_header = auth_header.split
+      bearer = split_auth_header.first
+      token = split_auth_header.second
+
+      bearer.blank? || token.blank? || bearer != 'Bearer' ? nil : token
     end
   end
 end
