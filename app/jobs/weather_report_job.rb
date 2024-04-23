@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WeatherReportJob < ApplicationJob
   MAPPER = {
     name: %i[location name],
@@ -24,7 +26,7 @@ class WeatherReportJob < ApplicationJob
     uv: %i[current uv],
     gust_kph: %i[current gust_kph]
   }.freeze
-  
+
   def perform(scope: :current, location: 'Lahore')
     weather_response = Clients::WeatherApiClient.new.query_weather(scope, location)
     weather_response = JSON.parse(weather_response.body)

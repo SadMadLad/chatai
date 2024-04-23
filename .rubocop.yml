@@ -6,9 +6,8 @@ AllCops:
     - script/**/*
     - bin/**/*
     - test/**/*
-    - app/admin/**/*
-    - app/channels/**/*
-    - app/jobs/**/*
+    # TEMP: app/models/structures is ignored temporarily for Rubocop.
+    - app/models/structures/**/*
     - node_modules/**/*
     - Rakefile
     - config.ru
@@ -21,13 +20,13 @@ require:
   - rubocop-performance
   - rubocop-rails
 
-Style/Documentation:
-  Description: 'Document classes and non-namespace modules.'
-  Enabled: false
-
 Metrics/ParameterLists:
   Max: 6
 
 Metrics/BlockLength:
   Exclude:
     - config/routes.rb
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/jobs/**/*

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Clients
   class WeatherApiClient
     attr_reader :client
@@ -17,7 +19,7 @@ module Clients
       return unless scope.in?(AVAILABLE_URLS)
 
       @q = @q.deep_merge(q: location)
-      @client.get("#{scope.to_s}#{json ? '.json' : '.xml' }", @q)
+      @client.get("#{scope}#{json ? '.json' : '.xml'}", @q)
     end
   end
 end
