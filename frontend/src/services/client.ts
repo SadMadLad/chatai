@@ -11,6 +11,6 @@ export default function client(
     headers: headers,
     body: JSON.stringify(body),
   });
-  
+
   return request;
 }

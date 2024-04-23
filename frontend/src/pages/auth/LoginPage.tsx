@@ -32,22 +32,17 @@ export default function LoginPage() {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
       const response = await fetch(
-        client(
-          loginRoute.url,
-          loginRoute.method,
-          { user: values },
-        ),
-      )
+        client(loginRoute.url, loginRoute.method, { user: values }),
+      );
       const responseJson = await response.json();
 
-      if(response.ok) {
-        navigate('/')
+      if (response.ok) {
+        navigate("/");
       } else {
-        toast(responseJson.error)
+        toast(responseJson.error);
       }
-    }
-    catch (err) {
-      toast('Something went wrong. Please try again later.')
+    } catch (err) {
+      toast("Something went wrong. Please try again later.");
     }
   }
 
