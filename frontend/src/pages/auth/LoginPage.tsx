@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -12,14 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/Form";
 import { toast } from "sonner";
-
-import { useForm } from "react-hook-form";
-import loginSchema from "@/schemas/loginSchema";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/lib/stores";
-
 import { loginRoute } from "@/services/routes";
+import loginSchema from "@/schemas/loginSchema";
 import client from "@/services/client";
 
 export default function LoginPage() {
