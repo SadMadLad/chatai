@@ -32,7 +32,7 @@ class WeatherReportJob < ApplicationJob
     weather_response = JSON.parse(weather_response.body)
     weather_response = ResponseModelParser.new(weather_response, MAPPER).parse
 
-    weather_report = WeatherReport.new(weather_response)
+    weather_report = Apis::WeatherReport.new(weather_response)
     weather_report.save
   end
 end

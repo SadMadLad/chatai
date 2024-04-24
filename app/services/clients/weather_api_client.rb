@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
-  class WeatherApiClient
-    attr_reader :client
-
+  class WeatherApiClient < Clients::ApplicationClient
     WEATHER_API_URL = 'http://api.weatherapi.com/v1'
     AVAILABLE_URLS = %i[current forecast search history marine future timezone sports astronomy ip].freeze
 

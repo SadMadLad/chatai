@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
-  class OpenAiClient
-    attr_reader :client
-
+  class OpenAiClient < Clients::ApplicationClient
     COMPLETIONS_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
     GPT_MODEL = 'gpt-3.5-turbo-0125'
     MAX_TOKENS = 400
