@@ -1,20 +1,42 @@
 import StaticPage from "@/pages/static/StaticPage";
 import LoginPage from "@/pages/auth/LoginPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import { Toaster } from "@/components/ui/Sonner";
 
-function App() {
-  const routes = [
-    { path: "/", element: <StaticPage /> },
-    { path: "/login", element: <LoginPage /> },
-  ];
-  const router = createBrowserRouter(routes);
+import { useAuthStore } from "@/lib/stores";
 
+function PrivateRoutes() {
+  const { authToken } = useAuthStore();
+
+  return authToken != null ? <Outlet /> : <Navigate to="/login" />;
+}
+
+function PublicRoutes() {
+  const { authToken } = useAuthStore();
+
+  return authToken == null ? <Outlet /> : <Navigate to="/" />;
+}
+
+function App() {
   return (
-    <>
-      <RouterProvider router={router} />
+    <Router>
+      <Routes>
+        <Route element={<PrivateRoutes />}></Route>
+
+        <Route element={<PublicRoutes />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+
+        <Route path="/" element={<StaticPage />} />
+      </Routes>
       <Toaster />
-    </>
+    </Router>
   );
 }
 
