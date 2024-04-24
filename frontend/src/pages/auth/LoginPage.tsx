@@ -45,7 +45,6 @@ export default function LoginPage() {
         toast(error);
       }
     } catch (err) {
-      console.log(err);
       toast("Something went wrong. Please try again later.");
     }
   }
