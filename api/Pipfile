@@ -28,6 +28,7 @@ torchvision = "==0.17.0"
 torchaudio = "==2.2.0"
 langchain = "*"
 g4f = {extras = ["all"], version = "*"}
+selenium = "*"
 
 [dev-packages]
 flake8 = "*"
