@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import loginSchema from "@/schemas/loginSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuthStore } from "@/lib/stores";
 
 import { loginRoute } from "@/services/routes";
 import client from "@/services/client";
@@ -24,6 +25,7 @@ import client from "@/services/client";
 export default function LoginPage() {
   const navigate = useNavigate();
   const defaultValues = { email: "", password: "123456", scope: "ai_showcase" };
+  const { setAuthToken } = useAuthStore();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: defaultValues,
@@ -34,14 +36,16 @@ export default function LoginPage() {
       const response = await fetch(
         client(loginRoute.url, loginRoute.method, { user: values }),
       );
-      const responseJson = await response.json();
+      const { error, token } = await response.json();
 
-      if (response.ok) {
+      if (token) {
+        setAuthToken(token);
         navigate("/");
       } else {
-        toast(responseJson.error);
+        toast(error);
       }
     } catch (err) {
+      console.log(err);
       toast("Something went wrong. Please try again later.");
     }
   }
