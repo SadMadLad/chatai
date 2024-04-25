@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subreddit: one
+  url: MyString
+  permalink: MyString
+  created_utc: 
+  selftext_html: MyText
+  selftext: MyText
+  title: MyString
+  name: MyString
+  upvote_ratio: 1.5
+  ups: 1
+  score: MyString
+  author: MyString
+  author_fullname: MyString
+  subreddit_name_prefixed: MyString
+  num_comments: 1
+  subreddit_subscribers: 1
+
+two:
+  subreddit: two
+  url: MyString
+  permalink: MyString
+  created_utc: 
+  selftext_html: MyText
+  selftext: MyText
+  title: MyString
+  name: MyString
+  upvote_ratio: 1.5
+  ups: 1
+  score: MyString
+  author: MyString
+  author_fullname: MyString
+  subreddit_name_prefixed: MyString
+  num_comments: 1
+  subreddit_subscribers: 1

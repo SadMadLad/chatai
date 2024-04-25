@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Apis
   class WeatherReport < ApplicationRecord
     MUST_PRESENT_FIELDS = %i[name region country latitude longitude temperature wind_kph].freeze
