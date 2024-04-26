@@ -2,8 +2,8 @@
 
 module Reddit
   class LatestSubredditPostsJob < ApplicationJob
-    rescue_from JSON::ParserError, with: :log_json_parse_error
-    rescue_from ActiveModel::UnknownAttributeError, with: :log_unknown_attribute_error
+    rescue_from JSON::ParserError, with: lambda { log_error('job_errors.json_parse') }
+    rescue_from ActiveModel::UnknownAttributeError, with: lambda { log_error('job_errors.unknown_attribute') }
 
     def perform(subreddit)
       @subreddit = subreddit
@@ -18,14 +18,6 @@ module Reddit
 
       @subreddit.update(latest_scraped_at: DateTime.now,
                         subreddit_subscribers: recent_most_post[:subreddit_subscribers])
-    end
-
-    def log_json_parse_error
-      logger.error "Scraping failed. Could not parse for #{@subreddit.subreddit_url}"
-    end
-
-    def log_unknown_attribute_error
-      logger.error 'Scraping failed. Unknown attributes detected. Maybe there\'s a change in API?'
     end
 
     private

@@ -237,33 +237,36 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_102130) do
 
   create_table "subreddit_posts", force: :cascade do |t|
     t.bigint "subreddit_id", null: false
-    t.string "url", null: false
-    t.string "permalink", null: false
-    t.bigint "created_utc", null: false
-    t.text "selftext_html"
-    t.text "selftext"
-    t.string "title", null: false
-    t.string "name", null: false
-    t.float "upvote_ratio", null: false
-    t.integer "ups", null: false
-    t.string "score", null: false
-    t.string "author", null: false
-    t.string "author_fullname", null: false
-    t.string "subreddit_name_prefixed", null: false
     t.integer "num_comments", null: false
     t.integer "subreddit_subscribers", null: false
+    t.integer "ups", null: false
+    t.float "upvote_ratio", null: false
+    t.bigint "created_utc", null: false
+    t.string "url", null: false
+    t.string "author", null: false
+    t.string "author_fullname", null: false
+    t.string "name", null: false
+    t.string "permalink", null: false
+    t.string "score", null: false
+    t.string "subreddit_name_prefixed", null: false
+    t.string "title", null: false
+    t.text "selftext"
+    t.text "selftext_html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["permalink"], name: "index_subreddit_posts_on_permalink", unique: true
     t.index ["subreddit_id"], name: "index_subreddit_posts_on_subreddit_id"
   end
 
   create_table "subreddits", force: :cascade do |t|
+    t.integer "subreddit_subscribers"
     t.string "subreddit", null: false
     t.string "subreddit_url", null: false
-    t.integer "subreddit_subscribers"
     t.datetime "latest_scraped_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["subreddit"], name: "index_subreddits_on_subreddit", unique: true
+    t.index ["subreddit_url"], name: "index_subreddits_on_subreddit_url", unique: true
   end
 
   create_table "users", force: :cascade do |t|
