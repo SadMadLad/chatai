@@ -6,7 +6,7 @@ module Apis
       has_many :subreddit_posts, dependent: :destroy
 
       validates :latest_scraped_at, presence: true, on: :update
-      validates :subreddit, :subreddit_url, presence: true
+      validates :subreddit, :subreddit_url, presence: true, unqiueness: true
     end
   end
 end

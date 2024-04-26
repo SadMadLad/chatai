@@ -41,5 +41,5 @@
 
 ### Some Standards
 
-* `**TODO:**` highlights stuff that needs to be done. `**TEMP:**` is for temporary statements that should be removed later.
+* `**TODO:**` highlights stuff that needs to be done. `**TEMP:**` is for temporary statements that should be removed or fixed later.
 
