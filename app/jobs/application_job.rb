@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationJob < ActiveJob::Base
-  # Automatically retry jobs that encountered a deadlock
-  # retry_on ActiveRecord::Deadlocked
+  retry_on ActiveRecord::Deadlocked
 
-  # Most jobs are safe to ignore if the underlying records are no longer available
-  # discard_on ActiveJob::DeserializationError
+  def log_error(error_translation)
+    logger.error t(error_translation, job: self.class.name)
+  end
 end

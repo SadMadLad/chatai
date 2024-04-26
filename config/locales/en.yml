@@ -38,3 +38,7 @@ en:
 
   destroy: The %{model} is destroyed successfully.
   failed_destroy: Unable to destroy %{model}
+
+  job_errors:
+    json_parse: Scraping failed. Could not parse JSON Response for %{job}
+    unknown_attribute: Scraping failed for %{job}. Unknown attribute detected when saving record. Possible that the API changed?

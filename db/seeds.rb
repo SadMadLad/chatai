@@ -59,3 +59,8 @@ end
                          account: j.even? ? first_account : nil)
   end
 end
+
+# Creating subreddits
+
+Apis::Reddit::Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
+Apis::Reddit::Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
