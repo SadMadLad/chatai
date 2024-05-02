@@ -15,18 +15,25 @@ export default class extends Controller {
     tabHideClasses: { type: Array, default: ["gap-20"] },
     sidebarShowClasses: { type: Array, default: ["w-60"] },
     sidebarHideClasses: { type: Array, default: ["md:w-20", "w-12"] },
-    sidebarToggleButtonClasses: {
-      type: Array,
-      default: ["hidden", "md:block"],
-    },
+    sidebarToggleButtonClasses: { type: Array, default: ["hidden", "md:block"] }
   };
 
+  /**
+   * Triggered when the tab target is connected.
+   * Toggles classes based on the 'show' value.
+   * @param {HTMLElement} tab - The connected tab element.
+   */
   tabTargetConnected(tab) {
     if (this.loading) return;
 
-    this.toggleTabClasses(tab);
+    this.#toggleTabClasses(tab);
   }
 
+  /**
+   * Triggered when the hideable target is connected.
+   * Shows or hides the hideable element based on the 'show' value.
+   * @param {HTMLElement} hideable - The connected hideable element.
+   */
   hideableTargetConnected(hideable) {
     if (this.loading) return;
 
@@ -35,15 +42,26 @@ export default class extends Controller {
       : hideable.classList.add("hidden");
   }
 
+  /**
+   * Initializes the controller. Sets the the loading flag to be true.
+   */
   initialize() {
     this.loading = true;
   }
 
+  /**
+   * Triggered when the controller is connected.
+   * Sets loading to false, indicating that the sidebar is successfully loaded.
+   */
   connect() {
     this.loading = false;
   }
 
-  toggleTabClasses(tab) {
+  /**
+   * Toggles classes on the tab based on the 'show' value.
+   * @param {HTMLElement} tab - The tab element.
+   */
+  #toggleTabClasses(tab) {
     if (this.showValue) {
       tab.classList.add(...this.tabShowClassesValue);
       tab.classList.remove(...this.tabHideClassesValue);
@@ -53,8 +71,13 @@ export default class extends Controller {
     }
   }
 
+  /**
+   * Handles changes in the 'show' value.
+   * Toggles classes and visibility based on the 'show' value.
+   * @param {boolean} showValue - The new value of 'show'.
+   */
   showValueChanged(showValue) {
-    this.tabTargets.forEach((tab) => this.toggleTabClasses(tab));
+    this.tabTargets.forEach((tab) => this.#toggleTabClasses(tab));
     if (showValue) {
       this.sidebarTarget.classList.add(...this.sidebarShowClassesValue);
       this.sidebarTarget.classList.remove(...this.sidebarHideClassesValue);
@@ -72,6 +95,10 @@ export default class extends Controller {
     this.#toggleSidebarButtons(showValue);
   }
 
+  /**
+   * Toggles classes on the sidebar buttons based on the 'show' value.
+   * @param {boolean} showValue - The current value of 'show'.
+   */
   #toggleSidebarButtons(showValue) {
     if (!this.hasShowButtonTarget || !this.hasHideButtonTarget) return;
 
@@ -92,6 +119,9 @@ export default class extends Controller {
     }
   }
 
+  /**
+   * Colors the tab based on the value of the controller field.
+   */
   colorTab() {
     const src = this.controllerFieldTarget.value;
 
@@ -112,6 +142,9 @@ export default class extends Controller {
     });
   }
 
+  /**
+   * Toggles the 'show' value.
+   */
   toggleSidebar() {
     this.showValue = !this.showValue;
   }

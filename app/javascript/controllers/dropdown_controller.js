@@ -7,6 +7,10 @@ export default class extends Controller {
     otherToggleClasses: { type: Array, default: [] },
   };
 
+  /**
+   * Toggle classes for the dropdown whenever the value for show is changed.
+   * @param {boolean} show - The new value of 'show'.
+   */
   showValueChanged(show) {
     if (show) {
       this.dropdownTarget.classList.remove("w-0", "h-0");
@@ -25,6 +29,9 @@ export default class extends Controller {
     }
   }
 
+  /**
+   * Toggles the 'show' value.
+   */
   toggle() {
     this.showValue = !this.showValue;
   }
