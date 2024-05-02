@@ -1,13 +1,10 @@
-import NavBar from "@/components/shared/NavBar";
-import Footer from "@/components/static/Footer";
 import Hero from "@/components/static/Hero";
+import ApplicationLayout from "@/layouts/ApplicationLayout";
 
 export default function StaticPage() {
   return (
-    <>
-      <NavBar />
+    <ApplicationLayout>
       <Hero />
-      <Footer />
-    </>
+    </ApplicationLayout>
   );
 }

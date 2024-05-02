@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, To, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
 import { Button } from "@/components/ui/Button";
 import {
@@ -9,60 +9,73 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
-import { Package2, Menu, CircleUser } from "lucide-react";
+import { Menu, CircleUser, Apple } from "lucide-react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 import { useAuthStore } from "@/lib/stores";
 
+interface NavBarLinks {
+  text: String;
+  to: To;
+  key: Key;
+}
+
 export default function NavBar() {
-  const { authToken } = useAuthStore();
+  const { authToken, removeAuthToken } = useAuthStore();
   const [isAuthed, setIsAuthed] = useState<Boolean>(false);
+  const navigate = useNavigate();
+
+  const authedLinks: Array<NavBarLinks> = [
+    {
+      text: "Dashboard",
+      to: "#",
+      key: "Dashboard",
+    },
+    {
+      text: "Weather",
+      to: "#",
+      key: "Weather",
+    },
+  ];
+
+  const handleLogout = () => {
+    removeAuthToken();
+    navigate("/");
+  };
 
   useEffect(() => {
     setIsAuthed(authToken != null);
-  }, []);
+  }, [authToken]);
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-white px-4 md:px-6">
-      {isAuthed && <div>123123</div>}
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
           to="#"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Package2 className="h-6 w-6" />
+          <Apple className="h-6 w-6" />
           <span className="sr-only">Acme Inc</span>
         </Link>
         <Link
           to="#"
           className="text-muted-foreground hover:text-foreground transition-colors"
         >
-          Dashboard
+          Blog
         </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Orders
-        </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Products
-        </Link>
-        <Link
-          to="#"
-          className="text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Customers
-        </Link>
-        <Link
-          to="#"
-          className="text-foreground hover:text-foreground transition-colors"
-        >
-          Settings
-        </Link>
+        {isAuthed && (
+          <>
+            {authedLinks.map((link) => (
+              <Link
+                to={link.to}
+                key={link.key}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.text}
+              </Link>
+            ))}
+          </>
+        )}
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -77,57 +90,57 @@ export default function NavBar() {
               to="#"
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              <Package2 className="h-6 w-6" />
+              <Apple className="h-6 w-6" />
               <span className="sr-only">Acme Inc</span>
             </Link>
             <Link
               to="#"
               className="text-muted-foreground hover:text-foreground"
             >
-              Dashboard
+              Blog
             </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Orders
-            </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Products
-            </Link>
-            <Link
-              to="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </Link>
-            <Link to="#" className="hover:text-foreground">
-              Settings
-            </Link>
+            {isAuthed && (
+              <>
+                {authedLinks.map((link) => (
+                  <Link
+                    to={link.to}
+                    key={link.key}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    {link.text}
+                  </Link>
+                ))}
+              </>
+            )}
           </nav>
         </SheetContent>
       </Sheet>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <div className="ml-auto flex-initial">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isAuthed && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full"
+                >
+                  <CircleUser className="h-5 w-5" />
+                  <span className="sr-only">Toggle user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
       </div>
     </header>

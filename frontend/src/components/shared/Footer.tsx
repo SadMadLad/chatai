@@ -1,6 +1,15 @@
 import { Button } from "@/components/ui/Button";
+import { useState, useEffect } from "react";
+import { useAuthStore } from "@/lib/stores";
 
 export default function Footer() {
+  const { authToken } = useAuthStore();
+  const [isAuthed, setIsAuthed] = useState<Boolean>(false);
+
+  useEffect(() => {
+    setIsAuthed(authToken != null);
+  }, [authToken]);
+
   const helpTabs = [
     "Support",
     "Get Started",
@@ -60,6 +69,8 @@ export default function Footer() {
         </div>
 
         <hr className="mt-20" />
+
+        {isAuthed && <div>Please Give Us Your Feedback</div>}
 
         <div className="gap justify-between py-2.5">
           <span>2024 Chatai. All Rights Reserved</span>
