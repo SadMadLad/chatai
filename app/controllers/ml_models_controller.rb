@@ -2,11 +2,11 @@
 
 class MlModelsController < AuthenticatedController
   def index
-    @ml_models = MlModel.include(:account).all
+    @ml_models = Ai::MlModel.include(:account).all
   end
 
   def show
-    @ml_model = MlModel.find(params[:id])
+    @ml_model = Ai::MlModel.find(params[:id])
   end
 
   def predication

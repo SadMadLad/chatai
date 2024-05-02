@@ -2,14 +2,13 @@
 
 class Account < ApplicationRecord
   has_many :account_chat_maps, dependent: :destroy
+  has_many :account_tokens, dependent: :destroy
   has_many :chats, through: :account_chat_maps
   has_many :comments, class_name: 'AdminComment', foreign_key: 'commenter_id', dependent: :destroy,
                       inverse_of: :commenter
+  has_many :feedbacks, dependent: :destroy
   has_many :messages, dependent: :destroy, strict_loading: true
   has_many :ml_models, dependent: :destroy
-  has_many :account_tokens, dependent: :destroy
-
-  default_scope { includes(avatar_attachment: :blob) }
 
   has_one_attached :avatar, dependent: :destroy do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
@@ -18,6 +17,8 @@ class Account < ApplicationRecord
   belongs_to :user, dependent: :destroy
 
   enum :role, { user: 0, admin: 1, superadmin: 2 }
+
+  default_scope { includes(avatar_attachment: :blob) }
 
   scope :admins, -> { where(role: %i[superadmin admin]) }
 
