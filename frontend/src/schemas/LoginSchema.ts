@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const loginSchema = z.object({
+const LoginSchema = z.object({
   email: z
     .string()
     .min(5, { message: "E-mail must be minimum 5 letter long" })
@@ -12,4 +12,4 @@ const loginSchema = z.object({
   scope: z.string(),
 });
 
-export default loginSchema;
+export default LoginSchema;
