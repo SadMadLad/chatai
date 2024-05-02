@@ -7,12 +7,22 @@ export default class extends Controller {
     scrollContainerToBottom: { type: Boolean, default: false },
   };
 
+  /**
+   * Triggered when the scroll container target is connected.
+   * Scrolls the container to the bottom if configured to do so.
+   * @param {HTMLElement} scrollContainer - The connected scroll container element.
+   */
   scrollContainerTargetConnected(scrollContainer) {
     if (!this.scrollContainerToBottomValue) return;
 
     scrollContainer.scrollIntoView({ block: "end" });
   }
 
+  /**
+   * Triggered when the scrollable target is connected.
+   * Scrolls the scrollable element into view if configured to do so.
+   * @param {HTMLElement} scrollable - The connected scrollable element.
+   */
   scrollableTargetConnected(scrollable) {
     if (!this.scrollableIntoViewValue) return;
 
