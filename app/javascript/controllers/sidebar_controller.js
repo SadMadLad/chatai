@@ -15,7 +15,10 @@ export default class extends Controller {
     tabHideClasses: { type: Array, default: ["gap-20"] },
     sidebarShowClasses: { type: Array, default: ["w-60"] },
     sidebarHideClasses: { type: Array, default: ["md:w-20", "w-12"] },
-    sidebarToggleButtonClasses: { type: Array, default: ["hidden", "md:block"] }
+    sidebarToggleButtonClasses: {
+      type: Array,
+      default: ["hidden", "md:block"],
+    },
   };
 
   /**

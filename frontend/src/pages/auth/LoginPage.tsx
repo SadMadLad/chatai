@@ -17,19 +17,19 @@ import {
 import { toast } from "sonner";
 import { useAuthStore } from "@/lib/stores";
 import { loginRoute } from "@/services/routes";
-import loginSchema from "@/schemas/loginSchema";
+import LoginSchema from "@/schemas/LoginSchema";
 import client from "@/services/client";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const defaultValues = { email: "", password: "123456", scope: "ai_showcase" };
   const { setAuthToken } = useAuthStore();
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: defaultValues,
   });
 
-  async function onSubmit(values: z.infer<typeof loginSchema>) {
+  async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
       const response = await fetch(
         client(loginRoute.url, loginRoute.method, { user: values }),
