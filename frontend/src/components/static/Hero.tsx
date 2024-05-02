@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -13,8 +14,9 @@ export default function Hero() {
           nobis.
         </p>
         <div className="flex items-center justify-center gap-2.5">
-          <Button>Login</Button>
-          <Button variant="ghost">Sign Up</Button>
+          <Link to="/login">
+            <Button>Login</Button>
+          </Link>
         </div>
       </div>
     </section>
