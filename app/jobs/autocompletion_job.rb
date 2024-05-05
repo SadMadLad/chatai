@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Autocomplete that AI chat and generate its response.
 class AutocompletionJob < ApplicationJob
   queue_as :default
 

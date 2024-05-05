@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base Record
 class ApplicationRecord < ActiveRecord::Base
   attr_accessor :skip_broadcast_callbacks
 

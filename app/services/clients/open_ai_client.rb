@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Clients
+  # Client to connect to OpenAi.
   class OpenAiClient < Clients::ApplicationClient
     COMPLETIONS_ENDPOINT = 'https://api.openai.com/v1/chat/completions'
     GPT_MODEL = 'gpt-3.5-turbo-0125'
@@ -8,6 +9,7 @@ module Clients
     TEMPERATURE = 0.25
 
     def initialize(messages: [])
+      super
       @client = Faraday.new(
         url: COMPLETIONS_ENDPOINT,
         headers: {

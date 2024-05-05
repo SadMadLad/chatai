@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Admin Dashboard for Machine Learning Models
   class MlModelsController < AdminController
     layout 'admin', except: :notebook_html
 

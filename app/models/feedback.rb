@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# User's feedback.
 class Feedback < ApplicationRecord
   belongs_to :account
 

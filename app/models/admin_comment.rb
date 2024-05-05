@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Admin Comment that only admins can create from the dashboard. Inspired from active_admin.
 class AdminComment < ApplicationRecord
   ADMIN_COMMENTS_Q_PARAMS = %i[sort_by sort_by_direction commenter_id min_created_at max_created_at min_updated_at
                                max_updated_at].freeze

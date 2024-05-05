@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# Module for rendering chats.
 module ChatsHelper
+  # The ChatStyleBuilder is render the inline styling for the chat and its messages styling.
   class ChatStyleBuilder
     class << self
       def build(account, color: '#8b5cf6')

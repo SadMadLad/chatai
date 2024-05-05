@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Module to 'infinite load' chats.
 module ChatPagination
   extend ActiveSupport::Concern
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for Machine Learning Models. This is for normal users only.
 class MlModelsController < AuthenticatedController
   def index
     @ml_models = Ai::MlModel.include(:account).all

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Api
+  # Methods to authenticate account via the encrypted account token.
   class AuthenticatedController < Api::ApiController
     include JwtService
 
@@ -9,7 +10,7 @@ module Api
     def authenticate_account_token!
       token = parse_auth_header
       if token.present?
-        @account_token = AccountToken.find(decode(token)[:id])
+        @account_token = AccountToken.find(decode(token)['sub'])
         @account = @account_token.account
       else
         render json: { error: 'Invalid or blank token' }, status: :unauthorized

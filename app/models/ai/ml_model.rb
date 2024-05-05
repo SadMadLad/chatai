@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Ai
+  # Machine Learning model are simple scikit models.
   class MlModel < ApplicationRecord
     has_many :prediction_params, dependent: :destroy
     belongs_to :account

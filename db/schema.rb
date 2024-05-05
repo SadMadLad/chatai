@@ -35,12 +35,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "accounts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "active_at_chatai", default: false, null: false
+    t.boolean "active_at_frontend", default: false, null: false
+    t.integer "role", default: 0, null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "username", null: false
-    t.integer "role", default: 0, null: false
     t.datetime "latest_message_at"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
@@ -86,10 +88,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "admin_comments", force: :cascade do |t|
-    t.text "body", null: false
-    t.bigint "commenter_id", null: false
     t.string "admin_commentable_type", null: false
     t.bigint "admin_commentable_id", null: false
+    t.bigint "commenter_id", null: false
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_commentable_type", "admin_commentable_id"], name: "index_admin_comments_on_admin_commentable"
@@ -97,10 +99,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.integer "chat_type", default: 0, null: false
     t.integer "chat_status"
-    t.datetime "latest_message_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "chat_type", default: 0, null: false
     t.string "chat_title"
+    t.datetime "latest_message_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -115,10 +117,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "content", null: false
-    t.integer "role", default: 0, null: false
-    t.bigint "chat_id", null: false
     t.bigint "account_id"
+    t.bigint "chat_id", null: false
+    t.integer "role", default: 0, null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_messages_on_account_id"
@@ -126,12 +128,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "ml_models", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "identifier", null: false
-    t.text "description", null: false
-    t.integer "model_type", null: false
-    t.jsonb "parameters_with_order", null: false
     t.bigint "account_id", null: false
+    t.integer "model_type", null: false
+    t.string "identifier", null: false
+    t.string "title", null: false
+    t.text "description", null: false
+    t.jsonb "parameters_with_order", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ml_models_on_account_id"
@@ -139,11 +141,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "prediction_params", force: :cascade do |t|
-    t.string "name", null: false
+    t.bigint "ml_model_id", null: false
     t.integer "param_type", null: false
+    t.string "name", null: false
     t.text "description", null: false
     t.jsonb "possible_values"
-    t.bigint "ml_model_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ml_model_id"], name: "index_prediction_params_on_ml_model_id"
@@ -296,29 +298,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   end
 
   create_table "weather_reports", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "region", null: false
-    t.string "country", null: false
-    t.float "latitude", null: false
-    t.float "longitude", null: false
-    t.string "timezone_id"
-    t.bigint "localtime_epoch"
-    t.datetime "localtime"
-    t.bigint "last_updated_epoch"
-    t.datetime "last_updated"
-    t.float "temperature", null: false
-    t.string "condition_text"
-    t.float "wind_kph", null: false
-    t.float "wind_degree"
-    t.string "wind_direction"
-    t.float "pressure_mb"
-    t.float "precip_mm"
-    t.float "humidity"
     t.float "cloud"
     t.float "feels_like_temperature"
-    t.float "vis_km"
-    t.float "uv"
     t.float "gust_kph"
+    t.float "humidity"
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.float "precip_mm"
+    t.float "pressure_mb"
+    t.float "temperature", null: false
+    t.float "uv"
+    t.float "vis_km"
+    t.float "wind_degree"
+    t.float "wind_kph", null: false
+    t.bigint "localtime_epoch"
+    t.bigint "last_updated_epoch"
+    t.string "condition_text"
+    t.string "country", null: false
+    t.string "name", null: false
+    t.string "region", null: false
+    t.string "timezone_id"
+    t.string "wind_direction"
+    t.datetime "last_updated"
+    t.datetime "localtime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

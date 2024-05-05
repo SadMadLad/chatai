@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Admin Dashboard for Admin Comments
   class AdminCommentsController < AdminController
     before_action :set_admin_comment, only: %i[show edit update destroy]
     before_action :authorize_admin_comment

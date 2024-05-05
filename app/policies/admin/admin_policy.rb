@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Base Policy for admin dashboard primarily.
   class AdminPolicy
     RESOURCEFUL_ACTIONS = %w[index show new create edit update destroy].freeze
     ADMIN_SEPARATION_ACTIONS = %w[show edit update destroy].freeze
@@ -20,6 +21,7 @@ module Admin
 
     protected
 
+    # Allow superadmin anything but allow simple admins to do stuff of normal users.
     def authenticated?
       account.superadmin? || (record.user? && account.admin?)
     end

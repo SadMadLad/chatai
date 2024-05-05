@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Fetch Weather using Weather's API.
 class WeatherReportJob < ApplicationJob
   MAPPER = {
     name: %i[location name],

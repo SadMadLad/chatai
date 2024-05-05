@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["newAssistantMessage", "form", "submitButton", "spinner"];
   static validChatStatuses = ["AwaitingUserReply", "Processing"];
-  static values = { chatId: String, chatStatus: String };
+  static values = { chatId: string, chatStatus: string };
 
   /**
    * Triggered when the form target is connected. Disable the form if chat is in processing.

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for managing account tokens.
 class AccountTokensController < AuthenticatedController
   before_action :set_account_tokens, only: %i[index create]
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Chat Model. Can be group as well as two-way.
 class Chat < ApplicationRecord
   after_initialize { self.latest_message_at = DateTime.now if new_record? }
 

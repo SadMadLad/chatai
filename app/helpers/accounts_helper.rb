@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Helpers for rendering account related stuff.
 module AccountsHelper
   def account_avatar(
     account, size_classes: 'w-10 h-10', display_classes: 'flex-center',

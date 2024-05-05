@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Admin Dashboard for Prediction Params.
   class PredictionParamsController < AdminController
     before_action :set_ml_model, only: %i[new create edit update]
     before_action :set_prediction_param, only: %i[show edit update destroy]

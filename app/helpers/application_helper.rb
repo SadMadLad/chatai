@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Generic Helpers
 module ApplicationHelper
   include Pagy::Frontend
 
