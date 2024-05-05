@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Dashboard for Solid Queue Jobs.
   class SolidQueuesController < AdminController
     def index
       @jobs = SolidQueue::Job.all

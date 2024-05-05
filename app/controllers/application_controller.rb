@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base Controller.
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include Pundit::Authorization

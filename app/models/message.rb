@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A Chat Message.
 class Message < ApplicationRecord
   belongs_to :chat, touch: :latest_message_at
   belongs_to :account, touch: :latest_message_at, optional: true

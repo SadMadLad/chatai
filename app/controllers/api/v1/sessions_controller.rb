@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Managing sessions for the API.
     class SessionsController < Api::ApiController
       include JwtService
 
@@ -23,7 +24,7 @@ module Api
 
       def authenticate_token
         if @account_token.present?
-          render json: { token: encode({ id: @account_token.id }) }
+          render json: { token: encode(@account_token.id), full_name: @account_token.account.full_name }
         else
           render json: { error: 'Please create the API from the main portal' }, status: :unauthorized
         end

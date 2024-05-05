@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Message Policy.
 class MessagePolicy < ApplicationPolicy
   def create?
     true

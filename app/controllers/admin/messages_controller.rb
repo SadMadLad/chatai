@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Admin Dashboard for Messages
   class MessagesController < AdminController
     before_action :set_message, only: %i[show edit update destroy]
     before_action :authorize_message

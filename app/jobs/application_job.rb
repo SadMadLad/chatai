@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Base Job.
 class ApplicationJob < ActiveJob::Base
   retry_on ActiveRecord::Deadlocked
 

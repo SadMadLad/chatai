@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# A User Account
 class Account < ApplicationRecord
   has_many :account_chat_maps, dependent: :destroy
   has_many :account_tokens, dependent: :destroy

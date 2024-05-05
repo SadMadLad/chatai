@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
 # A Devise User.
-# Each User must have an account
-
+# Each User must have an accounts.
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   DEVISE_MODULES = %i[database_authenticatable registerable recoverable rememberable trackable validatable].freeze
+
+  Warden::Manager.after_authentication do |user, _auth, _opts|
+    user.account.update(:active_at_chatai, true)
+  end
+
+  Warden::Manager.before_logout do |user, _auth, _opts|
+    user.account.update(:active_at_chatai, false)
+  end
 
   devise(*DEVISE_MODULES)
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Digs deep into the response and fetches the results. Use case can be understood
+# in weather report job for example.
 class ResponseModelParser
   def initialize(input_hash, mapper)
     @input_hash = input_hash.with_indifferent_access

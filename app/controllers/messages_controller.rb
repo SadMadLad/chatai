@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller for chat messages.
 class MessagesController < AuthenticatedController
   include ChatPagination
 

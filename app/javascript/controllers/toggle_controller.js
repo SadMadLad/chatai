@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["toggleable"];
-  static values = { toggledId: String };
+  static values = { toggledId: string };
 
   /**
    * Handles changes in the 'toggledId' value.

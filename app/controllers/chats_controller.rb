@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Managing chats - both the two-way as well as group ones.
 class ChatsController < AuthenticatedController
   include ChatPagination
 

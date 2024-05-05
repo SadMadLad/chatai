@@ -3,15 +3,16 @@
 Consistent standard to write down the migrations - Arrange the fields when creating table as follows:
 
 1. References/Associations
-2. Integer
-3. Float
-4. Big Integer
-5. String
-6. Text
-7. DateTime
-8. Index
-9. JSON/JSONB
-10. Timestamps
+2. Boolean
+3. Integer
+4. Float
+5. Big Integer
+6. String
+7. Text
+8. DateTime
+9. Index
+10. JSON/JSONB
+11. Timestamps
 
 Arrange the grouped fields alphabetically.
 <br />

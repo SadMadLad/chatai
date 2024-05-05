@@ -2,6 +2,7 @@
 
 module Apis
   module Reddit
+    # A reddit subreddit
     class Subreddit < ApplicationRecord
       has_many :subreddit_posts, dependent: :destroy
 

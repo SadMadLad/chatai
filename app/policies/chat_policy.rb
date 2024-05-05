@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Chat Policy. Allow if the chat exists for that user.
 class ChatPolicy < ApplicationPolicy
   %w[index group ai_chats create].each do |action|
     define_method(:"#{action}?") { true }

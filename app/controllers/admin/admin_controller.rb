@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
+  # Base Controller for Admin Only routes.
   class AdminController < ApplicationController
     layout 'admin'
 

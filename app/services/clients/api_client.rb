@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 module Clients
+  # Api Client to connect to FastAPI app.
   class ApiClient < Clients::ApplicationClient
     def initialize(ml_model: nil)
+      super
       @client = Faraday.new(
         url: ENV.fetch('API_CLIENT_URL', nil),
         headers: {

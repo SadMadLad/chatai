@@ -32,6 +32,7 @@ end
 # Creating Chat Messages
 
 first_account = normal_accounts.first
+second_account = normal_accounts.second
 
 n = 10
 last_n_accounts = normal_accounts.last(n)
@@ -59,6 +60,11 @@ end
                          account: j.even? ? first_account : nil)
   end
 end
+
+# Creating account tokens
+
+first_account.account_tokens.create(scope: :ai_showcase)
+second_account.account_tokens.create(scope: :ai_showcase)
 
 # Creating subreddits
 
