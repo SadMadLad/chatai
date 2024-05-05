@@ -32,8 +32,9 @@ config :phoenix, :json_library, Jason
 
 # Configure the authentication keys
 config :channel, Channel.Auth.Guardian,
-  issuer: "channel",
-  secret_key: "12039U91209U3J12OIPCJ3IHIU^&%(*&^*(*&^*&^12312))"
+  issuer: "chatai",
+  allowed_algos: ["HS256"],
+  secret_key: "ssSW552e+O/hWCF5ajmDaUulGYuwIb4lzIZlUvnGciCmC5/gg+9SwhfoSz/mTL6p"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

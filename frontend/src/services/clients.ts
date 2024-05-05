@@ -1,4 +1,4 @@
-export default function client(
+function client(
   route: RequestInfo,
   method: string,
   body: Object | null | undefined = null,
@@ -14,3 +14,5 @@ export default function client(
 
   return request;
 }
+
+export { client };

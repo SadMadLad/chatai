@@ -1,5 +1,13 @@
-const baseUrl = "http://localhost:3000/api/v1";
+const Rails = `${import.meta.env.VITE_RAILS_URL}/api/v1`;
+const RailsRoutes = {
+  loginRoute: { url: `${Rails}/sessions`, method: "POST" },
+};
 
-const loginRoute = { url: `${baseUrl}/sessions`, method: "post" };
+const PhoenixSocket = import.meta.env.VITE_PHOENIX_SOCKET_URL;
+const PhoenixRoutes = {
+  socket: `${PhoenixSocket}/socket`,
+};
 
-export { loginRoute };
+const Fastapi = import.meta.env.VITE_FASTAPI_URL;
+
+export { RailsRoutes, Fastapi, PhoenixRoutes };
