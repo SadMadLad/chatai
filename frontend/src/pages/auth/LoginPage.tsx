@@ -16,9 +16,10 @@ import {
 } from "@/components/ui/Form";
 import { toast } from "sonner";
 import { useAuthStore } from "@/lib/stores";
-import { loginRoute } from "@/services/routes";
+import { RailsRoutes, PhoenixRoutes } from "@/services/routes";
 import LoginSchema from "@/schemas/LoginSchema";
-import client from "@/services/client";
+import { client } from "@/services/clients";
+import { Socket, Presence } from "phoenix";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -31,18 +32,45 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
+      const { loginRoute } = RailsRoutes;
       const response = await fetch(
         client(loginRoute.url, loginRoute.method, { user: values }),
       );
-      const { error, token } = await response.json();
+      const { error, token, full_name } = await response.json();
 
       if (token) {
-        setAuthToken(token);
+        setAuthToken(token, full_name);
+
+        const socket = new Socket(PhoenixRoutes.socket, {
+          params: { token: token },
+        });
+        const channel = socket.channel("active:lobby", { name: full_name });
+        const presence = new Presence(channel);
+
+        socket.connect();
+        presence.onSync(() => {
+          let response = "";
+
+          presence.list((id, { metas: [_first, ...rest] }) => {
+            console.log("First: ", _first);
+            console.log("Rest: ", rest);
+            console.log("Id:", id);
+
+            let count = rest.length + 1;
+            response += `<br>${id} (count: ${count})</br>`;
+
+            console.log(response);
+          });
+        });
+
+        channel.join();
+
         navigate("/");
       } else {
         toast(error);
       }
     } catch (err) {
+      console.log(err);
       toast("Something went wrong. Please try again later.");
     }
   }

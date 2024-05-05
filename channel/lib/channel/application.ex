@@ -11,11 +11,12 @@ defmodule Channel.Application do
       ChannelWeb.Telemetry,
       Channel.Repo,
       {DNSCluster, query: Application.get_env(:channel, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: Channel.PubSub},
       # Start a worker by calling: Channel.Worker.start_link(arg)
       # {Channel.Worker, arg},
       # Start to serve requests, typically the last entry
-      ChannelWeb.Endpoint
+      {Phoenix.PubSub, name: Channel.PubSub},
+      ChannelWeb.Presence,
+      ChannelWeb.Endpoint,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
