@@ -1,11 +1,32 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { Socket, Presence, Channel } from "phoenix";
+
+import { PhoenixRoutes } from "@/services/routes";
 
 interface AuthTokenState {
   authToken: string | null;
   fullName: string | null;
-  setAuthToken: (newToken: string, newName: string) => void;
+  avatarUrl: string | null;
+  setAuthToken: (
+    newToken: string,
+    newName: string,
+    newAvatarUrl: string,
+  ) => void;
   removeAuthToken: () => void;
+}
+
+interface SocketStoreState {
+  socket: Socket | null;
+  subscribeSocket: (token: string) => void;
+  unsubscribeSocket: () => void;
+}
+
+interface PresenceStoreState {
+  presence: Presence | null;
+  channel: Channel | null;
+  subscribePresence: (fullName: string) => void;
+  unsubscribePresence: () => void;
 }
 
 const useAuthStore = create<AuthTokenState>()(
@@ -13,15 +34,66 @@ const useAuthStore = create<AuthTokenState>()(
     (set) => ({
       authToken: null,
       fullName: null,
-      removeAuthToken: () => set({ authToken: null, fullName: null }),
-      setAuthToken: (newToken: string, newName: string) =>
-        set({ authToken: newToken, fullName: newName }),
+      avatarUrl: null,
+      removeAuthToken: () =>
+        set({ authToken: null, fullName: null, avatarUrl: null }),
+      setAuthToken: (newToken: string, newName: string, newAvatarUrl: string) =>
+        set({
+          authToken: newToken,
+          fullName: newName,
+          avatarUrl: newAvatarUrl,
+        }),
     }),
     {
       name: "auth-storage",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 );
 
-export { useAuthStore };
+const useSocketStore = create<SocketStoreState>((set, get) => ({
+  socket: null,
+  subscribeSocket: (token: string) => {
+    const newSocket = new Socket(PhoenixRoutes.socket, {
+      params: { token: token },
+    });
+    set({ socket: newSocket });
+    get().socket?.connect();
+  },
+  unsubscribeSocket: () => get().socket?.disconnect(),
+}));
+
+const usePresenceStore = create<PresenceStoreState>((set, get) => ({
+  channel: null,
+  presence: null,
+  subscribePresence: (fullName: string) => {
+    const socket = useSocketStore.getState().socket;
+    if (!socket)
+      return;
+
+    const newChannel = socket.channel("active:lobby", { name: fullName });
+    const newPresence = new Presence(newChannel);
+
+    newPresence.onSync(() => {
+      let response = "";
+
+      newPresence.list((id, { metas: [_first, ...rest] }) => {
+        console.log("First: ", _first);
+        console.log("Rest: ", rest);
+        console.log("Id:", id);
+
+        let count = rest.length + 1;
+        response += `<br>${id} (count: ${count})</br>`;
+
+        console.log(response);
+      });
+    });
+
+    set({ channel: newChannel, presence: newPresence });
+
+    get().channel?.join();
+  },
+  unsubscribePresence: () => get().channel?.leave()
+}))
+
+export { useAuthStore, useSocketStore, usePresenceStore };
