@@ -4,7 +4,8 @@
 module JwtService
   HMAC_SECRET = ENV.fetch('HMAC_SECRET', nil).freeze
   ALGORITHM = 'HS256'
-  def self.default_options
+
+  def default_options
     {
       aud: 'chatai', exp: 56.days.from_now.to_time.to_i, iat: DateTime.now.to_time.to_i,
       iss: 'chatai', jit: SecureRandom.uuid, typ: 'access', nbf: DateTime.now.to_time.to_i - 1
@@ -12,7 +13,7 @@ module JwtService
   end
 
   def encode(payload)
-    JWT.encode(DEFAULT_OPTIONS.merge(sub: payload.to_s), HMAC_SECRET, ALGORITHM, alg: ALGORITHM, typ: 'JWT')
+    JWT.encode(default_options.merge(sub: payload.to_s), HMAC_SECRET, ALGORITHM, alg: ALGORITHM, typ: 'JWT')
   end
 
   def decode(token)

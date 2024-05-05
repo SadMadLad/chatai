@@ -15,62 +15,40 @@ import {
   FormMessage,
 } from "@/components/ui/Form";
 import { toast } from "sonner";
-import { useAuthStore } from "@/lib/stores";
-import { RailsRoutes, PhoenixRoutes } from "@/services/routes";
+import { useAuthStore, useSocketStore, usePresenceStore } from "@/lib/stores";
+import { RailsRoutes } from "@/services/routes";
 import LoginSchema from "@/schemas/LoginSchema";
 import { client } from "@/services/clients";
-import { Socket, Presence } from "phoenix";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const defaultValues = { email: "", password: "123456", scope: "ai_showcase" };
-  const { setAuthToken } = useAuthStore();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: defaultValues,
   });
 
+  const { setAuthToken } = useAuthStore();
+  const { subscribeSocket } = useSocketStore();
+  const { subscribePresence } = usePresenceStore();
+
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
-      const { loginRoute } = RailsRoutes;
-      const response = await fetch(
-        client(loginRoute.url, loginRoute.method, { user: values }),
-      );
-      const { error, token, full_name } = await response.json();
+      const { url, method } = RailsRoutes.loginRoute;
+      const response = await fetch(client(url, method, { user: values }));
+
+      const { error, token, full_name, avatar_url } = await response.json();
 
       if (token) {
-        setAuthToken(token, full_name);
-
-        const socket = new Socket(PhoenixRoutes.socket, {
-          params: { token: token },
-        });
-        const channel = socket.channel("active:lobby", { name: full_name });
-        const presence = new Presence(channel);
-
-        socket.connect();
-        presence.onSync(() => {
-          let response = "";
-
-          presence.list((id, { metas: [_first, ...rest] }) => {
-            console.log("First: ", _first);
-            console.log("Rest: ", rest);
-            console.log("Id:", id);
-
-            let count = rest.length + 1;
-            response += `<br>${id} (count: ${count})</br>`;
-
-            console.log(response);
-          });
-        });
-
-        channel.join();
+        setAuthToken(token, full_name, avatar_url);
+        subscribeSocket(token);
+        subscribePresence(full_name);
 
         navigate("/");
       } else {
         toast(error);
       }
     } catch (err) {
-      console.log(err);
       toast("Something went wrong. Please try again later.");
     }
   }

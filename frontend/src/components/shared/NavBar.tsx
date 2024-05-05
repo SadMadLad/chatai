@@ -1,3 +1,4 @@
+import { useState, useEffect, Key } from "react";
 import { Link, To, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
 import { Button } from "@/components/ui/Button";
@@ -10,9 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
 import { Menu, CircleUser, Apple } from "lucide-react";
+import { toast } from "sonner";
 
-import { useState, useEffect, Key } from "react";
-import { useAuthStore } from "@/lib/stores";
+import { useAuthStore, usePresenceStore, useSocketStore } from "@/lib/stores";
+import { RailsRoutes } from "@/services/routes";
+import { client } from "@/services/clients";
 
 interface NavBarLinks {
   text: String;
@@ -21,7 +24,10 @@ interface NavBarLinks {
 }
 
 export default function NavBar() {
-  const { authToken, removeAuthToken } = useAuthStore();
+  const { authToken, avatarUrl, removeAuthToken } = useAuthStore();
+  const { unsubscribeSocket } = useSocketStore();
+  const { unsubscribePresence } = usePresenceStore();
+
   const [isAuthed, setIsAuthed] = useState<Boolean>(false);
   const navigate = useNavigate();
 
@@ -38,9 +44,23 @@ export default function NavBar() {
     },
   ];
 
-  const handleLogout = () => {
-    removeAuthToken();
-    navigate("/");
+  const handleLogout = async () => {
+    const { url, method } = RailsRoutes.logoutRoute;
+
+    const response = await fetch(
+      client(url, method, null, { Authorization: `Bearer ${authToken}` }),
+    );
+
+    if (response.ok) {
+      removeAuthToken();
+      unsubscribePresence();
+      unsubscribeSocket(); 
+      
+      navigate("/");
+    } else {
+      const { error } = await response.json();
+      toast(error || "Something went wrong. Please try again later");
+    }
   };
 
   useEffect(() => {
@@ -125,7 +145,14 @@ export default function NavBar() {
                   size="icon"
                   className="rounded-full"
                 >
-                  <CircleUser className="h-5 w-5" />
+                  {authToken && avatarUrl ? (
+                    <img
+                      className="h-full w-full rounded-full object-cover"
+                      src={avatarUrl}
+                    />
+                  ) : (
+                    <CircleUser className="h-5 w-5" />
+                  )}
                   <span className="sr-only">Toggle user menu</span>
                 </Button>
               </DropdownMenuTrigger>
