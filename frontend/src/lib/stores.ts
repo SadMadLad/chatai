@@ -25,7 +25,8 @@ interface SocketStoreState {
 interface PresenceStoreState {
   presence: Presence | null;
   channel: Channel | null;
-  subscribePresence: (fullName: string) => void;
+  subscribeChannel: (fullName: string) => void;
+  subscribePresence: () => void;
   unsubscribePresence: () => void;
 }
 
@@ -66,13 +67,20 @@ const useSocketStore = create<SocketStoreState>((set, get) => ({
 const usePresenceStore = create<PresenceStoreState>((set, get) => ({
   channel: null,
   presence: null,
-  subscribePresence: (fullName: string) => {
+  subscribeChannel: (fullName: string) => {
     const socket = useSocketStore.getState().socket;
-    if (!socket)
-      return;
+    if (!socket) return;
 
     const newChannel = socket.channel("active:lobby", { name: fullName });
-    const newPresence = new Presence(newChannel);
+    newChannel.join();
+
+    set({ channel: newChannel });
+  },
+  subscribePresence: () => {
+    const presenceChannel = get().channel;
+    if (!presenceChannel) return;
+
+    const newPresence = new Presence(presenceChannel);
 
     newPresence.onSync(() => {
       let response = "";
@@ -89,9 +97,7 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
       });
     });
 
-    set({ channel: newChannel, presence: newPresence });
-
-    get().channel?.join();
+    set({ presence: newPresence });
   },
   unsubscribePresence: () => get().channel?.leave()
 }))
