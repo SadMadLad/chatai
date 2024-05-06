@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { Toaster } from "@/components/ui/Sonner";
 
-import { useAuthStore } from "@/lib/stores";
+import useAuthStore from "@/storage/useAuthStore";
 
 /* PrivateRoutes: Routet that require user to auth. */
 function PrivateRoutes() {
