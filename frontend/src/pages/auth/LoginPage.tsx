@@ -30,7 +30,7 @@ export default function LoginPage() {
 
   const { setAuthToken } = useAuthStore();
   const { subscribeSocket } = useSocketStore();
-  const { subscribePresence } = usePresenceStore();
+  const { subscribePresence, subscribeChannel } = usePresenceStore();
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
@@ -42,7 +42,8 @@ export default function LoginPage() {
       if (token) {
         setAuthToken(token, full_name, avatar_url);
         subscribeSocket(token);
-        subscribePresence(full_name);
+        subscribeChannel(full_name);
+        subscribePresence();
 
         navigate("/");
       } else {
