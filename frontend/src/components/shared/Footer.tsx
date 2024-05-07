@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
-import { useAuthStore } from "@/storage/stores";
+import useAuthStore from "@/storage/useAuthStore";
 
 export default function Footer() {
   const { authToken } = useAuthStore();

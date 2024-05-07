@@ -6,6 +6,8 @@ module Api
     class SessionsController < Api::ApiController
       include JwtService
 
+      before_action :authenticate_account_token!, only: %i[verify_session destroy]
+
       def create
         user = User.find_by(email: sign_in_params[:email])
         if user.nil? || !user.valid_password?(sign_in_params[:password])
@@ -17,9 +19,11 @@ module Api
         end
       end
 
-      def destroy
-        authenticate_account_token!
+      def verify_session
+        render json: { full_name: @account.full_name, avatar_url: url_for(@account.avatar) }
+      end
 
+      def destroy
         @account.update(active_at_frontend: false)
         render json: { error: 'Signed Out successfully!' }, status: :ok
       end

@@ -8,10 +8,9 @@ module Api
     def authenticate_account_token!
       token = parse_auth_header
       if token.present?
-        @account_token = AccountToken.find(decode(token)['sub'])
-        @account = @account_token.account
+        verify_token(token)
       else
-        render json: { error: 'Invalid or blank token' }, status: :unauthorized
+        render json: { error: 'Invalid or empty token' }, status: :unauthorized
       end
     rescue StandardError
       render json: { error: 'Could not authenticate user' }, status: :unauthorized
@@ -28,6 +27,16 @@ module Api
       token = split_auth_header.second
 
       bearer.blank? || token.blank? || bearer != 'Bearer' ? nil : token
+    end
+
+    def verify_token(token)
+      decoded_token = decode(token)
+      if Time.at(decoded_token[:exp] <= DateTime.now)
+        render json: { error: 'Your session has expired' }, status: :unauthorized
+      else
+        @account_token = AccountToken.find(decoded_token[:sub])
+        @account = @account_token.account
+      end
     end
   end
 end

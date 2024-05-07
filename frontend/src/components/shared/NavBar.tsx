@@ -13,7 +13,9 @@ import {
 import { Menu, CircleUser, Apple } from "lucide-react";
 import { toast } from "sonner";
 
-import { useAuthStore, usePresenceStore, useSocketStore } from "@/storage/stores";
+import useAuthStore from "@/storage/useAuthStore";
+import usePresenceStore from "@/storage/usePresenceStore";
+import useSocketStore from "@/storage/useSocketStore";
 import { RailsRoutes } from "@/services/routes";
 import { client } from "@/services/clients";
 

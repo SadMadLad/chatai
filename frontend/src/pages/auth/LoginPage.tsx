@@ -15,12 +15,12 @@ import {
   FormMessage,
 } from "@/components/ui/Form";
 import { toast } from "sonner";
+import { RailsRoutes } from "@/services/routes";
+import { client } from "@/services/clients";
 import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 import usePresenceStore from "@/storage/usePresenceStore";
-import { RailsRoutes } from "@/services/routes";
 import LoginSchema from "@/schemas/LoginSchema";
-import { client } from "@/services/clients";
 
 export default function LoginPage() {
   const navigate = useNavigate();
