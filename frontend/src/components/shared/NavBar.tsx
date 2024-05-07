@@ -1,4 +1,4 @@
-import { useState, useEffect, Key } from "react";
+import { Key } from "react";
 import { Link, To, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
 import { Button } from "@/components/ui/Button";
@@ -26,11 +26,10 @@ interface NavBarLinks {
 }
 
 export default function NavBar() {
-  const { authToken, avatarUrl, removeAuthToken } = useAuthStore();
+  const { authToken, avatarUrl, fullName, isAuthed, removeAuthToken } = useAuthStore();
   const { unsubscribeSocket } = useSocketStore();
   const { unsubscribePresence } = usePresenceStore();
 
-  const [isAuthed, setIsAuthed] = useState<Boolean>(false);
   const navigate = useNavigate();
 
   const authedLinks: Array<NavBarLinks> = [
@@ -56,18 +55,14 @@ export default function NavBar() {
     if (response.ok) {
       removeAuthToken();
       unsubscribePresence();
-      unsubscribeSocket(); 
-      
+      unsubscribeSocket();
+
       navigate("/");
     } else {
       const { error } = await response.json();
       toast(error || "Something went wrong. Please try again later");
     }
   };
-
-  useEffect(() => {
-    setIsAuthed(authToken != null);
-  }, [authToken]);
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-white px-4 md:px-6">
@@ -159,7 +154,7 @@ export default function NavBar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>{fullName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuItem>Support</DropdownMenuItem>

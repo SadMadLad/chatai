@@ -1,14 +1,8 @@
 import { Button } from "@/components/ui/Button";
-import { useState, useEffect } from "react";
 import useAuthStore from "@/storage/useAuthStore";
 
 export default function Footer() {
-  const { authToken } = useAuthStore();
-  const [isAuthed, setIsAuthed] = useState<Boolean>(false);
-
-  useEffect(() => {
-    setIsAuthed(authToken != null);
-  }, [authToken]);
+  const { isAuthed } = useAuthStore();
 
   const helpTabs = [
     "Support",

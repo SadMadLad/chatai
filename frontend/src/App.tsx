@@ -1,5 +1,3 @@
-import StaticPage from "@/pages/static/StaticPage";
-import LoginPage from "@/pages/auth/LoginPage";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,25 +5,53 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import { Toaster } from "@/components/ui/Sonner";
+import { useEffect } from "react";
 
+import StaticPage from "@/pages/static/StaticPage";
+import LoginPage from "@/pages/auth/LoginPage";
+import { Toaster } from "@/components/ui/Sonner";
 import useAuthStore from "@/storage/useAuthStore";
+import useSocketStore from "./storage/useSocketStore";
+import usePresenceStore from "./storage/usePresenceStore";
 
 /* PrivateRoutes: Routet that require user to auth. */
 function PrivateRoutes() {
-  const { authToken } = useAuthStore();
+  const { isAuthed } = useAuthStore();
 
-  return authToken != null ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthed ? <Outlet /> : <Navigate to="/login" />;
 }
 
 /* PublicRoutes: Routes that are for unauthed users only. Like the /login one. */
 function PublicRoutes() {
-  const { authToken } = useAuthStore();
+  const { isAuthed } = useAuthStore();
 
-  return authToken == null ? <Outlet /> : <Navigate to="/" />;
+  return !isAuthed ? <Outlet /> : <Navigate to="/" />;
 }
 
 function App() {
+  const { authToken, fullName, verifySession } = useAuthStore();
+  const { subscribeSocket, unsubscribeSocket } = useSocketStore();
+  const { subscribeChannel, subscribePresence, unsubscribePresence } =
+    usePresenceStore();
+
+  const prepareSockets = async () => {
+    const verifiedSession = await verifySession();
+    if (!verifiedSession || !authToken || !fullName) return;
+
+    subscribeSocket(authToken);
+    subscribeChannel(fullName);
+    subscribePresence();
+  };
+
+  useEffect(() => {
+    prepareSockets();
+
+    return () => {
+      unsubscribePresence();
+      unsubscribeSocket();
+    };
+  }, []);
+
   return (
     <Router>
       <Routes>

@@ -14,8 +14,8 @@ const useSocketStore = create<SocketStoreState>((set, get) => ({
     const newSocket = new Socket(PhoenixRoutes.socket, {
       params: { token: token },
     });
+    newSocket.connect();
     set({ socket: newSocket });
-    get().socket?.connect();
   },
   unsubscribeSocket: () => get().socket?.disconnect(),
 }));
