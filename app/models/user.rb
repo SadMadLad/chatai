@@ -9,11 +9,11 @@ class User < ApplicationRecord
   DEVISE_MODULES = %i[database_authenticatable registerable recoverable rememberable trackable validatable].freeze
 
   Warden::Manager.after_authentication do |user, _auth, _opts|
-    user.account.update(:active_at_chatai, true)
+    user.account.update(active_at_chatai: true)
   end
 
   Warden::Manager.before_logout do |user, _auth, _opts|
-    user.account.update(:active_at_chatai, false)
+    user.account.update(active_at_chatai: false)
   end
 
   devise(*DEVISE_MODULES)
