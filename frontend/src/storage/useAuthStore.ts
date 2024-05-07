@@ -7,10 +7,12 @@ interface AuthTokenState {
   authToken: string | null;
   fullName: string | null;
   avatarUrl: string | null;
+  isAuthed: boolean;
   setAuthToken: (
     newToken: string,
     newName: string,
     newAvatarUrl: string,
+    newIsAuthed: boolean,
   ) => void;
   removeAuthToken: () => void;
   verifySession: () => Promise<boolean>;
@@ -22,28 +24,39 @@ const useAuthStore = create<AuthTokenState>()(
       authToken: null,
       fullName: null,
       avatarUrl: null,
+      isAuthed: false,
       setAuthToken: (newToken: string, newName: string, newAvatarUrl: string) =>
         set({
           authToken: newToken,
           fullName: newName,
           avatarUrl: newAvatarUrl,
+          isAuthed: true,
         }),
       removeAuthToken: () =>
-        set({ authToken: null, fullName: null, avatarUrl: null }),
+        set({
+          authToken: null,
+          fullName: null,
+          avatarUrl: null,
+          isAuthed: false,
+        }),
       verifySession: async () => {
         const token = get().authToken;
         if (!token) return false;
 
         const { method, url } = RailsRoutes.verifySessionRoute;
-        const response = await fetch(client(url, method, null, { "Authorization": `Bearer ${token}` }));
+        const response = await fetch(
+          client(url, method, null, { Authorization: `Bearer ${token}` }),
+        );
 
-        if (!response.ok) return false;
+        if (!response.ok) {
+          get().removeAuthToken();
+        } else {
+          const { full_name, avatar_url } = await response.json();
+          set({ fullName: full_name, avatarUrl: avatar_url, isAuthed: true });
+        }
 
-        const { full_name, avatar_url } = await response.json();
-        set({ fullName: full_name, avatarUrl: avatar_url });
-        
-        return true;
-      }
+        return response.ok;
+      },
     }),
     {
       name: "auth-storage",

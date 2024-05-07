@@ -45,7 +45,7 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
 
     set({ presence: newPresence });
   },
-  unsubscribePresence: () => get().channel?.leave()
-}))
+  unsubscribePresence: () => get().channel?.leave(),
+}));
 
 export default usePresenceStore;
