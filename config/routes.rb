@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resource :sessions, only: %i[create destroy]
+      resource :sessions, only: %i[create destroy] do
+        collection { post :verify_session }
+      end
     end
   end
 
