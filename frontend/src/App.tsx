@@ -11,8 +11,8 @@ import StaticPage from "@/pages/static/StaticPage";
 import LoginPage from "@/pages/auth/LoginPage";
 import { Toaster } from "@/components/ui/Sonner";
 import useAuthStore from "@/storage/useAuthStore";
-import useSocketStore from "./storage/useSocketStore";
-import usePresenceStore from "./storage/usePresenceStore";
+import useSocketStore from "@/storage/useSocketStore";
+import usePresenceStore from "@/storage/usePresenceStore";
 
 /* PrivateRoutes: Routet that require user to auth. */
 function PrivateRoutes() {
@@ -29,9 +29,9 @@ function PublicRoutes() {
 }
 
 function App() {
-  const { authToken, fullName, verifySession } = useAuthStore();
+  const { authToken, fullName, verifySession, isAuthed } = useAuthStore();
   const { subscribeSocket, unsubscribeSocket } = useSocketStore();
-  const { subscribeChannel, subscribePresence, unsubscribePresence } =
+  const { subscribeChannel, subscribePresence, unsubscribePresence, onlineUsers } =
     usePresenceStore();
 
   const prepareSockets = async () => {
@@ -39,7 +39,7 @@ function App() {
     if (!verifiedSession || !authToken || !fullName) return;
 
     subscribeSocket(authToken);
-    subscribeChannel(fullName);
+    subscribeChannel(fullName, authToken);
     subscribePresence();
   };
 
@@ -51,7 +51,7 @@ function App() {
       unsubscribeSocket();
     };
   }, []);
-
+  
   return (
     <Router>
       <Routes>
@@ -62,6 +62,8 @@ function App() {
         <Route path="/" element={<StaticPage />} />
       </Routes>
       <Toaster />
+      { isAuthed && 
+      <div id="bund">{JSON.stringify(onlineUsers)}</div>}
     </Router>
   );
 }

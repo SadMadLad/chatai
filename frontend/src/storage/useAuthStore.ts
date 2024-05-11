@@ -12,7 +12,6 @@ interface AuthTokenState {
     newToken: string,
     newName: string,
     newAvatarUrl: string,
-    newIsAuthed: boolean,
   ) => void;
   removeAuthToken: () => void;
   verifySession: () => Promise<boolean>;
