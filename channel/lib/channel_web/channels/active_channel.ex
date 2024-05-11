@@ -14,7 +14,8 @@ defmodule ChannelWeb.ActiveChannel do
     {:ok, _} =
       Presence.track(socket, socket.assigns.token, %{
         online_at: inspect(System.system_time(:second)),
-        name: first_name <> " " <> last_name
+        name: first_name <> " " <> last_name,
+        id: socket.assigns.current_account.id
       })
 
     push(socket, "presence_state", Presence.list(socket))

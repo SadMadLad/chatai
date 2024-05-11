@@ -17,7 +17,14 @@ const useSocketStore = create<SocketStoreState>((set, get) => ({
     newSocket.connect();
     set({ socket: newSocket });
   },
-  unsubscribeSocket: () => get().socket?.disconnect(),
+  unsubscribeSocket: () => {
+    const socket = get().socket;
+
+    if (socket) {
+      socket.disconnect();
+      set({ socket: null });
+    }
+  }
 }));
 
 export default useSocketStore;
