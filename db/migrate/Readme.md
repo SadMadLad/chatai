@@ -10,9 +10,10 @@ Consistent standard to write down the migrations - Arrange the fields when creat
 6. String
 7. Text
 8. DateTime
-9. Index
-10. JSON/JSONB
-11. Timestamps
+9. UUID
+10. Index
+11. JSON/JSONB
+12. Timestamps
 
 Arrange the grouped fields alphabetically.
 <br />

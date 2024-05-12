@@ -1,19 +1,17 @@
 import { Presence, Channel } from "phoenix";
 import { create } from "zustand";
 import useSocketStore from "@/storage/useSocketStore";
-
-interface UserPresence {
-  id: number,
-  name: string,
-  phx_ref: string,
-  online_at: string
-}
+import { UserPresence } from "@/types/UserPresence";
 
 interface PresenceStoreState {
   presence: Presence | null;
   channel: Channel | null;
   onlineUsers: Array<UserPresence>;
-  subscribeChannel: (fullName: string, token: string) => void;
+  subscribeChannel: (
+    fullName: string,
+    token: string,
+    avatarUrl: string | null,
+  ) => void;
   subscribePresence: () => void;
   unsubscribePresence: () => void;
 }
@@ -23,16 +21,20 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
   presence: null,
   onlineUsers: [],
 
-  subscribeChannel: (fullName: string, token: string) => {
+  subscribeChannel: (
+    fullName: string,
+    token: string,
+    avatarUrl: string | null,
+  ) => {
     const channelIsPresent = !!get().channel;
-    if(channelIsPresent) return;
-
+    if (channelIsPresent) return;
     const socket = useSocketStore.getState().socket;
     if (!socket) return;
 
     const newChannel = socket.channel("active:lobby", {
       name: fullName,
       token: token,
+      avatar_url: avatarUrl,
     });
     newChannel.join();
 
@@ -50,11 +52,19 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
     newPresence.onSync(() => {
       let presentUsers: Array<UserPresence> = [];
 
-      newPresence.list((_, { metas: [presentUser, ...__] }: { metas: UserPresence[] }) => presentUsers.unshift(presentUser));
-      presentUsers.filter(presentUser => !!presentUser.id);
-      presentUsers = Object.values(presentUsers.reduce((acc, obj) => ({ ...acc, [obj.id]: obj }), {}));
-      
-      set({ onlineUsers: presentUsers })
+      newPresence.list(
+        (_, { metas: [presentUser, ...__] }: { metas: UserPresence[] }) =>
+          presentUsers.unshift(presentUser),
+      );
+      presentUsers.filter((presentUser) => !!presentUser.unique_identifier);
+      presentUsers = Object.values(
+        presentUsers.reduce(
+          (acc, obj) => ({ ...acc, [obj.unique_identifier]: obj }),
+          {},
+        ),
+      );
+
+      set({ onlineUsers: presentUsers });
     });
 
     set({ presence: newPresence });
@@ -65,10 +75,10 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
 
     if (channel) {
       channel.leave();
-      set({ channel: null, presence: null })
+      set({ channel: null, presence: null });
     }
     get().channel?.leave();
-  } ,
+  },
 }));
 
 export default usePresenceStore;

@@ -24,7 +24,7 @@ const useSocketStore = create<SocketStoreState>((set, get) => ({
       socket.disconnect();
       set({ socket: null });
     }
-  }
+  },
 }));
 
 export default useSocketStore;

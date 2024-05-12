@@ -10,29 +10,32 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
-import { Menu, CircleUser, Apple } from "lucide-react";
+import { Menu, Apple } from "lucide-react";
 import { toast } from "sonner";
 
 import useAuthStore from "@/storage/useAuthStore";
 import usePresenceStore from "@/storage/usePresenceStore";
 import useSocketStore from "@/storage/useSocketStore";
+import UserAvatar from "@/components/shared/UserAvatar";
 import { RailsRoutes } from "@/services/routes";
 import { client } from "@/services/clients";
+import ActiveUsersDrawer from "@/components/shared/ActiveUsersDrawer";
 
-interface NavBarLinks {
+interface NavBarLink {
   text: String;
   to: To;
   key: Key;
 }
 
 export default function NavBar() {
-  const { authToken, avatarUrl, fullName, isAuthed, removeAuthToken } = useAuthStore();
+  const { authToken, fullName, isAuthed, avatarUrl, removeAuthToken } =
+    useAuthStore();
   const { unsubscribeSocket } = useSocketStore();
   const { unsubscribePresence } = usePresenceStore();
 
   const navigate = useNavigate();
 
-  const authedLinks: Array<NavBarLinks> = [
+  const authedLinks: Array<NavBarLink> = [
     {
       text: "Dashboard",
       to: "#",
@@ -133,37 +136,35 @@ export default function NavBar() {
         </SheetContent>
       </Sheet>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        <div className="ml-auto flex-initial">
+        <div className="ml-auto flex items-center">
           {isAuthed && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="rounded-full"
-                >
-                  {authToken && avatarUrl ? (
-                    <img
-                      className="h-full w-full rounded-full object-cover"
-                      src={avatarUrl}
-                    />
-                  ) : (
-                    <CircleUser className="h-5 w-5" />
-                  )}
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{fullName}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout}>
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <>
+              <ActiveUsersDrawer />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="rounded-full"
+                  >
+                    {isAuthed && (
+                      <UserAvatar fullName={fullName} avatarUrl={avatarUrl} />
+                    )}
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>{fullName}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem>Support</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
           )}
         </div>
       </div>

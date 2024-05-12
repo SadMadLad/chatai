@@ -8,6 +8,7 @@ defmodule Channel.Auth.Account do
     field :last_name, :string
     field :latest_message_at, :naive_datetime
     field :user_id, :integer
+    field :unique_identifier, :binary_id
 
     has_many :account_tokens, AccountToken
 

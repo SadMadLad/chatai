@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 
+import { Toaster } from "@/components/ui/Sonner";
 import StaticPage from "@/pages/static/StaticPage";
 import LoginPage from "@/pages/auth/LoginPage";
-import { Toaster } from "@/components/ui/Sonner";
 import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 import usePresenceStore from "@/storage/usePresenceStore";
@@ -29,9 +29,9 @@ function PublicRoutes() {
 }
 
 function App() {
-  const { authToken, fullName, verifySession, isAuthed } = useAuthStore();
+  const { authToken, fullName, avatarUrl, verifySession } = useAuthStore();
   const { subscribeSocket, unsubscribeSocket } = useSocketStore();
-  const { subscribeChannel, subscribePresence, unsubscribePresence, onlineUsers } =
+  const { subscribeChannel, subscribePresence, unsubscribePresence } =
     usePresenceStore();
 
   const prepareSockets = async () => {
@@ -39,7 +39,7 @@ function App() {
     if (!verifiedSession || !authToken || !fullName) return;
 
     subscribeSocket(authToken);
-    subscribeChannel(fullName, authToken);
+    subscribeChannel(fullName, authToken, avatarUrl);
     subscribePresence();
   };
 
@@ -51,7 +51,7 @@ function App() {
       unsubscribeSocket();
     };
   }, []);
-  
+
   return (
     <Router>
       <Routes>
@@ -62,8 +62,6 @@ function App() {
         <Route path="/" element={<StaticPage />} />
       </Routes>
       <Toaster />
-      { isAuthed && 
-      <div id="bund">{JSON.stringify(onlineUsers)}</div>}
     </Router>
   );
 }

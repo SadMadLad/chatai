@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "account_chat_maps", primary_key: ["account_id", "chat_id"], force: :cascade do |t|
     t.bigint "account_id", null: false
@@ -43,8 +44,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_123034) do
     t.string "last_name", null: false
     t.string "username", null: false
     t.datetime "latest_message_at"
+    t.uuid "unique_identifier", default: -> { "uuid_generate_v4()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["unique_identifier"], name: "index_accounts_on_unique_identifier", unique: true
     t.index ["user_id"], name: "index_accounts_on_user_id"
     t.index ["username"], name: "index_accounts_on_username", unique: true
   end
