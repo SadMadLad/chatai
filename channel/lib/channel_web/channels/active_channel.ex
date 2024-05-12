@@ -2,20 +2,19 @@ defmodule ChannelWeb.ActiveChannel do
   use ChannelWeb, :channel
   alias ChannelWeb.Presence
 
-  def join("active:lobby", %{"token" => token}, socket) do
+  def join("active:lobby", %{"token" => token, "name" => name, "avatar_url" => avatar_url}, socket) do
     send(self(), :after_join)
-    {:ok, assign(socket, :token, token)}
+    {:ok, assign(socket, token: token, name: name, avatar_url: avatar_url)}
   end
 
   def handle_info(:after_join, socket) do
-    first_name = socket.assigns.current_account.first_name
-    last_name = socket.assigns.current_account.last_name
-
     {:ok, _} =
       Presence.track(socket, socket.assigns.token, %{
         online_at: inspect(System.system_time(:second)),
-        name: first_name <> " " <> last_name,
-        id: socket.assigns.current_account.id
+        name: socket.assigns.name,
+        avatar_url: socket.assigns.avatar_url,
+        unique_identifier: socket.assigns.current_account.unique_identifier,
+        username: socket.assigns.current_account.username
       })
 
     push(socket, "presence_state", Presence.list(socket))

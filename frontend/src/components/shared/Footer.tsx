@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/Button";
-import useAuthStore from "@/storage/useAuthStore";
 
 export default function Footer() {
-  const { isAuthed } = useAuthStore();
-
   const helpTabs = [
     "Support",
     "Get Started",
@@ -63,8 +60,6 @@ export default function Footer() {
         </div>
 
         <hr className="mt-20" />
-
-        {isAuthed && <div>Please Give Us Your Feedback</div>}
 
         <div className="gap justify-between py-2.5">
           <span>2024 Chatai. All Rights Reserved</span>

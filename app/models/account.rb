@@ -19,12 +19,13 @@ class Account < ApplicationRecord
 
   enum :role, { user: 0, admin: 1, superadmin: 2 }
 
-  default_scope { includes(avatar_attachment: :blob) }
+  default_scope { with_attached_avatar }
 
   scope :admins, -> { where(role: %i[superadmin admin]) }
 
   validates :first_name, :last_name, :role, :username, presence: true
   validates :username, uniqueness: true
+  validates :unique_identifier, uniqueness: true, if: :unique_identifier?
 
   def full_name
     "#{first_name} #{last_name}"

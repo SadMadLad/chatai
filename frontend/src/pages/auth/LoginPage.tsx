@@ -44,7 +44,7 @@ export default function LoginPage() {
       if (token) {
         setAuthToken(token, full_name, avatar_url);
         subscribeSocket(token);
-        subscribeChannel(full_name, token);
+        subscribeChannel(full_name, token, avatar_url);
         subscribePresence();
 
         navigate("/");
