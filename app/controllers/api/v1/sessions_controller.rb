@@ -44,7 +44,12 @@ module Api
       end
 
       def response_payload
-        { token: encode(@account_token.id), full_name: @account.full_name, avatar_url: url_for(@account.avatar) }
+        { 
+          token: encode(@account_token.id),
+          full_name: @account.full_name,
+          unique_identifier: @account.unique_identifier,
+          avatar_url: url_for(@account.avatar)
+        }
       end
     end
   end

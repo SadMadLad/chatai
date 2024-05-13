@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :account_tokens, through: :account, dependent: :destroy
   has_many :chats, through: :account, dependent: :destroy
   has_many :feedback, through: :account, dependent: :destroy
+  has_many :favorites, through: :account, dependent: :destroy
   has_many :messages, through: :account, dependent: :destroy
   has_many :ml_models, through: :account, dependent: :destroy
 

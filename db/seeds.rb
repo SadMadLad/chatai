@@ -70,3 +70,13 @@ second_account.account_tokens.create(scope: :ai_showcase)
 
 Apis::Reddit::Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
 Apis::Reddit::Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
+
+# Creating Live chats
+
+chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies')
+chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence')
+
+chat_seagal.messages.create(account: first_account, content: Faker::Movies::TheRoom.quote)
+chat_seagal.messages.create(account: second_account, content: Faker::Movies::TheRoom.quote)
+
+last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote )}

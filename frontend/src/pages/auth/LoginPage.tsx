@@ -36,13 +36,14 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     try {
-      const { url, method } = RailsRoutes.loginRoute;
+      const { url, method } = RailsRoutes.login;
       const response = await fetch(client(url, method, { user: values }));
 
-      const { error, token, full_name, avatar_url } = await response.json();
+      const { error, token, full_name, unique_identifier, avatar_url } =
+        await response.json();
 
       if (token) {
-        setAuthToken(token, full_name, avatar_url);
+        setAuthToken(token, full_name, avatar_url, unique_identifier);
         subscribeSocket(token);
         subscribeChannel(full_name, token, avatar_url);
         subscribePresence();

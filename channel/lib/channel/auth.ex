@@ -1,4 +1,8 @@
 defmodule Channel.Auth do
+  @moduledoc """
+  Module for managing User authentication - Accounts, Users and Account Tokens.
+  """
+
   import Ecto.Query, warn: false
 
   alias Channel.Repo

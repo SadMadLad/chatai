@@ -4,6 +4,8 @@
 class Chat < ApplicationRecord
   after_initialize { self.latest_message_at = DateTime.now if new_record? }
 
+  has_one_attached :photo
+
   has_many :messages, dependent: :destroy, strict_loading: true
   has_many :account_chat_maps, dependent: :destroy
   has_many :accounts, through: :account_chat_maps
@@ -12,10 +14,10 @@ class Chat < ApplicationRecord
   validates :chat_title, presence: true, unless: :two_person?
   validates :chat_status, presence: true, if: :ai_chat?
 
-  enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2 }
+  enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2, live_room: 3 }
   enum :chat_status, { awaiting_user_reply: 0, processing: 1 }
 
-  default_scope -> { includes(:messages) }
+  default_scope -> { with_attached_photo.includes(:messages) }
 
   def other_account(account)
     raise NoMethodError unless two_person?
