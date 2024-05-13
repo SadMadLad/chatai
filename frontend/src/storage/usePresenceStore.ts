@@ -37,6 +37,7 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
       avatar_url: avatarUrl,
     });
     newChannel.join();
+    
 
     set({ channel: newChannel });
   },
