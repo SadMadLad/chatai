@@ -31,4 +31,6 @@ class User < ApplicationRecord
 
   validates_associated :account
   accepts_nested_attributes_for :account
+
+  delegate :first_name, to: :account, prefix: true
 end
