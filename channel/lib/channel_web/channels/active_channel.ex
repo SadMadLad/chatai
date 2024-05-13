@@ -1,4 +1,8 @@
 defmodule ChannelWeb.ActiveChannel do
+  @moduledoc """
+  Associated Channel for registering user presence.
+  """
+
   use ChannelWeb, :channel
   alias ChannelWeb.Presence
 

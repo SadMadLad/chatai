@@ -1,4 +1,8 @@
 defmodule Channel.Auth.AccountToken do
+  @moduledoc """
+  Account's Account Token module.
+  """
+
   use Ecto.Schema
   alias Channel.Auth.Account
 

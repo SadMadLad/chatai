@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resource :sessions, only: %i[create destroy] do
         collection { post :verify_session }
       end
+      resources :chats, only: %i[index show]
     end
   end
 

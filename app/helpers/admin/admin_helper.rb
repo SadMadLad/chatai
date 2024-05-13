@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+# Admin Helper for Admin Dashboard.
 module Admin
-  # Admin Helper for Admin Dashboard.
   module AdminHelper
     ADMIN_LINKS = {
       dashboard: 'fas fa-chart-line',

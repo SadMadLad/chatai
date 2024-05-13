@@ -49,7 +49,7 @@ export default function NavBar() {
   ];
 
   const handleLogout = async () => {
-    const { url, method } = RailsRoutes.logoutRoute;
+    const { url, method } = RailsRoutes.logout;
 
     const response = await fetch(
       client(url, method, null, { Authorization: `Bearer ${authToken}` }),

@@ -11,6 +11,8 @@
 
 ## Specifications
 
+### Rails
+
 * Ruby version 3.3.0
 * Tailwind
 * Hotwire (StimulusJS + Turbo)
@@ -19,6 +21,14 @@
 * Devise for authentication
 * Pundit for authorization
 * Solid Queue for Jobs
+
+### FastAPI
+
+### Phoenix
+
+### Frontend
+
+--- 
 
 ## Setup
 
@@ -37,9 +47,13 @@
 
 ### Python Setup
 
+### Frontend Setup
+
+### Phoenix Setup
+
 ---
 
 ### Some Standards
 
-* `**TODO:**` highlights stuff that needs to be done. `**TEMP:**` is for temporary statements that should be removed or fixed later.
+* **`TODO:`** highlights stuff that needs to be done. **`TEMP:`** is for temporary statements that should be removed or fixed later.
 

@@ -1,6 +1,9 @@
 defmodule Channel.Auth.Guardian do
-  use Guardian, otp_app: :channel
+  @moduledoc """
+  JWT module for User Authentication.
+  """
 
+  use Guardian, otp_app: :channel
   alias Channel.Auth
 
   def subject_for_token(account_token, _claims) do

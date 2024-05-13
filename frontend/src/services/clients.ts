@@ -3,6 +3,7 @@ function client(
   method: string,
   body: Object | null | undefined = null,
   headerOptions: { [key: string]: string } | null = null,
+  params: Record<string, string> | null | undefined = null,
 ) {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
@@ -13,12 +14,12 @@ function client(
     });
   }
 
-  const request = new Request(route, {
-    method: method,
-    headers: headers,
-    body: JSON.stringify(body),
-  });
+  const requestOptions: RequestInit = { method: method, headers: headers };
+  if (method !== "GET") requestOptions.body = JSON.stringify(body);
+  const fullRoute =
+    route + `${params ? "?" + new URLSearchParams(params).toString() : ""}`;
 
+  const request = new Request(fullRoute, requestOptions);
   return request;
 }
 

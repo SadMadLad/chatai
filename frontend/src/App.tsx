@@ -9,10 +9,13 @@ import { useEffect } from "react";
 
 import { Toaster } from "@/components/ui/Sonner";
 import StaticPage from "@/pages/static/StaticPage";
-import LoginPage from "@/pages/auth/LoginPage";
 import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 import usePresenceStore from "@/storage/usePresenceStore";
+
+import LoginPage from "@/pages/auth/LoginPage";
+import ChatsPage from "@/pages/chats/ChatsPage";
+import ChatPage from "./pages/chats/ChatPage";
 
 /* PrivateRoutes: Routet that require user to auth. */
 function PrivateRoutes() {
@@ -55,7 +58,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route element={<PrivateRoutes />}></Route>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/chats" element={<ChatsPage />} />
+          <Route path="/chats/:id" element={<ChatPage />} />
+        </Route>
         <Route element={<PublicRoutes />}>
           <Route path="/login" element={<LoginPage />} />
         </Route>

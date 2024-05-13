@@ -31,7 +31,7 @@ module Api
 
     def verify_token(token)
       decoded_token = decode(token)
-      if Time.at(decoded_token[:exp]) <= DateTime.now
+      if Time.zone.at(decoded_token[:exp]) <= DateTime.now
         render json: { error: 'Your session has expired' }, status: :unauthorized
       else
         @account_token = AccountToken.find(decoded_token[:sub])
