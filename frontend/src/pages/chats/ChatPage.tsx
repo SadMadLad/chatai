@@ -31,25 +31,30 @@ export default function ChatPage() {
     );
     const { chat, messages } = await response.json();
     if (response.ok) {
-      setIsLoading(false);
       setChat(chat);
       setMessages(messages);
     }
+
+    setIsLoading(false);
   }
 
   return (
     <ApplicationLayout>
-      {!isLoading && chat ? (
-        <>
-          <p>
-            {chat.id} {chat.title}
-          </p>
-          {messages.map((message) => (
-            <p key={message.id} className="bg-orange-500">
-              {message.content}
+      {!isLoading ? (
+        chat ? (
+          <>
+            <p>
+              {chat.id} {chat.title}
             </p>
-          ))}
-        </>
+            {messages.map((message) => (
+              <p key={message.id} className="bg-orange-500">
+                {message.content}
+              </p>
+            ))}
+          </>
+        ) : (
+          <p>Chat Not Found</p>
+        )
       ) : (
         <Skeleton className="h-20 w-40" />
       )}

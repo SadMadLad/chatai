@@ -38,8 +38,13 @@ export default function NavBar() {
   const authedLinks: Array<NavBarLink> = [
     {
       text: "Dashboard",
-      to: "#",
+      to: "/",
       key: "Dashboard",
+    },
+    {
+      text: "Chats",
+      to: "/chats",
+      key: "Chats",
     },
     {
       text: "Weather",
