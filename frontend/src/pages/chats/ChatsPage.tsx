@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout";
 import useAuthStore from "@/storage/useAuthStore";
@@ -9,12 +10,12 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 function ChatCard({ id, title, photo_url }: Chat) {
   return (
-    <>
+    <Link to={`${id}`}>
       {photo_url && <img src={photo_url} />}
       <p>
         {id} {title}
       </p>
-    </>
+    </Link>
   );
 }
 
@@ -37,10 +38,8 @@ export default function ChatsPage() {
     );
     const chats = await response.json();
 
-    if (response.ok) {
-      setChats(chats);
-      setIsLoading(false);
-    }
+    if (response.ok) setChats(chats);
+    setIsLoading(false);
   }
 
   return (
