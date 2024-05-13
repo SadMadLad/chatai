@@ -1,6 +1,7 @@
 defmodule ChannelWeb.AccountSocket do
   use Phoenix.Socket
   alias Channel.Auth
+  alias ChannelWeb.{ActiveChannel, ChatChannel}
 
   # A Socket handler
   #
@@ -9,7 +10,8 @@ defmodule ChannelWeb.AccountSocket do
 
   ## Channels
 
-  channel "active:*", ChannelWeb.ActiveChannel
+  channel "active:*", ActiveChannel
+  channel "chat:*", ChatChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a account. After
