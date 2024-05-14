@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Presence } from "phoenix";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout";
+import UserAvatar from "@/components/shared/UserAvatar";
 import { RailsRoutes } from "@/services/routes";
 import { Chat, Message } from "@/types/data/ChatTypes";
 import { client } from "@/services/clients";
@@ -27,12 +28,13 @@ export default function ChatPage() {
     const abortController = new AbortController();
 
     fetchChatAndMessages();
-    subscribeToSockets();
+    const chatChannel = subscribeToSockets();
 
     return () => {
       abortController.abort();
+      chatChannel?.leave();
     };
-  }, []);
+  }, [socket]);
 
   async function fetchChatAndMessages() {
     const { method, url } = RailsRoutes.chats;
@@ -55,22 +57,26 @@ export default function ChatPage() {
       name: fullName,
       avatar_url: avatarUrl,
     });
+
     const chatPresence = new Presence(chatChannel);
+
     chatPresence.onSync(() => {
       const presentUsers = Object.values(
         chatPresence.list((_, { metas: [presentUser] }) => presentUser),
       ).filter((presentUser) => !!presentUser.unique_identifier);
+
       setLiveUsers(presentUsers);
     });
 
     chatChannel.join();
+    return chatChannel;
   }
 
   return (
     <ApplicationLayout>
-      {liveUsers.map((liveUser) => (
-        <div key={liveUser.unique_identifier}>
-          {liveUser.avatar_url} {liveUser.name}
+      {liveUsers.map(({ avatar_url, name, unique_identifier }) => (
+        <div key={unique_identifier}>
+          <UserAvatar avatarUrl={avatar_url} fullName={name} />
         </div>
       ))}
       <hr />
