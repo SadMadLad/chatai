@@ -1,7 +1,7 @@
 import { Presence, Channel } from "phoenix";
 import { create } from "zustand";
 import useSocketStore from "@/storage/useSocketStore";
-import { UserPresence } from "@/types/UserPresence";
+import { UserPresence } from "@/types/StoreTypes";
 
 interface PresenceStoreState {
   presence: Presence | null;
@@ -37,7 +37,6 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
       avatar_url: avatarUrl,
     });
     newChannel.join();
-    
 
     set({ channel: newChannel });
   },

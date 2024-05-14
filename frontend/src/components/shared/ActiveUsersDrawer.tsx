@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/Drawer";
 import { Button } from "@/components/ui/Button";
 import { ScrollArea, ScrollBar } from "@/components/ui/ScrollArea";
-import { UserPresence } from "@/types/UserPresence";
+import { UserPresence } from "@/types/StoreTypes";
 import UserAvatar from "@/components/shared/UserAvatar";
 import usePresenceStore from "@/storage/usePresenceStore";
 
