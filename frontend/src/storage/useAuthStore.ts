@@ -53,9 +53,7 @@ const useAuthStore = create<AuthTokenState>()(
         if (!token) return false;
 
         const { method, url } = RailsRoutes.verifySession;
-        const response = await fetch(
-          client(url, method, null, { Authorization: `Bearer ${token}` }),
-        );
+        const response = await fetch(client(url, method, { authToken: token }));
 
         if (!response.ok) {
           get().removeAuthToken();

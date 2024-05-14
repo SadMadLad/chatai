@@ -33,9 +33,7 @@ export default function ChatsPage() {
 
   async function fetchChats() {
     const { url, method } = RailsRoutes.chats;
-    const response = await fetch(
-      client(url, method, null, { Authorization: `Bearer ${authToken}` }),
-    );
+    const response = await fetch(client(url, method, { authToken: authToken }));
     const chats = await response.json();
 
     if (response.ok) setChats(chats);

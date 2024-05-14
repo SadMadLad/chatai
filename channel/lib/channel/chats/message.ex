@@ -19,7 +19,7 @@ defmodule Channel.Chats.Message do
 
   def changeset(message, attrs) do
     message_cols = [:chat_id, :account_id, :content]
-    
+
     message
     |> cast(attrs, message_cols)
     |> validate_required(message_cols)
