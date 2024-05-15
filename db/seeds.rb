@@ -73,8 +73,8 @@ Apis::Reddit::Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://w
 
 # Creating Live chats
 
-chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies')
-chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence')
+chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies', chat_description: 'Hello')
+chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence', chat_description: 'Hello 2')
 
 chat_seagal.messages.create(account: first_account, content: Faker::Movies::TheRoom.quote)
 chat_seagal.messages.create(account: second_account, content: Faker::Movies::TheRoom.quote)

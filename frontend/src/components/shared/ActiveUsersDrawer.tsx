@@ -18,7 +18,7 @@ import UserAvatar from "@/components/shared/UserAvatar";
 function UserCard({ name, avatar_url, username }: UserPresence) {
   return (
     <div className="flex items-center gap-2.5 rounded-lg border p-4 shadow-sm">
-      <UserAvatar fullName={name} avatarUrl={avatar_url} />
+      <UserAvatar fullName={name} avatarUrl={avatar_url} hasPopover={false} />
       <div>
         <p className="text-xl font-bold">{name}</p>
         <p className="text-sm text-gray-500">{username}</p>

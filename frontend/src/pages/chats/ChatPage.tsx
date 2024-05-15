@@ -76,17 +76,19 @@ export default function ChatPage() {
 
   return (
     <ApplicationLayout>
+      <div className="pl-8">
       {liveUsers.map(({ avatar_url, name, unique_identifier }) => (
         <div key={unique_identifier}>
-          <UserAvatar avatarUrl={avatar_url} fullName={name} />
+          <UserAvatar avatarUrl={avatar_url} fullName={name} hasPopover={true} />
         </div>
       ))}
+      </div>
       <hr />
       {!isLoading ? (
         chat ? (
           <>
             <p>
-              {chat.id} {chat.title}
+              {chat.id} {chat.chat_title} {chat.chat_description}
             </p>
             {messages.map((message) => (
               <p key={message.id} className="bg-orange-500">
