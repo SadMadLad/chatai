@@ -1,3 +1,6 @@
+import usePresenceStore from "@/storage/usePresenceStore";
+
+import { Button } from "@/components/ui/Button";
 import {
   Drawer,
   DrawerTrigger,
@@ -8,11 +11,9 @@ import {
   DrawerFooter,
   DrawerClose,
 } from "@/components/ui/Drawer";
-import { Button } from "@/components/ui/Button";
 import { ScrollArea, ScrollBar } from "@/components/ui/ScrollArea";
 import { UserPresence } from "@/types/StoreTypes";
 import UserAvatar from "@/components/shared/UserAvatar";
-import usePresenceStore from "@/storage/usePresenceStore";
 
 function UserCard({ name, avatar_url, username }: UserPresence) {
   return (

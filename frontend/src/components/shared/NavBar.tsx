@@ -1,6 +1,11 @@
-import { Key } from "react";
 import { Link, To, useNavigate } from "react-router-dom";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
+import { Key } from "react";
+
+import useAuthStore from "@/storage/useAuthStore";
+import usePresenceStore from "@/storage/usePresenceStore";
+import useSocketStore from "@/storage/useSocketStore";
+
+import ActiveUsersDrawer from "@/components/shared/ActiveUsersDrawer";
 import { Button } from "@/components/ui/Button";
 import {
   DropdownMenu,
@@ -11,15 +16,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
 import { Menu, Apple } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
 import { toast } from "sonner";
-
-import useAuthStore from "@/storage/useAuthStore";
-import usePresenceStore from "@/storage/usePresenceStore";
-import useSocketStore from "@/storage/useSocketStore";
 import UserAvatar from "@/components/shared/UserAvatar";
-import { RailsRoutes } from "@/services/routes";
+
 import { client } from "@/services/clients";
-import ActiveUsersDrawer from "@/components/shared/ActiveUsersDrawer";
+import { RailsRoutes } from "@/services/routes";
 
 interface NavBarLink {
   text: String;

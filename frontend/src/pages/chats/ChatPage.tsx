@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Presence } from "phoenix";
 
-import ApplicationLayout from "@/layouts/ApplicationLayout";
-import UserAvatar from "@/components/shared/UserAvatar";
-import { RailsRoutes } from "@/services/routes";
-import { Chat, Message } from "@/types/data/ChatTypes";
-import { client } from "@/services/clients";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { UserPresence } from "@/types/StoreTypes";
 import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
+
+import ApplicationLayout from "@/layouts/ApplicationLayout";
+import UserAvatar from "@/components/shared/UserAvatar";
+import { Skeleton } from "@/components/ui/Skeleton";
+
+import { Chat, Message } from "@/types/data/ChatTypes";
+import { client } from "@/services/clients";
+import { RailsRoutes } from "@/services/routes";
+import { UserPresence } from "@/types/StoreTypes";
 
 export default function ChatPage() {
   const { authToken, fullName, avatarUrl } = useAuthStore();

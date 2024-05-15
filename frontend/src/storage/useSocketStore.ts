@@ -1,5 +1,6 @@
-import { Socket } from "phoenix";
 import { create } from "zustand";
+import { Socket } from "phoenix";
+
 import { PhoenixRoutes } from "@/services/routes";
 
 interface SocketStoreState {

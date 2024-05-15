@@ -1,5 +1,5 @@
-import { Presence, Channel } from "phoenix";
 import { create } from "zustand";
+import { Presence, Channel } from "phoenix";
 import useSocketStore from "@/storage/useSocketStore";
 import { UserPresence } from "@/types/StoreTypes";
 
