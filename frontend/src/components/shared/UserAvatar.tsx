@@ -14,7 +14,7 @@ interface UserAvatarProps {
 export default function UserAvatar({
   avatarUrl,
   fullName,
-  hasPopover = true,
+  hasPopover,
 }: UserAvatarProps) {
   const [first, last] = (fullName ?? "").split(" ");
 
