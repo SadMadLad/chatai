@@ -152,7 +152,11 @@ export default function NavBar() {
                     className="rounded-full"
                   >
                     {isAuthed && (
-                      <UserAvatar fullName={fullName} avatarUrl={avatarUrl} hasPopover={false} />
+                      <UserAvatar
+                        fullName={fullName}
+                        avatarUrl={avatarUrl}
+                        hasPopover={false}
+                      />
                     )}
                     <span className="sr-only">Toggle user menu</span>
                   </Button>

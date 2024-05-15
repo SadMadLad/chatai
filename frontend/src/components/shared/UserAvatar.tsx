@@ -37,7 +37,7 @@ export default function UserAvatar({
           <PopoverTrigger asChild className="cursor-pointer">
             {UserAvatarComponent()}
           </PopoverTrigger>
-          <PopoverContent className="inline p-2.5 text-sm">
+          <PopoverContent className="inline p-1.5 text-xs">
             {first} {last}
           </PopoverContent>
         </Popover>
