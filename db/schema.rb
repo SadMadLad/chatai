@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
     t.integer "chat_status"
     t.integer "chat_type", default: 0, null: false
     t.string "chat_title"
+    t.text "chat_description"
     t.datetime "latest_message_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

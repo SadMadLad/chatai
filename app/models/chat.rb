@@ -10,9 +10,11 @@ class Chat < ApplicationRecord
   has_many :account_chat_maps, dependent: :destroy
   has_many :accounts, through: :account_chat_maps
 
-  validates :chat_type, :latest_message_at, presence: true
+  validates :chat_description, presence: true, if: :multi_person? || :live_room?
+  validates :chat_type, presence: true
   validates :chat_title, presence: true, unless: :two_person?
   validates :chat_status, presence: true, if: :ai_chat?
+  validates :latest_message_at, presence: true
 
   enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2, live_room: 3 }
   enum :chat_status, { awaiting_user_reply: 0, processing: 1 }
@@ -35,8 +37,9 @@ class Chat < ApplicationRecord
 
       chat_type = accounts.size == 2 ? :two_person : :multi_person
       chat_title = chat_type == :multi_person ? "Group Chat #{accounts.size}" : nil
-      chat = new(chat_type:, chat_title:)
+      chat_description = chat_title
 
+      chat = new(chat_description:, chat_title:, chat_type:)
       return false unless chat.save
 
       AccountChatMap.create(accounts.map { |account| { account:, chat: } })

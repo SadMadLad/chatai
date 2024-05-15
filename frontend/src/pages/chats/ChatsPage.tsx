@@ -9,12 +9,12 @@ import { client } from "@/services/clients";
 import { Chat } from "@/types/data/ChatTypes";
 import { RailsRoutes } from "@/services/routes";
 
-function ChatCard({ id, title, photo_url }: Chat) {
+function ChatCard({ id, chat_title, photo_url }: Chat) {
   return (
     <Link to={`${id}`}>
       {photo_url && <img src={photo_url} />}
       <p>
-        {id} {title}
+        {id} {chat_title}
       </p>
     </Link>
   );
@@ -22,6 +22,7 @@ function ChatCard({ id, title, photo_url }: Chat) {
 
 export default function ChatsPage() {
   const { authToken } = useAuthStore();
+
   const [chats, setChats] = useState<Array<Chat>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
