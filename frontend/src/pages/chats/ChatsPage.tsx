@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import ApplicationLayout from "@/layouts/ApplicationLayout";
 import useAuthStore from "@/storage/useAuthStore";
+import ApplicationLayout from "@/layouts/ApplicationLayout";
+import { Skeleton } from "@/components/ui/Skeleton";
+
 import { client } from "@/services/clients";
 import { Chat } from "@/types/data/ChatTypes";
 import { RailsRoutes } from "@/services/routes";
-import { Skeleton } from "@/components/ui/Skeleton";
 
 function ChatCard({ id, title, photo_url }: Chat) {
   return (

@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import useAuthStore from "@/storage/useAuthStore";
+import usePresenceStore from "@/storage/usePresenceStore";
+import useSocketStore from "@/storage/useSocketStore";
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -15,12 +19,10 @@ import {
   FormMessage,
 } from "@/components/ui/Form";
 import { toast } from "sonner";
-import { RailsRoutes } from "@/services/routes";
+
 import { client } from "@/services/clients";
-import useAuthStore from "@/storage/useAuthStore";
-import useSocketStore from "@/storage/useSocketStore";
-import usePresenceStore from "@/storage/usePresenceStore";
 import LoginSchema from "@/schemas/LoginSchema";
+import { RailsRoutes } from "@/services/routes";
 
 export default function LoginPage() {
   const navigate = useNavigate();
