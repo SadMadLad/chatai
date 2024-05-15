@@ -12,6 +12,7 @@ import { RailsRoutes } from "@/services/routes";
 function ChatCard({ id, chat_title, photo_url }: Chat) {
   return (
     <Link to={`${id}`}>
+      {photo_url}
       {photo_url && <img src={photo_url} />}
       <p>
         {id} {chat_title}

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-PROFILE_PICS = Dir['app/assets/images/faker/*']
+PROFILE_PICS = Dir['app/assets/images/faker/profile_pics/*']
+COVER_PICS = Dir['app/assets/images/faker/covers/*']
 
 def generate_account_attributes(index)
   { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, role: 0, username: "#{Random.hex}#{index}" }
@@ -75,8 +76,17 @@ Apis::Reddit::Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://w
 
 chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies', chat_description: 'Hello')
 chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence', chat_description: 'Hello 2')
+chat_seagal.photo.attach(
+  io: File.open(Rails.root.join(COVER_PICS.first).to_s),
+  filename: COVER_PICS.first
+)
+chat_breen.photo.attach(
+  io: File.open(Rails.root.join(COVER_PICS.second).to_s),
+  filename: COVER_PICS.second
+)
 
-chat_seagal.messages.create(account: first_account, content: Faker::Movies::TheRoom.quote)
-chat_seagal.messages.create(account: second_account, content: Faker::Movies::TheRoom.quote)
+[first_account, second_account].each do |account|
+  chat_seagal.messages.create(account:, content: Faker::Movies::TheRoom.quote)
+end
 
 last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote )}

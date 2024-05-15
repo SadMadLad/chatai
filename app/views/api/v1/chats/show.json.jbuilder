@@ -2,7 +2,7 @@ json.chat do
   json.id @chat.id
   json.chat_title @chat.chat_title
   json.chat_description @chat.chat_description
-  json.photo_url @chat.photo.attached? ? url_for(@chat.photo) : nil
+  json.photo_url rails_blob_url(@chat.photo) if @chat.photo.attached?
 end
 
 json.messages @messages do |message|

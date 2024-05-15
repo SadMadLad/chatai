@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Presence } from "phoenix";
+import { Channel, Presence } from "phoenix";
 
 import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout";
+import ChatPageSkeleton from "@/components/chats/ChatPageSkeleton";
 import UserAvatar from "@/components/shared/UserAvatar";
 import { Skeleton } from "@/components/ui/Skeleton";
 
@@ -29,8 +30,10 @@ export default function ChatPage() {
     if (!socket) return;
     const abortController = new AbortController();
 
-    fetchChatAndMessages();
-    const chatChannel = subscribeToSockets();
+    let chatChannel: Channel | undefined = undefined;
+    fetchChatAndMessages().then((success) => {
+      if (success) chatChannel = subscribeToSockets();
+    });
 
     return () => {
       abortController.abort();
@@ -38,17 +41,20 @@ export default function ChatPage() {
     };
   }, [socket]);
 
-  async function fetchChatAndMessages() {
+  async function fetchChatAndMessages(): Promise<boolean> {
     const { method, url } = RailsRoutes.chats;
     const response = await fetch(
       client(`${url}/${id}`, method, { authToken: authToken }),
     );
     const { chat, messages } = await response.json();
+
     if (response.ok) {
       setChat(chat);
       setMessages(messages);
     }
+
     setIsLoading(false);
+    return response.ok;
   }
 
   function subscribeToSockets() {
@@ -76,32 +82,19 @@ export default function ChatPage() {
 
   return (
     <ApplicationLayout>
-      <div className="pl-8">
-      {liveUsers.map(({ avatar_url, name, unique_identifier }) => (
-        <div key={unique_identifier}>
-          <UserAvatar avatarUrl={avatar_url} fullName={name} hasPopover={true} />
-        </div>
-      ))}
-      </div>
-      <hr />
-      {!isLoading ? (
-        chat ? (
-          <>
-            <p>
-              {chat.id} {chat.chat_title} {chat.chat_description}
-            </p>
-            {messages.map((message) => (
-              <p key={message.id} className="bg-orange-500">
-                {message.content}
-              </p>
-            ))}
-          </>
+      {isLoading && <ChatPageSkeleton />}
+      {!isLoading &&
+        (chat ? (
+          <section>
+            <img
+              src={chat.photo_url}
+              className="h-20 w-20 rounded-full object-cover"
+            />
+            <h1 className="text-4xl font-black">{chat.chat_title}</h1>
+          </section>
         ) : (
-          <p>Chat Not Found</p>
-        )
-      ) : (
-        <Skeleton className="h-20 w-40" />
-      )}
+          <>No Chat Found</>
+        ))}
     </ApplicationLayout>
   );
 }

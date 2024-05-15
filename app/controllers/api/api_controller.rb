@@ -5,6 +5,8 @@ module Api
   class ApiController < ActionController::API
     include JwtService
 
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
     def authenticate_account_token!
       token = parse_auth_header
       if token.present?
@@ -14,6 +16,10 @@ module Api
       end
     rescue StandardError
       render json: { error: 'Could not authenticate user' }, status: :unauthorized
+    end
+
+    def not_found
+      render json: { error: 'Record not found' }, status: :not_found
     end
 
     private
