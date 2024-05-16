@@ -13,12 +13,14 @@ import { Chat, Message } from "@/types/data/ChatTypes";
 import { client } from "@/services/clients";
 import { RailsRoutes } from "@/services/routes";
 import { UserPresence } from "@/types/StoreTypes";
+import MessagesSection from "@/components/chats/MessagesSection";
 
 export default function ChatPage() {
   const { authToken, fullName, avatarUrl } = useAuthStore();
   const { socket } = useSocketStore();
 
   const [chat, setChat] = useState<Chat | null>(null);
+  const [chatChannel, setChatChannel] = useState<Channel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [liveUsers, setLiveUsers] = useState<UserPresence[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -35,6 +37,7 @@ export default function ChatPage() {
     return () => {
       abortController.abort();
       chatChannel?.leave();
+      setChatChannel(null);
     };
   }, [socket]);
 
@@ -62,6 +65,7 @@ export default function ChatPage() {
       name: fullName,
       avatar_url: avatarUrl,
     });
+    setChatChannel(chatChannel);
 
     const chatPresence = new Presence(chatChannel);
 
@@ -82,7 +86,10 @@ export default function ChatPage() {
       {isLoading && <ChatPageSkeleton />}
       {!isLoading &&
         (chat ? (
-          <ChatHero chat={chat} liveUsers={liveUsers} />
+          <>
+            <ChatHero chat={chat} liveUsers={liveUsers} />
+            <MessagesSection messages={messages} />
+          </>
         ) : (
           <>No Chat Found</>
         ))}
