@@ -13,9 +13,11 @@ import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 import usePresenceStore from "@/storage/usePresenceStore";
 
-import LoginPage from "@/pages/auth/LoginPage";
 import ChatsPage from "@/pages/chats/ChatsPage";
-import ChatPage from "./pages/chats/ChatPage";
+import ChatPage from "@/pages/chats/ChatPage";
+import LoginPage from "@/pages/auth/LoginPage";
+import PublicAccountPage from "@/pages/accounts/PublicAccountPage";
+
 
 /* PrivateRoutes: Routet that require user to auth. */
 function PrivateRoutes() {
@@ -61,6 +63,7 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/chats/:id" element={<ChatPage />} />
+          <Route path="/accounts/:uniqueIdentifier/public" element={<PublicAccountPage />} />
         </Route>
         <Route element={<PublicRoutes />}>
           <Route path="/login" element={<LoginPage />} />
