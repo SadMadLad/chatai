@@ -11,4 +11,5 @@ export interface Message {
   content: string;
   created_at: string;
   sender: string;
+  sender_identifier: string;
 }

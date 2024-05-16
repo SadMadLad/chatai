@@ -20,8 +20,8 @@ export default function ChatPage() {
 
   const [chat, setChat] = useState<Chat | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [liveUsers, setLiveUsers] = useState<Array<UserPresence>>([]);
-  const [messages, setMessages] = useState<Array<Message>>([]);
+  const [liveUsers, setLiveUsers] = useState<UserPresence[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const { id } = useParams();
 
@@ -29,14 +29,11 @@ export default function ChatPage() {
     if (!socket) return;
     const abortController = new AbortController();
 
-    let chatChannel: Channel | undefined = undefined;
-    fetchChatAndMessages().then((success) => {
-      if (success) chatChannel = subscribeToSockets();
-    });
+    fetchChatAndMessages();
+    const chatChannel = subscribeToSockets();
 
     return () => {
       abortController.abort();
-      console.log("Channel: ", chatChannel)
       chatChannel?.leave();
     };
   }, [socket]);
