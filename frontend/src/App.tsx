@@ -18,7 +18,6 @@ import ChatPage from "@/pages/chats/ChatPage";
 import LoginPage from "@/pages/auth/LoginPage";
 import PublicAccountPage from "@/pages/accounts/PublicAccountPage";
 
-
 /* PrivateRoutes: Routet that require user to auth. */
 function PrivateRoutes() {
   const { isAuthed } = useAuthStore();
@@ -63,7 +62,10 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/chats/:id" element={<ChatPage />} />
-          <Route path="/accounts/:uniqueIdentifier/public" element={<PublicAccountPage />} />
+          <Route
+            path="/accounts/:uniqueIdentifier/public"
+            element={<PublicAccountPage />}
+          />
         </Route>
         <Route element={<PublicRoutes />}>
           <Route path="/login" element={<LoginPage />} />

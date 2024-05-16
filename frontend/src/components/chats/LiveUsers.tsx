@@ -7,7 +7,7 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandItem,
-  CommandList
+  CommandList,
 } from "@/components/ui/Command";
 import {
   Popover,
@@ -31,10 +31,16 @@ function LiveUserSearch({ liveUsers }: { liveUsers: UserPresence[] }) {
           <CommandList>
             <CommandGroup>
               {liveUsers.map(({ unique_identifier, name }) => (
-                <CommandItem key={unique_identifier} value={name} onSelect={(u) => {
-                  liveUsers.find(user => u === user.name )
-                }}>
-                  <Link to={`/accounts/${unique_identifier}/public`}>{name}</Link>
+                <CommandItem
+                  key={unique_identifier}
+                  value={name}
+                  onSelect={(u) => {
+                    liveUsers.find((user) => u === user.name);
+                  }}
+                >
+                  <Link to={`/accounts/${unique_identifier}/public`}>
+                    {name}
+                  </Link>
                 </CommandItem>
               ))}
             </CommandGroup>
