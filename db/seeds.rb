@@ -37,6 +37,7 @@ second_account = normal_accounts.second
 
 n = 10
 last_n_accounts = normal_accounts.last(n)
+first_n_accounts = normal_accounts.first(n)
 
 chats_accounts = last_n_accounts.map { |account| [first_account, account] }
 chats_accounts.each do |accounts|
@@ -64,8 +65,7 @@ end
 
 # Creating account tokens
 
-first_account.account_tokens.create(scope: :ai_showcase)
-second_account.account_tokens.create(scope: :ai_showcase)
+first_n_accounts.each { |account| account.account_tokens.create(scope: :ai_showcase) }
 
 # Creating subreddits
 

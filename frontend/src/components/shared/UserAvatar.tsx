@@ -9,24 +9,28 @@ interface UserAvatarProps {
   avatarUrl: string | null;
   fullName: string | null;
   hasPopover: boolean;
+  className?: string;
 }
 
 export default function UserAvatar({
   avatarUrl,
   fullName,
   hasPopover,
+  className,
 }: UserAvatarProps) {
   const [first, last] = (fullName ?? "").split(" ");
 
   function UserAvatarComponent() {
     return (
-      <Avatar>
-        {avatarUrl && <AvatarImage src={avatarUrl} />}
-        <AvatarFallback>
-          {first[0]}
-          {last[0]}
-        </AvatarFallback>
-      </Avatar>
+      <div className={className}>
+        <Avatar>
+          {avatarUrl && <AvatarImage src={avatarUrl} />}
+          <AvatarFallback>
+            {first[0]}
+            {last[0]}
+          </AvatarFallback>
+        </Avatar>
+      </div>
     );
   }
 

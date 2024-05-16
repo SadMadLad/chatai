@@ -49,3 +49,9 @@
     src: url("./assets/fonts/geist/Geist-UltraBlack.woff2") format("woff2");
   }
 }
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}

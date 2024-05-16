@@ -6,9 +6,8 @@ import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout";
+import ChatHero from "@/components/chats/ChatHero";
 import ChatPageSkeleton from "@/components/chats/ChatPageSkeleton";
-import UserAvatar from "@/components/shared/UserAvatar";
-import { Skeleton } from "@/components/ui/Skeleton";
 
 import { Chat, Message } from "@/types/data/ChatTypes";
 import { client } from "@/services/clients";
@@ -37,6 +36,7 @@ export default function ChatPage() {
 
     return () => {
       abortController.abort();
+      console.log("Channel: ", chatChannel)
       chatChannel?.leave();
     };
   }, [socket]);
@@ -85,13 +85,7 @@ export default function ChatPage() {
       {isLoading && <ChatPageSkeleton />}
       {!isLoading &&
         (chat ? (
-          <section>
-            <img
-              src={chat.photo_url}
-              className="h-20 w-20 rounded-full object-cover"
-            />
-            <h1 className="text-4xl font-black">{chat.chat_title}</h1>
-          </section>
+          <ChatHero chat={chat} liveUsers={liveUsers} />
         ) : (
           <>No Chat Found</>
         ))}
