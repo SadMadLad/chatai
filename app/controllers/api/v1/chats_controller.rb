@@ -7,7 +7,7 @@ module Api
 
       def show
         @chat = Chat.find(params[:id])
-        @messages = @chat.messages.includes(:account)
+        @messages = @chat.messages.includes(account: { avatar_attachment: :blob })
       end
     end
   end

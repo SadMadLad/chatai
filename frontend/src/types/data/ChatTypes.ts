@@ -12,4 +12,5 @@ export interface Message {
   created_at: string;
   sender: string;
   sender_identifier: string;
+  avatar_url: string;
 }

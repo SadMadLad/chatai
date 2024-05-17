@@ -1,19 +1,33 @@
-import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Channel, Presence } from "phoenix";
+import { toast } from "sonner";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import useAuthStore from "@/storage/useAuthStore";
 import useSocketStore from "@/storage/useSocketStore";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout";
+import { Button } from "@/components/ui/Button";
 import ChatHero from "@/components/chats/ChatHero";
 import ChatPageSkeleton from "@/components/chats/ChatPageSkeleton";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
+import MessagesSection from "@/components/chats/MessagesSection";
 
 import { Chat, Message } from "@/types/data/ChatTypes";
 import { client } from "@/services/clients";
+import MessageSchema from "@/schemas/MessageSchema";
 import { RailsRoutes } from "@/services/routes";
 import { UserPresence } from "@/types/StoreTypes";
-import MessagesSection from "@/components/chats/MessagesSection";
 
 export default function ChatPage() {
   const { authToken, fullName, avatarUrl } = useAuthStore();
@@ -27,11 +41,18 @@ export default function ChatPage() {
 
   const { id } = useParams();
 
+  const defaultValues = { content: "" };
+  const form = useForm<z.infer<typeof MessageSchema>>({
+    resolver: zodResolver(MessageSchema),
+    defaultValues: defaultValues,
+  });
+
   useEffect(() => {
     if (!socket) return;
     const abortController = new AbortController();
 
     fetchChatAndMessages();
+
     const chatChannel = subscribeToSockets();
 
     return () => {
@@ -77,8 +98,23 @@ export default function ChatPage() {
       setLiveUsers(presentUsers);
     });
 
+    chatChannel.on("create:message", (newMessage: Message) =>
+      setMessages((prevMessages) => [...prevMessages, newMessage]),
+    );
+
     chatChannel.join();
     return chatChannel;
+  }
+
+  async function handleSubmit(values: z.infer<typeof MessageSchema>) {
+    try {
+      if (!chatChannel) return;
+
+      chatChannel.push("create:message", values);
+      form.reset();
+    } catch {
+      toast("Something went wrong. Please try again later.");
+    }
   }
 
   return (
@@ -89,6 +125,27 @@ export default function ChatPage() {
           <>
             <ChatHero chat={chat} liveUsers={liveUsers} />
             <MessagesSection messages={messages} />
+            <br />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Send the message" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" className="w-full">
+                  Send
+                </Button>
+              </form>
+            </Form>
           </>
         ) : (
           <>No Chat Found</>

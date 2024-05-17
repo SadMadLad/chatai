@@ -11,4 +11,5 @@ json.messages @messages do |message|
   json.created_at message.created_at.strftime("%Y-%m-%d %H:%M:%S")
   json.sender message.account.full_name
   json.sender_identifier message.account.unique_identifier
+  json.avatar_url url_for(message.account.avatar)
 end

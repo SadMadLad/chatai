@@ -32,17 +32,30 @@ defmodule ChannelWeb.ChatChannel do
     "chat:" <> chat_id = socket.topic
 
     chat = Chats.get_chat!(chat_id)
+    account = socket.assigns.current_account
+
     case Chats.create_message(%{
-      "account_id" => socket.assigns.current_account.id,
+      "account_id" => account.id,
       "chat_id" => chat_id,
-      "message" => content
+      "content" => content
     }) do
       {:ok, message} ->
         Chats.update_chat(chat, %{"latest_message_at" => message.created_at})
-        Auth.update_account(socket.assigns.current_account, %{"latest_message_at" => message.created_at})
-        broadcast!(socket, "create:message", %{"content" => content})
+        Auth.update_account(account, %{"latest_message_at" => message.created_at})
+        broadcast!(socket, "create:message", new_message_payload(socket, message, account))
         {:noreply, socket}
-      {:error, _} -> {:error, %{reason: "Content Must be present"}}
+      {:error, _} -> {:noreply, socket}
     end
+  end
+
+  defp new_message_payload(socket, message, account) do
+    %{
+      "id" => message.id,
+      "avatar_url" => socket.assigns.avatar_url,
+      "content" => message.content,
+      "created_at" => message.created_at,
+      "sender" => socket.assigns.name,
+      "sender_identifier" => account.unique_identifier
+    }
   end
 end

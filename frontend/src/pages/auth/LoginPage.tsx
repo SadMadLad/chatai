@@ -9,7 +9,6 @@ import usePresenceStore from "@/storage/usePresenceStore";
 import useSocketStore from "@/storage/useSocketStore";
 
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
 import {
   Form,
   FormControl,
@@ -18,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
 import { toast } from "sonner";
 
 import { client } from "@/services/clients";
@@ -36,7 +36,7 @@ export default function LoginPage() {
   const { subscribeSocket } = useSocketStore();
   const { subscribePresence, subscribeChannel } = usePresenceStore();
 
-  async function onSubmit(values: z.infer<typeof LoginSchema>) {
+  async function handleSubmit(values: z.infer<typeof LoginSchema>) {
     try {
       const { url, method } = RailsRoutes.login;
       const response = await fetch(
@@ -72,7 +72,10 @@ export default function LoginPage() {
             </p>
           </div>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+            <form
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="grid gap-4"
+            >
               <FormField
                 control={form.control}
                 name="email"
