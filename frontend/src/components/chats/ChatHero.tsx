@@ -10,23 +10,22 @@ export default function ChatHero({
   chat: Chat;
   liveUsers: UserPresence[];
 }) {
+  const { photo_url, chat_title, chat_description } = chat;
+
   return (
     <section className="container flex flex-col gap-6 bg-black py-16 text-white">
       <div className="flex items-center gap-4">
-        {chat.photo_url ? (
-          <img
-            src={chat.photo_url}
-            className="h-20 w-20 rounded-lg object-cover"
-          />
+        {photo_url ? (
+          <img src={photo_url} className="h-20 w-20 rounded-lg object-cover" />
         ) : (
           <div className="h-20 w-20 rounded-lg">
-            {chat.chat_title.substring(0, 2)}
+            {chat_title.substring(0, 2)}
           </div>
         )}
-        <h1 className="text-4xl font-black">{chat.chat_title}</h1>
+        <h1 className="text-4xl font-black">{chat_title}</h1>
       </div>
       <LiveUsers liveUsers={liveUsers} />
-      <p>{chat.chat_description}</p>
+      <p>{chat_description}</p>
     </section>
   );
 }

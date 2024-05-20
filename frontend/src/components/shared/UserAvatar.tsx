@@ -8,7 +8,7 @@ import {
 interface UserAvatarProps {
   avatarUrl: string | null;
   fullName: string | null;
-  hasPopover: boolean;
+  hasPopover?: boolean;
   className?: string;
 }
 
