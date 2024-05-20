@@ -21,7 +21,7 @@ function Message({
             className="flex-shrink-0"
             avatarUrl={avatar_url}
             fullName={sender}
-            hasPopover={true}
+            hasPopover={false}
           />
           <div>
             <p className="rounded-lg border p-4 text-sm">{content}</p>
@@ -40,7 +40,7 @@ function Message({
             className="flex-shrink-0"
             avatarUrl={avatar_url}
             fullName={sender}
-            hasPopover={true}
+            hasPopover={false}
           />
         </div>
       )}

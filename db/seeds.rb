@@ -10,10 +10,17 @@ end
 password = 'password'
 
 admin_account_attributes = { first_name: 'Admin', last_name: 'Admin', role: 1, username: 'admin' }
-User.create(email: 'admin@admin.com', password:, account_attributes: admin_account_attributes)
+admin_user = User.create(email: 'admin@admin.com', password:, account_attributes: admin_account_attributes)
+admin_user.account.account_tokens.create(scope: :frontend)
 
 super_admin_account_attributes = { first_name: 'Superadmin', last_name: 'Superadmin', role: 2, username: 'superadmin' }
-User.create(email: 'superadmin@superadmin.com', password:, account_attributes: super_admin_account_attributes)
+super_admin_user = User.create(
+  email: 'superadmin@superadmin.com',
+  password:,
+  account_attributes: super_admin_account_attributes
+)
+super_admin_user.account.account_tokens.create(scope: :frontend)
+
 
 normal_users = Array.new(20) do |i|
   { email: "user@#{i}.com", password:, account_attributes: generate_account_attributes(i) }
@@ -65,7 +72,7 @@ end
 
 # Creating account tokens
 
-first_n_accounts.each { |account| account.account_tokens.create(scope: :ai_showcase) }
+first_n_accounts.each { |account| account.account_tokens.create(scope: :frontend) }
 
 # Creating subreddits
 

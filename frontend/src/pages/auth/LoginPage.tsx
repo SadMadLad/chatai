@@ -26,7 +26,7 @@ import { RailsRoutes } from "@/services/routes";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const defaultValues = { email: "", password: "123456", scope: "ai_showcase" };
+  const defaultValues = { email: "", password: "123456", scope: "frontend" };
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: defaultValues,
@@ -43,11 +43,11 @@ export default function LoginPage() {
         client(url, method, { body: { user: values } }),
       );
 
-      const { error, token, full_name, unique_identifier, avatar_url } =
+      const { error, token, full_name, unique_identifier, avatar_url, is_admin } =
         await response.json();
 
       if (token) {
-        setAuthToken(token, full_name, avatar_url, unique_identifier);
+        setAuthToken(token, full_name, avatar_url, unique_identifier, is_admin);
         subscribeSocket(token);
         subscribeChannel(full_name, token, avatar_url);
         subscribePresence();

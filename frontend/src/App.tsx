@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
   Outlet,
+  useParams,
 } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -18,11 +19,23 @@ import ChatPage from "@/pages/chats/ChatPage";
 import LoginPage from "@/pages/auth/LoginPage";
 import PublicAccountPage from "@/pages/accounts/PublicAccountPage";
 
-/* PrivateRoutes: Routet that require user to auth. */
+/* PrivateRoutes: Routes that require user to auth. */
 function PrivateRoutes() {
   const { isAuthed } = useAuthStore();
 
   return isAuthed ? <Outlet /> : <Navigate to="/login" />;
+}
+
+/* UserPrivateRoutes: Routes that are specific to the logged in user. */
+function UserPrivateRoutes() {
+  const { isAuthed, uniqueIdentifier } = useAuthStore();
+  const { identifier } = useParams();
+
+  return isAuthed && uniqueIdentifier === identifier ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/" />
+  );
 }
 
 /* PublicRoutes: Routes that are for unauthed users only. Like the /login one. */
@@ -30,6 +43,13 @@ function PublicRoutes() {
   const { isAuthed } = useAuthStore();
 
   return !isAuthed ? <Outlet /> : <Navigate to="/" />;
+}
+
+/* AdminRoutes: Routes that for admins only. */
+function AdminRoutes() {
+  const { isAdmin } = useAuthStore();
+
+  return isAdmin ? <Outlet /> : <Navigate to="/" />;
 }
 
 function App() {
@@ -59,11 +79,12 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route element={<AdminRoutes />}></Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/chats/:id" element={<ChatPage />} />
           <Route
-            path="/accounts/:uniqueIdentifier/public"
+            path="/accounts/:identifier/public"
             element={<PublicAccountPage />}
           />
         </Route>
@@ -71,6 +92,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
         </Route>
         <Route path="/" element={<StaticPage />} />
+        <Route element={<UserPrivateRoutes />}></Route>
       </Routes>
       <Toaster />
     </Router>
