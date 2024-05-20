@@ -19,7 +19,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
 } from "@/components/ui/Form";
 import { Label } from "@/components/ui/Label";
 import MessagesSection from "@/components/chats/MessagesSection";
@@ -149,7 +148,6 @@ export default function ChatPage() {
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
                       </FormItem>
                     )}
                   />

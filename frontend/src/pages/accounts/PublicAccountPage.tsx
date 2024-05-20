@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
 export default function PublicAccountPage() {
-  const { uniqueIdentifier } = useParams();
+  const { identifier } = useParams();
 
-  return <div>Visiting Unique Identifier {uniqueIdentifier}</div>;
+  return <div>Visiting Public Account Page with Identifier {identifier}</div>;
 }

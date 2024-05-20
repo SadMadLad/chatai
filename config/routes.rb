@@ -17,6 +17,9 @@ Rails.application.routes.draw do
         collection { post :verify_session }
       end
       resources :chats, only: %i[index show]
+      resources :accounts, param: :identifier do
+        member { get :public }
+      end
     end
   end
 

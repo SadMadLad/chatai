@@ -15,6 +15,8 @@ class CreateAccounts < ActiveRecord::Migration[7.1]
       t.string :last_name, null: false
       t.string :username, null: false
 
+      t.text :tagline
+
       t.datetime :latest_message_at
 
       t.uuid :unique_identifier, default: 'uuid_generate_v4()'

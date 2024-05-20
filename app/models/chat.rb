@@ -6,7 +6,7 @@ class Chat < ApplicationRecord
 
   has_one_attached :photo
 
-  has_many :messages, dependent: :destroy, strict_loading: true
+  has_many :messages, dependent: :destroy
   has_many :account_chat_maps, dependent: :destroy
   has_many :accounts, through: :account_chat_maps
 

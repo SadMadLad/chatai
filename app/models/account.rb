@@ -9,7 +9,7 @@ class Account < ApplicationRecord
                       inverse_of: :commenter
   has_many :feedbacks, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :messages, dependent: :destroy, strict_loading: true
+  has_many :messages, dependent: :destroy
   has_many :ml_models, dependent: :destroy
 
   has_one_attached :avatar, dependent: :destroy do |attachable|
