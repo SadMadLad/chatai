@@ -60,6 +60,7 @@ const useAuthStore = create<AuthTokenState>()(
         } else {
           const { full_name, avatar_url, unique_identifier } =
             await response.json();
+
           set({
             fullName: full_name,
             avatarUrl: avatar_url,

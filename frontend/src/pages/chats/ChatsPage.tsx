@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import useAuthStore from "@/storage/useAuthStore";
 import ApplicationLayout from "@/layouts/ApplicationLayout";
-import ChatsPageSkeleton from "@/components/chats/ChatsPageSkeleton";
+import ChatsPageSkeleton from "@/components/skeletons/ChatsPageSkeleton";
 
 import { client } from "@/services/clients";
 import { Chat } from "@/types/data/ChatTypes";

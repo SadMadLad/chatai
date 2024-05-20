@@ -18,11 +18,9 @@ export default function ChatsPageSkeleton() {
   );
 
   return (
-    <section className="p-8">
-      {FiltersSkeleton()}
-      <br />
-      <br />
-      {ChatCardSkeleton()}
+    <section className="flex flex-col gap-8 p-8">
+      <FiltersSkeleton />
+      <ChatCardSkeleton />
     </section>
   );
 }

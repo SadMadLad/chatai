@@ -19,7 +19,7 @@ module Api
       end
 
       def verify_session
-        render json: { full_name: @account.full_name, avatar_url: url_for(@account.avatar) }
+        render json: response_payload
       end
 
       def destroy
@@ -44,7 +44,7 @@ module Api
       end
 
       def response_payload
-        { 
+        {
           token: encode(@account_token.id),
           full_name: @account.full_name,
           unique_identifier: @account.unique_identifier,

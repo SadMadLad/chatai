@@ -12,7 +12,8 @@ import useSocketStore from "@/storage/useSocketStore";
 import ApplicationLayout from "@/layouts/ApplicationLayout";
 import { Button } from "@/components/ui/Button";
 import ChatHero from "@/components/chats/ChatHero";
-import ChatPageSkeleton from "@/components/chats/ChatPageSkeleton";
+import ChatPageSkeleton from "@/components/skeletons/ChatPageSkeleton";
+import { CornerDownLeft } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -20,8 +21,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/Form";
-import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
 import MessagesSection from "@/components/chats/MessagesSection";
+import { Textarea } from "@/components/ui/Textarea";
 
 import { Chat, Message } from "@/types/data/ChatTypes";
 import { client } from "@/services/clients";
@@ -98,9 +100,9 @@ export default function ChatPage() {
       setLiveUsers(presentUsers);
     });
 
-    chatChannel.on("create:message", (newMessage: Message) =>
-      setMessages((prevMessages) => [...prevMessages, newMessage]),
-    );
+    chatChannel.on("create:message", (newMessage: Message) => {
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    });
 
     chatChannel.join();
     return chatChannel;
@@ -125,26 +127,40 @@ export default function ChatPage() {
           <>
             <ChatHero chat={chat} liveUsers={liveUsers} />
             <MessagesSection messages={messages} />
-            <br />
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input placeholder="Send the message" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button type="submit" className="w-full">
-                  Send
-                </Button>
-              </form>
+              <div className="p-8">
+                <form
+                  className="bg-background focus-within:ring-ring relative overflow-hidden rounded-lg border focus-within:ring-1"
+                  onSubmit={form.handleSubmit(handleSubmit)}
+                >
+                  <Label htmlFor="message" className="sr-only">
+                    Message
+                  </Label>
+                  <FormField
+                    control={form.control}
+                    name="content"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Textarea
+                            className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
+                            id="message"
+                            placeholder="Type your message here"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex items-center p-3 pt-0">
+                    <Button type="submit" size="sm" className="ml-auto gap-1.5">
+                      Send Message
+                      <CornerDownLeft className="size-3.5" />
+                    </Button>
+                  </div>
+                </form>
+              </div>
             </Form>
           </>
         ) : (
