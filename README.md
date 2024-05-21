@@ -91,4 +91,5 @@ Currently, it has some of these features:
 ### Some Standards
 
 * **`TODO:`** highlights stuff that needs to be done. **`TEMP:`** is for temporary statements that should be removed or fixed later.
+* Use `flake8` + `black` for Python code, `prettier` for JS and TS, `credo` for Elixir and `rubocop` for Ruby code.
 
