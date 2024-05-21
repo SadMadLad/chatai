@@ -18,6 +18,7 @@ const RailsRoutes: RailsRoutes = {
     method: "POST",
   },
   chats: { url: `${Rails}/chats`, method: "GET" },
+  accounts: { url: `${Rails}/accounts`, method: "GET" }
 };
 
 const PhoenixSocket = import.meta.env.VITE_PHOENIX_SOCKET_URL;

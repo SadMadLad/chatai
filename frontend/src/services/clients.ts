@@ -1,9 +1,9 @@
 import { Method } from "@/types/UtilTypes";
 
 interface ClientOptions {
-  body?: Object | null | undefined;
-  headerOptions?: { [key: string]: string } | null;
-  params?: Record<string, string> | null | undefined;
+  body?: Object;
+  headers?: { [key: string]: string };
+  params?: Record<string, string>;
   authToken?: string | null;
 }
 
@@ -14,6 +14,7 @@ function client(
 ) {
   // Prepare headers
   const headers = new Headers();
+
   headers.append("Content-Type", "application/json");
 
   // Append Auth Token in headers if provided
@@ -21,7 +22,7 @@ function client(
   if (authToken) headers.append("Authorization", `Bearer ${authToken}`);
 
   // Append other headers
-  const headerOptions = clientOptions.headerOptions;
+  const headerOptions = clientOptions.headers;
   if (headerOptions) {
     Object.keys(headerOptions).forEach((key) =>
       headers.append(key, headerOptions[key]),

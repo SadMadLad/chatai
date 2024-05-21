@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array! @chats do |chat|
   json.id chat.id
   json.chat_description chat.chat_description

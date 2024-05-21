@@ -14,12 +14,7 @@ import { Button } from "@/components/ui/Button";
 import ChatHero from "@/components/chats/ChatHero";
 import ChatPageSkeleton from "@/components/skeletons/ChatPageSkeleton";
 import { CornerDownLeft } from "lucide-react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-} from "@/components/ui/Form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/Form";
 import { Label } from "@/components/ui/Label";
 import MessagesSection from "@/components/chats/MessagesSection";
 import { Textarea } from "@/components/ui/Textarea";
@@ -51,8 +46,9 @@ export default function ChatPage() {
   useEffect(() => {
     if (!socket) return;
     const abortController = new AbortController();
+    const signal = abortController.signal;
 
-    fetchChatAndMessages();
+    fetchChatAndMessages(signal);
 
     const chatChannel = subscribeToSockets();
 
@@ -60,13 +56,15 @@ export default function ChatPage() {
       abortController.abort();
       chatChannel?.leave();
       setChatChannel(null);
+      setMessages([]);
     };
   }, [socket]);
 
-  async function fetchChatAndMessages(): Promise<boolean> {
+  async function fetchChatAndMessages(signal: AbortSignal): Promise<boolean> {
     const { method, url } = RailsRoutes.chats;
     const response = await fetch(
       client(`${url}/${id}`, method, { authToken: authToken }),
+      { signal },
     );
     const { chat, messages } = await response.json();
 

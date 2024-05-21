@@ -21,7 +21,6 @@ super_admin_user = User.create(
 )
 super_admin_user.account.account_tokens.create(scope: :frontend)
 
-
 normal_users = Array.new(20) do |i|
   { email: "user@#{i}.com", password:, account_attributes: generate_account_attributes(i) }
 end
@@ -96,4 +95,4 @@ chat_breen.photo.attach(
   chat_seagal.messages.create(account:, content: Faker::Movies::TheRoom.quote)
 end
 
-last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote )}
+last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote) }

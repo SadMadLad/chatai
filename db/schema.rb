@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "username", null: false
+    t.text "tagline"
     t.datetime "latest_message_at"
     t.uuid "unique_identifier", default: -> { "uuid_generate_v4()" }
     t.datetime "created_at", null: false

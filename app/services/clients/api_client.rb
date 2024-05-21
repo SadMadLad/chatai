@@ -3,8 +3,7 @@
 module Clients
   # Api Client to connect to FastAPI app.
   class ApiClient < Clients::ApplicationClient
-    def initialize(ml_model: nil)
-      super
+    def initialize
       @client = Faraday.new(
         url: ENV.fetch('API_CLIENT_URL', nil),
         headers: {
@@ -12,13 +11,12 @@ module Clients
           'Authorization' => "Bearer #{ENV.fetch('API_CLIENT_SECRET', nil)}"
         }
       )
-      @ml_model = ml_model
     end
 
-    def prediction(prediction_params)
-      return if @ml_model.nil?
+    def prediction(ml_model, prediction_params)
+      return if ml_model.nil?
 
-      @client.post("ml_models/#{@ml_model.id}/prediction", prediction_params.to_json)
+      @client.post("ml_models/#{ml_model.id}/prediction", prediction_params.to_json)
     end
 
     def autocomplete(messages)
