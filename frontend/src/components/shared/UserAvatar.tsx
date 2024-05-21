@@ -22,8 +22,8 @@ export default function UserAvatar({
 
   function UserAvatarComponent() {
     return (
-      <div className={className}>
-        <Avatar>
+      <div>
+        <Avatar className={className}>
           {avatarUrl && <AvatarImage src={avatarUrl} />}
           <AvatarFallback>
             {first[0]}

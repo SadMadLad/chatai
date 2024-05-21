@@ -18,7 +18,7 @@ interface AuthTokenState {
     newIsAdmin: boolean,
   ) => void;
   removeAuthToken: () => void;
-  verifySession: () => Promise<boolean>;
+  verifySession: (signal: AbortSignal) => Promise<boolean>;
 }
 
 const useAuthStore = create<AuthTokenState>()(
@@ -54,12 +54,12 @@ const useAuthStore = create<AuthTokenState>()(
           isAuthed: false,
           isAdmin: null,
         }),
-      verifySession: async () => {
+      verifySession: async (signal: AbortSignal) => {
         const token = get().authToken;
         if (!token) return false;
 
         const { method, url } = RailsRoutes.verifySession;
-        const response = await fetch(client(url, method, { authToken: token }));
+        const response = await fetch(client(url, method, { authToken: token }), { signal });
 
         if (!response.ok) {
           get().removeAuthToken();

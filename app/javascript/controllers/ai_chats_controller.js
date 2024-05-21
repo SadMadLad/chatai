@@ -1,9 +1,10 @@
 import { Controller } from "@hotwired/stimulus";
+import { FetchRequest } from "@rails/request.js";
 
 export default class extends Controller {
   static targets = ["newAssistantMessage", "form", "submitButton", "spinner"];
   static validChatStatuses = ["AwaitingUserReply", "Processing"];
-  static values = { chatId: string, chatStatus: string };
+  static values = { chatId: String, chatStatus: String };
 
   /**
    * Triggered when the form target is connected. Disable the form if chat is in processing.

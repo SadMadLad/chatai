@@ -38,14 +38,16 @@ export default function ChatsPage() {
 
   useEffect(() => {
     const abortController = new AbortController();
-    fetchChats();
+    const signal = abortController.signal;
+
+    fetchChats(signal);
 
     return () => abortController.abort();
   }, []);
 
-  async function fetchChats() {
+  async function fetchChats(signal: AbortSignal) {
     const { url, method } = RailsRoutes.chats;
-    const response = await fetch(client(url, method, { authToken: authToken }));
+    const response = await fetch(client(url, method, { authToken: authToken }), { signal });
     const chats = await response.json();
 
     if (response.ok) setChats(chats);

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import usePresenceStore from "@/storage/usePresenceStore";
 
 import { Button } from "@/components/ui/Button";
@@ -15,15 +17,25 @@ import { ScrollArea, ScrollBar } from "@/components/ui/ScrollArea";
 import { UserPresence } from "@/types/StoreTypes";
 import UserAvatar from "@/components/shared/UserAvatar";
 
-function UserCard({ name, avatar_url, username }: UserPresence) {
+function UserCard({
+  name,
+  avatar_url,
+  username,
+  unique_identifier,
+}: UserPresence) {
   return (
-    <div className="flex items-center gap-2.5 rounded-lg border p-4 shadow-sm">
-      <UserAvatar fullName={name} avatarUrl={avatar_url} hasPopover={false} />
-      <div>
-        <p className="text-xl font-bold">{name}</p>
-        <p className="text-sm text-gray-500">{username}</p>
-      </div>
-    </div>
+    <DrawerClose asChild>
+      <Link
+        className="flex items-center gap-2.5 rounded-lg border p-4 shadow-sm"
+        to={`/accounts/${unique_identifier}/public`}
+      >
+        <UserAvatar fullName={name} avatarUrl={avatar_url} hasPopover={false} />
+        <div>
+          <p className="text-xl font-bold">{name}</p>
+          <p className="text-sm text-gray-500">{username}</p>
+        </div>
+      </Link>
+    </DrawerClose>
   );
 }
 

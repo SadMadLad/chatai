@@ -19,8 +19,6 @@ class Chat < ApplicationRecord
   enum :chat_type, { two_person: 0, multi_person: 1, ai_chat: 2, live_room: 3 }
   enum :chat_status, { awaiting_user_reply: 0, processing: 1 }
 
-  default_scope -> { with_attached_photo.includes(:messages) }
-
   def other_account(account)
     raise NoMethodError unless two_person?
 
@@ -46,8 +44,8 @@ class Chat < ApplicationRecord
       return_chat ? chat : chat.persisted?
     end
 
-    def include_messages_accounts_avatars
-      includes(:messages, accounts: { avatar_attachment: :blob })
+    def eager_load_by_chat_type(chat_type)
+      chat_type == :multi_person ? includes(:messages, :accounts) : includes(:messages)
     end
   end
 end

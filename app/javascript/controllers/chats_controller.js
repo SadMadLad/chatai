@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["chatTab"];
   static values = {
-    notificationQuery: { type: string, default: "" },
+    notificationQuery: { type: String, default: "" },
     toggleClasses: { type: Array, default: ["bg-gray-100"] },
   };
 

@@ -4,7 +4,6 @@ import {
   Route,
   Navigate,
   Outlet,
-  useParams,
 } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -26,30 +25,11 @@ function PrivateRoutes() {
   return isAuthed ? <Outlet /> : <Navigate to="/login" />;
 }
 
-/* UserPrivateRoutes: Routes that are specific to the logged in user. */
-function UserPrivateRoutes() {
-  const { isAuthed, uniqueIdentifier } = useAuthStore();
-  const { identifier } = useParams();
-
-  return isAuthed && uniqueIdentifier === identifier ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" />
-  );
-}
-
 /* PublicRoutes: Routes that are for unauthed users only. Like the /login one. */
 function PublicRoutes() {
   const { isAuthed } = useAuthStore();
 
   return !isAuthed ? <Outlet /> : <Navigate to="/" />;
-}
-
-/* AdminRoutes: Routes that for admins only. */
-function AdminRoutes() {
-  const { isAdmin } = useAuthStore();
-
-  return isAdmin ? <Outlet /> : <Navigate to="/" />;
 }
 
 function App() {
@@ -58,8 +38,8 @@ function App() {
   const { subscribeChannel, subscribePresence, unsubscribePresence } =
     usePresenceStore();
 
-  const prepareSockets = async () => {
-    const verifiedSession = await verifySession();
+  const prepareSockets = async (signal: AbortSignal) => {
+    const verifiedSession = await verifySession(signal);
     if (!verifiedSession || !authToken || !fullName) return;
 
     subscribeSocket(authToken);
@@ -68,18 +48,21 @@ function App() {
   };
 
   useEffect(() => {
-    prepareSockets();
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    prepareSockets(signal);
 
     return () => {
       unsubscribePresence();
       unsubscribeSocket();
+      abortController.abort();
     };
   }, []);
 
   return (
     <Router>
       <Routes>
-        <Route element={<AdminRoutes />}></Route>
         <Route element={<PrivateRoutes />}>
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/chats/:id" element={<ChatPage />} />
@@ -92,7 +75,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
         </Route>
         <Route path="/" element={<StaticPage />} />
-        <Route element={<UserPrivateRoutes />}></Route>
       </Routes>
       <Toaster />
     </Router>

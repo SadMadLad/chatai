@@ -40,7 +40,7 @@ export default function LoginPage() {
     try {
       const { url, method } = RailsRoutes.login;
       const response = await fetch(
-        client(url, method, { body: { user: values } }),
+        client(url, method, { body: { user: values } })
       );
 
       const { error, token, full_name, unique_identifier, avatar_url, is_admin } =

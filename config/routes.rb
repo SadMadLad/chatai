@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get :pages
   end
 
-  namespace :api do
+  namespace :api, format: :json do
     namespace :v1 do
       resource :sessions, only: %i[create destroy] do
         collection { post :verify_session }
