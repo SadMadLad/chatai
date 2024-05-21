@@ -17,6 +17,8 @@ Currently, it has some of these features:
 
 ## Specifications
 
+*Note: Docker support will be coming soon for easier developer experience.*
+
 ### Rails
 
 * Ruby version 3.3.0
