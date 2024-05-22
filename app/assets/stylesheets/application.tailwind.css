@@ -28,4 +28,16 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
+
+  .btn {
+    @apply px-3.5 py-1.5 rounded-lg border font-semibold;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-500 text-white hover:bg-primary-700;
+  }
+
+  .btn-ghost {
+    @apply px-3.5 py-1.5 hover:underline font-semibold;
+  }
 }

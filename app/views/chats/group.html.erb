@@ -17,7 +17,7 @@
       data-sidebar-sidebar-toggle-button-classes-value=<%= ['hidden'].to_json %>
     >
       <% [{ direction: 'right', button: 'hideButton'}, { direction: 'left', button: 'showButton'}].each do |toggle_button| %>
-        <button class="z-50 w-8 h-8 shadow-md bg-white rounded-full p-1 absolute -top-2 -right-4 text-primary-500" data-sidebar-target=<%= toggle_button[:button] %> data-action="sidebar#toggleSidebar">
+        <button class="z-[48] w-8 h-8 shadow-md bg-white rounded-full p-1 absolute -top-2 -right-4 text-primary-500" data-sidebar-target=<%= toggle_button[:button] %> data-action="sidebar#toggleSidebar">
           <i class="fas fa-angle-double-<%= toggle_button[:direction] %> fa-sm"></i>
         </button>
       <% end %>

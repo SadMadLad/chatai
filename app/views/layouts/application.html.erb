@@ -4,7 +4,7 @@
     <title>
       <%= content_for?(:title) ? yield(:title) : 'Chatai' %>
     </title>
-    
+
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -27,7 +27,7 @@
     <main class="flex flex-col items-center">
       <%= render 'shared/navbar' %>
 
-      <div class="fixed top-12 right-12" id="flash">
+      <div id="flash" class="fixed top-12 right-12">
         <%= render 'shared/flash' %>
       </div>
 
