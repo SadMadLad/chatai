@@ -1,13 +1,9 @@
 <% if notice || alert %>
   <div data-controller="flash" class="shadow-lg rounded-lg border bg-white p-4">
-      <% if alert %>
-        <i class="fa-2xl fas fa-times-circle text-red-500"></i>
-      <% elsif notice %>
-        <i class="fa-2xl fas fa-check-circle text-green-500"></i>
-      <% else %>
-        <i class="fa-2xl fas fa-info-circle text-blue-500"></i>
-      <% end %>
-      <span class="ml-1.5"><%= alert || notice %></span>
-    </div>
+    <i
+      class="fa-2xl <%= "#{flash_style(:icon)} #{flash_style(:text)}" %>"
+    >
+    </i>
+    <span class="ml-1.5"><%= alert || notice %></span>
   </div>
 <% end %>
