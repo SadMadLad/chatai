@@ -4,9 +4,9 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  FLASH_COLORS = {
-    alert: { bg: 'bg-red-500', text: 'text-red-500', bg_light: 'bg-red-100' },
-    notice: { bg: 'bg-green-500', text: 'text-green-500', bg_light: 'bg-green-100' }
+  FLASH_STYLES = {
+    alert: { bg: 'bg-red-500', text: 'text-red-500', bg_light: 'bg-red-100', icon: 'fas fa-times-circle' },
+    notice: { bg: 'bg-green-500', text: 'text-green-500', bg_light: 'bg-green-100', icon: 'fas fa-check-circle' }
   }.freeze
 
   DIALOG_FRAME_ATTRIBUTES = {
@@ -15,6 +15,12 @@ module ApplicationHelper
   }.freeze
 
   NAVIGATION_LINKS = {
+    'Feed' => {
+      route: %i[dashboard],
+      controller: 'dashboard',
+      action: 'index',
+      auth: :auth_only
+    },
     'Chats' => {
       route: %i[chats],
       controller: 'chats',
@@ -41,8 +47,8 @@ module ApplicationHelper
     }
   }.freeze
 
-  def flash_color(color_type)
-    FLASH_COLORS[flash[:alert] ? :alert : :notice][color_type]
+  def flash_style(color_type)
+    FLASH_STYLES[flash[:alert] ? :alert : :notice][color_type]
   end
 
   def dialog_frame(attributes: {}, &block)
