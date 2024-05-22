@@ -148,7 +148,15 @@ export default class extends Controller {
   /**
    * Toggles the 'show' value.
    */
-  toggleSidebar() {
+  toggleSidebar(e) {
+    e.stopPropagation();
     this.showValue = !this.showValue;
+  }
+
+  /**
+   * Closes the sidebar.
+   */
+  closeSidebar() {
+    this.showValue = false;
   }
 }
