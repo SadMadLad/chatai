@@ -1,4 +1,22 @@
-<div>
-  <h1 class="text-4xl font-bold">Static#index</h1>
-  <p>Find me in app/views/static/index.html.erb</p>
-</div>
+
+<section class="container flex items-center flex-col gap-4 my-20 text-primary-500">
+  <h1 class="text-4xl font-black px-4"><%= t '.welcome' %></h1>
+  <p class="text-center text-xl font-light px-6 w-96 md:w-[36rem]"><%= t '.introduction' %></p>
+</section>
+
+<section class="bg-primary-500 pt-12">
+  <div class="container overflow-hidden">
+    <h3 class="text-3xl font-black text-white text-center mb-8"><%= t '.services' %></h3>
+
+    <ul class="flex flex-wrap justify-center items-start gap-8 pb-12">
+    <% t('.services_list').each do |service| %>
+      <% heading, icon, text = service.values_at(:heading, :icon, :text) %>
+      <li class="w-60 flex flex-col hover:text-primary-800 hover:shadow-primary-800 hover:bg-primary-50 hover:-translate-y-2.5 duration-200 items-center gap-2.5 bg-white shadow-xl shadow-primary-600 text-primary-500 font-medium rounded-xl px-4 py-6">
+        <i class="fa-xl <%= icon %>"></i>
+        <h6 class="uppercase font-black text-lg text-center"><%= heading %></h6>
+        <p class="text-center"><%= text %></p>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</section>

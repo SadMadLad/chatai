@@ -1,13 +1,14 @@
 <header class="w-full flex items-center justify-between border-b px-4 py-2 md:p-0 md:px-8">
   <div class="hidden items-center md:flex gap-16">
-    <%= link_to root_path, class: 'flex-center gap-1.5 hover:text-primary-500' do %>
+    <%= link_to root_path, class: 'flex-center gap-1.5 hover:text-primary-500 text-primary-600' do %>
       <i class="fa-lg fab fa-rocketchat"></i>
       <strong class="text-2xl font-serif">Chatai</strong>
     <% end %>
 
     <nav class="flex items-center gap-5">
       <% (user_signed_in? ? authed_routes : unauthed_routes).each do |route_text, route_data|  %>
-        <%= link_to route_text, route_data[:route], class: "font-semibold hover:text-primary-500 py-4 #{'border-b-2 border-b-primary-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
+        <%- route, controller, action = route_data.values_at(:route, :controller, :action) %>
+        <%= link_to route_text, route, class: "font-semibold hover:text-primary-500 py-4 #{'border-b-2 border-b-primary-500' if controller == params[:controller] && action == params[:action]}" %>
       <% end %>
     </nav>
   </div>

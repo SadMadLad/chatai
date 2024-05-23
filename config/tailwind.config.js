@@ -10,7 +10,7 @@ module.exports = {
   ],
   theme: {
     colors: {
-      primary: colors.violet,
+      primary: colors.blue,
       secondary: colors.yellow,
       danger: colors.red,
       ...colors,

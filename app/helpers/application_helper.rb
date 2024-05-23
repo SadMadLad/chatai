@@ -53,7 +53,9 @@ module ApplicationHelper
 
   def dialog_frame(attributes: {}, &block)
     turbo_frame_tag('dialog') do
-      content_tag(:dialog, **DIALOG_FRAME_ATTRIBUTES.deep_merge(attributes)) { content_tag(:div, class: 'p-6', &block) }
+      content_tag(:dialog, **DIALOG_FRAME_ATTRIBUTES.deep_merge(attributes)) do
+        content_tag(:div, class: 'p-6', &block)
+      end
     end
   end
 

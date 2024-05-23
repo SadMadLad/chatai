@@ -43,7 +43,7 @@ Currently, it has some of these features:
 * Elixir 1.16.1
 * Erlang 26
 * Phoenix 1.17.2
-* Other dependencies mentioned in `mix.exs` file under `channel/` directory. 
+* Other dependencies mentioned in `mix.exs` file under `channel/` directory.
 
 ### Frontend
 
@@ -52,7 +52,7 @@ Currently, it has some of these features:
 * React 18.2.0
 * NPM 9.5.1
 
---- 
+---
 
 ## Setup
 

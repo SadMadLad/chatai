@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Controller for chat messages.
+# TODO: Move group chat broadcast to a solid queue job.
 class MessagesController < AuthenticatedController
   include ChatPagination
 

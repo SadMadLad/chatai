@@ -24,14 +24,16 @@
   </head>
 
   <body>
-    <main class="flex flex-col items-center">
+    <main class="flex flex-col">
       <%= render 'shared/navbar' %>
 
       <div id="flash" class="fixed top-12 right-12">
         <%= render 'shared/flash' %>
       </div>
 
-      <section class="container"><%= yield %></section>
+      <section><%= yield %></section>
+
+      <%= render 'shared/footer' %>
 
       <%= turbo_frame_tag 'dialog' %>
     </main>

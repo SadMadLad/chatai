@@ -1,0 +1,48 @@
+<footer class="bg-primary-950 text-white px-8 pt-12 pb-4 mt-16">
+  <div class="container">
+    <div class="flex flex-col justify-between gap-8 md:flex-row">
+      <div class="max-w-96">
+        <h5 class="mb-2.5 text-xl font-extrabold">
+          Join the community
+        </h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
+          obcaecati praesentium nam a cumque fugiat!
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-8">
+        <div>
+          <h5 class="mb-3 text-xl font-extrabold">Need Help?</h5>
+          <ul class="flex flex-col gap-1.5">
+            <% ["Help", "Contact"].each do |help_tab| %>
+              <li><%= help_tab %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div>
+          <h5 class="mb-3 text-xl font-extrabold">Learn More</h5>
+          <ul class="flex flex-col gap-1.5">
+            <% (user_signed_in? ? authed_routes : unauthed_routes).each do |route_text, route_data|  %>
+              <%- route, controller, action = route_data.values_at(:route, :controller, :action) %>
+              <%= link_to route_text, route %>
+            <% end %>
+          </ul>
+        </div>
+        <div class="max-w-72">
+          <h5 class="mb-3 text-xl font-extrabold">Get In Touch</h5>
+          <p>Moonshine St. 14/05 Light City, London, United Kingdom</p>
+          <ul class="mt-2.5">
+            <li>info@gmail.com</li>
+            <li>0331-03310331-01</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="mt-20" />
+
+    <div class="gap justify-between py-2.5">
+      <span>2024 Chatai. All Rights Reserved</span>
+    </div>
+  </div>
+</footer>
