@@ -42,3 +42,20 @@ en:
   job_errors:
     json_parse: Scraping failed. Could not parse JSON Response for %{job}
     unknown_attribute: Scraping failed for %{job}. Unknown attribute detected when saving record. Possible that the API changed?
+
+  static:
+    index:
+      welcome: Welcome to ChatAI
+      introduction: This is probably one of the most important product of your entire life and would be really needed by you even if you do not know it yet.
+
+      services: We offer a lot of features that you will enjoy.
+      services_list:
+        - icon: fas fa-comments
+          heading: Chats
+          text: We offer users to communicate and chat with each other.
+        - icon: fab fa-joomla
+          heading: AI Showcase
+          text: We use small AI models that you can interact with.
+        - icon: fas fa-brain
+          heading: Other AI Features
+          text: You can utilize our other AI features like summarization and others.
