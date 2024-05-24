@@ -52,3 +52,7 @@ package-lock.json
 
 # Ignore catboost logs
 catboost_info/
+
+# Ignore C++ Executables
+*.exe
+*.out
