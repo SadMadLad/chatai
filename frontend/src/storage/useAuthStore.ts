@@ -59,7 +59,10 @@ const useAuthStore = create<AuthTokenState>()(
         if (!token) return false;
 
         const { method, url } = RailsRoutes.verifySession;
-        const response = await fetch(client(url, method, { authToken: token }), { signal });
+        const response = await fetch(
+          client(url, method, { authToken: token }),
+          { signal },
+        );
 
         if (!response.ok) {
           get().removeAuthToken();
@@ -72,7 +75,7 @@ const useAuthStore = create<AuthTokenState>()(
             avatarUrl: avatar_url,
             uniqueIdentifier: unique_identifier,
             isAuthed: true,
-            isAdmin: is_admin
+            isAdmin: is_admin,
           });
         }
 

@@ -30,14 +30,14 @@
   }
 
   .btn {
-    @apply px-3.5 py-1.5 rounded-lg border font-semibold;
+    @apply rounded-lg border px-3.5 py-1.5 font-semibold;
   }
 
   .btn-primary {
-    @apply btn bg-primary-500 text-white hover:bg-primary-700;
+    @apply btn bg-primary-500 hover:bg-primary-700 text-white;
   }
 
   .btn-ghost {
-    @apply px-3.5 py-1.5 hover:underline font-semibold;
+    @apply px-3.5 py-1.5 font-semibold hover:underline;
   }
 }

@@ -14,9 +14,17 @@ export default function ChatPhoto({
   return (
     <>
       {photo_url ? (
-        <img className={cn("h-20 w-20 rounded-lg object-cover", className)} src={photo_url} />
+        <img
+          className={cn("h-20 w-20 rounded-lg object-cover", className)}
+          src={photo_url}
+        />
       ) : (
-        <div className={cn("h-20 w-20 rounded-lg bg-gray-50 object-cover", className)}>
+        <div
+          className={cn(
+            "h-20 w-20 rounded-lg bg-gray-50 object-cover",
+            className,
+          )}
+        >
           {chat_title.substring(0, 3)}
         </div>
       )}

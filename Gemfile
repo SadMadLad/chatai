@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.3.0'
+ruby '3.3.1'
 
 gem 'rails', '~> 7.1.3.3'
 
@@ -37,6 +37,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do
   gem 'annotate'
+  gem 'bullet'
   gem 'debug', platforms: %i[mri windows]
   gem 'letter_opener'
   gem 'lookbook'
@@ -49,7 +50,6 @@ end
 
 group :development do
   gem 'brakeman'
-  gem 'bullet'
   gem 'web-console'
 end
 

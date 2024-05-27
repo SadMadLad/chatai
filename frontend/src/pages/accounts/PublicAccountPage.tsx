@@ -31,7 +31,7 @@ export default function PublicAccountPage() {
     return () => {
       abortController.abort();
     };
-  }, [identifier])
+  }, [identifier]);
 
   async function fetchPublicAccountDetails(signal: AbortSignal) {
     setIsLoading(true);
@@ -43,7 +43,12 @@ export default function PublicAccountPage() {
     );
 
     if (response.ok) {
-      const { account, messages, chats }: { account: AccountData, messages: Message[], chats: Chat[] } = await response.json();
+      const {
+        account,
+        messages,
+        chats,
+      }: { account: AccountData; messages: Message[]; chats: Chat[] } =
+        await response.json();
 
       setAccountData(account);
       setMessages(messages);
@@ -51,15 +56,19 @@ export default function PublicAccountPage() {
     }
 
     setIsLoading(false);
-  };
+  }
 
-  return <ApplicationLayout>
-    <>
-      { isLoading && <ChatPageSkeleton /> }
-      { !isLoading && <section className="container flex flex-col md:flex-row gap-8 py-12">
-        <AccountsHeaderSection accountData={accountData} />
-        <AccountChatsSection chats={chats} messages={messages} />
-      </section>}
-    </>
-  </ApplicationLayout>
+  return (
+    <ApplicationLayout>
+      <>
+        {isLoading && <ChatPageSkeleton />}
+        {!isLoading && (
+          <section className="container flex flex-col gap-8 py-12 md:flex-row">
+            <AccountsHeaderSection accountData={accountData} />
+            <AccountChatsSection chats={chats} messages={messages} />
+          </section>
+        )}
+      </>
+    </ApplicationLayout>
+  );
 }
