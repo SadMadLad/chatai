@@ -47,7 +47,10 @@ export default function ChatsPage() {
 
   async function fetchChats(signal: AbortSignal) {
     const { url, method } = RailsRoutes.chats;
-    const response = await fetch(client(url, method, { authToken: authToken }), { signal });
+    const response = await fetch(
+      client(url, method, { authToken: authToken }),
+      { signal },
+    );
     const chats = await response.json();
 
     if (response.ok) setChats(chats);

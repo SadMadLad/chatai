@@ -40,11 +40,17 @@ export default function LoginPage() {
     try {
       const { url, method } = RailsRoutes.login;
       const response = await fetch(
-        client(url, method, { body: { user: values } })
+        client(url, method, { body: { user: values } }),
       );
 
-      const { error, token, full_name, unique_identifier, avatar_url, is_admin } =
-        await response.json();
+      const {
+        error,
+        token,
+        full_name,
+        unique_identifier,
+        avatar_url,
+        is_admin,
+      } = await response.json();
 
       if (token) {
         setAuthToken(token, full_name, avatar_url, unique_identifier, is_admin);

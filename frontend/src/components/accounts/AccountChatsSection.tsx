@@ -23,9 +23,11 @@ function ChatCard({ id, chat_title, photo_url }: Chat) {
 
 function MessageCard({ content, created_at, chat_title }: Message) {
   return (
-    <div className="flex flex-col items-start gap-1 p-4 border rounded-lg">
-      <p className="overflow-ellipsis max-w-full">{content}</p>
-      <p className="text-xs text-gray-500">{created_at} in {chat_title}</p>
+    <div className="flex flex-col items-start gap-1 rounded-lg border p-4">
+      <p className="max-w-full overflow-ellipsis">{content}</p>
+      <p className="text-xs text-gray-500">
+        {created_at} in {chat_title}
+      </p>
     </div>
   );
 }
