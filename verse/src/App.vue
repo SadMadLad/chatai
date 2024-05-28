@@ -1,3 +1,3 @@
 <template>
-    Opening
+  Opening
 </template>

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -22,7 +21,7 @@ import { toast } from "sonner";
 
 import { client } from "@/services/clients";
 import LoginSchema from "@/schemas/LoginSchema";
-import { RailsRoutes } from "@/services/routes";
+import { RailsSignUpPath, RailsRoutes } from "@/services/routes";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -119,9 +118,10 @@ export default function LoginPage() {
           </Form>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
-            <Link to="#" className="underline">
-              Sign up
-            </Link>
+            <a href={RailsSignUpPath} className="underline">
+              Sign Up
+            </a>{" "}
+            and create an API Key for yourself.
           </div>
         </div>
       </main>
