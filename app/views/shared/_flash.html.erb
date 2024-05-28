@@ -1,5 +1,5 @@
 <% if notice || alert %>
-  <div data-controller="flash" class="shadow-lg rounded-lg border bg-white p-4">
+  <div data-controller="flash" class="transition-opacity duration-200 opacity-0 shadow-lg rounded-lg border bg-white p-4">
     <i
       class="fa-2xl <%= "#{flash_style(:icon)} #{flash_style(:text)}" %>"
     >

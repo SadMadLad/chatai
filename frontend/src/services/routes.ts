@@ -10,6 +10,9 @@ interface RailsRoutes {
 }
 
 const Rails = `${import.meta.env.VITE_RAILS_URL}/api/v1`;
+const RailsSignUpPath = `${import.meta.env.VITE_RAILS_URL}/users/sign_up`;
+const RailsDashboardPath = `${import.meta.env.VITE_RAILS_URL}/dashboard`;
+
 const RailsRoutes: RailsRoutes = {
   login: { url: `${Rails}/sessions`, method: "POST" },
   logout: { url: `${Rails}/sessions`, method: "DELETE" },
@@ -28,4 +31,10 @@ const PhoenixRoutes = {
 
 const Fastapi = import.meta.env.VITE_FASTAPI_URL;
 
-export { RailsRoutes, Fastapi, PhoenixRoutes };
+export {
+  RailsDashboardPath,
+  RailsSignUpPath,
+  RailsRoutes,
+  Fastapi,
+  PhoenixRoutes,
+};

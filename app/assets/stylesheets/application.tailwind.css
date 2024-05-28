@@ -37,6 +37,10 @@
     @apply btn bg-primary-500 hover:bg-primary-700 text-white;
   }
 
+  .btn-secondary {
+    @apply btn bg-secondary-500 hover:bg-secondary-700 text-white;
+  }
+
   .btn-ghost {
     @apply px-3.5 py-1.5 font-semibold hover:underline;
   }

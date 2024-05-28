@@ -10,8 +10,8 @@ module.exports = {
   ],
   theme: {
     colors: {
-      primary: colors.blue,
-      secondary: colors.yellow,
+      primary: colors.sky,
+      secondary: colors.fuchsia,
       danger: colors.red,
       ...colors,
     },
