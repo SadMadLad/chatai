@@ -25,8 +25,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     get :dashboard, to: 'dashboard#index'
-
-    resources :accounts, only: %i[show edit update destroy]
+    resources :accounts
     resources :account_tokens, only: %i[index create destroy]
     resources :chats, only: %i[index show create destroy] do
       collection do

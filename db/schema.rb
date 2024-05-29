@@ -37,8 +37,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
 
   create_table "accounts", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.boolean "active_at_chatai", default: false, null: false
-    t.boolean "active_at_frontend", default: false, null: false
     t.integer "role", default: 0, null: false
     t.string "first_name", null: false
     t.string "last_name", null: false

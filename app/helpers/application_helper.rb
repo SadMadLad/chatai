@@ -89,4 +89,8 @@ module ApplicationHelper
       auth.is_a?(Array) ? info[:auth].in?(auth) : info[:auth] == auth
     end
   end
+
+  def frontend_route
+    ENV.fetch('FRONTEND_URL', nil)
+  end
 end

@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Chats at the frontend
     class ChatsController < Api::AuthenticatedController
       def index
         @chats = Chat.where(chat_type: 'live_room').all

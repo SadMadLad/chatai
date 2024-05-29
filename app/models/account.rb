@@ -2,6 +2,8 @@
 
 # A User Account
 class Account < ApplicationRecord
+  include SearchBy
+
   has_many :account_chat_maps, dependent: :destroy
   has_many :account_tokens, dependent: :destroy
   has_many :chats, through: :account_chat_maps
