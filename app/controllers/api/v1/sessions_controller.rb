@@ -23,7 +23,6 @@ module Api
       end
 
       def destroy
-        @account.update(active_at_frontend: false)
         render json: { error: 'Signed Out successfully!' }, status: :ok
       end
 
@@ -36,7 +35,6 @@ module Api
       def authenticate_token
         if @account_token.present?
           @account = @account_token.account
-          @account.update(active_at_frontend: true)
           render json: response_payload
         else
           render json: { error: 'Please create the API from the main portal' }, status: :unauthorized

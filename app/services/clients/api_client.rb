@@ -4,6 +4,7 @@ module Clients
   # Api Client to connect to FastAPI app.
   class ApiClient < Clients::ApplicationClient
     def initialize
+      super
       @client = Faraday.new(
         url: ENV.fetch('API_CLIENT_URL', nil),
         headers: {
