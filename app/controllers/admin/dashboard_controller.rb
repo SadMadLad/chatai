@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Dashboard Feed.
-  class DashboardController < AdminController
+  class DashboardController < Admin::AdminController
     def index; end
   end
 end

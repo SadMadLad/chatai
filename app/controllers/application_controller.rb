@@ -24,9 +24,9 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    flash.now[:alert] = t(:unauthorized)
+    flash[:alert] = t(:unauthorized)
 
-    render turbo_stream: turbo_stream.append('flash', partial: 'shared/flash'), status: :unauthorized
+    redirect_back fallback_location: dashboard_path
   end
 
   def current_account

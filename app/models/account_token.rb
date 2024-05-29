@@ -6,5 +6,5 @@ class AccountToken < ApplicationRecord
 
   validates :scope, presence: true, uniqueness: { scope: :account_id }
 
-  enum :scope, { frontend: 0 }
+  enum :scope, { frontend: 0, verse: 1 }
 end

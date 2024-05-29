@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Dashboard for Account Chat Mappings
-  class AccountChatMapsController < AdminController
+  class AccountChatMapsController < Admin::AdminController
     before_action :set_account_chat_map, only: %i[show destroy]
     before_action :authorize_account_chat_map
 

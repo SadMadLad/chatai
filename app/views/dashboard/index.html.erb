@@ -1,9 +1,40 @@
-<section class="container">
-  <div class="flex flex-row flex-wrap justify-center">
-    <div class="border p-6 rounded-xl flex-col gap-4 relative">
-      <h3 class="text-xl">Active Users</h3>
-      <p class="text-2xl"><%= @active_users_count %></p>
-    </div>
-  </div>
+<div class="bg-gray-100 w-full h-full">
+  <div class="container w-full h-full flex flex-row gap-8 p-8">
+    <aside class="rounded-2xl bg-white p-8 hidden md:block">
+      <div class="flex flex-col items-center gap-2.5">
+        <%= image_tag current_account.avatar, class: 'w-20 h-20 rounded-full'%>
+        <%= link_to current_account.full_name, account_path(current_account), class: 'text-sm font-bold text-primary-500 hover:underline cursor-pointer min-w-40 text-center max-w-52 overflow-ellipsis overflow-hidden whitespace-nowrap' %>
+      </div>
 
-</section>
+      <hr class="my-4"/>
+
+      <div class="flex flex-col gap-1 text-sm">
+        <p class="text-justify">Your Messages: <strong><%= @messages_count %></strong></p>
+        <%= link_to chats_path, class: 'hover:underline' do %>
+          <p class="text-justify">Your Chats: <strong><%= @chats_count %></strong></p>
+        <% end %>
+        <%= link_to likes_path, class: 'hover:underline' do %>
+          <p class="text-justify">Your Likes: <strong><%= @likes_count %></strong></p>
+        <% end %>
+        <%= link_to posts_path, class: 'hover:underline' do %>
+          <p class="text-justify">Your Posts: <strong><%= @posts_count %></strong></p>
+        <% end %>
+      </div>
+
+      <hr class="my-4"/>
+
+        <div class="flex flex-col gap-1 text-sm font-bold">
+          <%= link_to 'Check Users', accounts_path, class: 'hover:text-secondary-500 hover:underline cursor-pointer' %>
+          <% if @account_tokens.present? %>
+            <% @account_tokens.each do |token| %>
+              <% if token.frontend? %>
+                <%= link_to 'Visit Frontend', frontend_route, class: 'hover:text-secondary-500 hover:underline cursor-pointer' %>
+              <% elsif token.verse? %>
+                <%= link_to 'Visit Verse', verse_route, class: 'hover:text-secondary-500 hover:underline cursor-pointer' %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+    </aside>
+  </div>
+</div>

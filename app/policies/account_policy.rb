@@ -2,11 +2,11 @@
 
 # Account Policy.
 class AccountPolicy < ApplicationPolicy
-  def index
-    true
+  %w[index show].each do |action|
+    define_method(:"#{action}?") { true }
   end
 
-  %w[show edit update destroy].each do |action|
+  %w[edit update destroy].each do |action|
     define_method(:"#{action}?") { account == record }
   end
 end

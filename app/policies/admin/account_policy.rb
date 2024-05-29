@@ -2,7 +2,7 @@
 
 module Admin
   # Account Policy.
-  class AccountPolicy < AdminPolicy
+  class AccountPolicy < Admin::AdminPolicy
     ADMIN_SEPARATION_ACTIONS.each do |action|
       define_method(:"#{action}?") { authenticated? }
     end

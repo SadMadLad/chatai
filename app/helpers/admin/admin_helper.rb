@@ -13,15 +13,17 @@ module Admin
       ml_models: 'fa-solid fa-braille',
       prediction_params: 'fas fa-brain',
       users: 'fas fa-users',
-      solid_queues: 'fas fa-users'
+      solid_queues: 'fas fa-user-md',
+      posts: 'fas fa-mail-bulk'
     }.freeze
-  end
 
-  def spread_record(record, except: [])
-    content_tag(:div) do
-      record.attributes.except(*except).map do |attribute, value|
-        content_tag(:div, "#{attribute}: #{value}")
-      end.join.html_safe
+
+    def spread_record(record, except: [])
+      content_tag(:div) do
+        record.attributes.except(*except).map do |attribute, value|
+          content_tag(:div, "#{attribute}: #{value}")
+        end.join.html_safe
+      end
     end
   end
 end

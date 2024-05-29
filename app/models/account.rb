@@ -10,7 +10,8 @@ class Account < ApplicationRecord
   has_many :comments, class_name: 'AdminComment', foreign_key: 'commenter_id', dependent: :destroy,
                       inverse_of: :commenter
   has_many :feedbacks, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :ml_models, dependent: :destroy
 

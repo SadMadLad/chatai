@@ -2,7 +2,7 @@
 
 module Admin
   # Dashboard for Solid Queue Jobs.
-  class SolidQueuesController < AdminController
+  class SolidQueuesController < Admin::AdminController
     def index
       @jobs = SolidQueue::Job.all
       @blocked_executions = SolidQueue::BlockedExecution.all

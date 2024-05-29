@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Dashboard for Messages
-  class MessagesController < AdminController
+  class MessagesController < Admin::AdminController
     before_action :set_message, only: %i[show edit update destroy]
     before_action :authorize_message
     before_action :set_accounts, only: %i[new create edit update]
