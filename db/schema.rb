@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_121612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -110,16 +110,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "favorites", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.string "favoratable_type", null: false
-    t.bigint "favoratable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_favorites_on_account_id"
-    t.index ["favoratable_type", "favoratable_id"], name: "index_favorites_on_favoratable"
-  end
-
   create_table "feedbacks", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.integer "platform", null: false
@@ -127,6 +117,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_feedbacks_on_account_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "likeable_type", null: false
+    t.bigint "likeable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_likes_on_account_id"
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -151,6 +151,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ml_models_on_account_id"
     t.index ["identifier"], name: "index_ml_models_on_identifier", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_posts_on_account_id"
   end
 
   create_table "prediction_params", force: :cascade do |t|
@@ -344,10 +353,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_203845) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "favorites", "accounts"
   add_foreign_key "feedbacks", "accounts"
+  add_foreign_key "likes", "accounts"
   add_foreign_key "messages", "accounts"
   add_foreign_key "messages", "chats"
+  add_foreign_key "posts", "accounts"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

@@ -6,10 +6,10 @@
 
     <hr class="mt-6 mb-4 mx-4"/>
 
-    <ul class="flex flex-col gap-2.5 text-sm">
+    <ul class="flex flex-col gap-0 text-sm">
       <% Admin::AdminHelper::ADMIN_LINKS.each do |link, icon| %>
         <%= link_to [:admin, link], data: { turbo_frame: 'main' } do %>
-          <li class="flex gap-5 items-center pl-4 md:pl-8 py-2 transition-all duration-100 <%= 'border-primary-500 border-l-4 text-primary-500' if params[:controller] == "admin/#{link.to_s}"%>" data-sidebar-target="tab" data-id=<%= "admin/#{link.to_s}" %>>
+          <li class="flex gap-5 items-center pl-4 md:pl-8 py-1.5 transition-all duration-100 <%= 'border-primary-500 border-l-4 text-primary-500' if params[:controller] == "admin/#{link.to_s}"%>" data-sidebar-target="tab" data-id=<%= "admin/#{link.to_s}" %>>
             <i class="<%= icon %>"></i>
             <span class="whitespace-nowrap font-semibold"><%= link.to_s.titleize %></span>
           </li>

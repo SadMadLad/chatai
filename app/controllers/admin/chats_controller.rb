@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Dashboard for Chats
-  class ChatsController < AdminController
+  class ChatsController < Admin::AdminController
     before_action :set_chat, only: %i[show destroy]
     before_action :set_accounts, only: %i[new create]
     before_action :authorize_chat

@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Comment Policy.
-  class AdminCommentPolicy < AdminPolicy
+  class AdminCommentPolicy < Admin::AdminPolicy
     %i[edit update destroy].each do |action|
       define_method(:"#{action}?") { authorized_record? }
     end

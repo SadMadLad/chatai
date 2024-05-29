@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Dashboard for acounts.
-  class AccountsController < AdminController
+  class AccountsController < Admin::AdminController
     before_action :set_account, only: %i[show edit update destroy]
     before_action :authorize_account
 

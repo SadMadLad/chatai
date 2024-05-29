@@ -93,4 +93,8 @@ module ApplicationHelper
   def frontend_route
     ENV.fetch('FRONTEND_URL', nil)
   end
+
+  def verse_route
+    ENV.fetch('VERSE_URL', nil)
+  end
 end

@@ -1,0 +1,7 @@
+<% if @likes.blank? %>
+  You haven't liked anything right now.
+<% else %>
+  <%= @likes.each do |like| %>
+    <%= "#{like.id} #{like.likeable.id}" %>
+  <% end %>
+<% end %>

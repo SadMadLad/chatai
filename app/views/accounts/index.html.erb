@@ -1,0 +1,6 @@
+<div>
+  <% @accounts.each do |account| %>
+    <%= link_to account.full_name, account, class: 'bg-blue-100' %>
+    <br />
+  <% end %>
+</div>

@@ -38,6 +38,8 @@ Rails.application.routes.draw do
       end
       resources :messages, only: %i[create edit update destroy]
     end
+    resources :likes, only: %i[index create destroy]
+    resources :posts
     resources :ml_models, only: %i[index show] do
       member do
         get :notebook_html
@@ -51,14 +53,12 @@ Rails.application.routes.draw do
     namespace :admin do
       get :dashboard, to: 'dashboard#index'
 
-      resources :users
-      resources :accounts, except: %i[new create]
       resources :account_chat_maps, only: %i[index show destroy]
+      resources :accounts, except: %i[new create]
       resources :admin_comments, except: :new
       resources :chats, only: %i[index show new create destroy]
+      resources :likes, only: %i[index show destroy]
       resources :messages
-      resources :prediction_params, only: %i[index show]
-
       resources :ml_models do
         resources :prediction_params, except: %i[index show]
         member do
@@ -66,19 +66,10 @@ Rails.application.routes.draw do
           post :prediction
         end
       end
-
-      resources :solid_queues, only: :index do
-        collection do
-          get :blocked_executions
-          get :claimed_executions
-          get :failed_executions
-          get :pauses
-          get :processes
-          get :ready_executions
-          get :scheduled_executions
-          get :semaphores
-        end
-      end
+      resources :prediction_params, only: %i[index show]
+      resources :posts
+      resources :solid_queues, only: :index
+      resources :users
     end
   end
 end

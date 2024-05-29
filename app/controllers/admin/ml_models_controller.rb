@@ -2,7 +2,7 @@
 
 module Admin
   # Admin Dashboard for Machine Learning Models
-  class MlModelsController < AdminController
+  class MlModelsController < Admin::AdminController
     layout 'admin', except: :notebook_html
 
     before_action :set_model, only: %i[show edit update destroy prediction notebook_html]
