@@ -39,7 +39,9 @@ Rails.application.routes.draw do
       resources :messages, only: %i[create edit update destroy]
     end
     resources :likes, only: %i[index create destroy]
-    resources :posts
+    resources :posts do
+      collection { get :own }
+    end
     resources :ml_models, only: %i[index show] do
       member do
         get :notebook_html

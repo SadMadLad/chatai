@@ -3,10 +3,18 @@ class PostsController < AuthenticatedController
   before_action :authorize_post, only: %i[edit update destroy]
 
   def index
+    @posts = Post.all
+  end
+
+  def own
     @posts = current_account.posts
   end
 
-  def show; end
+  def show
+    @account = @post.account
+    @images = @post.images
+    @like = @post.likes.find_by(account: current_account)
+  end
 
   def new
     @post = Post.new
@@ -44,6 +52,6 @@ class PostsController < AuthenticatedController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, images: [])
+    params.require(:post).permit(:title, :body, images: []).merge(account: current_account)
   end
 end

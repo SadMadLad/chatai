@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <main class="flex flex-col">
+    <main class="min-h-screen flex flex-col justify-between">
       <%= render 'shared/navbar' %>
 
       <div id="flash" class="fixed top-12 right-12 z-[60]">
@@ -33,9 +33,8 @@
 
       <section><%= yield %></section>
 
-      <%= render 'shared/footer' %>
-
       <%= turbo_frame_tag 'dialog' %>
+      <%= render 'shared/footer' %>
     </main>
   </body>
 </html>

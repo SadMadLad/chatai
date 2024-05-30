@@ -1,1 +1,72 @@
-<h1>Post Show page </h1>
+<div class="flex-center my-8">
+  <div class="max-w-2xl rounded-xl border shadow flex-grow overflow-hidden">
+    <div class="flex flex-row border-b px-4 md:px-8">
+      <div class="flex-auto flex items-center gap-2.5 py-2.5">
+        <%= account_avatar(@account) %>
+        <div class="flex flex-col justify-start">
+          <%= link_to @account.full_name, @account, class: 'font-semibold hover:text-secondary-500 hover:underline' %>
+          <hr class="my-1"/>
+          <p class="text-xs text-gray-600"><%= @post.created_at.strftime("%d %B, %Y - %I:%M %p") %></p>
+        </div>
+      </div>
+      <div class="flex-auto flex justify-end items-center">
+        <div id=<%= "#{dom_id(@post)}_like" %>>
+          <% if @like.present? %>
+            <%= button_to like_path(@like), method: :delete do %>
+              <i class="fa-solid fa-thumbs-up fa-xl cursor-pointer text-primary-500"></i>
+            <% end %>
+          <% else %>
+            <%= button_to likes_path(like: { likeable_type: @post.class.name, likeable_id: @post.id }) do %>
+              <i class="far fa-thumbs-up fa-xl cursor-pointer"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="py-6 px-4 md:px-8">
+      <h4 class="font-semibold text-xl mb-2.5"><%= @post.title %></h4>
+      <div class="text-sm" data-controller="toggle" data-toggle-toggled-id-value="1">
+        <div data-toggle-target="toggleable" data-toggle-id="1">
+          <p><%= @post.body.truncate(200) %></p>
+          <% if @post.body.length > 200 %>
+            <button data-toggle-target="toggleable" data-toggle-id="1" data-toggle-value="2" class="cursor-pointer underline text-primary-500" data-action="toggle#toggle"><%= t '.read_more' %></span>
+          <% end %>
+        </div>
+
+        <% if @post.body.length > 200 %>
+          <div class="hidden" data-toggle-target="toggleable" data-toggle-id="2">
+            <p><%= @post.body %></p>
+            <button data-toggle-target="toggleable" data-toggle-id="2" data-toggle-value="1" class="cursor-pointer underline text-primary-500" data-action="toggle#toggle"><%= t '.read_less' %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @images.present? %>
+      <%- @images_count = @images.length %>
+      <%- @more_than_four = @images_count > 4 %>
+
+      <div class="grid grid-cols-2">
+        <% @images.first(4).each_with_index do |image, index| %>
+          <% if index == 3 && @more_than_four %>
+            <a href="<%= url_for(image) %>" class="relative glightbox col-auto max-h-32" target="_blank" data-gallery="gallery-post-<%= @post.id %>">
+              <%= image_tag image, class: 'object-cover h-full w-full absolute' %>
+              <p>+<%= @images_count - 4 %></p>
+            </a>
+          <% else %>
+            <a href="<%= url_for(image) %>" class="glightbox col-auto max-h-32 <%= "last:col-span-2" if @images_count.odd? && @more_than_four %>" target="_blank" data-gallery="gallery-post-<%= @post.id %>">
+              <%= image_tag image, class: 'object-cover h-full w-full' %>
+            </a>
+          <% end %>
+        <% end %>
+        <% if @images_count > 4 %>
+          <% @images.drop(4).each do |image| %>
+            <a href="<%= url_for(image) %>" class="glightbox hidden" target="_blank" data-gallery="gallery-post-<%= @post.id %>">
+              <%= image_tag image, class: 'object-cover h-full w-full' %>
+            </a>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

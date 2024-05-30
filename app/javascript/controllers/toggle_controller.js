@@ -33,6 +33,6 @@ export default class extends Controller {
    */
   toggle(e) {
     this.toggledIdValue =
-      e.currentTarget.dataset?.toggleId || e.currentTarget.value;
+      e.currentTarget.dataset?.toggleValue || e.currentTarget.value;
   }
 }

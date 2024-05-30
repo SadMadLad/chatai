@@ -1,1 +1,31 @@
-<h1>New Post Page</h1>
+<div class="flex-center my-8">
+  <div class="max-w-3xl p-8 rounded-xl border shadow flex-grow">
+    <h1 class="text-3xl font-black text-center mb-6"><%= t '.page_heading' %></h1>
+    <%= form_with model: @post, class: 'flex flex-col gap-4' do |form| %>
+      <div class="flex flex-col">
+        <%= form.label :title, class: 'text-lg font-semibold' %>
+        <%= form.text_field :title, class: 'h-10 rounded shadow-md focus:ring-primary-500 border-gray-300' %>
+        <% if @post.errors[:title].present? %>
+          <p class="text-danger-500 text-sm"><%= @post.errors.full_messages_for(:title).first %></p>
+        <% end %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :body, class: 'text-lg font-semibold' %>
+        <%= form.text_area :body, class: 'h-28 rounded shadow-md focus:ring-primary-500 border-gray-300' %>
+        <% if @post.errors[:body].present? %>
+          <p class="text-danger-500 text-sm"><%= @post.errors.full_messages_for(:body).first %></p>
+        <% end %>
+      </div>
+
+      <div class="flex flex-col">
+        <%= form.label :images, class: 'text-lg font-semibold' %>
+        <%= form.file_field :images, class: 'block w-full text-sm text-primary-900 border border-primary-300 file:border-primary-300 file:py-1.5 file:px-2.5 file:bg-primary-800 file:text-white file:border-0 file:cursor-pointer file:font-semibold file:border-0.5 rounded-lg cursor-pointer bg-primary-50 dark:text-primary-400 focus:outline-none dark:bg-primary-700 dark:border-primary-600 dark:placeholder-primary-400', multiple: true, accept: '.png,.jpg,.jpeg' %>
+      </div>
+
+      <div class="w-full text-center mt-6">
+        <%= form.submit t('.submit'), class: 'bg-primary-500 px-3.5 py-2 rounded font-semibold text-white cursor-pointer' %>
+      </div>
+    <% end %>
+  </div>
+</div>

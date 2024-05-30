@@ -1,0 +1,5 @@
+<%= turbo_stream.update "#{dom_id(@likeable)}_like" do %>
+  <%= button_to likes_path(like: { likeable_type: @likeable.class.name, likeable_id: @likeable.id }) do %>
+    <i class="far fa-thumbs-up fa-xl cursor-pointer"></i>
+  <% end %>
+<% end %>
