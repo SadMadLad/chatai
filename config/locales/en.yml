@@ -59,3 +59,20 @@ en:
         - icon: fas fa-brain
           heading: Other AI Features
           text: You can utilize our other AI features like summarization and others.
+
+  posts:
+    index:
+      page_heading: Posts Page
+      no_posts: There are no posts right now.
+      create_post_button: Create a post right now.
+    new:
+      page_heading: Create a new post
+      submit: Create Post
+    show:
+      read_more: Read More
+      read_less: Read Less
+    own:
+      page_heading: Your Posts
+      no_posts: You have created no post.
+      create_post_button: Create a post right now.
+    

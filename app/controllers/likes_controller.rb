@@ -12,13 +12,14 @@ class LikesController < AuthenticatedController
   end
 
   def destroy
+    @likeable = @like.likeable
     @like.destroy
   end
 
   private
 
   def like_params
-    params.require(:like).permit(:likeable_id, :likeable_type).merge(account_id: currenet_account.id)
+    params.require(:like).permit(:likeable_id, :likeable_type).merge(account_id: current_account.id)
   end
 
   def set_like

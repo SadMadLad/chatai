@@ -1,6 +1,6 @@
 <h1 class="text-3xl font-black text-center mt-8 mb-6"><%= t '.page_heading' %></h1>
 
-<% if @posts.blank? %>
+<% if @posts.empty? %>
   <section class="flex flex-col items-center mt-4 mb-8">
     <p class="font-light my-4 text-2xl text-center mx-4"><%= t '.no_posts' %></p>
     <%= link_to t('.create_post_button'), new_post_path, class: 'bg-primary-500 rounded font-semibold px-5 py-2.5 text-white' %>
