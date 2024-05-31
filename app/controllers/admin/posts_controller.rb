@@ -19,6 +19,8 @@ module Admin
       @post = Post.new
     end
 
+    def edit; end
+
     def create
       @post = Post.new(post_params)
 
@@ -28,8 +30,6 @@ module Admin
         render :new, status: :unprocessable_entity, alert: t(:failed_create, model:)
       end
     end
-
-    def edit; end
 
     def update
       if @post.update(post_params)

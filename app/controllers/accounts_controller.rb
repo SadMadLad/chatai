@@ -4,9 +4,10 @@
 class AccountsController < AuthenticatedController
   before_action :set_account, only: %i[show edit update destroy]
   before_action :authorize_account
+  before_action -> { define_model_name('account') }
 
   def index
-    @accounts = Account.all.excluding(current_account)
+    @accounts = Account.excluding(current_account)
   end
 
   def show; end
@@ -15,9 +16,9 @@ class AccountsController < AuthenticatedController
 
   def update
     if @account.update(account_params)
-      redirect_to @account, notice: 'Account updated successfully.'
+      redirect_to @account, notice: t(:update, model:)
     else
-      render :edit, status: :unprocessable_entity, alert: 'Failed to update account.'
+      render :edit, status: :unprocessable_entity, alert: t(:update, model:)
     end
   end
 

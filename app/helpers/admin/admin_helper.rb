@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Admin Helper for Admin Dashboard.
 module Admin
+  # Admin Helper for Admin Dashboard.
   module AdminHelper
     ADMIN_LINKS = {
       dashboard: 'fas fa-chart-line',
@@ -16,7 +16,6 @@ module Admin
       solid_queues: 'fas fa-user-md',
       posts: 'fas fa-mail-bulk'
     }.freeze
-
 
     def spread_record(record, except: [])
       content_tag(:div) do

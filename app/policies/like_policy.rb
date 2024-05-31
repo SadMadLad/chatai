@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Like Policy
 class LikePolicy < ApplicationPolicy
   %w[index create].each do |action|
     define_method(:"#{action}") { true }
