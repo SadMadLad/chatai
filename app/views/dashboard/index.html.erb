@@ -1,6 +1,6 @@
 <div class="bg-gray-100 w-full h-full">
-  <div class="container w-full h-full flex flex-row gap-8 p-8">
-    <aside class="rounded-2xl bg-white p-8 hidden md:block">
+  <div class="container relative w-full h-full flex flex-row gap-8 p-8">
+    <aside class="top-0 sticky rounded-2xl bg-white p-8 hidden md:block">
       <div class="flex flex-col items-center gap-2.5">
         <%= image_tag current_account.avatar, class: 'w-20 h-20 rounded-full'%>
         <%= link_to current_account.full_name, account_path(current_account), class: 'text-sm font-bold text-primary-500 hover:underline cursor-pointer min-w-40 text-center max-w-52 overflow-ellipsis overflow-hidden whitespace-nowrap' %>
@@ -36,5 +36,8 @@
           <% end %>
         </div>
     </aside>
+    <section class="flex flex-col gap-6">
+      <%= render partial: 'posts/post', collection: @posts, locals: { has_link_button: true } %>
+    </section>
   </div>
 </div>
