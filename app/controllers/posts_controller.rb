@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# Posts Controller
 class PostsController < AuthenticatedController
   before_action :set_post, only: %i[show edit update destroy]
   before_action :authorize_post, only: %i[edit update destroy]
+  before_action -> { define_model_name('post') }
 
   def index
     @posts = Post.all
@@ -20,23 +24,23 @@ class PostsController < AuthenticatedController
     @post = Post.new
   end
 
+  def edit; end
+
   def create
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to @post, notice: t(:create, model:)
     else
-      render :new, status: :unprocessable_entity, alert: 'Could\'nt create the post'
+      render :new, status: :unprocessable_entity, alert: t(:failed_create, model:)
     end
   end
 
-  def edit; end
-
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to @post, notice: t(:update, model:)
     else
-      render :edit, status: :unprocessable_entity, alert: 'Couldn\'t update the post'
+      render :edit, status: :unprocessable_entity, notice: t(:failed_update, model:)
     end
   end
 

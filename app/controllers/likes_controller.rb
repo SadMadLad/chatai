@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Likes Controller
 class LikesController < AuthenticatedController
   before_action :authorize_like, only: :destroy
 

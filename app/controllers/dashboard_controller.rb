@@ -4,13 +4,8 @@
 class DashboardController < AuthenticatedController
   def index
     @account_tokens = current_account.account_tokens
-    @posts = Post
-              .includes(images_attachments: :blob)
-              .includes(:likes)
-              .includes(:account)
-              .all
-    @current_account_post_and_likes =
-      current_account.likes.where(likeable_type: 'Post').pluck(:likeable_id, :id).to_h
+    @posts = Post.eager_load_everything.all
+    @current_account_post_and_likes = current_account.likes.account_likes_hash('Post')
 
     @chats_count = current_account.chats.count
     @messages_count = current_account.messages.count
