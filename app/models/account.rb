@@ -45,6 +45,15 @@ class Account < ApplicationRecord
     "account_#{id}_chat_sidebar#{'_group' if chat_type == :multi_person}"
   end
 
+  def account_data
+    {
+      chats_count: chats.count,
+      messages_count: messages.count,
+      likes_count: likes.count,
+      posts_count: posts.count
+    }
+  end
+
   class << self
     def conversing_accounts(account, chats)
       joins(:chats)

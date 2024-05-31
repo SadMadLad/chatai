@@ -9,15 +9,15 @@
       <hr class="my-4"/>
 
       <div class="flex flex-col gap-1 text-sm">
-        <p class="text-justify">Your Messages: <strong><%= @messages_count %></strong></p>
+        <p class="text-justify">Your Messages: <strong><%= @count_data[:messages_count] %></strong></p>
         <%= link_to chats_path, class: 'hover:underline' do %>
-          <p class="text-justify">Your Chats: <strong><%= @chats_count %></strong></p>
+          <p class="text-justify">Your Chats: <strong><%= @count_data[:chats_count]  %></strong></p>
         <% end %>
         <%= link_to likes_path, class: 'hover:underline' do %>
-          <p class="text-justify">Your Likes: <strong><%= @likes_count %></strong></p>
+          <p class="text-justify">Your Likes: <strong><%= @count_data[:likes_count]  %></strong></p>
         <% end %>
         <%= link_to posts_path, class: 'hover:underline' do %>
-          <p class="text-justify">Your Posts: <strong><%= @posts_count %></strong></p>
+          <p class="text-justify">Your Posts: <strong><%= @count_data[:posts_count] %></strong></p>
         <% end %>
       </div>
 

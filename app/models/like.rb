@@ -8,8 +8,8 @@ class Like < ApplicationRecord
   validates :account_id, uniqueness: { scope: %i[likeable_type likeable_id] }
 
   class << self
-    def account_likes_hash(likeable_type)
-      where(likeable_type:).pluck(:likeable_id, :id).to_h
+    def account_likes_hash(likeable_type, account)
+      where(likeable_type:, account:).pluck(:likeable_id, :id).to_h
     end
   end
 end
