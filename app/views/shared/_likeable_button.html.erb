@@ -1,0 +1,14 @@
+<div id=<%= "#{dom_id(likeable)}_like" %>>
+  <div class="flex flex-col gap-1 items-center">
+    <% if like.present? %>
+      <%= button_to like_path(like, likeable_id: likeable.id, likeable_type: likeable.class.name), method: :delete do %>
+        <i class="fa-solid fa-thumbs-up fa-xl cursor-pointer text-primary-500"></i>
+      <% end %>
+    <% else %>
+      <%= button_to likes_path(like: { likeable_type: likeable.class.name, likeable_id: likeable.id }) do %>
+        <i class="far fa-thumbs-up fa-xl cursor-pointer"></i>
+      <% end %>
+    <% end %>
+    <span class="text-xs text-gray-600"><%= likeable.likes.length %></span>
+  </div>
+</div>

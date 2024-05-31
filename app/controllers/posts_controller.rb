@@ -12,8 +12,8 @@ class PostsController < AuthenticatedController
 
   def show
     @account = @post.account
-    @images = @post.images
     @like = @post.likes.find_by(account: current_account)
+    @likes_count = @post.likes.count
   end
 
   def new
@@ -48,7 +48,7 @@ class PostsController < AuthenticatedController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.includes(images_attachments: :blob).includes(:likes).find(params[:id])
   end
 
   def post_params

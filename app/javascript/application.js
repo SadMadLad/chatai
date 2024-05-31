@@ -6,6 +6,3 @@ import "@rails/request.js";
 import "trix";
 import "@rails/actiontext";
 
-import GLightbox from "glightbox";
-
-var lightbox = GLightbox()

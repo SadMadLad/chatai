@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       resources :messages, only: %i[create edit update destroy]
     end
     resources :likes, only: %i[index create destroy]
-    resources :posts do
+    resources :posts, except: :index do
       collection { get :own }
     end
     resources :ml_models, only: %i[index show] do

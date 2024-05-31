@@ -1,0 +1,73 @@
+<%- account = post.account %>
+<%- like_id = @like&.id || @current_account_post_and_likes&.[](post.id) %>
+
+<div class="max-w-2xl rounded-xl border shadow flex-grow overflow-hidden bg-white">
+  <div class="flex flex-row border-b px-4 md:px-8">
+    <div class="flex-auto flex items-center gap-4 py-2.5">
+      <%= account_avatar(account) %>
+      <div class="flex flex-col justify-start">
+        <%= link_to account.full_name, account, class: 'font-semibold hover:text-secondary-500 hover:underline' %>
+        <hr class="my-1"/>
+        <p class="text-xs text-gray-600"><%= post.created_at.strftime("%d %B, %Y - %I:%M %p") %></p>
+      </div>
+    </div>
+    <div class="flex-auto flex justify-end items-center gap-4">
+      <% if has_link_button %>
+        <%= link_to post, class: 'cursor-pointer' do %>
+          <i class="fa-solid fa-arrow-up-right-from-square text-primary-500"></i>
+        <% end %>
+      <% end %>
+      <%= render 'shared/likeable_button', likeable: post, like: like_id %>
+    </div>
+  </div>
+  <div class="py-6 px-4 md:px-8">
+    <h4 class="font-semibold text-xl mb-2.5"><%= post.title %></h4>
+    <div class="text-sm" data-controller="toggle" data-toggle-toggled-id-value="1">
+      <div data-toggle-target="toggleable" data-toggle-id="1">
+        <p><%= post.body.truncate(200) %></p>
+        <% if post.body.length > 200 %>
+          <button data-toggle-target="toggleable" data-toggle-id="1" data-toggle-value="2" class="cursor-pointer underline text-primary-500" data-action="toggle#toggle"><%= t '.read_more' %></span>
+        <% end %>
+      </div>
+
+      <% if post.body.length > 200 %>
+        <div class="hidden" data-toggle-target="toggleable" data-toggle-id="2">
+          <p><%= post.body %></p>
+          <button data-toggle-target="toggleable" data-toggle-id="2" data-toggle-value="1" class="cursor-pointer underline text-primary-500" data-action="toggle#toggle"><%= t '.read_less' %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if post.images.present? %>
+    <%- images_count = post.images.length %>
+    <%- more_than_four = images_count > 4 %>
+    <%- is_odd = images_count.odd? %>
+    
+    <div class="grid grid-cols-2" data-turbo="false" data-controller="glightbox">
+      <% post.images.first(4).each_with_index do |image, index| %>
+        <% if index == 3 && more_than_four %>
+          <a href="<%= url_for(image) %>" class="relative glightbox col-auto max-h-36" target="_blank" data-gallery="gallery-post-<%= post.id %>" onclick="return false">
+            <%= image_tag image, class: 'object-cover h-full w-full' %>
+            <div class="transition-opacity duration-300 group hover:opacity-50 absolute top-0 right-0 left-0 bottom-0 w-full h-full flex-center bg-black opacity-0">
+              <p class="duration-300 text-white font-bold text-xl group-hover:opacity-100 opacity-0 transition-opacity">+<%= images_count - 4 %></p>
+            </div>
+          </a>
+        <% else %>
+          <a href="<%= url_for(image) %>" class="relative glightbox col-auto max-h-36 <%= "last:col-span-2" if images_count.odd? %>" target="_blank" data-gallery="gallery-post-<%= post.id %>" onclick="return false">
+            <%= image_tag image, class: 'object-cover h-full w-full' %>
+            <div class="transition-opacity duration-300 bg-black hover:opacity-50 opacity-0 absolute w-full h-full top-0 left-0">
+            </div>
+          </a>
+        <% end %>
+      <% end %>
+      <% if more_than_four %>
+        <% post.images.drop(4).each do |image| %>
+          <a href="<%= url_for(image) %>" class="glightbox hidden" target="_blank" data-gallery="gallery-post-<%= post.id %>">
+            <%= image_tag image, class: 'object-cover h-full w-full' %>
+          </a>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
