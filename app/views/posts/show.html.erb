@@ -18,7 +18,7 @@
 
   <div class="flex-center">
     <div class="max-w-2xl flex flex-col items-center gap-4 w-full" id=<%= "#{dom_id(@post)}" %>>
-      <%= render partial: 'comments/comment', collection: @post.comments.order(created_at: :desc), locals: { has_like_button: true, depth: 0 } %>
+      <%= render partial: 'comments/comment', collection: @comments.order(created_at: :desc), locals: { has_like_button: true, depth: 0 } %>
     </div>
   </div>
 </div>
