@@ -28,6 +28,8 @@
 #       enabled: "ON"
 
 en:
+  op: Original Poster
+
   unauthorized: You are unauthorized to perform this action.
   reply: Reply
   edit: Edit
@@ -61,7 +63,7 @@ en:
         - icon: fas fa-brain
           heading: Other AI Features
           text: You can utilize our other AI features like summarization and others.
-    
+
   dashboard:
     index:
       your_chats: Your Chats
@@ -70,9 +72,19 @@ en:
       your_messages: Your messages
       your_posts: Your Posts
 
+  comments:
+    index:
+      page_heading: Your Comments
+      no_comments: You have no comments.
+
+  likes:
+    index:
+      page_heading: Your Liked Things
+      no_likes: You have not liked anything yet.
+
   posts:
     index:
-      page_heading: Posts Page
+      page_heading: Your Posts
       no_posts: There are no posts right now.
       create_post_button: Create a post right now.
     new:
@@ -89,4 +101,4 @@ en:
       page_heading: Your Posts
       no_posts: You have created no post.
       create_post_button: Create a post right now.
-    
+

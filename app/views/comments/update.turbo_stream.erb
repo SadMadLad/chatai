@@ -1,6 +1,6 @@
 <% if @updated %>
   <%= turbo_stream.replace dom_id(@comment) do %>
-    <%= render 'comments/comment', comment: @comment, has_like_button: true, depth: @comment.depth&.to_i %>
+    <%= render 'comments/comment', comment: @comment, has_like_button: true, depth: @comment.depth&.to_i, display_only: false %>
   <% end %>
 <% end %>
 
