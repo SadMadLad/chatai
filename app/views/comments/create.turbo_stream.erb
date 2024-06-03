@@ -1,0 +1,19 @@
+<% if @created %>
+  <% if @comment.commentable_type == 'Comment' %>
+    <%= turbo_stream.remove "comment_reply_#{@commentable.id}_form" %>
+
+    <%= turbo_stream.append dom_id(@commentable) do %>
+      <%= render 'comments/comment', comment: @comment, has_like_button: true, depth: @comment.depth || 0 %>
+    <% end %>
+  <% else %>
+    <%= turbo_stream.prepend dom_id(@commentable) do %>
+      <%= render 'comments/comment', comment: @comment, has_like_button: true, depth: @comment.depth || 0 %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%- replace_id = @comment.commentable_type == 'Post' ? 'post_comment' : "comment_reply_#{@comment.commentable_id}_form" %>
+  
+  <%= turbo_stream.replace replace_id  do %>
+    <%= render 'comments/form', comment: @comment, id: replace_id, commentable: @commentable %>
+  <% end %>
+<% end %>

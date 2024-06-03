@@ -1,6 +1,6 @@
 <div class="bg-gray-100 w-full h-full">
-  <div class="container relative w-full h-full flex flex-row gap-8 p-8">
-    <aside class="top-0 sticky rounded-2xl bg-white p-8 hidden md:block">
+  <div class="container relative w-full h-full flex flex-row items-start gap-8 p-8">
+    <aside class="top-20 sticky rounded-2xl bg-white p-8 hidden md:block">
       <div class="flex flex-col items-center gap-2.5">
         <%= image_tag current_account.avatar, class: 'w-20 h-20 rounded-full'%>
         <%= link_to current_account.full_name, account_path(current_account), class: 'text-sm font-bold text-primary-500 hover:underline cursor-pointer min-w-40 text-center max-w-52 overflow-ellipsis overflow-hidden whitespace-nowrap' %>
@@ -9,15 +9,10 @@
       <hr class="my-4"/>
 
       <div class="flex flex-col gap-1 text-sm">
-        <p class="text-justify">Your Messages: <strong><%= @count_data[:messages_count] %></strong></p>
-        <%= link_to chats_path, class: 'hover:underline' do %>
-          <p class="text-justify">Your Chats: <strong><%= @count_data[:chats_count]  %></strong></p>
-        <% end %>
-        <%= link_to likes_path, class: 'hover:underline' do %>
-          <p class="text-justify">Your Likes: <strong><%= @count_data[:likes_count]  %></strong></p>
-        <% end %>
-        <%= link_to posts_path, class: 'hover:underline' do %>
-          <p class="text-justify">Your Posts: <strong><%= @count_data[:posts_count] %></strong></p>
+        <% %w[chats comments likes posts].each do |stat| %>
+          <%= link_to [stat.to_sym], class: 'hover:underline' do %>
+            <p class="text-justify"><%= t ".your_#{stat}" %>: <strong><%= @account_stats[:"#{stat}_count"] %></strong></p>
+          <% end %>
         <% end %>
       </div>
 
@@ -37,7 +32,7 @@
         </div>
     </aside>
     <section class="flex flex-col gap-6">
-      <%= render partial: 'posts/post', collection: @posts, locals: { has_link_button: true } %>
+      <%= render partial: 'posts/post', collection: @posts, locals: { has_link_button: true, has_comments_count: true } %>
     </section>
   </div>
 </div>

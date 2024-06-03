@@ -2,6 +2,7 @@
 
 # Likes Controller
 class LikesController < AuthenticatedController
+  before_action :set_like, only: :destroy
   before_action :authorize_like, only: :destroy
 
   def index
@@ -14,7 +15,6 @@ class LikesController < AuthenticatedController
   end
 
   def destroy
-    @like = Like.find_by(id: params[:id])
     if @like.present?
       @likeable = @like.likeable
       @like.destroy
@@ -30,6 +30,10 @@ class LikesController < AuthenticatedController
   end
 
   def authorize_like
-    authorize @like, policy_class: LikePolicy
+    authorize @like, policy_class: RecordPolicy
+  end
+
+  def set_like
+    @like = Like.find_by(id: params[:id])
   end
 end

@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "comment_reply_#{@comment.commentable.id}" do %>
+  <%= render 'form', comment: @comment, commentable: @comment.commentable, id: "comment_reply_#{@comment.commentable.id}_form", depth: @comment.depth %>
+<% end %>

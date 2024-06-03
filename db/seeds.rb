@@ -96,3 +96,62 @@ chat_breen.photo.attach(
 end
 
 last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote) }
+
+# TODO: Seed posts, comments, likes and replies.
+
+posters = normal_accounts.first(3)
+account_ids = normal_accounts.pluck(:id)
+
+posters.each_with_index do |poster, index|
+  1.upto(index + 2) do |i|
+    post = Post.new(account_id: poster.id, title: Faker::Book.title, body: Faker::Lorem.paragraph(sentence_count: 20 + rand(10) ))
+    
+    random_post_images = COVER_PICS.sample(rand(5) + 1)
+    random_post_images.each do |img| 
+      post.images.attach(io: File.open(Rails.root.join(img).to_s), filename: img)
+    end
+
+    post.save
+
+    # Create Likes
+    likers = account_ids.sample Array(1..10).sample
+    likes_data = likers.map { |l| { account_id: l, likeable_type: 'Post', likeable_id: post.id } }
+
+    post.likes.create(likes_data)
+
+    # Create Comments
+    commenters = account_ids.sample Array(1..10).sample
+    commenters_data = commenters.map do |c|
+      { account_id: c, commentable_type: 'Post', commentable_id: post.id, body: Faker::Movies::TheRoom.quote  }
+    end
+
+    comments = post.comments.create(commenters_data)
+
+    # Create Replies
+    comments.sample(Array(1..10).sample).each do |comment|      
+      reply = Comment.new(
+        account_id: account_ids.sample,
+        commentable_type: 'Comment',
+        commentable_id: comment.id,
+        body: Faker::Movies::TheRoom.quote
+      )
+
+      reply.save
+      
+      should_have_reply = [true, false].sample
+
+      if should_have_reply
+        reply_to_reply = Comment.new(
+          account_id: account_ids.sample,
+          commentable_type: 'Comment',
+          commentable_id: reply.id,
+          body: Faker::Movies::TheRoom.quote
+        )
+
+        reply_to_reply.save
+      end
+    end
+  end
+end
+
+

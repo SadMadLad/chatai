@@ -134,7 +134,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
       net-http
-    ffi (1.16.3)
+    ffi (1.17.0-x86_64-linux-gnu)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
     fugit (1.11.0)
@@ -142,7 +142,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    high_voltage (3.1.2)
+    high_voltage (4.0.0)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
     i18n (1.14.5)
@@ -203,7 +203,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    net-imap (0.4.11)
+    net-imap (0.4.12)
       date
       net-protocol
     net-pop (0.1.2)

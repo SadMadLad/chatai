@@ -1,1 +1,8 @@
-<h1>Edit Post Page </h1>
+<div class="flex-center my-8">
+  <div class="max-w-3xl p-8 rounded-xl border shadow flex-grow">
+    <h1 class="text-3xl font-black text-center mb-6"><%= t '.page_heading' %></h1>
+    <%= form_with model: @post, class: 'flex flex-col gap-4' do |form| %>
+      <%= render 'form', form:, post: @post, submit_text: t('.submit') %>
+    <% end %>
+  </div>
+</div>

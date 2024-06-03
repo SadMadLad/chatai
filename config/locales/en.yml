@@ -29,6 +29,8 @@
 
 en:
   unauthorized: You are unauthorized to perform this action.
+  reply: Reply
+  edit: Edit
 
   create: New %{model} created successfully.
   failed_create: Unable to create %{model}.
@@ -59,6 +61,14 @@ en:
         - icon: fas fa-brain
           heading: Other AI Features
           text: You can utilize our other AI features like summarization and others.
+    
+  dashboard:
+    index:
+      your_chats: Your Chats
+      your_comments: Your Comments
+      your_likes: Your Likes
+      your_messages: Your messages
+      your_posts: Your Posts
 
   posts:
     index:
@@ -68,7 +78,11 @@ en:
     new:
       page_heading: Create a new post
       submit: Create Post
+    edit:
+      page_heading: Edit the post
+      submit: Update Post
     show:
+      go_back: Go Back to Feed
       read_more: Read More
       read_less: Read Less
     own:

@@ -12,6 +12,13 @@
       </div>
     </div>
     <div class="flex-auto flex justify-end items-center gap-4">
+      <%# TODO: Recursively and efficiently get the total count of comments + replies of a post. %>
+
+      <%# if has_comments_count %>
+        <%# <%- comments_count = post.comments.length + post.comments.recursive_count %>
+        <%# <span class="text-xs text-gray-600"><%= comments_count %> <%#= 'comment'.pluralize(comments_count) %> <%# </span> %> 
+      <%# <% end %>
+
       <% if has_link_button %>
         <%= link_to post, class: 'cursor-pointer' do %>
           <i class="fa-solid fa-arrow-up-right-from-square text-primary-500"></i>
