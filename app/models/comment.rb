@@ -30,5 +30,29 @@ class Comment < ApplicationRecord
 
       replies_count
     end
+
+    def deep_includes
+      includes(
+        {
+          replies: [
+            :likes,
+            { account: { avatar_attachment: :blob } },
+            replies: generate_nested_hash(5)
+          ] 
+        },
+        :likes,
+        account: { avatar_attachment: :blob }
+      )
+    end
+
+    def generate_nested_hash(levels)
+      return :replies if levels == 0
+    
+      {
+        likes: [],
+        account: { avatar_attachment: :blob },
+        replies: generate_nested_hash(levels - 1)
+      }
+    end
   end
 end

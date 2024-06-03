@@ -1,6 +1,5 @@
 class CommentsController < AuthenticatedController
-  before_action :set_comment, only: %i[edit update]
-  before_action :authorize_comment, except: :reply
+  before_action :authorize_comment, except: %i[edit update reply]
 
   def index
     @comments = current_account.comments
@@ -17,10 +16,16 @@ class CommentsController < AuthenticatedController
   end
 
   def edit
+    @comment = Comment.find(params[:id])
+    authorize @comment, policy_class: RecordPolicy
+
     @comment.depth = params.dig(:comment, :depth)
   end
 
   def update
+    @comment = Comment.deep_includes.find(params[:id])
+    authorize @comment, policy_class: RecordPolicy
+
     if @comment.update(comment_params)
       @like = current_account.likes.find_by(likeable: @comment)
       @updated = true
@@ -40,9 +45,5 @@ class CommentsController < AuthenticatedController
 
   def authorize_comment
     authorize @comment, policy_class: RecordPolicy
-  end
-
-  def set_comment
-    @comment = Comment.includes(:likes, :replies, { account: { avatar_attachment: :blob } }).find(params[:id])
   end
 end

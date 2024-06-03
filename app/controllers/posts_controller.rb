@@ -16,7 +16,7 @@ class PostsController < AuthenticatedController
 
   def show
     @account = @post.account
-    @comments = @post.comments.includes({ replies: [:likes, { account: { avatar_attachment: :blob } }, :replies] }, :likes, account: { avatar_attachment: :blob }).all
+    @comments = @post.comments.deep_includes.all
     @comment = Comment.new
 
     @account_comments_likes_hash = Like.account_likes_hash('Comment', current_account)
