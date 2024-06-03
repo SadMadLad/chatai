@@ -7,7 +7,7 @@ class AccountsController < AuthenticatedController
   before_action -> { define_model_name('account') }
 
   def index
-    @accounts = Account.excluding(current_account)
+    @accounts = Account.excluding(current_account).includes(avatar_attachment: :blob).all
   end
 
   def show; end

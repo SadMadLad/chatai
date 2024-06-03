@@ -64,6 +64,10 @@ en:
           heading: Other AI Features
           text: You can utilize our other AI features like summarization and others.
 
+  accounts:
+    index:
+      page_heading: Accounts
+
   dashboard:
     index:
       your_chats: Your Chats
