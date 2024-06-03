@@ -36,10 +36,15 @@ Rails.application.routes.draw do
         get :details
         post :autocomplete
       end
-      resources :messages, only: %i[create edit update destroy]
+      resources :messages, only: %i[index create edit update destroy]
+    end
+
+    # TODO: Implement the functionality to destroy comments
+    resources :comments, except: %i[show new destroy] do
+      collection { get :reply }
     end
     resources :likes, only: %i[index create destroy]
-    resources :posts, except: :index do
+    resources :posts do
       collection { get :own }
     end
     resources :ml_models, only: %i[index show] do

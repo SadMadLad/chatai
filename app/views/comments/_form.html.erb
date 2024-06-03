@@ -1,0 +1,25 @@
+<%- depth = local_assigns[:depth] || comment&.depth %>
+<%- is_edit = local_assigns[:is_edit] || nil %>
+
+<%= form_with model: comment, class: 'w-full my-4', id:, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#clear' } do |form| %>
+  <% unless is_edit %>
+    <%= form.hidden_field :commentable_type, value: commentable.class.name %>
+    <%= form.hidden_field :commentable_id, value: commentable.id %>
+  <% end %>
+
+  <% if depth.present? %>
+    <%= form.hidden_field :depth, value: depth %>
+  <% end %>
+  
+  <div>
+    <%= form.text_area :body, class: 'w-full h-full rounded border-gray-400 focus:border-primary-300' %>
+  </div>
+
+  <% if comment.errors[:body].present? %>
+    <span class="text-xs text-danger-500" data-form-target="errorField"><%= comment.errors.full_messages_for(:body).first %></span>
+  <% end %>
+
+  <div class="flex justify-end">
+    <%= form.submit 'Comment', class: 'px-4 py-2 cursor-pointer bg-primary-500 hover:bg-secondary-500 rounded-lg font-semibold text-white' %>
+  </div>
+<% end %>

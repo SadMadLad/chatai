@@ -7,7 +7,7 @@ class PostsController < AuthenticatedController
   before_action -> { define_model_name('post') }
 
   def index
-    @posts = Post.all
+    @posts = current_account.posts
   end
 
   def own
@@ -16,12 +16,11 @@ class PostsController < AuthenticatedController
 
   def show
     @account = @post.account
+    @comment = Comment.new
+
+    @account_comments_likes_hash = Like.account_likes_hash('Comment', current_account)
     @like = @post.likes.find_by(account: current_account)
     @likes_count = @post.likes.count
-  end
-
-  def new
-    @post = Post.new
   end
 
   def edit; end
@@ -52,10 +51,26 @@ class PostsController < AuthenticatedController
   private
 
   def set_post
-    @post = Post.includes(images_attachments: :blob).includes(:likes).find(params[:id])
+    @post = Post
+              .includes(
+                :likes,
+                :replies,
+                :account,
+                { comments: [
+                  :likes,
+                  { account: { avatar_attachment: :blob } },
+                  { replies: :likes }
+                ] },
+                { images_attachments: :blob }
+              )
+              .find(params[:id])
   end
 
   def post_params
     params.require(:post).permit(:title, :body, images: []).merge(account: current_account)
+  end
+
+  def authorize_post
+    authorize @post, policy_class: RecordPolicy
   end
 end

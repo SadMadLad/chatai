@@ -1,0 +1,51 @@
+<%- like_id = @account_comments_likes_hash&.[](comment.id) || @like&.id %>
+<%- account = comment.account %>
+
+<turbo-frame class="block w-full" style="padding-left: <%= "#{depth}rem" %>" id=<%= dom_id(comment) %>>
+  <div class="w-full rounded-xl border shadow flex-grow">
+    <div class="flex flex-row items-center border-b px-4 md:px-8">
+      <div class="flex-auto flex items-center gap-4 py-2.5">
+        <%= account_avatar(account) %>
+        <div class="flex flex-col justify-start">
+          <%= link_to account.full_name, account, class: 'font-semibold hover:text-secondary-500 hover:underline' %>
+          <hr class="my-1"/>
+          <p class="text-xs text-gray-600"><%= comment.created_at.strftime("%d %B, %Y - %I:%M %p") %></p>
+        </div>
+      </div>
+      <%= link_to edit_comment_path(comment, { comment: { depth: depth.to_i } }), data: { turbo_frame: dom_id(comment) }, class: 'text-xs hover:text-secondary-500 hover:underline cursor-pointer mr-3.5' do %>
+        <%= t 'edit' %>
+      <% end %>
+      <%= link_to reply_comments_path({ comment: { commentable_type: 'Comment', commentable_id: comment.id, depth: depth.to_i + 1 } }), data: { turbo_frame: "comment_reply_#{comment.id}" }, class: 'text-xs hover:text-secondary-500 hover:underline cursor-pointer mr-3.5' do %>
+        <%= t 'reply' %>
+      <% end %>
+      <% if has_like_button %>
+        <%= render 'shared/likeable_button', likeable: comment, like: like_id %>
+      <% end %>
+    </div>
+    <div>
+      <div class="py-6 px-4 md:px-8">
+        <div class="text-sm" data-controller="toggle" data-toggle-toggled-id-value="1">
+          <div data-toggle-target="toggleable" data-toggle-id="1">
+            <p><%= comment.body.truncate(200) %></p>
+            <% if comment.body.length > 200 %>
+              <button data-toggle-target="toggleable" data-toggle-id="1" data-toggle-value="2" class="cursor-pointer underline text-primary-500" data-action="toggle#toggle"><%= t '.read_more' %></span>
+            <% end %>
+          </div>
+
+          <% if comment.body.length > 200 %>
+            <div class="hidden" data-toggle-target="toggleable" data-toggle-id="2">
+              <p><%= comment.body %></p>
+              <button data-toggle-target="toggleable" data-toggle-id="2" data-toggle-value="1" class="cursor-pointer underline text-primary-500" data-action="toggle#toggle"><%= t '.read_less' %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag "comment_reply_#{comment.id}" %>
+
+  <% if comment.replies.present? %>
+    <%= render partial: 'comments/comment', collection: comment.replies, locals: { has_like_button:, depth: depth + 1 } %>
+  <% end %>
+</turbo-frame>

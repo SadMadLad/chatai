@@ -7,7 +7,8 @@ class Account < ApplicationRecord
   has_many :account_chat_maps, dependent: :destroy
   has_many :account_tokens, dependent: :destroy
   has_many :chats, through: :account_chat_maps
-  has_many :comments, class_name: 'AdminComment', foreign_key: 'commenter_id', dependent: :destroy,
+  has_many :comments, dependent: :destroy
+  has_many :overseer_comments, class_name: 'AdminComment', foreign_key: 'commenter_id', dependent: :destroy,
                       inverse_of: :commenter
   has_many :feedbacks, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -45,12 +46,12 @@ class Account < ApplicationRecord
     "account_#{id}_chat_sidebar#{'_group' if chat_type == :multi_person}"
   end
 
-  def account_data
+  def account_stats
     {
       chats_count: chats.count,
-      messages_count: messages.count,
+      comments_count: comments.count,
       likes_count: likes.count,
-      posts_count: posts.count
+      posts_count: posts.count,
     }
   end
 

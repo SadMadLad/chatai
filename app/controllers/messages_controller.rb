@@ -30,7 +30,7 @@ class MessagesController < AuthenticatedController
   end
 
   def authorize_message
-    authorize @message, policy_class: MessagePolicy
+    authorize @message, policy_class: RecordPolicy
   end
 
   def broadcast_new_message
