@@ -17,5 +17,9 @@ class Post < ApplicationRecord
     def eager_load_everything(without_replies: true)
       includes(:likes, { account: { avatar_attachment: :blob } }, { images_attachments: :blob }).all
     end
+
+    def order_by_most_likes
+      left_joins(:likes).group(:id).order('COUNT(likes.id) DESC')
+    end
   end
 end

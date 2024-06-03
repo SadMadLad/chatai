@@ -6,6 +6,11 @@
     <%= link_to t('.create_post_button'), new_post_path, class: 'bg-primary-500 rounded font-semibold px-5 py-2.5 text-white' %>
   </section>
 <% else %>
-  <section class="flex flex-col items-center mt-4 mb-8">
+  <section class="flex-center mt-4 mb-8">
+    <div class="flex flex-col gap-4 max-w-2xl">
+      <% @posts.each do |post| %>
+        <%= render 'post', post:, has_link_button: true, has_comments_count: true, display_only: true %>
+      <% end %>
+    </div>
   </section>
 <% end %>

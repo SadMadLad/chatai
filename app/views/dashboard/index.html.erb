@@ -32,7 +32,7 @@
         </div>
     </aside>
     <section class="flex flex-col gap-6">
-      <%= render partial: 'posts/post', collection: @posts, locals: { has_link_button: true, has_comments_count: true } %>
+      <%= render partial: 'posts/post', collection: @posts, locals: { has_link_button: true, has_comments_count: true, display_only: false } %>
     </section>
   </div>
 </div>

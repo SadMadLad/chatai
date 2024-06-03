@@ -1,7 +1,17 @@
-<% if @likes.blank? %>
-  You haven't liked anything right now.
+<h1 class="text-3xl font-black text-center mt-8 mb-6"><%= t '.page_heading' %></h1>
+
+<% if @likes.present? %>
+  <section class="flex-center mb-8">
+    <div class="flex flex-col gap-4">
+      <% @likes.each do |like| %>
+        <% if like.likeable_type == 'Post' %>
+          <%= render 'posts/post', post: like.likeable, display_only: true, has_comments_count: true, has_link_button: true %>
+        <% else %>
+          <%= render 'comments/comment', comment: like.likeable, display_only: true, has_like_button: false, depth: 0 %>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
 <% else %>
-  <%= @likes.each do |like| %>
-    <%= "#{like.id} #{like.likeable.id}" %>
-  <% end %>
+  <h3 class="text-2xl font-bold text-center mb-8"><%= t '.no-likes' %></h3>
 <% end %>

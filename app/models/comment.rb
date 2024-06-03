@@ -7,7 +7,7 @@ class Comment < ApplicationRecord
 
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :replies, class_name: 'Comment', as: :commentable, dependent: :destroy
-  
+
   validates :body, presence: true
 
   def recursive_count
@@ -31,27 +31,27 @@ class Comment < ApplicationRecord
       replies_count
     end
 
-    def deep_includes
+    def deep_includes(levels: 5)
       includes(
         {
           replies: [
             :likes,
             { account: { avatar_attachment: :blob } },
-            replies: generate_nested_hash(5)
-          ] 
+            replies: deep_includes_nested_hash(levels)
+          ]
         },
         :likes,
         account: { avatar_attachment: :blob }
       )
     end
 
-    def generate_nested_hash(levels)
+    def deep_includes_nested_hash(levels)
       return :replies if levels == 0
-    
+
       {
         likes: [],
         account: { avatar_attachment: :blob },
-        replies: generate_nested_hash(levels - 1)
+        replies: deep_includes_nested_hash(levels - 1)
       }
     end
   end

@@ -13,6 +13,7 @@ class CommentsController < AuthenticatedController
     @comment = Comment.new(comment_params)
     @commentable = @comment.commentable
     @created = @comment.save
+    @account = @comment.account if @created
   end
 
   def edit
@@ -28,6 +29,7 @@ class CommentsController < AuthenticatedController
 
     if @comment.update(comment_params)
       @like = current_account.likes.find_by(likeable: @comment)
+      @account = @comment.account
       @updated = true
     else
       render :edit, status: :unprocessable_entity

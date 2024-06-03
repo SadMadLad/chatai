@@ -5,21 +5,35 @@
   <div class="w-full rounded-xl border shadow flex-grow">
     <div class="flex flex-row items-center border-b px-4 md:px-8">
       <div class="flex-auto flex items-center gap-4 py-2.5">
-        <%= account_avatar(account) %>
+        <% unless display_only %>
+          <%= account_avatar(account) %>
+        <% end %>
         <div class="flex flex-col justify-start">
-          <%= link_to account.full_name, account, class: 'font-semibold hover:text-secondary-500 hover:underline' %>
-          <hr class="my-1"/>
+          <% unless display_only %>
+            <%= link_to account, class: 'font-semibold hover:text-secondary-500 flex flex-row items-center gap-2.5', data: { turbo_frame: '_top' } do %>
+              <span><%= account.full_name %></span>
+              <% if @account && @account == account %>
+                <span class="text-[0.5rem] rounded-full px-2 py-1 bg-primary-100 text-primary-600"><%= t 'op' %></span>
+              <% end %>
+            <% end %>
+
+            <hr class="my-1"/>
+          <% end %>
           <p class="text-xs text-gray-600"><%= comment.created_at.strftime("%d %B, %Y - %I:%M %p") %></p>
         </div>
       </div>
-      <%= link_to edit_comment_path(comment, { comment: { depth: depth.to_i } }), data: { turbo_frame: dom_id(comment) }, class: 'text-xs hover:text-secondary-500 hover:underline cursor-pointer mr-3.5' do %>
-        <%= t 'edit' %>
-      <% end %>
-      <%= link_to reply_comments_path({ comment: { commentable_type: 'Comment', commentable_id: comment.id, depth: depth.to_i + 1 } }), data: { turbo_frame: "comment_reply_#{comment.id}" }, class: 'text-xs hover:text-secondary-500 hover:underline cursor-pointer mr-3.5' do %>
-        <%= t 'reply' %>
-      <% end %>
-      <% if has_like_button %>
-        <%= render 'shared/likeable_button', likeable: comment, like: like_id %>
+      <% unless display_only %>
+        <% if account == current_account %>
+          <%= link_to edit_comment_path(comment, { comment: { depth: depth.to_i } }), data: { turbo_frame: dom_id(comment) }, class: 'text-xs hover:text-secondary-500 hover:underline cursor-pointer mr-3.5' do %>
+            <%= t 'edit' %>
+          <% end %>
+        <% end %>
+        <%= link_to reply_comments_path({ comment: { commentable_type: 'Comment', commentable_id: comment.id, depth: depth.to_i + 1 } }), data: { turbo_frame: "comment_reply_#{comment.id}" }, class: 'text-xs hover:text-secondary-500 hover:underline cursor-pointer mr-3.5' do %>
+          <%= t 'reply' %>
+        <% end %>
+        <% if has_like_button %>
+          <%= render 'shared/likeable_button', likeable: comment, like: like_id %>
+        <% end %>
       <% end %>
     </div>
     <div>
@@ -45,7 +59,9 @@
 
   <%= turbo_frame_tag "comment_reply_#{comment.id}" %>
 
-  <% if comment.replies.present? %>
-    <%= render partial: 'comments/comment', collection: comment.replies, locals: { has_like_button:, depth: depth + 1 } %>
+  <% unless display_only %>
+    <% if comment.replies.present? %>
+      <%= render partial: 'comments/comment', collection: comment.replies, locals: { has_like_button:, depth: depth + 1, display_only: false } %>
+    <% end %>
   <% end %>
 </turbo-frame>

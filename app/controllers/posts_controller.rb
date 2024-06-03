@@ -20,7 +20,7 @@ class PostsController < AuthenticatedController
     @comment = Comment.new
 
     @account_comments_likes_hash = Like.account_likes_hash('Comment', current_account)
-    @like = @post.likes.find_by(account: current_account)
+    @post_like = @post.likes.find_by(account: current_account)
     @likes_count = @post.likes.count
   end
 

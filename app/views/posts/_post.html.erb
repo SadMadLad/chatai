@@ -1,13 +1,17 @@
 <%- account = post.account %>
-<%- like_id = @like&.id || @current_account_post_and_likes&.[](post.id) %>
+<%- like_id = @post_like&.id || @current_account_post_and_likes&.[](post.id) %>
 
 <div class="max-w-2xl rounded-xl border shadow flex-grow overflow-hidden bg-white">
   <div class="flex flex-row border-b px-4 md:px-8">
     <div class="flex-auto flex items-center gap-4 py-2.5">
-      <%= account_avatar(account) %>
+      <% unless display_only %>
+        <%= account_avatar(account) %>
+      <% end %>
       <div class="flex flex-col justify-start">
-        <%= link_to account.full_name, account, class: 'font-semibold hover:text-secondary-500 hover:underline' %>
-        <hr class="my-1"/>
+        <% unless display_only %>
+          <%= link_to account.full_name, account, class: 'font-semibold hover:text-secondary-500 hover:underline' %>
+          <hr class="my-1"/>
+        <% end %>
         <p class="text-xs text-gray-600"><%= post.created_at.strftime("%d %B, %Y - %I:%M %p") %></p>
       </div>
     </div>
@@ -16,7 +20,7 @@
 
       <%# if has_comments_count %>
         <%# <%- comments_count = post.comments.length + post.comments.recursive_count %>
-        <%# <span class="text-xs text-gray-600"><%= comments_count %> <%#= 'comment'.pluralize(comments_count) %> <%# </span> %> 
+        <%# <span class="text-xs text-gray-600"><%= comments_count %> <%#= 'comment'.pluralize(comments_count) %> <%# </span> %>
       <%# <% end %>
 
       <% if has_link_button %>
@@ -24,7 +28,10 @@
           <i class="fa-solid fa-arrow-up-right-from-square text-primary-500"></i>
         <% end %>
       <% end %>
-      <%= render 'shared/likeable_button', likeable: post, like: like_id %>
+
+      <% unless display_only %>
+        <%= render 'shared/likeable_button', likeable: post, like: like_id %>
+      <% end %>
     </div>
   </div>
   <div class="py-6 px-4 md:px-8">
@@ -50,7 +57,7 @@
     <%- images_count = post.images.length %>
     <%- more_than_four = images_count > 4 %>
     <%- is_odd = images_count.odd? %>
-    
+
     <div class="grid grid-cols-2" data-turbo="false" data-controller="glightbox">
       <% post.images.first(4).each_with_index do |image, index| %>
         <% if index == 3 && more_than_four %>
