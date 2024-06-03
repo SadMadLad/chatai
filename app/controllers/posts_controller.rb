@@ -16,6 +16,7 @@ class PostsController < AuthenticatedController
 
   def show
     @account = @post.account
+    @comments = @post.comments.includes({ replies: [:likes, { account: { avatar_attachment: :blob } }, :replies] }, :likes, account: { avatar_attachment: :blob }).all
     @comment = Comment.new
 
     @account_comments_likes_hash = Like.account_likes_hash('Comment', current_account)
@@ -51,19 +52,7 @@ class PostsController < AuthenticatedController
   private
 
   def set_post
-    @post = Post
-              .includes(
-                :likes,
-                :replies,
-                :account,
-                { comments: [
-                  :likes,
-                  { account: { avatar_attachment: :blob } },
-                  { replies: :likes }
-                ] },
-                { images_attachments: :blob }
-              )
-              .find(params[:id])
+    @post = Post.includes(images_attachments: :blob).find(params[:id])
   end
 
   def post_params
