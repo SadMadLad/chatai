@@ -1,7 +1,26 @@
-<h1><%= %></h1>
-<div>
-  <% @accounts.each do |account| %>
-    <%= link_to account.full_name, account, class: 'bg-blue-100' %>
-    <br />
-  <% end %>
+<h1 class="text-center font-black text-3xl my-12"><%= t '.page_heading' %></h1>
+
+<div class="mx-6 sm:mx-16 mb-12">
+  <div class="container overflow-auto max-w-full">
+    <table class="border-separate border-spacing-0 rounded-xl border w-full bg-gray-200">
+      <thead class="text-xs border-b text-gray-600 border-y border-y-gray-300 rounded-xl uppercase">
+        <tr>
+          <% %w[full_name avatar latest_chat_message joined_since role].each do |col| %>
+            <th class="first:text-left first:pl-3.5 p-2"><%= t ".table_headers.#{col}" %></th>
+          <% end %>
+        </tr>
+      <thead>
+      <tbody>
+        <% @accounts.each do |account| %>
+          <tr class="text-center even:bg-gray-50 odd:bg-white text-sm">
+            <td class="text-left p-2.5"><%= account.full_name %></td>
+            <td class="flex-center p-2.5"><%= account_avatar(account) %></td>
+            <td class="p-2.5"><%= account.latest_message_at&.strftime("%d %B, %Y - %I:%M %p") || '-' %></td>
+            <td class="p-2.5"><%= account.created_at.strftime("%d %B, %Y - %I:%M %p") %></td>
+            <td class="p-2.5 text-xs"><span class="bg-primary-100 text-primary-600 px-2.5 rounded-full py-1.5"><%= account.role.capitalize %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
