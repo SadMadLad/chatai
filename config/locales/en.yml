@@ -28,11 +28,12 @@
 #       enabled: "ON"
 
 en:
-  op: Original Poster
-
-  unauthorized: You are unauthorized to perform this action.
-  reply: Reply
+  # Key words
   edit: Edit
+  op: Original Poster
+  reply: Reply
+  unauthorized: You are unauthorized to perform this action.  
+
 
   create: New %{model} created successfully.
   failed_create: Unable to create %{model}.
@@ -47,6 +48,8 @@ en:
     json_parse: Scraping failed. Could not parse JSON Response for %{job}
     unknown_attribute: Scraping failed for %{job}. Unknown attribute detected when saving record. Possible that the API changed?
 
+  
+  # Controllers
   static:
     index:
       welcome: Welcome to ChatAI
@@ -66,7 +69,13 @@ en:
 
   accounts:
     index:
-      page_heading: Accounts
+      page_heading: Explore Accounts
+      table_headers:
+        full_name: Name
+        avatar: Avatar
+        latest_message_at: Latest Message At
+        joined_since: Joined Since
+        role: Role
 
   dashboard:
     index:
