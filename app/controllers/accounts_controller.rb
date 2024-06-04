@@ -7,7 +7,11 @@ class AccountsController < AuthenticatedController
   before_action -> { define_model_name('account') }
 
   def index
-    @accounts = Account.excluding(current_account).includes(avatar_attachment: :blob).all
+    @pagy, @accounts = pagy(
+      Account
+        .includes(avatar_attachment: :blob)
+        .all
+    )
   end
 
   def show; end

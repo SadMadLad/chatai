@@ -13,6 +13,6 @@ class ChatPolicy < ApplicationPolicy
   private
 
   def account_chat?
-    record.account == account
+    account.chats.exists?(id: record.id)
   end
 end

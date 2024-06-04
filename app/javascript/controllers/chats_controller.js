@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
+/* TODO: Fix the scrolling for new incoming message. */
 export default class extends Controller {
   static targets = ["chatTab"];
   static values = {

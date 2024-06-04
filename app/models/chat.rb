@@ -30,18 +30,28 @@ class Chat < ApplicationRecord
   end
 
   class << self
-    def create_chat(accounts, return_chat: false)
-      return false if accounts.size < 2
+    def create_chat(accounts)
+      return false if accounts.length < 2
 
-      chat_type = accounts.size == 2 ? :two_person : :multi_person
-      chat_title = chat_type == :multi_person ? "Group Chat #{accounts.size}" : nil
+      chat_type = accounts.length == 2 ? :two_person : :multi_person
+      chat_title = chat_type == :multi_person ? "Group Chat #{accounts.length}" : nil
       chat_description = chat_title
 
+      if chat_type == :two_person
+        account_chat_maps = AccountChatMap.chat_between_accounts(*accounts.map(&:id))
+
+        return account_chat_maps.first.chat if account_chat_maps.present?
+      end
+
+      create_new_chat(chat_description, chat_title, chat_type, accounts)
+    end
+
+    def create_new_chat(chat_description, chat_title, chat_type, accounts)
       chat = new(chat_description:, chat_title:, chat_type:)
       return false unless chat.save
 
       AccountChatMap.create(accounts.map { |account| { account:, chat: } })
-      return_chat ? chat : chat.persisted?
+      chat
     end
 
     def eager_load_by_chat_type(chat_type)

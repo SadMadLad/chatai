@@ -12,7 +12,7 @@ module ChatPagination
 
     return if @chats.blank?
 
-    @chat = @chats.first
+    @chat = params[:chat_id].present? ? Chat.find(params[:chat_id]) : @chats.first
     @messages = @chat.messages.includes(account: :avatar_attachment)
     params[:id] = @chat.id
 
