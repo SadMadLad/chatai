@@ -4,7 +4,6 @@ json.account do
   json.name @other_account.full_name
   json.avatar_url rails_blob_url(@other_account.avatar) if @other_account.avatar.attached?
   json.tagline @other_account.tagline
-  json.active @other_account.active_at_frontend
 end
 
 json.messages @latest_messages do |message|

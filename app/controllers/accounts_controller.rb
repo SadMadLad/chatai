@@ -14,7 +14,11 @@ class AccountsController < AuthenticatedController
     )
   end
 
-  def show; end
+  def show
+    @account_tokens = @account.account_tokens
+    @account_stats = @account.account_stats
+    @latest_message = @account.messages.last
+  end
 
   def edit; end
 

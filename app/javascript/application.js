@@ -5,4 +5,3 @@ import "@rails/request.js";
 
 import "trix";
 import "@rails/actiontext";
-

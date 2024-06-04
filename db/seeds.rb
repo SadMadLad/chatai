@@ -97,8 +97,6 @@ end
 
 last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote) }
 
-# TODO: Seed posts, comments, likes and replies.
-
 posters = normal_accounts.first(3)
 account_ids = normal_accounts.pluck(:id)
 
@@ -155,3 +153,5 @@ posters.each_with_index do |poster, index|
     end
   end
 end
+
+# TODO: Seed some machine learning models and prediction params
