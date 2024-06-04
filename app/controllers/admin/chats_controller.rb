@@ -25,7 +25,7 @@ module Admin
 
     def create
       accounts = Account.where(id: chat_account_params)
-      @chat = Chat.create_chat(accounts, return_chat: true)
+      @chat = Chat.create_chat(accounts)
 
       if @chat.save
         redirect_to [:admin, @chat], notice: t(:create, model:)

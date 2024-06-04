@@ -5,7 +5,7 @@ module ChatsHelper
   # The ChatStyleBuilder is render the inline styling for the chat and its messages styling.
   class ChatStyleBuilder
     class << self
-      def build(account, color: '#8b5cf6')
+      def build(account, color: '#0ea5e9')
         message_direction(account) +
           message_color(account, color) +
           message_text(account) +

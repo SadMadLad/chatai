@@ -2,10 +2,10 @@
 
 <div class="mx-6 sm:mx-16 mb-12">
   <div class="container overflow-auto max-w-full">
-    <table class="border-separate border-spacing-0 rounded-xl border w-full bg-gray-200">
+    <table class="border-separate border-spacing-0 rounded-xl border w-full bg-gray-200 overflow-hidden">
       <thead class="text-xs border-b text-gray-600 border-y border-y-gray-300 rounded-xl uppercase">
         <tr>
-          <% %w[full_name avatar latest_chat_message joined_since role].each do |col| %>
+          <% %w[full_name avatar latest_chat_message joined_since role actions].each do |col| %>
             <th class="first:text-left first:pl-3.5 p-2"><%= t ".table_headers.#{col}" %></th>
           <% end %>
         </tr>
@@ -13,14 +13,38 @@
       <tbody>
         <% @accounts.each do |account| %>
           <tr class="text-center even:bg-gray-50 odd:bg-white text-sm">
-            <td class="text-left p-2.5"><%= account.full_name %></td>
+            <td class="text-left p-2.5"><%= link_to account.full_name, account, class: 'hover:underline hover:text-secondary-500' %></td>
             <td class="flex-center p-2.5"><%= account_avatar(account) %></td>
             <td class="p-2.5"><%= account.latest_message_at&.strftime("%d %B, %Y - %I:%M %p") || '-' %></td>
             <td class="p-2.5"><%= account.created_at.strftime("%d %B, %Y - %I:%M %p") %></td>
             <td class="p-2.5 text-xs"><span class="bg-primary-100 text-primary-600 px-2.5 rounded-full py-1.5"><%= account.role.capitalize %></span></td>
+            <td class="p-2.5 flex-center">
+              <div
+                class="relative min-w-fit"
+                data-controller="dropdown"
+                data-dropdown-other-toggle-classes-value=<%= %w[px-4 py-2.5].to_json %>
+              >
+                <button data-action="dropdown#toggle"><i class="fa-solid fa-ellipsis"></i></button>
+                <div
+                  class="absolute w-0 h-0 bg-white shadow z-[48] right-0 top-4 rounded-xl transition-all duration-100 overflow-hidden"
+                  data-dropdown-target="dropdown"
+                >
+                  <ul class="flex flex-col gap-1.5">
+                    <li>
+                      <%= button_to chats_path(account:), class: 'whitespace-nowrap' do %>
+                        <i class="fa-regular fa-comment"></i>
+                        <%= t('.create_chat') %> 
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
+
+  <div class="mt-8"><%== pagy_nav(@pagy) %></div>
 </div>

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Polymorphic Comments Controller
 class CommentsController < AuthenticatedController
   before_action :authorize_comment, except: %i[edit update reply]
 
@@ -9,18 +12,18 @@ class CommentsController < AuthenticatedController
     @comment = Comment.new(comment_params)
   end
 
-  def create
-    @comment = Comment.new(comment_params)
-    @commentable = @comment.commentable
-    @created = @comment.save
-    @account = @comment.account if @created
-  end
-
   def edit
     @comment = Comment.find(params[:id])
     authorize @comment, policy_class: RecordPolicy
 
     @comment.depth = params.dig(:comment, :depth)
+  end
+
+  def create
+    @comment = Comment.new(comment_params)
+    @commentable = @comment.commentable
+    @created = @comment.save
+    @account = @comment.account if @created
   end
 
   def update

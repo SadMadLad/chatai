@@ -76,6 +76,8 @@ en:
         latest_message_at: Latest Message At
         joined_since: Joined Since
         role: Role
+        actions: Actions
+        create_chat: Create Chat
 
   dashboard:
     index:

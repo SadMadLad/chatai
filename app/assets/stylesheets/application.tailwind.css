@@ -44,4 +44,26 @@
   .btn-ghost {
     @apply px-3.5 py-1.5 font-semibold hover:underline;
   }
+
+  .pagy {
+    @apply flex space-x-1 font-semibold text-sm text-primary-500;
+    a:not(.gap) {
+      @apply block rounded-lg px-3 py-1 bg-primary-200;
+      &:hover {
+        @apply bg-primary-300;
+      }
+      &:not([href]) { /* disabled links */
+        @apply text-primary-300 bg-primary-100 cursor-default;
+      }
+      &.current {
+        @apply text-white bg-primary-400;
+      }
+    }
+    label {
+      @apply inline-block whitespace-nowrap bg-primary-200 rounded-lg px-3 py-0.5;
+      input {
+        @apply bg-primary-100 border-none rounded-md;
+      }
+    }
+  }
 }

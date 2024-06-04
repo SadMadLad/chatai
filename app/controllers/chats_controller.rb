@@ -33,11 +33,13 @@ class ChatsController < AuthenticatedController
   end
 
   def create
-    other_account = Account.find(params[:account_id])
-    if Chat.create_chat([current_account, other_account])
-      redirect_to :chats, notice: t(:create, model:)
+    other_account = Account.find(params[:account])
+
+    chat = Chat.create_chat([current_account, other_account])
+    if chat.present?
+      redirect_to chats_path(chat_id: chat.id)
     else
-      redirect_to :chats, alert: t(:failed_create, model:)
+      redirect_to :chats, status: :unprocessable_entity, alert: t(:failed_create, model:)
     end
   end
 
@@ -54,6 +56,10 @@ class ChatsController < AuthenticatedController
   end
 
   private
+
+  def chat_params
+    params.require(:chat).permit
+  end
 
   def set_chat
     @chat = Chat.find(params[:id])

@@ -14,7 +14,7 @@ class Post < ApplicationRecord
   validates :body, presence: true
 
   class << self
-    def eager_load_everything(without_replies: true)
+    def eager_load_everything
       includes(:likes, { account: { avatar_attachment: :blob } }, { images_attachments: :blob }).all
     end
 

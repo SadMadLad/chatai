@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # User Comment to a post or as a reply.
 class Comment < ApplicationRecord
   attr_accessor :depth
@@ -24,8 +26,8 @@ class Comment < ApplicationRecord
     def recursive_count
       replies_count = 0
 
-      all.each do |comment|
-        replies_count = replies_count + comment.recursive_count
+      find_each do |comment|
+        replies_count += comment.recursive_count
       end
 
       replies_count
@@ -37,16 +39,15 @@ class Comment < ApplicationRecord
           replies: [
             :likes,
             { account: { avatar_attachment: :blob } },
-            replies: deep_includes_nested_hash(levels)
+            { replies: deep_includes_nested_hash(levels) }
           ]
         },
-        :likes,
-        account: { avatar_attachment: :blob }
+        :likes, account: { avatar_attachment: :blob }
       )
     end
 
     def deep_includes_nested_hash(levels)
-      return :replies if levels == 0
+      return :replies if levels.zero?
 
       {
         likes: [],

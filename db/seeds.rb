@@ -47,13 +47,13 @@ first_n_accounts = normal_accounts.first(n)
 
 chats_accounts = last_n_accounts.map { |account| [first_account, account] }
 chats_accounts.each do |accounts|
-  chat = Chat.create_chat(accounts, return_chat: true)
+  chat = Chat.create_chat(accounts)
   chat.messages.create(accounts.map { |account| { account:, content: account.full_name } })
 end
 
 4.upto 9 do |i|
   group_chat_accounts = normal_accounts.last(i) + [first_account]
-  chat = Chat.create_chat(group_chat_accounts, return_chat: true)
+  chat = Chat.create_chat(group_chat_accounts)
   chat.messages.create(group_chat_accounts.map { |account| { account:, content: Faker::Movies::TheRoom.quote } })
 end
 
@@ -103,11 +103,12 @@ posters = normal_accounts.first(3)
 account_ids = normal_accounts.pluck(:id)
 
 posters.each_with_index do |poster, index|
-  1.upto(index + 2) do |i|
-    post = Post.new(account_id: poster.id, title: Faker::Book.title, body: Faker::Lorem.paragraph(sentence_count: 20 + rand(10) ))
-    
-    random_post_images = COVER_PICS.sample(rand(5) + 1)
-    random_post_images.each do |img| 
+  1.upto(index + 2) do |_i|
+    post = Post.new(account_id: poster.id, title: Faker::Book.title,
+                    body: Faker::Lorem.paragraph(sentence_count: rand(20..29)))
+
+    random_post_images = COVER_PICS.sample(rand(1..5))
+    random_post_images.each do |img|
       post.images.attach(io: File.open(Rails.root.join(img).to_s), filename: img)
     end
 
@@ -122,13 +123,13 @@ posters.each_with_index do |poster, index|
     # Create Comments
     commenters = account_ids.sample Array(1..10).sample
     commenters_data = commenters.map do |c|
-      { account_id: c, commentable_type: 'Post', commentable_id: post.id, body: Faker::Movies::TheRoom.quote  }
+      { account_id: c, commentable_type: 'Post', commentable_id: post.id, body: Faker::Movies::TheRoom.quote }
     end
 
     comments = post.comments.create(commenters_data)
 
     # Create Replies
-    comments.sample(Array(1..10).sample).each do |comment|      
+    comments.sample(Array(1..10).sample).each do |comment|
       reply = Comment.new(
         account_id: account_ids.sample,
         commentable_type: 'Comment',
@@ -137,21 +138,20 @@ posters.each_with_index do |poster, index|
       )
 
       reply.save
-      
-      should_have_reply = [true, false].sample
 
-      if should_have_reply
-        reply_to_reply = Comment.new(
-          account_id: account_ids.sample,
-          commentable_type: 'Comment',
-          commentable_id: reply.id,
-          body: Faker::Movies::TheRoom.quote
-        )
+      true_false = [true, false]
+      should_have_reply = true_false.sample
 
-        reply_to_reply.save
-      end
+      next unless should_have_reply
+
+      reply_to_reply = Comment.new(
+        account_id: account_ids.sample,
+        commentable_type: 'Comment',
+        commentable_id: reply.id,
+        body: Faker::Movies::TheRoom.quote
+      )
+
+      reply_to_reply.save
     end
   end
 end
-
-

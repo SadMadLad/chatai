@@ -9,7 +9,7 @@ class Account < ApplicationRecord
   has_many :chats, through: :account_chat_maps
   has_many :comments, dependent: :destroy
   has_many :overseer_comments, class_name: 'AdminComment', foreign_key: 'commenter_id', dependent: :destroy,
-                      inverse_of: :commenter
+                               inverse_of: :commenter
   has_many :feedbacks, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :posts, dependent: :destroy
@@ -51,7 +51,7 @@ class Account < ApplicationRecord
       chats_count: chats.count,
       comments_count: comments.count,
       likes_count: likes.count,
-      posts_count: posts.count,
+      posts_count: posts.count
     }
   end
 
