@@ -46,23 +46,24 @@
   }
 
   .pagy {
-    @apply flex space-x-1 font-semibold text-sm text-primary-500;
+    @apply text-primary-500 flex space-x-1 text-sm font-semibold;
     a:not(.gap) {
-      @apply block rounded-lg px-3 py-1 bg-primary-200;
+      @apply bg-primary-200 block rounded-lg px-3 py-1;
       &:hover {
         @apply bg-primary-300;
       }
-      &:not([href]) { /* disabled links */
+      &:not([href]) {
+        /* disabled links */
         @apply text-primary-300 bg-primary-100 cursor-default;
       }
       &.current {
-        @apply text-white bg-primary-400;
+        @apply bg-primary-400 text-white;
       }
     }
     label {
-      @apply inline-block whitespace-nowrap bg-primary-200 rounded-lg px-3 py-0.5;
+      @apply bg-primary-200 inline-block whitespace-nowrap rounded-lg px-3 py-0.5;
       input {
-        @apply bg-primary-100 border-none rounded-md;
+        @apply bg-primary-100 rounded-md border-none;
       }
     }
   }

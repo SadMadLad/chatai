@@ -1,3 +1,22 @@
-<%= @account.full_name %>
-<br />
-<%= account_avatar(@account) %>
+<div class="flex flex-col items-center gap-4 mt-12">
+  <h3 class="text-2xl font-bold"><%= @account.full_name %></h3>
+  <%= account_avatar(@account, size_classes: 'w-20 h-20') %>
+</div>
+
+<% if @account_tokens.present? %>
+  <ul class="mx-12">
+    <% @account_tokens.each do |token| %>
+      <%= link_to t(".#{token.scope}_profile"), token.profile_url(@account), class: 'hover:text-secondary-500 hover:underline' %>
+    <% end %>
+  </ul>
+<% end %>
+
+<section class="bg-gray-50 rounded-xl shadow p-4 md:p-6 m-8 md:m-8">
+  <h4 class="text-xl font-bold"><%= t '.user-stats' %></h4>
+
+  <% %w[chats comments likes posts].each do |stat| %>
+    <p class="text-justify"><%= t ".stats.#{stat}" %>: <%= @account_stats[:"#{stat}_count"] %></p>
+  <% end %>
+
+  <p><%= t '.stats.latest_message' %>: <%= @latest_message&.content || '-' %></p>
+</section>

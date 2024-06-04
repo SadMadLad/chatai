@@ -78,6 +78,17 @@ en:
         role: Role
         actions: Actions
         create_chat: Create Chat
+    show:
+      frontend_profile: Visit user's frontend profile
+      verse_profile: Visit user's verse profile
+      user_stats: User Statistics
+      stats:
+        chats: Chats
+        comments: Comments
+        likes: Likes
+        posts: Posts
+
+        latest_message: Account's Latest Message
 
   dashboard:
     index:

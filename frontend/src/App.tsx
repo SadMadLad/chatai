@@ -33,7 +33,8 @@ function PublicRoutes() {
 }
 
 function App() {
-  const { authToken, fullName, avatarUrl, isAuthed, verifySession } = useAuthStore();
+  const { authToken, fullName, avatarUrl, isAuthed, verifySession } =
+    useAuthStore();
   const { subscribeSocket, unsubscribeSocket } = useSocketStore();
   const { subscribeChannel, subscribePresence, unsubscribePresence } =
     usePresenceStore();
@@ -52,13 +53,13 @@ function App() {
   const removeSockets = () => {
     unsubscribePresence();
     unsubscribeSocket();
-  }
+  };
 
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    prepareSockets(signal).then(isVerified => {
+    prepareSockets(signal).then((isVerified) => {
       if (!isVerified) removeSockets();
     });
 
@@ -74,15 +75,15 @@ function App() {
         <Route element={<PrivateRoutes />}>
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/chats/:id" element={<ChatPage />} />
-          <Route
-            path="/accounts/:identifier/public"
-            element={<PublicAccountPage />}
-          />
         </Route>
         <Route element={<PublicRoutes />}>
           <Route path="/login" element={<LoginPage />} />
         </Route>
         <Route path="/" element={<StaticPage />} />
+        <Route
+          path="/accounts/:identifier/public"
+          element={<PublicAccountPage />}
+        />
       </Routes>
       <Toaster />
     </Router>
