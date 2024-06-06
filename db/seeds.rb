@@ -154,4 +154,11 @@ posters.each_with_index do |poster, index|
   end
 end
 
+# Generate Tags
+
+Tag.create([
+  { tag: 'Education' },
+  { tag: 'Cartoons' }
+])
+
 # TODO: Seed some machine learning models and prediction params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_31_120432) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_173943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -166,8 +166,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_120432) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+    t.string "title", null: false
+    t.text "body", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -314,6 +314,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_120432) do
     t.index ["subreddit_url"], name: "index_subreddits_on_subreddit_url", unique: true
   end
 
+  create_table "tag_maps", force: :cascade do |t|
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_tag_maps_on_taggable"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -377,4 +393,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_120432) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "subreddit_posts", "subreddits"
+  add_foreign_key "tag_maps", "tags"
 end
