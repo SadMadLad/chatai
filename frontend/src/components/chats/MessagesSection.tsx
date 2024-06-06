@@ -19,8 +19,8 @@ function Message({
         <div className="flex flex-row gap-2.5">
           <UserAvatar
             className="flex-shrink-0"
-            avatarUrl={avatar_url}
-            fullName={sender}
+            avatarUrl={avatar_url ?? null}
+            fullName={sender ?? null}
             hasPopover={false}
           />
           <div>
@@ -38,8 +38,8 @@ function Message({
           </div>
           <UserAvatar
             className="flex-shrink-0"
-            avatarUrl={avatar_url}
-            fullName={sender}
+            avatarUrl={avatar_url ?? null}
+            fullName={sender ?? null}
             hasPopover={false}
           />
         </div>

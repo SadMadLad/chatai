@@ -9,7 +9,7 @@ export default function AccountsHeaderSection({
 }) {
   if (!accountData) return null;
 
-  const { active, avatar_url, name, tagline } = accountData;
+  const { avatar_url, name, tagline } = accountData;
 
   return (
     <aside className="flex flex-shrink-0 flex-col gap-4 rounded-lg border p-4 shadow">
@@ -20,11 +20,6 @@ export default function AccountsHeaderSection({
           fullName={name}
           avatarUrl={avatar_url}
         />
-        {active && (
-          <span className="rounded-full border border-green-500 px-2 py-1 text-xs text-green-500">
-            Currently Active
-          </span>
-        )}
       </div>
       <p className="text-center">
         {tagline ? tagline : <i>No Description Yet</i>}
