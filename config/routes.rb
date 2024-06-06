@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       resources :accounts, except: %i[new create]
       resources :admin_comments, except: :new
       resources :chats, only: %i[index show new create destroy]
+      resources :comments, only: %i[index show destroy]
       resources :likes, only: %i[index show destroy]
       resources :messages
       resources :ml_models do

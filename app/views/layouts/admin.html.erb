@@ -17,7 +17,7 @@
   <body>
     <main class="flex min-h-screen" data-controller="sidebar" data-sidebar-show-value="true">
       <%= render 'shared/admin_sidebar' %>
-      <div class="flex-grow">
+      <div class="ml-14 md:ml-0 flex-grow">
         <%= turbo_frame_tag 'main', data: { action: 'turbo:frame-render->sidebar#colorTab' } do %>
           <%= hidden_field_tag :controller, params[:controller], { data: { sidebar_target: 'controllerField' } } %>
           <%= yield %>

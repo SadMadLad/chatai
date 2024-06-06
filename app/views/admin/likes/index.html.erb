@@ -1,0 +1,44 @@
+<div class="mx-8 my-6 flex justify-end items-center">
+  <%== pagy_nav(@pagy) %>
+</div>
+
+<div class="w-full flex-center mb-8">
+  <div class="w-full overflow-auto max-w-5xl mx-8 border rounded-xl">
+    <table class="border-separate border-spacing-0 text-xs md:text-sm w-full rounded-xl overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <%== table_cols(%w[liked_by model_name model_id], class: 'py-2.5 text-center px-3') %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @likes.each do |like| %>
+          <tr class="even:bg-gray-50 odd:bg-white">
+            <td class="text-center p-0.5 md:p-2"><%= like.account.full_name %></td>
+            <td class="text-center p-0.5 md:p-2"><%= like.likeable_type %></td>
+            <td class="text-center p-0.5 md:p-2"><%= like.likeable_id %></td>
+            <td class="text-center p-0.5 md:p-2"><%= like.created_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2"><%= like.updated_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2">
+              <div
+                class="relative min-w-fit"
+                data-controller="dropdown"
+                data-dropdown-other-toggle-classes-value=<%= %w[px-3 py-1.5].to_json %>
+              >
+                <button data-action="dropdown#toggle"><i class="fa-solid fa-ellipsis"></i></button>
+                <div
+                  class="absolute w-0 h-0 bg-white shadow z-[48] right-0 bottom-4 rounded-xl transition-all duration-100 overflow-hidden"
+                  data-dropdown-target="dropdown"
+                >
+                  <div class="flex flex-col gap-1 text-left">
+                    <%= link_to t('show'), [:admin, like] %>
+                    <%= button_to t('delete'), [:admin, like], method: :delete %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
