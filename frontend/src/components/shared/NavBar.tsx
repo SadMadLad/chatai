@@ -48,11 +48,6 @@ export default function NavBar() {
       to: "/chats",
       key: "Chats",
     },
-    {
-      text: "Weather",
-      to: "#",
-      key: "Weather",
-    },
   ];
 
   const handleLogout = async () => {

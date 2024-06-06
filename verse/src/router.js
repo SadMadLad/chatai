@@ -1,10 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
-import RootPage from "@/views/RootPage.vue";
-import PokemonPage from "@/views/PokemonPage.vue";
+
+import NotFoundView from "@/views/errors/NotFoundView.vue";
+import PokemonView from "@/views/PokemonView.vue";
+import RootView from "@/views/RootView.vue";
 
 const routes = [
-  { path: "/", name: "root", component: RootPage },
-  { path: "/pokemon", name: "pokemon", component: PokemonPage },
+  { path: "/", name: "root", component: RootView },
+  { path: "/pokemon", name: "pokemon", component: PokemonView },
+  { path: "/:pathMatch(.*)*", name: "not-found", component: NotFoundView },
 ];
 
 const router = createRouter({
