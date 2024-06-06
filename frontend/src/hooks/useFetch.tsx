@@ -16,16 +16,18 @@ export default function useFetch(url: string, method: Method) {
     const signal = abortController.signal;
 
     fetch(client(url, method, { authToken: authToken }), { signal })
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
         setFetchedData(data);
         setIsSuccess(true);
       })
-      .catch(() => setIsSuccess(false) )
+      .catch(() => setIsSuccess(false))
       .finally(() => setIsLoading(false));
 
     return () => abortController.abort();
   }, [url]);
 
-  return [fetchedData, isLoading, isSuccess];
+  return { fetchedData, isLoading, isSuccess };
 }

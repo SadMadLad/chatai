@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import useFetch from "@/hooks/useFetch";
 import { Link } from "react-router-dom";
 
-import useAuthStore from "@/storage/useAuthStore";
 import ApplicationLayout from "@/layouts/ApplicationLayout";
 import ChatsPageSkeleton from "@/components/skeletons/ChatsPageSkeleton";
+import WentWrong from "@/pages/errors/WentWrong";
 
-import { client } from "@/services/clients";
 import { Chat } from "@/types/data/ChatTypes";
 import { RailsRoutes } from "@/services/routes";
 
@@ -31,45 +30,32 @@ function ChatCard({ id, chat_title, chat_description, photo_url }: Chat) {
 }
 
 export default function ChatsPage() {
-  const { authToken } = useAuthStore();
+  const { url, method } = RailsRoutes.chats;
+  const { isLoading, isSuccess, fetchedData } = useFetch(url, method);
 
-  const [chats, setChats] = useState<Array<Chat>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
-    fetchChats(signal);
-
-    return () => abortController.abort();
-  }, []);
-
-  async function fetchChats(signal: AbortSignal) {
-    const { url, method } = RailsRoutes.chats;
-    const response = await fetch(
-      client(url, method, { authToken: authToken }),
-      { signal },
+  if (isLoading)
+    return (
+      <ApplicationLayout>
+        <ChatsPageSkeleton />
+      </ApplicationLayout>
     );
-    const chats = await response.json();
 
-    if (response.ok) setChats(chats);
-    setIsLoading(false);
-  }
+  if (isSuccess) {
+    const chats: Chat[] = fetchedData;
 
-  return (
-    <ApplicationLayout>
-      <h1 className="pb-12 pt-20 text-center text-3xl font-black md:text-5xl">
-        Visit all the Cool Chat Rooms
-      </h1>
-      {!isLoading && (
+    return (
+      <ApplicationLayout>
+        <h1 className="pb-12 pt-20 text-center text-3xl font-black md:text-5xl">
+          Visit all the Cool Chat Rooms
+        </h1>
         <section className="flex flex-row flex-wrap justify-center gap-6 pb-12">
           {chats.map((chat) => (
             <ChatCard key={chat.id} {...chat} />
           ))}
         </section>
-      )}
-      {isLoading && <ChatsPageSkeleton />}
-    </ApplicationLayout>
-  );
+      </ApplicationLayout>
+    );
+  } else {
+    return <WentWrong />;
+  }
 }

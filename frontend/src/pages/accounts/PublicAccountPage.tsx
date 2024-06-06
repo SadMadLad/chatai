@@ -5,14 +5,17 @@ import ApplicationLayout from "@/layouts/ApplicationLayout";
 import AccountChatsSection from "@/components/accounts/AccountChatsSection";
 import AccountsHeaderSection from "@/components/accounts/AccountsHeaderSection";
 import ChatPageSkeleton from "@/components/skeletons/ChatPageSkeleton";
+import WentWrong from "@/pages/errors/WentWrong";
 
+import { AccountData } from "@/types/data/UserTypes";
+import { Chat, Message } from "@/types/data/ChatTypes";
 import { RailsRoutes } from "@/services/routes";
 
 export default function PublicAccountPage() {
   const { identifier } = useParams();
 
   const { method, url } = RailsRoutes.accounts;
-  const [fetchedData, isLoading, isSuccess] = useFetch(
+  const { fetchedData, isLoading, isSuccess } = useFetch(
     `${url}/${identifier}/public`,
     method,
   );
@@ -25,7 +28,11 @@ export default function PublicAccountPage() {
     );
 
   if (isSuccess && fetchedData) {
-    const { account, chats, messages }: {
+    const {
+      account,
+      chats,
+      messages,
+    }: {
       account: AccountData;
       chats: Chat[];
       messages: Message[];
@@ -40,8 +47,6 @@ export default function PublicAccountPage() {
       </ApplicationLayout>
     );
   } else {
-    <ApplicationLayout>
-      Something Failed. Please try again later.
-    </ApplicationLayout>;
+    <WentWrong />;
   }
 }
