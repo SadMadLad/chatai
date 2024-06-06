@@ -36,7 +36,6 @@ en:
   show: Show
   unauthorized: You are unauthorized to perform this action.
 
-
   create: New %{model} created successfully.
   failed_create: Unable to create %{model}.
 
@@ -49,7 +48,6 @@ en:
   job_errors:
     json_parse: Scraping failed. Could not parse JSON Response for %{job}
     unknown_attribute: Scraping failed for %{job}. Unknown attribute detected when saving record. Possible that the API changed?
-
 
   # Controllers
   static:
@@ -135,19 +133,20 @@ en:
       actions: Actions
       created_at: Created At
       updated_at: Updated At
-    dashboard:
-      index:
-        dashboard: Dashboard
-        accounts: Accounts
-        account_chat_maps: Account Chat Maps
-        admin_comments: Admin Comments
-        chats: Chats
-        messages: Messages
-        ml_models: ML Models
-        prediction_params: Prediction Params
-        posts: Posts
-        solid_queues: Solid Queues
-        users: Users
+  shared:
+    admin_sidebar:
+      as_user: Join as User
+      dashboard: Dashboard
+      accounts: Accounts
+      account_chat_maps: Account Chat Maps
+      admin_comments: Admin Comments
+      chats: Chats
+      messages: Messages
+      ml_models: ML Models
+      prediction_params: Prediction Params
+      posts: Posts
+      solid_queues: Solid Queues
+      users: Users
     accounts:
       index:
         add_user: Add New User
