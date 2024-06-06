@@ -31,7 +31,7 @@ class Chat < ApplicationRecord
 
   class << self
     def create_chat(accounts)
-      return false if accounts.length < 2
+      return false if accounts.uniq.length < 2
 
       chat_type = accounts.length == 2 ? :two_person : :multi_person
       chat_title = chat_type == :multi_person ? "Group Chat #{accounts.length}" : nil

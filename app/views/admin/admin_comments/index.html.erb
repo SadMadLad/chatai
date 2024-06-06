@@ -1,28 +1,45 @@
-<table class="table-auto text-sm">
-  <thead class="bg-gray-100">
-    <tr>
-      <th>Body</th>
-      <th>Commented By</th>
-      <th>Model Name</th>
-      <th>Model</th>
-      <th>Created At</th>
-      <th>Updated At</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @admin_comments.each do |admin_comment| %>
-      <tr class="border-b">
-        <td><%= admin_comment.body %></td>
-        <td><%= link_to admin_comment.commenter.full_name, [:admin, admin_comment.commenter] %></td>
-        <td><%= admin_comment.admin_commentable_type %></td>
-        <td><%= link_to admin_comment.admin_commentable.id, [:admin, admin_comment.admin_commentable] %></td>
-        <td><%= admin_comment.created_at %></td>
-        <td><%= admin_comment.updated_at %></td>
-        <td><%= link_to 'Show', [:admin, admin_comment] %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="mx-8 my-6 flex justify-end items-center">
+  <%== pagy_nav(@pagy) %>
+</div>
 
-<%== pagy_nav(@pagy) %>
+<div class="w-full flex-center mb-8">
+  <div class="w-full overflow-auto max-w-5xl mx-8 border rounded-xl">
+    <table class="border-separate border-spacing-0 text-xs md:text-sm w-full rounded-xl overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <%== table_cols(%w[body commented_by model_name model_id], class: 'py-2.5 text-center px-3') %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admin_comments.each do |admin_comment| %>
+          <tr class="even:bg-gray-50 odd:bg-white">
+            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden whitespace-nowrap overflow-ellipsis"><%= admin_comment.body %></td>
+            <td class="text-center p-0.5 md:p-2"><%= admin_comment.commenter.full_name %></td>
+            <td class="text-center p-0.5 md:p-2"><%= admin_comment.admin_commentable_type %></td>
+            <td class="text-center p-0.5 md:p-2"><%= admin_comment.admin_commentable_id %></td>
+            <td class="text-center p-0.5 md:p-2"><%= admin_comment.created_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2"><%= admin_comment.updated_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2">
+              <div
+                class="relative min-w-fit"
+                data-controller="dropdown"
+                data-dropdown-other-toggle-classes-value=<%= %w[px-3 py-1.5].to_json %>
+              >
+                <button data-action="dropdown#toggle"><i class="fa-solid fa-ellipsis"></i></button>
+                <div
+                  class="absolute w-0 h-0 bg-white shadow z-[48] right-0 bottom-4 rounded-xl transition-all duration-100 overflow-hidden"
+                  data-dropdown-target="dropdown"
+                >
+                  <div class="flex flex-col gap-1 text-left">
+                    <%= link_to t('show'), [:admin, admin_comment] %>
+                    <%= button_to t('delete'), [:admin, admin_comment], method: :delete %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

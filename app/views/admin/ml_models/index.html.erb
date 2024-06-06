@@ -1,31 +1,45 @@
-<%= link_to 'Create new Ml Model', [:new, :admin, :ml_model] %>
+<div class="mx-8 my-6 flex justify-between items-center">
+  <%= link_to t('.add_ml_model'), %i[new admin ml_model], class: 'px-4 py-2.5 bg-primary-500 hover:bg-secondary-500 text-white font-bold rounded-lg' %>
+  <%== pagy_nav(@pagy) %>
+</div>
 
-<table class="table-auto text-sm">
-  <thead class="bg-gray-100">
-    <tr>
-      <th>Title</th>
-      <th>Uploader</th>
-      <th>Created At</th>
-      <th>Updated At</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @ml_models.each do |ml_model| %>
-      <tr class="border-b">
-        <td><%= ml_model.title %></td>
-        <td><%= ml_model.account.full_name %></td>
-        <td><%= ml_model.created_at %></td>
-        <td><%= ml_model.updated_at %></td>
-        <td>
-          <%= link_to 'Show', [:admin, ml_model] %>
-          <%= link_to 'Edit', [:edit, :admin, ml_model] %>
-          <%= button_to('Destroy', [:admin, ml_model], method: :delete) if current_account.superadmin? %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%== pagy_nav(@pagy) %>
-
+<div class="w-full flex-center mb-8">
+  <div class="w-full overflow-auto max-w-5xl mx-8 border rounded-xl">
+    <table class="border-separate border-spacing-0 text-xs md:text-sm w-full rounded-xl overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <%== table_cols(%w[title uploader], class: 'py-2.5 text-center px-3') %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ml_models.each do |ml_model| %>
+          <tr class="even:bg-gray-50 odd:bg-white">
+            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= ml_model.title %></td>
+            <td class="text-center p-0.5 md:p-2"><%= ml_model.account.full_name %></td>
+            <td class="text-center p-0.5 md:p-2"><%= ml_model.created_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2"><%= ml_model.updated_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2">
+              <div
+                class="relative min-w-fit"
+                data-controller="dropdown"
+                data-dropdown-other-toggle-classes-value=<%= %w[px-3 py-1.5].to_json %>
+              >
+                <button data-action="dropdown#toggle"><i class="fa-solid fa-ellipsis"></i></button>
+                <div
+                  class="absolute w-0 h-0 bg-white shadow z-[48] right-0 bottom-4 rounded-xl transition-all duration-100 overflow-hidden"
+                  data-dropdown-target="dropdown"
+                >
+                  <div class="flex flex-row gap-1.5 text-left">
+                    <%= link_to t('show'), [:admin, ml_model] %>
+                    <%= link_to t('edit'), [:edit, :admin, ml_model] %>
+                    <%= button_to t('delete'), [:admin, ml_model], method: :delete %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -29,10 +29,12 @@
 
 en:
   # Key words
+  delete: Delete
   edit: Edit
   op: Original Poster
   reply: Reply
-  unauthorized: You are unauthorized to perform this action.  
+  show: Show
+  unauthorized: You are unauthorized to perform this action.
 
 
   create: New %{model} created successfully.
@@ -48,7 +50,7 @@ en:
     json_parse: Scraping failed. Could not parse JSON Response for %{job}
     unknown_attribute: Scraping failed for %{job}. Unknown attribute detected when saving record. Possible that the API changed?
 
-  
+
   # Controllers
   static:
     index:
@@ -127,4 +129,89 @@ en:
       page_heading: Your Posts
       no_posts: You have created no post.
       create_post_button: Create a post right now.
+
+  admin:
+    common_columns:
+      actions: Actions
+      created_at: Created At
+      updated_at: Updated At
+    dashboard:
+      index:
+        dashboard: Dashboard
+        accounts: Accounts
+        account_chat_maps: Account Chat Maps
+        admin_comments: Admin Comments
+        chats: Chats
+        messages: Messages
+        ml_models: ML Models
+        prediction_params: Prediction Params
+        posts: Posts
+        solid_queues: Solid Queues
+        users: Users
+    accounts:
+      index:
+        add_user: Add New User
+        first_name: First Name
+        last_name: Last Name
+        username: Username
+        role: Role
+    account_chat_maps:
+      index:
+        chat: Chat
+        account: Account
+        add_chat: Create New Chat
+    admin_comments:
+      index:
+        body: Body
+        commented_by: Commented By
+        model_name: Model Name
+        model_id: Model ID
+    chats:
+      index:
+        add_chat: Create New Chat
+        chat_type: Chat Type
+        participants_count: Participants Count
+        latest_message_at: Latest Message At
+    comments:
+      index:
+        commenter: Commenter
+        body: Body
+    likes:
+      index:
+        liked_by: Liked By
+        model_name: Model Name
+        model_id: Model ID
+    messages:
+      index:
+        add_message: Create New Message
+        content: Content
+        sender: Sender
+        chat: Chat
+    ml_models:
+      index:
+        add_ml_model: Add New ML Model
+        title: Title
+        uploader: Uploader
+    posts:
+      index:
+        add_post: Create New Post
+        title: Title
+        body: Body
+        poster: Poster
+        likes_count: Likes Count
+    prediction_params:
+      index:
+        name: Name
+        parameter_type: Parameter Type
+        description: Description
+        ml_model: ML Model
+    users:
+      index:
+        add_user: Add New User
+        email: Email
+        login_count: Login Count
+        current_login: Current Login
+        latest_login: Latest Login
+        current_login_ip: Current Login IP
+        last_login_ip: Last Login IP
 

@@ -1,5 +1,4 @@
 <div class="mx-8 my-6 flex justify-between items-center">
-  <%= link_to t('.add_post'), %i[new admin post], class: 'px-4 py-2.5 bg-primary-500 hover:bg-secondary-500 text-white font-bold rounded-lg' %>
   <%== pagy_nav(@pagy) %>
 </div>
 
@@ -8,18 +7,19 @@
     <table class="border-separate border-spacing-0 text-xs md:text-sm w-full rounded-xl overflow-hidden">
       <thead class="bg-gray-100">
         <tr>
-          <%== table_cols(%w[title body poster likes_count], class: 'py-2.5 text-center px-3') %>
+          <%== table_cols(%w[body commenter model_name model_id likes_count], class: 'py-2.5 text-center px-3') %>
         </tr>
       </thead>
       <tbody>
-        <% @posts.each do |post| %>
+        <% @comments.each do |comment| %>
           <tr class="even:bg-gray-50 odd:bg-white">
-            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= post.title %></td>
-            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= post.body %></td>
-            <td class="text-center p-0.5 md:p-2"><%= post.account.full_name %></td>
-            <td class="text-center p-0.5 md:p-2"><%= post.likes.length %></td>
-            <td class="text-center p-0.5 md:p-2"><%= post.created_at.strftime('%d %B, %Y') %></td>
-            <td class="text-center p-0.5 md:p-2"><%= post.updated_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= comment.body %></td>
+            <td class="text-center p-0.5 md:p-2"><%= comment.account.full_name %></td>
+            <td class="text-center p-0.5 md:p-2"><%= comment.commentable_type %></td>
+            <td class="text-center p-0.5 md:p-2"><%= comment.commentable_id %></td>
+            <td class="text-center p-0.5 md:p-2"><%= comment.likes.length %></td>
+            <td class="text-center p-0.5 md:p-2"><%= comment.created_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2"><%= comment.updated_at.strftime('%d %B, %Y') %></td>
             <td class="text-center p-0.5 md:p-2">
               <div
                 class="relative min-w-fit"
@@ -32,9 +32,8 @@
                   data-dropdown-target="dropdown"
                 >
                   <div class="flex flex-row gap-1.5 text-left">
-                    <%= link_to t('show'), [:admin, post] %>
-                    <%= link_to t('edit'), [:edit, :admin, post] %>
-                    <%= button_to t('delete'), [:admin, post], method: :delete %>
+                    <%= link_to t('show'), [:admin, comment] %>
+                    <%= button_to t('delete'), [:admin, comment], method: :delete %>
                   </div>
                 </div>
               </div>
