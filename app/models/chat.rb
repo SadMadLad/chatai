@@ -9,6 +9,7 @@ class Chat < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :account_chat_maps, dependent: :destroy
   has_many :accounts, through: :account_chat_maps
+  has_many :tags, -> { where(chat_type: :live_room) }, through: :tag_maps
 
   validates :chat_description, presence: true, if: :multi_person? || :live_room?
   validates :chat_type, presence: true

@@ -18,7 +18,7 @@ module ChatPagination
 
   def setup_chat
     @chat = params[:chat_id].present? ? Chat.find(params[:chat_id]) : @chats.first
-    @messages = @chat.message.includes(account: :avatar_attachment)
+    @messages = @chat.messages.includes(account: :avatar_attachment)
     params[:id] = @chat.id
 
     @other_account = @chat.other_account(current_account) if @chat.two_person?
