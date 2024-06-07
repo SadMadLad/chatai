@@ -29,10 +29,14 @@
 
 en:
   # Key words
+  app: Chatai
   delete: Delete
   edit: Edit
+  login: Login
+  logout: Logout
   op: Original Poster
   reply: Reply
+  register: Register
   show: Show
   unauthorized: You are unauthorized to perform this action.
 
@@ -90,6 +94,14 @@ en:
 
         latest_message: Account's Latest Message
 
+  chats:
+    index:
+      chats: Chats
+      group_chats: Group Chats
+    group:
+      chats: Chats
+      group_chats: Group Chats
+
   dashboard:
     index:
       your_chats: Your Chats
@@ -128,11 +140,6 @@ en:
       no_posts: You have created no post.
       create_post_button: Create a post right now.
 
-  admin:
-    common_columns:
-      actions: Actions
-      created_at: Created At
-      updated_at: Updated At
   shared:
     admin_sidebar:
       as_user: Join as User
@@ -147,6 +154,21 @@ en:
       posts: Posts
       solid_queues: Solid Queues
       users: Users
+    navbar:
+      visit_admin_dashboard: Visit Admin Dashboard
+      feed: Feed
+      chats: Chats
+      group_chats: Group Chats
+      ai_chats: AI Chats
+      blogs: Blogs
+      account: Account
+      account_tokens: Account Tokens
+
+  admin:
+    common_columns:
+      actions: Actions
+      created_at: Created At
+      updated_at: Updated At
     accounts:
       index:
         add_user: Add New User

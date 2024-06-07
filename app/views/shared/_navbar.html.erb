@@ -2,13 +2,13 @@
   <div class="hidden items-center md:flex gap-16">
     <%= link_to root_path, class: 'flex-center gap-1.5 hover:text-primary-500 text-primary-600' do %>
       <i class="fa-lg fab fa-rocketchat"></i>
-      <strong class="text-2xl font-serif">Chatai</strong>
+      <strong class="text-2xl font-serif"><%= t 'app' %></strong>
     <% end %>
 
     <nav class="flex items-center gap-5">
       <% (user_signed_in? ? authed_routes : unauthed_routes).each do |route_text, route_data|  %>
         <%- route, controller, action = route_data.values_at(:route, :controller, :action) %>
-        <%= link_to route_text, route, class: "font-semibold hover:text-primary-500 py-4 #{'border-b-2 border-b-primary-500' if controller == params[:controller] && action == params[:action]}" %>
+        <%= link_to t(".#{route_text}"), route, class: "font-semibold hover:text-primary-500 py-4 #{'border-b-2 border-b-primary-500' if controller == params[:controller] && action == params[:action]}" %>
       <% end %>
     </nav>
   </div>
@@ -29,11 +29,12 @@
       <nav class="flex flex-col items-start gap-3.5 p-6">
         <%= link_to root_path, class: 'flex-center gap-1.5 hover:text-primary-500' do %>
           <i class="fa-lg fab fa-rocketchat"></i>
-          <strong class="text-2xl font-serif">Chatai</strong>
+          <strong class="text-2xl font-serif"><%= t 'app' %></strong>
         <% end %>
         <% (user_signed_in? ? authed_routes : unauthed_routes).each do |route_text, route_data|  %>
-          <%= link_to route_text, route_data[:route], class: "font-semibold hover:text-primary-500 #{'border-b-2 border-b-primary-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
+          <%= link_to t(".#{route_text}"), route_data[:route], class: "font-semibold hover:text-primary-500 #{'border-b-2 border-b-primary-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
         <% end %>
+        <%= link_to t('.visit_admin_dashboard'), %i[admin dashboard], class: 'font-semibold' %>
       </nav>
     </aside>
     <div
@@ -45,10 +46,11 @@
 
   <% if user_signed_in? %>
     <div
-      class="relative min-w-fit"
+      class="relative min-w-fit flex items-center gap-4"
       data-controller="dropdown"
       data-dropdown-other-toggle-classes-value=<%= %w[px-4 py-2.5].to_json %>
     >
+      <%= link_to t('.visit_admin_dashboard'), %i[admin dashboard], class: 'font-semibold text-xs' %>
       <%= account_avatar(
         current_account,
         other_classes: 'cursor-pointer',
@@ -65,23 +67,23 @@
         <ul class="flex flex-col gap-1.5">
           <li class="flex items-center gap-1.5">
             <i class="fas fa-user-circle"></i>
-            <%= link_to 'Account', current_account, class: 'whitespace-nowrap' %>
+            <%= link_to t('.account'), current_account, class: 'whitespace-nowrap' %>
           </li>
           <li class="flex items-center gap-1.5">
             <i class="fas fa-sign-out-alt"></i>
-            <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'whitespace-nowrap' %>
+            <%= button_to t('logout'), destroy_user_session_path, method: :delete, class: 'whitespace-nowrap' %>
           </li>
           <li class="flex items-center gap-1.5">
             <i class="fas fa-key"></i>
-            <%= link_to 'Account Tokens', [:account_tokens], class: 'whitespace-nowrap' %>
+            <%= link_to t('.account_tokens'), [:account_tokens], class: 'whitespace-nowrap' %>
           </li>
         </ul>
       </nav>
     </div>
   <% else %>
     <div class="flex flex-row gap-4">
-      <%= link_to 'Login', new_user_session_path, class: 'btn-ghost' %>
-      <%= link_to 'Register', new_user_registration_path, class: 'btn-primary' %>
+      <%= link_to t('login'), new_user_session_path, class: 'btn-ghost' %>
+      <%= link_to t('register'), new_user_registration_path, class: 'btn-primary' %>
     </div>
   <% end %>
 </header>

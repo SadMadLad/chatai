@@ -24,8 +24,8 @@
 
       <section class="rounded-xl border h-[30rem] overflow-x-hidden overflow-y-hidden hover:overflow-y-scroll transition-all duration-100" data-sidebar-target="sidebar">
         <nav class="flex flex-wrap border-b sticky top-0 bg-white backdrop-blur-sm bg-opacity-80 z-[45]" data-sidebar-target="hideable">
-          <% ['Chats', 'Group Chats'].map { |route| { route => ApplicationHelper::NAVIGATION_LINKS[route] } }.reduce({}, :merge).each do |route_text, route_data| %>
-            <%= link_to route_text, route_data[:route], class: "flex-shrink-0 text-sm flex-1 text-center py-2.5 #{'font-semibold border-b-2 border-gray-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
+          <% ['chats', 'group_chats'].map { |route| { route => ApplicationHelper::NAVIGATION_LINKS[route] } }.reduce({}, :merge).each do |route_text, route_data| %>
+            <%= link_to t(".#{route_text}"), route_data[:route], class: "flex-shrink-0 text-sm flex-1 text-center py-2.5 #{'font-semibold border-b-2 border-gray-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
           <% end %>
         </nav>
 
