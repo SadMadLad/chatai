@@ -8,9 +8,9 @@
 
     <ul class="flex flex-col gap-0 text-sm">
       <%= link_to root_path do %>
-        <li class="flex gap-5 items-center pl-4 md:pl-8 py-1.5 transition-all duration-100 font-semibold">
+        <li class="flex gap-8 items-center pl-4 md:pl-8 py-1.5 transition-all duration-100 font-semibold">
           <i class="fa-solid fa-house"></i>
-          <span><%= t '.as_user' %></span>
+          <span class="whitespace-nowrap font-semibold" data-sidebar-target="tab" data-id="dashboard"><%= t '.as_user' %></span>
         </li>
       <% end %>
       <% Admin::AdminHelper::ADMIN_LINKS.each do |link, icon| %>

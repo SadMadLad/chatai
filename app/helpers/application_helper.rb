@@ -15,36 +15,36 @@ module ApplicationHelper
   }.freeze
 
   NAVIGATION_LINKS = {
-    'Feed' => {
+    'feed' => {
       route: %i[dashboard],
       controller: 'dashboard',
       action: 'index',
       auth: :auth_only
     },
-    'Chats' => {
+    'chats' => {
       route: %i[chats],
       controller: 'chats',
       action: 'index',
       auth: :auth_only
     },
-    'Group Chats' => {
+    'group_chats' => {
       route: %i[group chats],
       controller: 'chats',
       action: 'group',
       auth: :auth_only
     },
-    'AI Chats' => {
+    'ai_chats' => {
       route: %i[ai_chats chats],
       controller: 'chats',
       action: 'ai_chats',
       auth: :auth_only
     },
-    'Blogs' => {
+    'blogs' => {
       route: %i[pages],
       controller: 'static',
       action: 'pages',
       auth: :both
-    }
+    },
   }.freeze
 
   def flash_style(color_type)
