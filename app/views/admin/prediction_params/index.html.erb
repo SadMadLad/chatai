@@ -14,7 +14,7 @@
         <% @prediction_params.each do |prediction_param| %>
           <tr class="even:bg-gray-50 odd:bg-white">
             <td class="text-center p-0.5 md:p-2"><%= prediction_param.name %></td>
-            <td class="text-center p-0.5 md:p-2"><%= prediction_param.parameter_type %></td>
+            <td class="text-center p-0.5 md:p-2"><%= prediction_param.param_type %></td>
             <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= prediction_param.description %></td>
             <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= prediction_param.ml_model.title %></td>
             <td class="text-center p-0.5 md:p-2"><%= prediction_param.created_at.strftime('%d %B, %Y') %></td>
@@ -32,7 +32,7 @@
                 >
                   <div class="flex flex-row gap-1.5 text-left">
                     <%= link_to t('show'), [:admin, prediction_param] %>
-                    <%= link_to t('edit'), [:edit, :admin, prediction_param] %>
+                    <%= link_to t('edit'), [:edit, :admin, prediction_param.ml_model, prediction_param] %>
                     <%= button_to t('delete'), [:admin, prediction_param], method: :delete %>
                   </div>
                 </div>

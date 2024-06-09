@@ -44,9 +44,7 @@ Rails.application.routes.draw do
       collection { get :reply }
     end
     resources :likes, only: %i[index create destroy]
-    resources :posts do
-      collection { get :own }
-    end
+    resources :posts
     resources :ml_models, only: %i[index show] do
       member do
         get :notebook_html
@@ -77,6 +75,10 @@ Rails.application.routes.draw do
       resources :prediction_params, only: %i[index show]
       resources :posts
       resources :solid_queues, only: :index
+      resources :subreddit_posts
+      resources :subreddits do
+        resources :subreddit_posts, except: %i[index show]
+      end
       resources :users
     end
   end
