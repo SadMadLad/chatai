@@ -3,6 +3,7 @@
 module Ai
   # Machine Learning model are simple scikit models.
   class MlModel < ApplicationRecord
+    AVAILABLE_MODELS = %w[titanic].freeze
     has_many :prediction_params, dependent: :destroy
     belongs_to :account
 
@@ -12,6 +13,7 @@ module Ai
     enum :model_type, { classification: 0, regression: 1 }
 
     validates :description, :explanation, :identifier, :model_type, :parameters_with_order, :title, presence: true
-    validates :identifier, downcase: true, alphanumeric: true, length: { minimum: 2, maxiumum: 60 }
+    validates :identifier, downcase: true, alphanumeric: true, length: { in: 2..60 },
+              single_word: true, inclusion: { in: AVAILABLE_MODELS }
   end
 end
