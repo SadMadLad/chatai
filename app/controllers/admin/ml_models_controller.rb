@@ -12,7 +12,7 @@ module Admin
     before_action -> { fetch_admin_comments(@ml_model) }, only: :show
 
     def index
-      @pagy, @ml_models = pagy(Ai::MlModel.includes(:account).all)
+      @pagy, @ml_models = pagy(MlModel.includes(:account).all)
     end
 
     def show
@@ -21,13 +21,13 @@ module Admin
     end
 
     def new
-      @ml_model = Ai::MlModel.new
+      @ml_model = MlModel.new
     end
 
     def edit; end
 
     def create
-      @ml_model = Ai::MlModel.new(ml_model_params)
+      @ml_model = MlModel.new(ml_model_params)
 
       if @ml_model.save
         redirect_to [:admin, @ml_model], notice: t(:create, model:)
@@ -64,7 +64,7 @@ module Admin
     private
 
     def set_model
-      @ml_model = Ai::MlModel.find(params[:id])
+      @ml_model = MlModel.find(params[:id])
     end
 
     def authorize_ml_model
