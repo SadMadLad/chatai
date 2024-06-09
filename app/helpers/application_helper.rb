@@ -44,7 +44,7 @@ module ApplicationHelper
       controller: 'static',
       action: 'pages',
       auth: :both
-    },
+    }
   }.freeze
 
   def flash_style(color_type)

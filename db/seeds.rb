@@ -157,10 +157,10 @@ end
 # Generate Tags
 
 Tag.create([
-  { tag: 'Education' },
-  { tag: 'Chemistry' },
-  { tag: 'Physics' },
-])
+             { tag: 'Education' },
+             { tag: 'Chemistry' },
+             { tag: 'Physics' }
+           ])
 
 # Seed some basic machine learning model/s and prediction params
 
@@ -185,3 +185,22 @@ ml_model = MlModel.create(
     Embarked
   ]
 )
+
+prediction_params = [{ 'param_type' => 'integer', 'name' => 'PassengerId', 'description' => 'Ok',
+                       'possible_values' => nil },
+                     { 'param_type' => 'options', 'name' => 'Pclass', 'description' => 'ok',
+                       'possible_values' => %w[3 2 1] },
+                     { 'param_type' => 'text', 'name' => 'Name', 'description' => 'Name', 'possible_values' => nil },
+                     { 'param_type' => 'options', 'name' => 'Sex', 'description' => 'n',
+                       'possible_values' => %w[male female] },
+                     { 'param_type' => 'float', 'name' => 'Age', 'description' => 'm', 'possible_values' => nil },
+                     { 'param_type' => 'integer', 'name' => 'SibSp', 'description' => 'n', 'possible_values' => nil },
+                     { 'param_type' => 'integer', 'name' => 'Parch', 'description' => 'm', 'possible_values' => nil },
+                     { 'param_type' => 'integer', 'name' => 'Ticket', 'description' => 'm', 'possible_values' => nil },
+                     { 'param_type' => 'float', 'name' => 'Fare', 'description' => 'n', 'possible_values' => nil },
+                     { 'param_type' => 'string', 'name' => 'Cabin', 'description' => 'mm', 'possible_values' => nil },
+                     { 'param_type' => 'options', 'name' => 'Embarked', 'description' => '321',
+                       'possible_values' => %w[Q S C] }]
+prediction_params = prediction_params.each { |param| param['ml_model_id'] = ml_model.id }
+
+PredictionParam.create(prediction_params)

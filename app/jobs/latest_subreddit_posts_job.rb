@@ -54,4 +54,4 @@ class LatestSubredditPostsJob < ApplicationJob
   def update_subreddit(subreddit_subscribers)
     @subreddit.update(latest_scraped_at: DateTime.now, subreddit_subscribers:)
   end
-  end
+end
