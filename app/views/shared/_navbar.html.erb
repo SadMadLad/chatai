@@ -34,7 +34,9 @@
         <% (user_signed_in? ? authed_routes : unauthed_routes).each do |route_text, route_data|  %>
           <%= link_to t(".#{route_text}"), route_data[:route], class: "font-semibold hover:text-primary-500 #{'border-b-2 border-b-primary-500' if route_data[:controller] == params[:controller] && route_data[:action] == params[:action]}" %>
         <% end %>
-        <%= link_to t('.visit_admin_dashboard'), %i[admin dashboard], class: 'font-semibold' %>
+        <% if user_signed_in? && current_account.can_moderate? %>
+          <%= link_to t('.visit_admin_dashboard'), %i[admin dashboard], class: 'font-semibold' %>
+        <% end %>
       </nav>
     </aside>
     <div
@@ -50,7 +52,9 @@
       data-controller="dropdown"
       data-dropdown-other-toggle-classes-value=<%= %w[px-4 py-2.5].to_json %>
     >
-      <%= link_to t('.visit_admin_dashboard'), %i[admin dashboard], class: 'font-semibold text-xs' %>
+      <% if current_account.can_moderate? %>
+        <%= link_to t('.visit_admin_dashboard'), %i[admin dashboard], class: 'font-semibold text-xs' %>
+      <% end %>
       <%= account_avatar(
         current_account,
         other_classes: 'cursor-pointer',

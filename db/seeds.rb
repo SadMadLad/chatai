@@ -158,7 +158,30 @@ end
 
 Tag.create([
   { tag: 'Education' },
-  { tag: 'Cartoons' }
+  { tag: 'Chemistry' },
+  { tag: 'Physics' },
 ])
 
-# TODO: Seed some machine learning models and prediction params
+# Seed some basic machine learning model/s and prediction params
+
+ml_model = Ai::MlModel.create(
+  title: 'Titanic',
+  identifier: 'titanic',
+  model_type: 'classification',
+  description: 'Titanic Classification to see who has survived or not.',
+  explanation: 'Explanation of the Machine Learning Model.',
+  account: admin_user.account,
+  parameters_with_order: %w[
+    PassengerId
+    Pclass
+    Name
+    Sex
+    Age
+    SibSp
+    Parch
+    Ticket
+    Fare
+    Cabin
+    Embarked
+  ]
+)
