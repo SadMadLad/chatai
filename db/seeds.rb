@@ -75,8 +75,8 @@ first_n_accounts.each { |account| account.account_tokens.create(scope: :frontend
 
 # Creating subreddits
 
-Apis::Reddit::Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
-Apis::Reddit::Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
+Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
+Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
 
 # Creating Live chats
 
@@ -164,7 +164,7 @@ Tag.create([
 
 # Seed some basic machine learning model/s and prediction params
 
-ml_model = Ai::MlModel.create(
+ml_model = MlModel.create(
   title: 'Titanic',
   identifier: 'titanic',
   model_type: 'classification',
