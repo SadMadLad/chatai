@@ -18,10 +18,10 @@ public:
   AdjacencyMatrix(const std::vector<std::vector<bool>> &);
   AdjacencyMatrix(const AdjacencyMatrix &);
 
-  void appendNode(int);
-  void removeNode(int);
-  void connectNodes(int, int);
-  void disconnectNodes(int, int);
+  void append_node(int);
+  void remove_node(int);
+  void connect_nodes(int, int);
+  void disconnect_nodes(int, int);
 
   friend std::ostream &operator<<(std::ostream &, const AdjacencyMatrix &);
 };
