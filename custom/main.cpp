@@ -1,29 +1,16 @@
 #include <iostream>
 #include <vector>
 
-#include "algorithms/binomial_coefficient.h"
-#include "graphs/adjacency_matrix.cpp"
+#include "algorithms/sorting/selection_sort.cpp"
+#include "algorithms/sorting/bubble_sort.cpp"
 
 int main() {
-  AdjacencyMatrix A(8);
-  AdjacencyMatrix B;
-  AdjacencyMatrix C(std::vector<int>({ 9, 5, 4 }));
-  AdjacencyMatrix D(C);
+  std::vector<int> arr = {65, 14, 20, 30, 7, 80};
+  bubble_sort(arr);
 
-  std::cout << A;
-  A.appendNode(33);
-  std::cout << std::endl;
+  for (int i = 0; i < arr.size(); i++)
+    std::cout << arr[i] << ' ';
 
-  std::cout << B;
-  B.appendNode(20);
-  B.appendNode(30);
-  B.appendNode(20);
-  std::cout << std::endl;
-
-  std::cout << C;
-  std::cout << std::endl;
-
-  std::cout << D;
   std::cout << std::endl;
 
   return 0;
