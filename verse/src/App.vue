@@ -9,6 +9,7 @@
   <nav>
     <RouterLink to="/">Go to Home</RouterLink>
     <RouterLink to="/about">Go to About</RouterLink>
+    {{ isAuthenticated }}
     <div v-if="!isAuthenticated">
       <RouterLink to="/login">Go To Login</RouterLink>
     </div>

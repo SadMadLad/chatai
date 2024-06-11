@@ -18,6 +18,7 @@ export const useAuthStore = defineStore("auth", () => {
     avatarUrl.value = newAvatarUrl;
     fullName.value = newFullName;
     token.value = newToken;
+    isAuthenticated.value = true;
   }
 
   return { avatarUrl, isAuthenticated, fullName, token, logout, login };
