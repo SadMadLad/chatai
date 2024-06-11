@@ -76,7 +76,9 @@ Rails.application.routes.draw do
       resources :posts
       resources :solid_queues, only: :index
       resources :subreddit_posts, only: %i[index show delete]
-      resources :subreddits
+      resources :subreddits do
+        member { post :scrape_subreddit_posts }
+      end
       resources :users
     end
   end

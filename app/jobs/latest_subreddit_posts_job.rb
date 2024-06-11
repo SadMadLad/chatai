@@ -44,7 +44,7 @@ class LatestSubredditPostsJob < ApplicationJob
     fetched_values = post.values_at(*values_to_fetch)
     subreddit_post_hash = values_to_fetch.zip(fetched_values).to_h.merge('subreddit_id' => @subreddit.id)
 
-    SubredditPost.create(subreddit_post_hash)
+    SubredditPost.upsert(subreddit_post_hash, unique_by: :url)
   end
 
   def post_should_be_scraped?(post, post_created_at)

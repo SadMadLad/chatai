@@ -32,6 +32,7 @@ en:
   app: Chatai
   delete: Delete
   edit: Edit
+  job_enqueued: The Job has been enqueued successfully
   login: Login
   logout: Logout
   op: Original Poster

@@ -23,7 +23,7 @@ class CreateSubredditPosts < ActiveRecord::Migration[7.1]
       t.text :selftext
       t.text :selftext_html
 
-      t.index :permalink, unique: true
+      t.index :url, unique: true
 
       t.timestamps
     end

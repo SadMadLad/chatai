@@ -1,0 +1,13 @@
+<%== spread_record(@subreddit) %>
+
+<hr />
+
+<%= link_to @subreddit.subreddit %>
+<%= button_to 'Scrape Subreddit Posts', [:scrape_subreddit_posts, :admin, @subreddit], method: :post %>
+<hr />
+
+<%= render 'shared/admin_comments_section', admin_commentable: @subreddit, admin_comments: @admin_comments, pagy: @pagy %>
+
+<hr />
+
+<%= link_to 'Subreddits Path', %i[admin subreddits] %>

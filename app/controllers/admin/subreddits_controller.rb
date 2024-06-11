@@ -3,7 +3,7 @@
 module Admin
   # Admin View for Subreddits
   class SubredditsController < Admin::AdminController
-    before_action :set_subreddit, only: %i[show edit update destroy]
+    before_action :set_subreddit, only: %i[show edit update destroy scrape_subreddit_posts]
     before_action :authorize_subreddit
 
     before_action -> { define_model_name('subreddit') }
@@ -44,10 +44,17 @@ module Admin
       redirect_to %i[admin subreddits], notice: t(:destroy, model:)
     end
 
+    def scrape_subreddit_posts
+      LatestSubredditPostsJob.perform_now(@subreddit.id)
+
+      flash[:notice] = t(:job_enqueued)
+      head :accepted
+    end
+
     private
 
     def subreddit_params
-      params.require(:subreddit).permit(:title, :body, images: [])
+      params.require(:subreddit).permit(:subreddit, :subreddit_url)
     end
 
     def set_subreddit
@@ -55,7 +62,7 @@ module Admin
     end
 
     def authorize_subreddit
-      authorize @subreddit, policy_class: Admin::AdminPolicy
+      authorize @subreddit, policy_class: Admin::SubredditPolicy
     end
   end
 end
