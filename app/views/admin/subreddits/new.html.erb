@@ -1,0 +1,13 @@
+<%= form_with model: @subreddit, url: [:admin, :subreddits] do |form| %>
+  <div>
+    <%= form.label :subreddit %>
+    <%= form.text_field :subreddit %>
+  </div>
+
+  <div>
+    <%= form.label :subreddit_url %>
+    <%= form.text_field :subreddit_url %>
+  </div>
+
+  <%= form.submit %>
+<% end %>

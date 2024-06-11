@@ -299,8 +299,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_173943) do
     t.text "selftext_html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["permalink"], name: "index_subreddit_posts_on_permalink", unique: true
     t.index ["subreddit_id"], name: "index_subreddit_posts_on_subreddit_id"
+    t.index ["url"], name: "index_subreddit_posts_on_url", unique: true
   end
 
   create_table "subreddits", force: :cascade do |t|

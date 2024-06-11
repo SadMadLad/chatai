@@ -25,7 +25,7 @@ module Admin
       content_tag(:div) do
         record.attributes.except(*except).map do |attribute, value|
           content_tag(:div, "#{attribute}: #{value}")
-        end.join
+        end.join.html_safe
       end
     end
 
