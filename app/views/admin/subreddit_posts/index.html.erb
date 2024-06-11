@@ -1,0 +1,48 @@
+<div class="mx-8 my-6 flex justify-between items-center">
+  <%== pagy_nav(@pagy) %>
+</div>
+
+<div class="w-full flex-center mb-8">
+  <div class="w-full overflow-auto max-w-5xl mx-8 border rounded-xl">
+    <table class="border-separate border-spacing-0 text-xs md:text-sm w-full rounded-xl overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <%== table_cols(%w[ups upvote_ratio url author permalink score title], class: 'py-2.5 text-center px-3') %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subreddit_posts.each do |subreddit_post| %>
+          <tr class="even:bg-gray-50 odd:bg-white">
+            <td class="text-center p-0.5 md:p-2"><%= subreddit_post.ups %></td>
+            <td class="text-center p-0.5 md:p-2"><%= subreddit_post.upvote_ratio %></td>
+            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= subreddit_post.url %></td>
+            <td class="text-center p-0.5 md:p-2"><%= subreddit_post.author %></td>
+            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= subreddit_post.permalink %></td>
+            <td class="text-center p-0.5 md:p-2"><%= subreddit_post.score %></td>
+            <td class="text-center p-0.5 md:p-2 max-w-28 overflow-hidden overflow-ellipsis whitespace-nowrap"><%= subreddit_post.title %></td>
+            <td class="text-center p-0.5 md:p-2"><%= subreddit_post.created_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2"><%= subreddit_post.updated_at.strftime('%d %B, %Y') %></td>
+            <td class="text-center p-0.5 md:p-2">
+              <div
+                class="relative min-w-fit"
+                data-controller="dropdown"
+                data-dropdown-other-toggle-classes-value=<%= %w[px-3 py-1.5].to_json %>
+              >
+                <button data-action="dropdown#toggle"><i class="fa-solid fa-ellipsis"></i></button>
+                <div
+                  class="absolute w-0 h-0 bg-white shadow z-[48] right-0 bottom-4 rounded-xl transition-all duration-100 overflow-hidden"
+                  data-dropdown-target="dropdown"
+                >
+                  <div class="flex flex-row gap-1.5 text-left">
+                    <%= link_to t('show'), [:admin, subreddit_post] %>
+                    <%= button_to t('delete'), [:admin, subreddit_post], method: :delete %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

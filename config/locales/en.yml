@@ -226,6 +226,9 @@ en:
         parameter_type: Parameter Type
         description: Description
         ml_model: ML Model
+    subreddits:
+      index:
+        add_subreddit: Add A New Subreddit
     users:
       index:
         add_user: Add New User

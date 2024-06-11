@@ -5,7 +5,6 @@ module Admin
   module AdminHelper
     ADMIN_LINKS = {
       dashboard: 'fas fa-chart-line',
-
       accounts: 'fas fa-user-circle',
       account_chat_maps: 'fas fa-link',
       admin_comments: 'fas fa-comment-alt',
@@ -17,6 +16,8 @@ module Admin
       posts: 'fas fa-mail-bulk',
       prediction_params: 'fas fa-brain',
       solid_queues: 'fas fa-user-md',
+      subreddit_posts: 'fa-regular fa-envelope',
+      subreddits: 'fa-brands fa-reddit',
       users: 'fas fa-users'
     }.freeze
 

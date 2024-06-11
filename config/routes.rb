@@ -75,10 +75,8 @@ Rails.application.routes.draw do
       resources :prediction_params, only: %i[index show]
       resources :posts
       resources :solid_queues, only: :index
-      resources :subreddit_posts
-      resources :subreddits do
-        resources :subreddit_posts, except: %i[index show]
-      end
+      resources :subreddit_posts, only: %i[index show delete]
+      resources :subreddits
       resources :users
     end
   end
