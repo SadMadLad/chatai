@@ -14,8 +14,4 @@ class MlModel < ApplicationRecord
   validates :description, :explanation, :identifier, :model_type, :parameters_with_order, :title, presence: true
   validates :identifier, downcase: true, alphanumeric: true, length: { in: 2..60 },
                          single_word: true, inclusion: { in: AVAILABLE_MODELS }
-
-  def has_prediction_params_configured?
-    prediction_params.pluck(:name) == parameters_with_order
-  end
 end

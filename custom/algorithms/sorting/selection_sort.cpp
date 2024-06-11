@@ -5,6 +5,7 @@
 /*
   Start from left, find the next minimum and then swap it with the current element.
 */
+
 void selection_sort(std::vector<int> &array)
 {
   unsigned int array_size = array.size();

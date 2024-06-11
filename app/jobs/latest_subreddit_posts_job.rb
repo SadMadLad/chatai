@@ -5,8 +5,8 @@ class LatestSubredditPostsJob < ApplicationJob
   rescue_from JSON::ParserError, with: -> { log_error('job_errors.json_parse') }
   rescue_from ActiveModel::UnknownAttributeError, with: -> { log_error('job_errors.unknown_attribute') }
 
-  def perform(subreddit)
-    @subreddit = subreddit
+  def perform(subreddit_id)
+    @subreddit = Subreddit.find(subreddit_id)
 
     listing_data = JSON.parse(fetch_page_response.body).with_indifferent_access
     listing_data = listing_data.dig(:data, :children)
@@ -36,7 +36,7 @@ class LatestSubredditPostsJob < ApplicationJob
     return if post_created_at.blank?
 
     post_created_at = Time.zone.at(post_created_at)
-    return unless post_should_be_scrarped?(post, post_created_at)
+    return unless post_should_be_scraped?(post, post_created_at)
 
     post = post[:data]
 
@@ -47,7 +47,7 @@ class LatestSubredditPostsJob < ApplicationJob
     SubredditPost.create(subreddit_post_hash)
   end
 
-  def post_should_be_created(post, post_created_at)
+  def post_should_be_scraped?(post, post_created_at)
     post[:kind] == 't3' && (@subreddit.latest_scraped_at.nil? || post_created_at > @subreddit.latest_scraped_at)
   end
 
