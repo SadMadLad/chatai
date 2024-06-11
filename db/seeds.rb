@@ -71,7 +71,9 @@ end
 
 # Creating account tokens
 
-first_n_accounts.each { |account| account.account_tokens.create(scope: :frontend) }
+first_n_accounts.each do |account|
+  account.account_tokens.create([{ scope: :frontend }, { scope: :verse }])
+end
 
 # Creating subreddits
 
