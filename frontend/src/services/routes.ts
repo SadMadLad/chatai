@@ -20,8 +20,8 @@ const RailsRoutes: RailsRoutes = {
     url: `${Rails}/sessions/verify_session`,
     method: "POST",
   },
-  chats: { url: `${Rails}/chats`, method: "GET" },
-  accounts: { url: `${Rails}/accounts`, method: "GET" },
+  chats: { url: `${Rails}/frontend/chats`, method: "GET" },
+  accounts: { url: `${Rails}/frontend/accounts`, method: "GET" },
 };
 
 const PhoenixSocket = import.meta.env.VITE_PHOENIX_SOCKET_URL;
