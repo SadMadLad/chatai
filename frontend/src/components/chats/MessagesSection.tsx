@@ -9,13 +9,13 @@ function Message({
   sender,
   avatar_url,
   created_at,
-  sender_identifier,
+  sender_username,
 }: MessageType) {
-  const { uniqueIdentifier } = useAuthStore();
+  const { username } = useAuthStore();
 
   return (
     <div className="mb-4">
-      {sender_identifier !== uniqueIdentifier ? (
+      {sender_username !== username ? (
         <div className="flex flex-row gap-2.5">
           <UserAvatar
             className="flex-shrink-0"

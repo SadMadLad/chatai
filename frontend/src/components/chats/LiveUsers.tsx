@@ -30,15 +30,15 @@ function LiveUserSearch({ liveUsers }: { liveUsers: UserPresence[] }) {
           <CommandEmpty>No User Found</CommandEmpty>
           <CommandList>
             <CommandGroup>
-              {liveUsers.map(({ unique_identifier, name }) => (
+              {liveUsers.map(({ username, name }) => (
                 <CommandItem
-                  key={unique_identifier}
+                  key={username}
                   value={name}
                   onSelect={(u) => {
                     liveUsers.find((user) => u === user.name);
                   }}
                 >
-                  <Link to={`/accounts/${unique_identifier}/public`}>
+                  <Link to={`/accounts/${username}/public`}>
                     {name}
                   </Link>
                 </CommandItem>
@@ -63,9 +63,9 @@ export default function LiveUsers({
   return (
     <div className="flex flex-row items-center gap-8">
       <div className="group flex items-center gap-0 transition-all hover:gap-4">
-        {firstNUsers.map(({ avatar_url, name, unique_identifier }) => (
+        {firstNUsers.map(({ avatar_url, name, username }) => (
           <UserAvatar
-            key={unique_identifier}
+            key={username}
             avatarUrl={avatar_url}
             fullName={name}
             hasPopover={true}

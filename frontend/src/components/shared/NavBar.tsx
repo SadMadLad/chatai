@@ -17,11 +17,7 @@ import {
 } from "@/components/ui/DropdownMenu";
 import { Menu, Apple } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
-import { toast } from "sonner";
 import UserAvatar from "@/components/shared/UserAvatar";
-
-import { client } from "@/services/clients";
-import { RailsRoutes } from "@/services/routes";
 
 interface NavBarLink {
   text: String;
@@ -30,8 +26,7 @@ interface NavBarLink {
 }
 
 export default function NavBar() {
-  const { authToken, fullName, isAuthed, avatarUrl, removeAuthToken } =
-    useAuthStore();
+  const { fullName, isAuthed, avatarUrl, removeAuthToken } = useAuthStore();
   const { unsubscribeSocket } = useSocketStore();
   const { unsubscribePresence } = usePresenceStore();
 
@@ -51,19 +46,11 @@ export default function NavBar() {
   ];
 
   const handleLogout = async () => {
-    const { url, method } = RailsRoutes.logout;
-    const response = await fetch(client(url, method, { authToken: authToken }));
+    removeAuthToken();
+    unsubscribePresence();
+    unsubscribeSocket();
 
-    if (response.ok) {
-      removeAuthToken();
-      unsubscribePresence();
-      unsubscribeSocket();
-
-      navigate("/");
-    } else {
-      const { error } = await response.json();
-      toast(error || "Something went wrong. Please try again later");
-    }
+    navigate("/");
   };
 
   return (

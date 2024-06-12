@@ -17,7 +17,6 @@ defmodule ChannelWeb.ActiveChannel do
         online_at: inspect(System.system_time(:second)),
         name: socket.assigns.name,
         avatar_url: socket.assigns.avatar_url,
-        unique_identifier: socket.assigns.current_account.unique_identifier,
         username: socket.assigns.current_account.username
       })
 

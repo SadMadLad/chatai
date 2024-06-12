@@ -1,8 +1,4 @@
-function client(
-  route,
-  method,
-  clientOptions,
-) {
+function client(route, method, clientOptions) {
   // Prepare headers
   const headers = new Headers();
 

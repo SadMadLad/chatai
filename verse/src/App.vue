@@ -1,21 +1,22 @@
 <script setup>
-  import { useAuthStore } from "@/storage/auth";
-  import { reactive } from "vue";
+import { computed } from "vue";
+import { useAuthStore } from "@/storage/auth";
 
+const userIsAuthed = computed(() => {
   const { isAuthenticated } = useAuthStore();
+  return isAuthenticated
+});
 </script>
 
 <template>
   <nav>
-    <RouterLink to="/">Go to Home</RouterLink>
-    <RouterLink to="/about">Go to About</RouterLink>
-    {{ isAuthenticated }}
-    <div v-if="!isAuthenticated">
-      <RouterLink to="/login">Go To Login</RouterLink>
+    <RouterLink :to="{ name: 'home' }">Go to Home</RouterLink>
+    <RouterLink :to="{ name: 'about' }">Go to About</RouterLink>
+    {{ userIsAuthed }}
+    <div v-if="!userIsAuthed">
+      <RouterLink :to="{ name: 'login' }">Go To Login</RouterLink>
     </div>
-    <div v-else>
-      You are logged in.
-    </div>
+    <div v-else>You are logged in.</div>
   </nav>
   <main>
     <RouterView />

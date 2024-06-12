@@ -20,7 +20,6 @@ defmodule ChannelWeb.ChatChannel do
         online_at: inspect(System.system_time(:second)),
         name: socket.assigns.name,
         avatar_url: socket.assigns.avatar_url,
-        unique_identifier: socket.assigns.current_account.unique_identifier,
         username: socket.assigns.current_account.username
       })
 
@@ -55,7 +54,7 @@ defmodule ChannelWeb.ChatChannel do
       "content" => message.content,
       "created_at" => message.created_at,
       "sender" => socket.assigns.name,
-      "sender_identifier" => account.unique_identifier
+      "sender_username" => account.username
     }
   end
 end

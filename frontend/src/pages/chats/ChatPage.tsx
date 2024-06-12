@@ -62,7 +62,7 @@ export default function ChatPage() {
     chatPresence.onSync(() => {
       const presentUsers = Object.values(
         chatPresence.list((_, { metas: [presentUser] }) => presentUser),
-      ).filter((presentUser) => !!presentUser.unique_identifier);
+      ).filter((presentUser) => !!presentUser.username);
 
       setLiveUsers(presentUsers);
     });

@@ -4,6 +4,4 @@ const RailsRoutes = {
   login: { url: `${Rails}/sessions`, method: "POST" },
 };
 
-export {
-  RailsRoutes,
-};
+export { RailsRoutes };

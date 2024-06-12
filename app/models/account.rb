@@ -28,7 +28,6 @@ class Account < ApplicationRecord
 
   validates :first_name, :last_name, :role, :username, presence: true
   validates :username, uniqueness: true
-  validates :unique_identifier, uniqueness: true, if: :unique_identifier?
 
   def full_name
     "#{first_name} #{last_name}"
