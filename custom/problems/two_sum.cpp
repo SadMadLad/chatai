@@ -25,13 +25,17 @@ std::vector<int> two_sum(const std::vector<int> &nums, int target)
 }
 
 void test_two_sum() {
+  std::cout << "Testing Two Sum" << std::endl;
+
   std::vector<int> nums({ 2, 7, 9, 11 });
+  int target_sum = 9;
+
   std::cout << "Input Array: " << std::endl;
   for(int n: nums)
     std::cout << n << ' ';
-  std::cout << std::endl;
+  std::cout << std::endl << "Target Sum: " << target_sum << std::endl;
 
-  std::vector<int> two_sum_solution = two_sum(nums, 9);
+  std::vector<int> two_sum_solution = two_sum(nums, target_sum);
 
   std::cout << "Printing Solution: " << std::endl;
   for(int n: two_sum_solution)
