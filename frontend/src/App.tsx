@@ -81,7 +81,7 @@ function App() {
         </Route>
         <Route path="/" element={<StaticPage />} />
         <Route
-          path="/accounts/:identifier/public"
+          path="/accounts/:username/public"
           element={<PublicAccountPage />}
         />
       </Routes>

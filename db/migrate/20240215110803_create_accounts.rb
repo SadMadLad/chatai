@@ -16,9 +16,6 @@ class CreateAccounts < ActiveRecord::Migration[7.1]
 
       t.datetime :latest_message_at
 
-      t.uuid :unique_identifier, default: 'uuid_generate_v4()'
-
-      t.index :unique_identifier, unique: true
       t.index :username, unique: true
 
       t.timestamps

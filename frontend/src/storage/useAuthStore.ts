@@ -7,14 +7,14 @@ interface AuthTokenState {
   authToken: string | null;
   fullName: string | null;
   avatarUrl: string | null;
-  uniqueIdentifier: string | null;
+  username: string | null;
   isAuthed: boolean;
   isAdmin: boolean | null;
   setAuthToken: (
     newToken: string,
     newName: string,
     newAvatarUrl: string,
-    newUniqueIdentifier: string,
+    newUsername: string,
     newIsAdmin: boolean,
   ) => void;
   removeAuthToken: () => void;
@@ -27,21 +27,21 @@ const useAuthStore = create<AuthTokenState>()(
       authToken: null,
       fullName: null,
       avatarUrl: null,
-      uniqueIdentifier: null,
+      username: null,
       isAuthed: false,
       isAdmin: false,
       setAuthToken: (
         newToken: string,
         newName: string,
         newAvatarUrl: string,
-        newUniqueIdentifier: string,
+        newUsername: string,
         newIsAdmin: boolean,
       ) =>
         set({
           authToken: newToken,
           fullName: newName,
           avatarUrl: newAvatarUrl,
-          uniqueIdentifier: newUniqueIdentifier,
+          username: newUsername,
           isAuthed: true,
           isAdmin: newIsAdmin,
         }),
@@ -50,7 +50,7 @@ const useAuthStore = create<AuthTokenState>()(
           authToken: null,
           fullName: null,
           avatarUrl: null,
-          uniqueIdentifier: null,
+          username: null,
           isAuthed: false,
           isAdmin: null,
         }),
@@ -67,13 +67,13 @@ const useAuthStore = create<AuthTokenState>()(
         if (!response.ok) {
           get().removeAuthToken();
         } else {
-          const { full_name, avatar_url, unique_identifier, is_admin } =
+          const { full_name, avatar_url, username, is_admin } =
             await response.json();
 
           set({
             fullName: full_name,
             avatarUrl: avatar_url,
-            uniqueIdentifier: unique_identifier,
+            username: username,
             isAuthed: true,
             isAdmin: is_admin,
           });

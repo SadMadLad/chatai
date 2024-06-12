@@ -13,7 +13,6 @@ defmodule Channel.Auth.Account do
     field :last_name, :string
     field :latest_message_at, :utc_datetime
     field :user_id, :integer
-    field :unique_identifier, :binary_id
 
     has_many :account_tokens, AccountToken
 
@@ -21,7 +20,7 @@ defmodule Channel.Auth.Account do
   end
 
   def changeset(account, attrs) do
-    account_cols = [:username, :first_name, :last_name, :latest_message_at, :user_id, :unique_identifier]
+    account_cols = [:username, :first_name, :last_name, :latest_message_at, :user_id]
 
     account
     |> cast(attrs, account_cols)

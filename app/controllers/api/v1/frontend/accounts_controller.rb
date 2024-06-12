@@ -6,7 +6,7 @@ module Api
       # Frontend Accounts Controller
       class AccountsController < Api::AuthenticatedController
         def public
-          @other_account = Account.find_by!(unique_identifier: params[:identifier])
+          @other_account = Account.find_by!(username: params[:username])
           @live_chats = Chat
                         .includes({ photo_attachment: :blob })
                         .joins(messages: :account)

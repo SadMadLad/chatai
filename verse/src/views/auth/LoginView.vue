@@ -1,18 +1,20 @@
 <script setup>
-  import { reactive } from 'vue';
-  import { useAuthStore } from "@/storage/auth";
   import { client } from "@/services/clients";
   import { RailsRoutes } from "@/services/routes";
+  import { reactive } from 'vue';
+  import { useAuthStore } from "@/storage/auth";
+  import { useRouter } from "vue-router";
 
   const loginData = reactive({
     email: null,
     password: null
   });
+  const router = useRouter();
 
   async function handleLogin(event) {
     event.preventDefault();
 
-    const { isAuthenticated, login } = useAuthStore();
+    const { login } = useAuthStore();
     const { url, method } = RailsRoutes.login;
     const { email, password } = loginData;
     const response = await fetch(
@@ -26,9 +28,8 @@
     } = await response.json();
 
     if (token) {
-      login(avatar_url, full_name, token)
-
-      console.log(isAuthenticated)
+      login(avatar_url, full_name, token);
+      router.push({ name: 'dashboard' })
     }
   }
 </script>
@@ -42,7 +43,7 @@
 
     <label for="password">Password: </label>
     <input class="border" id="password" type="password" v-model="loginData.password" />
-    
+
     <hr />
 
     <button type="submit">Login</button>

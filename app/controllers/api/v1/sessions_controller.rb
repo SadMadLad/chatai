@@ -45,7 +45,7 @@ module Api
         {
           token: encode(@account_token.id),
           full_name: @account.full_name,
-          unique_identifier: @account.unique_identifier,
+          username: @account.username,
           avatar_url: @account.avatar.attached? ? url_for(@account.avatar) : nil,
           is_admin: @account.can_moderate?
         }

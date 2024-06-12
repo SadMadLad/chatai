@@ -21,13 +21,12 @@ function UserCard({
   name,
   avatar_url,
   username,
-  unique_identifier,
 }: UserPresence) {
   return (
     <DrawerClose asChild>
       <Link
         className="flex items-center gap-2.5 rounded-lg border p-4 shadow-sm"
-        to={`/accounts/${unique_identifier}/public`}
+        to={`/accounts/${username}/public`}
       >
         <UserAvatar fullName={name} avatarUrl={avatar_url} hasPopover={false} />
         <div>
@@ -58,7 +57,7 @@ export default function ActiveUsersDrawer() {
           <ScrollArea className="h-56">
             <div className="flex flex-col gap-4">
               {onlineUsers.map((onlineUser) => (
-                <UserCard key={onlineUser.unique_identifier} {...onlineUser} />
+                <UserCard key={onlineUser.username} {...onlineUser} />
               ))}
             </div>
             <ScrollBar orientation="vertical" />

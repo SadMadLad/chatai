@@ -46,13 +46,13 @@ export default function LoginPage() {
         error,
         token,
         full_name,
-        unique_identifier,
+        username,
         avatar_url,
         is_admin,
       } = await response.json();
 
       if (token) {
-        setAuthToken(token, full_name, avatar_url, unique_identifier, is_admin);
+        setAuthToken(token, full_name, avatar_url, username, is_admin);
         subscribeSocket(token);
         subscribeChannel(full_name, token, avatar_url);
         subscribePresence();

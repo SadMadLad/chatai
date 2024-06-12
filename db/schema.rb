@@ -43,10 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_173943) do
     t.string "username", null: false
     t.text "tagline"
     t.datetime "latest_message_at"
-    t.uuid "unique_identifier", default: -> { "uuid_generate_v4()" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["unique_identifier"], name: "index_accounts_on_unique_identifier", unique: true
     t.index ["user_id"], name: "index_accounts_on_user_id"
     t.index ["username"], name: "index_accounts_on_username", unique: true
   end

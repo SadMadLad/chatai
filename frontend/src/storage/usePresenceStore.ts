@@ -56,10 +56,10 @@ const usePresenceStore = create<PresenceStoreState>((set, get) => ({
         (_, { metas: [presentUser, ...__] }: { metas: UserPresence[] }) =>
           presentUsers.unshift(presentUser),
       );
-      presentUsers.filter((presentUser) => !!presentUser.unique_identifier);
+      presentUsers.filter((presentUser) => !!presentUser.username);
       presentUsers = Object.values(
         presentUsers.reduce(
-          (acc, obj) => ({ ...acc, [obj.unique_identifier]: obj }),
+          (acc, obj) => ({ ...acc, [obj.username]: obj }),
           {},
         ),
       );

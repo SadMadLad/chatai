@@ -12,6 +12,6 @@ class AccountToken < ApplicationRecord
   enum :scope, { frontend: 0, verse: 1 }
 
   def profile_url(account)
-    "#{frontend? ? FRONTEND_URL : VERSE_URL}/accounts/#{account.unique_identifier}/public"
+    "#{frontend? ? FRONTEND_URL : VERSE_URL}/accounts/#{account.username}/public"
   end
 end

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       end
       namespace :frontend do
         resources :chats, only: %i[index show]
-        resources :accounts, param: :identifier do
+        resources :accounts, param: :username do
           member { get :public }
         end
       end

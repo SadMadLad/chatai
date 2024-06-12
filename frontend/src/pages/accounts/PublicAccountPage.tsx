@@ -12,11 +12,11 @@ import { Chat, Message } from "@/types/data/ChatTypes";
 import { RailsRoutes } from "@/services/routes";
 
 export default function PublicAccountPage() {
-  const { identifier } = useParams();
+  const { username } = useParams();
 
   const { method, url } = RailsRoutes.accounts;
   const { fetchedData, isLoading, isSuccess } = useFetch(
-    `${url}/${identifier}/public`,
+    `${url}/${username}/public`,
     method,
   );
 
