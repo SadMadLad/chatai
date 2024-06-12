@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 /*
   Start from the left, swap the number to its right if its greater than the number

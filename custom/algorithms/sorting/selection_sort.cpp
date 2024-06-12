@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 
 /*
@@ -18,7 +19,7 @@ void selection_sort(std::vector<int> &array)
   for (int i = 0; i < array_size; i++)
   {
     min_index = i;
-    
+
     for (int j = i; j < array_size; j++)
       if (array[j] < array[min_index])
         min_index = j;
