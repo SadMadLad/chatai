@@ -13,9 +13,9 @@ module Api
                         .where(account: { id: @other_account }, chat_type: :live_room)
                         .distinct
           @latest_messages = @other_account
-                            .messages
-                            .includes(:chat)
-                            .where(chat: { chat_type: :live_room }).last(5)
+                             .messages
+                             .includes(:chat)
+                             .where(chat: { chat_type: :live_room }).last(5)
         end
       end
     end

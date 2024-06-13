@@ -206,3 +206,60 @@ prediction_params = [{ 'param_type' => 'integer', 'name' => 'PassengerId', 'desc
 prediction_params = prediction_params.each { |param| param['ml_model_id'] = ml_model.id }
 
 PredictionParam.create(prediction_params)
+
+# Seed Quiz, Questions and QuestionOptions
+
+quiz = Quiz.create(
+  title: 'Chemistry Quiz',
+  description: 'Test your chemistry knowledge',
+  timed: true,
+  timer: 500,
+  published: true
+)
+
+question_sodium = Question.create(
+  quiz_id: quiz.id,
+  multiple_answers: false,
+  question_text: 'What is the element Na?'
+)
+
+question_symbols = Question.create(
+  quiz_id: quiz.id,
+  multiple_answers: true,
+  question_text: 'Which elements symbol start with K?'
+)
+
+question_options_sodium = [
+  {
+    question_id: question_sodium.id,
+    correct: true,
+    option_text: 'Sodium'
+  },
+  {
+    question_id: question_sodium.id,
+    correct: false,
+    option_text: 'Potassium'
+  }
+]
+
+QuestionOption.create(question_options_sodium)
+
+question_options_symbols = [
+  {
+    question_id: question_symbols.id,
+    correct: true,
+    option_text: 'Krypton'
+  },
+  {
+    question_id: question_symbols.id,
+    correct: false,
+    option_text: 'Boron'
+  },
+  {
+    question_id: question_symbols.id,
+    correct: true,
+    option_text: 'Potassium'
+  }
+]
+
+QuestionOption.create(question_options_symbols)

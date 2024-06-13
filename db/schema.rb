@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_173943) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -182,6 +182,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_173943) do
     t.datetime "updated_at", null: false
     t.index ["ml_model_id"], name: "index_prediction_params_on_ml_model_id"
     t.index ["name"], name: "index_prediction_params_on_name", unique: true
+  end
+
+  create_table "question_options", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.boolean "correct", default: false, null: false
+    t.text "option_text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_options_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "quiz_id", null: false
+    t.boolean "multiple_answers", default: false, null: false
+    t.text "question_text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_questions_on_quiz_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer "timer"
+    t.string "title", null: false
+    t.boolean "published", default: false, null: false
+    t.boolean "timed", default: false, null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -385,6 +413,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_173943) do
   add_foreign_key "messages", "accounts"
   add_foreign_key "messages", "chats"
   add_foreign_key "posts", "accounts"
+  add_foreign_key "question_options", "questions"
+  add_foreign_key "questions", "quizzes"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
