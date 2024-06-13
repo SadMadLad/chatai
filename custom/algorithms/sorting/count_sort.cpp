@@ -27,13 +27,12 @@ void count_sort(std::vector<int> &array)
   std::vector<int> sortedArray = std::vector<int>(length);
 
   int index = 0;
-  for (int i = length; i > 0; i--)
+  for (int i = length - 1; i >= 0; i--)
   {
     countArray[array[i]]--;
     index = countArray[array[i]];
     sortedArray[index] = array[i];
   }
 
-  for(int x : sortedArray)
-    std::cout << x << ' ';
+  array = sortedArray;
 }
