@@ -203,6 +203,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
   end
 
   create_table "quizzes", force: :cascade do |t|
+    t.bigint "account_id"
     t.integer "timer"
     t.string "title", null: false
     t.boolean "published", default: false, null: false
@@ -210,6 +211,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_quizzes_on_account_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -415,6 +417,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
   add_foreign_key "posts", "accounts"
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quizzes", "accounts"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

@@ -42,14 +42,8 @@ export default function LoginPage() {
         client(url, method, { body: { user: values } }),
       );
 
-      const {
-        error,
-        token,
-        full_name,
-        username,
-        avatar_url,
-        is_admin,
-      } = await response.json();
+      const { error, token, full_name, username, avatar_url, is_admin } =
+        await response.json();
 
       if (token) {
         setAuthToken(token, full_name, avatar_url, username, is_admin);

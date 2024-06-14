@@ -158,11 +158,11 @@ end
 
 # Generate Tags
 
-Tag.create([
-             { tag: 'Education' },
-             { tag: 'Chemistry' },
-             { tag: 'Physics' }
-           ])
+education_tag = Tag.create(tag: 'Education')
+chemistry_tag = Tag.create(tag: 'Chemistry')
+physics_tag = Tag.create(tag: 'Physics')
+flags_tag = Tag.create(tag: 'Flags')
+countries_tag = Tag.create(tag: 'Countries')
 
 # Seed some basic machine learning model/s and prediction params
 
@@ -209,13 +209,18 @@ PredictionParam.create(prediction_params)
 
 # Seed Quiz, Questions and QuestionOptions
 
+# Chemistry Quiz
+
 quiz = Quiz.create(
   title: 'Chemistry Quiz',
   description: 'Test your chemistry knowledge',
   timed: true,
-  timer: 500,
-  published: true
+  timer: 2000,
+  published: true,
+  account: first_account
 )
+
+[education_tag, chemistry_tag].each { |tag| quiz.tag_maps.find_or_create_by(tag:) }
 
 question_sodium = Question.create(
   quiz_id: quiz.id,
@@ -263,3 +268,68 @@ question_options_symbols = [
 ]
 
 QuestionOption.create(question_options_symbols)
+
+# Flags Quiz
+
+quiz_two = Quiz.create(
+  title: 'Flags Quiz',
+  description: 'Test your knowledge of flags',
+  timed: true,
+  timer: 3000,
+  published: true,
+  account: second_account
+)
+
+[education_tag, countries_tag, flags_tag].each { |tag| quiz_two.tag_maps.find_or_create_by(tag:) }
+
+question_turkey = Question.create(
+  quiz_id: quiz_two.id,
+  multiple_answers: false,
+  question_text: 'Which country has a red flag with moon in the center?'
+)
+
+question_pakistan = Question.create(
+  quiz_id: quiz_two.id,
+  multiple_answers: false,
+  question_text: 'Which country has a green and white flag with moon and star?'
+)
+
+question_options_turkey = QuestionOption.create(
+  [
+    {
+      question_id: question_turkey.id,
+      correct: true,
+      option_text: 'Turkey'
+    },
+    {
+      question_id: question_turkey.id,
+      correct: false,
+      option_text: 'Pakistan'
+    },
+    {
+      question_id: question_turkey.id,
+      correct: false,
+      option_text: 'India'
+    },
+  ]
+)
+
+question_options_pakistan = QuestionOption.create(
+  [
+    {
+      question_id: question_turkey.id,
+      correct: false,
+      option_text: 'Turkey'
+    },
+    {
+      question_id: question_turkey.id,
+      correct: true,
+      option_text: 'Pakistan'
+    },
+    {
+      question_id: question_turkey.id,
+      correct: false,
+      option_text: 'India'
+    },
+  ]
+)

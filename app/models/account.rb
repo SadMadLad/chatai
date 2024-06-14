@@ -10,11 +10,13 @@ class Account < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :posts, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :ml_models, dependent: :destroy
   has_many :overseer_comments, class_name: 'AdminComment', foreign_key: 'commenter_id', dependent: :destroy,
                                inverse_of: :commenter
+  has_many :posts, dependent: :destroy
+  has_many :quizzes, dependent: :nullify
+  has_many :quiz_undertakings, dependent: :destroy
 
   has_one_attached :avatar, dependent: :destroy do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true

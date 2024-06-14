@@ -38,9 +38,7 @@ function LiveUserSearch({ liveUsers }: { liveUsers: UserPresence[] }) {
                     liveUsers.find((user) => u === user.name);
                   }}
                 >
-                  <Link to={`/accounts/${username}/public`}>
-                    {name}
-                  </Link>
+                  <Link to={`/accounts/${username}/public`}>{name}</Link>
                 </CommandItem>
               ))}
             </CommandGroup>
