@@ -22,4 +22,4 @@ export const useAuthStore = defineStore("auth", () => {
   }
 
   return { avatarUrl, isAuthenticated, fullName, token, logout, login };
-});
+}, { persist: true });

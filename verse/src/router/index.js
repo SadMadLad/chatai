@@ -6,6 +6,7 @@ import DashboardView from "@/views/dashboard/DashboardView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import NotFoundView from "@/views/errors/NotFoundView.vue";
 import QuizView from "@/views/quiz/QuizView.vue";
+import Quizzes from "@/views/quiz/Quizzes.vue";
 import QuizzesView from "@/views/quiz/QuizzesView.vue";
 import RootView from "@/views/static/RootView.vue";
 
@@ -33,16 +34,21 @@ const routes = [
     beforeEnter: [publicOnlyRoute],
   },
   {
-    path: "/quiz/:id",
-    name: "quiz",
-    component: QuizView,
-    beforeEnter: [privateRoute],
-  },
-  {
     path: "/quizzes",
-    name: "quizzes",
-    component: QuizzesView,
+    component: Quizzes,
     beforeEnter: [privateRoute],
+    children: [
+      {
+        path: "",
+        name: "quizzes",
+        component: QuizzesView,
+      },
+      {
+        path: ":id",
+        name: "quiz",
+        component: QuizView,
+      },
+    ],
   },
   {
     path: "/:pathMatch(.*)*",
