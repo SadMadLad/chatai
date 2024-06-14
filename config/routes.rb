@@ -16,11 +16,9 @@ Rails.application.routes.draw do
       resource :sessions, only: %i[create destroy] do
         collection { post :verify_session }
       end
-      namespace :frontend do
-        resources :chats, only: %i[index show]
-        resources :accounts, param: :username do
-          member { get :public }
-        end
+      resources :chats, only: %i[index show]
+      resources :accounts, param: :username do
+        member { get :public }
       end
     end
   end

@@ -21,7 +21,7 @@ import { toast } from "sonner";
 
 import { client } from "@/services/clients";
 import LoginSchema from "@/schemas/LoginSchema";
-import { RailsSignUpPath, RailsRoutes } from "@/services/routes";
+import { RailsRoutes } from "@/services/routes";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -110,13 +110,6 @@ export default function LoginPage() {
               </Button>
             </form>
           </Form>
-          <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <a href={RailsSignUpPath} className="underline">
-              Sign Up
-            </a>{" "}
-            and create an API Key for yourself.
-          </div>
         </div>
       </main>
       <aside className="bg-muted hidden min-h-screen lg:block">

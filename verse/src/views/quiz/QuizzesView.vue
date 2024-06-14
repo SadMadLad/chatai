@@ -1,3 +1,6 @@
-<script setup></script>
+<script setup>
+</script>
 
-<template></template>
+<template>
+  <h1>Quizzes Page</h1>
+</template>

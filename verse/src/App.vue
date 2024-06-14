@@ -32,7 +32,13 @@ const userIsAuthed = computed(() => {
         >Go To Login</RouterLink
       >
     </div>
-    <div v-else>You are logged in.</div>
+    <div v-else>
+      <RouterLink
+        :class="routerClass"
+        :to="{ name: 'quizzes' }"
+        activeClass="text-secondary-300"
+      >Go To Quizzes</RouterLink>
+    </div>
   </nav>
   <main>
     <RouterView />

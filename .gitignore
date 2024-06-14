@@ -40,9 +40,8 @@ dump.rdb
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
-# Ignore node_modules and package-lock.json
+# Ignore node_modules
 node_modules/
-package-lock.json
 
 # Ignore vscode settings
 .vscode/
