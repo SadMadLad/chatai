@@ -2,8 +2,11 @@
 
 # Quiz having many questions.
 class Quiz < ApplicationRecord
-  has_many :questions, dependent: :destroy
+  belongs_to :account
+
   has_many :question_options, through: :questions
+  has_many :questions, dependent: :destroy
+  has_many :tag_maps, as: :taggable, dependent: :destroy 
   has_many :tags, through: :tag_maps
 
   has_one_attached :cover
@@ -12,4 +15,10 @@ class Quiz < ApplicationRecord
   validates :timer, presence: true, comparison: { greater_than: 60 }, if: :timed?
   validates :timed, boolean: true
   validates :title, :description, presence: true
+
+  validate :publish_check, if: :saved_change_to_published?
+
+  private
+
+  def saved_change_to_published?; end
 end

@@ -2,19 +2,35 @@
 import { computed } from "vue";
 import { useAuthStore } from "@/storage/auth";
 
+const routerClass = "hover:underline transition-colors duration-300";
+
 const userIsAuthed = computed(() => {
   const { isAuthenticated } = useAuthStore();
-  return isAuthenticated
+  return isAuthenticated;
 });
 </script>
 
 <template>
-  <nav>
-    <RouterLink :to="{ name: 'home' }">Go to Home</RouterLink>
-    <RouterLink :to="{ name: 'about' }">Go to About</RouterLink>
-    {{ userIsAuthed }}
+  <nav class="bg-primary-500 flex gap-4 p-4 font-semibold text-white">
+    <RouterLink
+      :class="routerClass"
+      :to="{ name: 'home' }"
+      activeClass="text-secondary-300"
+      >Go to Home</RouterLink
+    >
+    <RouterLink
+      :class="routerClass"
+      :to="{ name: 'about' }"
+      activeClass="text-secondary-300"
+      >Go to About</RouterLink
+    >
     <div v-if="!userIsAuthed">
-      <RouterLink :to="{ name: 'login' }">Go To Login</RouterLink>
+      <RouterLink
+        :class="routerClass"
+        :to="{ name: 'login' }"
+        activeClass="text-secondary-300"
+        >Go To Login</RouterLink
+      >
     </div>
     <div v-else>You are logged in.</div>
   </nav>

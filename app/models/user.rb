@@ -19,11 +19,11 @@ class User < ApplicationRecord
   has_many :posts, through: :account, dependent: :destroy
   has_many :messages, through: :account, dependent: :destroy
   has_many :ml_models, through: :account, dependent: :destroy
+  has_many :quizzes, through: :account, dependent: :destroy
+  has_many :quiz_undertakings, through: :account, dependent: :destroy
 
   scope :admins, -> { where(role: %i[superadmin admin]) }
 
   validates_associated :account
   accepts_nested_attributes_for :account
-
-  delegate :first_name, to: :account, prefix: true
 end

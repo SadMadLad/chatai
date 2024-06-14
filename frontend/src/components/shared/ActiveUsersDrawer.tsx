@@ -17,11 +17,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/ScrollArea";
 import { UserPresence } from "@/types/StoreTypes";
 import UserAvatar from "@/components/shared/UserAvatar";
 
-function UserCard({
-  name,
-  avatar_url,
-  username,
-}: UserPresence) {
+function UserCard({ name, avatar_url, username }: UserPresence) {
   return (
     <DrawerClose asChild>
       <Link
