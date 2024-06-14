@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -200,6 +200,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
+  end
+
+  create_table "quiz_undertakings", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "quiz_id", null: false
+    t.integer "correct_answers", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_quiz_undertakings_on_account_id"
+    t.index ["quiz_id"], name: "index_quiz_undertakings_on_quiz_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -417,6 +427,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_12_234235) do
   add_foreign_key "posts", "accounts"
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "quizzes"
+  add_foreign_key "quiz_undertakings", "accounts"
+  add_foreign_key "quiz_undertakings", "quizzes"
   add_foreign_key "quizzes", "accounts"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

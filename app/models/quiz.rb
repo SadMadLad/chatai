@@ -4,9 +4,11 @@
 class Quiz < ApplicationRecord
   belongs_to :account
 
+  has_many :accounts, through: :quiz_undertakings
   has_many :question_options, through: :questions
   has_many :questions, dependent: :destroy
-  has_many :tag_maps, as: :taggable, dependent: :destroy 
+  has_many :quiz_undertakings, dependent: :destroy
+  has_many :tag_maps, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_maps
 
   has_one_attached :cover

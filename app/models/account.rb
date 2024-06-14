@@ -17,6 +17,7 @@ class Account < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :quizzes, dependent: :nullify
   has_many :quiz_undertakings, dependent: :destroy
+  has_many :taken_quizzes, through: :quiz_undertakings, class_name: 'Quiz'
 
   has_one_attached :avatar, dependent: :destroy do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true
