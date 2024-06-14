@@ -160,7 +160,7 @@ end
 
 education_tag = Tag.create(tag: 'Education')
 chemistry_tag = Tag.create(tag: 'Chemistry')
-physics_tag = Tag.create(tag: 'Physics')
+Tag.create(tag: 'Physics')
 flags_tag = Tag.create(tag: 'Flags')
 countries_tag = Tag.create(tag: 'Countries')
 
@@ -294,7 +294,7 @@ question_pakistan = Question.create(
   question_text: 'Which country has a green and white flag with moon and star?'
 )
 
-question_options_turkey = QuestionOption.create(
+QuestionOption.create(
   [
     {
       question_id: question_turkey.id,
@@ -310,26 +310,26 @@ question_options_turkey = QuestionOption.create(
       question_id: question_turkey.id,
       correct: false,
       option_text: 'India'
-    },
+    }
   ]
 )
 
-question_options_pakistan = QuestionOption.create(
+QuestionOption.create(
   [
     {
-      question_id: question_turkey.id,
+      question_id: question_pakistan.id,
       correct: false,
       option_text: 'Turkey'
     },
     {
-      question_id: question_turkey.id,
+      question_id: question_pakistan.id,
       correct: true,
       option_text: 'Pakistan'
     },
     {
-      question_id: question_turkey.id,
+      question_id: question_pakistan.id,
       correct: false,
       option_text: 'India'
-    },
+    }
   ]
 )
