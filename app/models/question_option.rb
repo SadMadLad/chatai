@@ -2,6 +2,8 @@
 
 # Single option of a quiz
 class QuestionOption < ApplicationRecord
+  scope :randomize, -> { order('random()') }
+
   belongs_to :question
 
   validates :correct, boolean: true

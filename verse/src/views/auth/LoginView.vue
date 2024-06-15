@@ -18,7 +18,7 @@ async function handleLogin(event) {
   const { url, method } = RailsRoutes.login;
   const { email, password } = loginData;
   const response = await fetch(
-    client(url, method, {
+    client(url(), method, {
       body: { user: { email: email, password: password, scope: "verse" } },
     }),
   );

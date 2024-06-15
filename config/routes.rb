@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       resources :accounts, param: :username do
         member { get :public }
       end
-      resources :quizzes, only: %i[index show]
+      resources :quizzes, only: %i[index show] do
+        member do
+          get :undertaking
+        end
+      end
     end
   end
 

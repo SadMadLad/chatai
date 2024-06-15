@@ -1,5 +1,5 @@
 import { client } from "@/services/clients";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { useAuthStore } from "@/storage/auth";
 import { useRouter } from "vue-router";
 
@@ -8,10 +8,10 @@ function requestHelper(url, method, clientOptions = {}) {
   const router = useRouter();
 
   const isLoading = ref(true);
-  const errorMessage = ref(null);
+  const isError = ref(false);
   const fetchedData = ref(null);
 
-  const mergedOptions = {...{ authToken: token }, ...clientOptions };
+  const mergedOptions = { ...{ authToken: token }, ...clientOptions };
   fetch(client(url, method, mergedOptions))
     .then((response) => {
       if (response.status === 401) {
@@ -19,9 +19,8 @@ function requestHelper(url, method, clientOptions = {}) {
         router.push({ name: "login" });
       } else {
         return response.json().then((responseJson) => {
-          const { error } = responseJson;
           if (response.status >= 400) {
-            errorMessage.value = error;
+            isError.value = true;
           } else {
             fetchedData.value = responseJson;
           }
@@ -29,13 +28,13 @@ function requestHelper(url, method, clientOptions = {}) {
       }
     })
     .catch(() => {
-      errorMessage.value = "Something went wrong.";
+      isError.value = true;
     })
     .finally(() => {
       isLoading.value = false;
     });
 
-  return { isLoading, errorMessage, fetchedData };
+  return { isLoading, isError, fetchedData };
 }
 
 export { requestHelper };
