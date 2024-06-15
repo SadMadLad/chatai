@@ -1,12 +1,25 @@
 <script setup>
-  import { useRoute } from "vue-router";
-  import { getQuiz } from "@/services/apis/quiz";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { getQuiz } from "@/services/apis/quiz";
 
-  const route = useRoute();
+const route = useRoute();
 
-  const { isLoading, error, fetchedData } = getQuiz(route.params.id);
+const { isLoading, isError, fetchedData } = getQuiz(route.params.id);
+const quiz = computed(() => fetchedData.value?.quiz);
 </script>
 
 <template>
-  {{ $route.params.id }}
+  <div v-if="isLoading">Loading...</div>
+  <div v-else-if="isError">Error</div>
+  <div v-else>
+    {{ quiz.title }}
+    {{ quiz.cover_url }}
+    {{ quiz.description }}
+    {{ quiz.questions_count }}
+    <hr />
+    <RouterLink :to="{ name: 'quiz-undertaking', params: { id: quiz.id } }"
+      >Take the Quiz</RouterLink
+    >
+  </div>
 </template>

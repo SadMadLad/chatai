@@ -2,6 +2,8 @@
 
 # A question in a quiz.
 class Question < ApplicationRecord
+  scope :randomize, -> { order('random()') }
+
   has_many :question_options, dependent: :destroy
 
   belongs_to :quiz
