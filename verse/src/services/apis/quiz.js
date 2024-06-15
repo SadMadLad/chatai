@@ -1,7 +1,16 @@
-import { client } from "@/services/clients";
+import { RailsRoutes } from "@/services/routes";
+import { requestHelper } from "@/services/utils";
 
-async function getQuizzes() {
+function getQuiz(id) {
+  const { url, method } = RailsRoutes.quizzes;
 
+  return requestHelper(`${url}/${id}`, method);
 }
 
-export { getQuizzes }
+function getQuizzes() {
+  const { url, method } = RailsRoutes.quizzes;
+
+  return requestHelper(url, method);
+}
+
+export { getQuiz, getQuizzes };
