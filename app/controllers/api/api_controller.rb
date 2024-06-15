@@ -32,7 +32,7 @@ module Api
       bearer = split_auth_header.first
       token = split_auth_header.second
 
-      bearer.blank? || token.blank? || bearer != 'Bearer' ? nil : token
+      bearer.present? && token.present? && bearer != 'Bearer' ? nil : token
     end
 
     def verify_token(token)

@@ -207,7 +207,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
     t.bigint "quiz_id", null: false
     t.integer "correct_answers", default: 0, null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    # t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_quiz_undertakings_on_account_id"
     t.index ["quiz_id"], name: "index_quiz_undertakings_on_quiz_id"
   end

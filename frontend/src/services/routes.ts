@@ -29,8 +29,4 @@ const PhoenixRoutes = {
 
 const Fastapi = import.meta.env.VITE_FASTAPI_URL;
 
-export {
-  RailsRoutes,
-  Fastapi,
-  PhoenixRoutes,
-};
+export { RailsRoutes, Fastapi, PhoenixRoutes };

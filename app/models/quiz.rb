@@ -18,9 +18,9 @@ class Quiz < ApplicationRecord
   validates :timed, boolean: true
   validates :title, :description, presence: true
 
-  validate :publish_check, if: :saved_change_to_published?
+  validate :publish_quiz, if: :saved_change_to_published?
 
   private
 
-  def saved_change_to_published?; end
+  def publish_quiz; end
 end
