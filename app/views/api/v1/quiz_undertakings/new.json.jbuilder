@@ -6,8 +6,7 @@ json.quiz do
   json.timed @quiz.timed?
   json.timer @quiz.timer
 
-  json.questions @questions.each_with_index.to_a do |question, index|
-    json.order index
+  json.questions @questions do |question|
     json.id question.id
     json.multiple_answers question.multiple_answers?
     json.question_text question.question_text

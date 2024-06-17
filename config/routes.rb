@@ -21,9 +21,7 @@ Rails.application.routes.draw do
         member { get :public }
       end
       resources :quizzes, only: %i[index show] do
-        member do
-          get :undertaking
-        end
+        resources :quiz_undertakings, only: %i[new create]
       end
     end
   end

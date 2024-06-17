@@ -13,10 +13,17 @@ function getQuizzes() {
   return requestHelper(url(), method);
 }
 
-function getQuizUndertaking(id) {
-  const { url, method } = RailsRoutes.quizUndertaking;
+function getNewQuizUndertaking(id) {
+  const { url, method } = RailsRoutes.newQuizUndertaking;
 
   return requestHelper(url(id), method);
 }
 
-export { getQuiz, getQuizzes, getQuizUndertaking };
+function createQuizUndertaking(id, payload) {
+  const { url, method } = RailsRoutes.createQuizUndertaking;
+
+return requestHelper(url(id), method, { body: payload })
+}
+
+
+export { getQuiz, getQuizzes, getNewQuizUndertaking, createQuizUndertaking };
