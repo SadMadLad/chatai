@@ -228,46 +228,99 @@ question_sodium = Question.create(
   question_text: 'What is the element Na?'
 )
 
+question_options_sodium = [
+  {
+    correct: true,
+    option_text: 'Sodium'
+  },
+  {
+    correct: false,
+    option_text: 'Potassium'
+  }
+]
+
+question_options_sodium.each { |option| option[:question_id] = question_sodium.id }
+
+QuestionOption.create(question_options_sodium)
+
 question_symbols = Question.create(
   quiz_id: quiz.id,
   multiple_answers: true,
   question_text: 'Which elements symbol start with K?'
 )
 
-question_options_sodium = [
-  {
-    question_id: question_sodium.id,
-    correct: true,
-    option_text: 'Sodium'
-  },
-  {
-    question_id: question_sodium.id,
-    correct: false,
-    option_text: 'Potassium'
-  }
-]
-
-QuestionOption.create(question_options_sodium)
-
 question_options_symbols = [
   {
-    question_id: question_symbols.id,
     correct: true,
     option_text: 'Krypton'
   },
   {
-    question_id: question_symbols.id,
     correct: false,
     option_text: 'Boron'
   },
   {
-    question_id: question_symbols.id,
     correct: true,
     option_text: 'Potassium'
   }
 ]
 
+question_options_symbols.each { |option| option[:question_id] = question_symbols.id }
+
 QuestionOption.create(question_options_symbols)
+
+question_ammonia = Question.create(
+  quiz_id: quiz.id,
+  multiple_answers: false,
+  question_text: 'Which process can create Ammonia?'
+)
+
+question_options_ammonia = [
+  {
+    correct: false,
+    option_text: 'The English Process'
+  },
+  {
+    correct: false,
+    option_text: 'Millikan\'s Process'
+  },
+  {
+    correct: true,
+    option_text: 'Haber\'s Process'
+  }
+]
+
+question_options_ammonia.each { |option| option[:question_id] = question_ammonia.id }
+
+QuestionOption.create(question_options_ammonia)
+
+question_radioactive = Question.create(
+  quiz_id: quiz.id,
+  multiple_answers: true,
+  question_text: 'Which elements are radioactive?'
+)
+
+question_options_radioactive = [
+  {
+    correct: true,
+    option_text: 'Uranium'
+  },
+  {
+    correct: true,
+    option_text: 'Polonium'
+  },
+  {
+    correct: true,
+    option_text: 'Radon'
+  },
+  {
+    correct: true,
+    option_text: 'Thorium'
+  }
+]
+
+question_options_radioactive.each { |option| option[:question_id] = question_radioactive.id }
+
+QuestionOption.create(question_options_radioactive)
 
 # Flags Quiz
 

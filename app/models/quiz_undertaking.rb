@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# An instance of quiz undertaking is the instance of user taking a quiz.
 class QuizUndertaking < ApplicationRecord
   belongs_to :account
   belongs_to :quiz

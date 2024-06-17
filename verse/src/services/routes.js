@@ -5,10 +5,13 @@ const RailsRoutes = {
 
   quizzes: { url: () => `${Rails}/quizzes`, method: "GET" },
   quiz: { url: (id) => `${Rails}/quizzes/${id}`, method: "GET" },
-  quizUndertaking: {
-    url: (id) => `${Rails}/quizzes/${id}/undertaking`,
+  newQuizUndertaking: {
+    url: (id) => `${Rails}/quizzes/${id}/quiz_undertakings/new`,
     method: "GET",
   },
+  createQuizUndertaking: {
+    url: (id) => `${Rails}/quizzes/${id}/quiz_undertakings`, method: "POST"
+  }
 };
 
 export { RailsRoutes };

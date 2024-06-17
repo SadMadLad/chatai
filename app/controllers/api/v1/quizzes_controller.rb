@@ -2,18 +2,15 @@
 
 module Api
   module V1
+    # Controller to manage quizzes
     class QuizzesController < Api::AuthenticatedController
-      before_action :set_quiz, only: %i[show undertaking]
+      before_action :set_quiz, only: :show
 
       def index
         @quizzes = Quiz.where(published: true).includes(cover_attachment: :blob).all
       end
 
       def show; end
-
-      def undertaking
-        @questions = @quiz.questions.includes(:question_options, { picture_attachment: :blob }).randomize
-      end
 
       private
 
