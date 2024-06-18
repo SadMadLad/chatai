@@ -67,7 +67,9 @@ watch(isFinished, async (finished) => {
       </div>
       <div v-else>
         {{ result.score }}
-        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }">Re-take the quiz</RouterLink>
+        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }"
+          >Re-take the quiz</RouterLink
+        >
       </div>
     </div>
     <div v-else>
@@ -75,22 +77,29 @@ watch(isFinished, async (finished) => {
       <div>{{ currentQuestionIndex + 1 }} / {{ questions.length }}</div>
 
       <Transition name="fade">
-        <Question v-bind="questions[currentQuestionIndex]" :index="currentQuestionIndex" :key="currentQuestionIndex" />
+        <Question
+          v-bind="questions[currentQuestionIndex]"
+          :index="currentQuestionIndex"
+          :key="currentQuestionIndex"
+        />
       </Transition>
-
 
       <hr />
 
       <div class="flex gap-4">
-        <button @click="currentQuestionIndex = Math.max(currentQuestionIndex - 1, 0)">
+        <button
+          @click="currentQuestionIndex = Math.max(currentQuestionIndex - 1, 0)"
+        >
           Back
         </button>
-        <button @click="
-          currentQuestionIndex = Math.min(
-            currentQuestionIndex + 1,
-            questions.length - 1,
-          )
-          ">
+        <button
+          @click="
+            currentQuestionIndex = Math.min(
+              currentQuestionIndex + 1,
+              questions.length - 1,
+            )
+          "
+        >
           Next
         </button>
       </div>
