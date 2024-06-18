@@ -34,7 +34,13 @@ const useQuizStore = defineStore("quiz", () => {
     return { ...quizzes };
   }
 
-  return { addSelectedOption, getAllSelectedOptions, getSelected, initializeQuizzesArray, quizzes };
+  return {
+    addSelectedOption,
+    getAllSelectedOptions,
+    getSelected,
+    initializeQuizzesArray,
+    quizzes,
+  };
 });
 
 export { useQuizStore };

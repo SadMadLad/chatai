@@ -1,5 +1,7 @@
+import { client } from "@/services/clients";
 import { RailsRoutes } from "@/services/routes";
 import { requestHelper } from "@/services/utils";
+import { useAuthStore } from "@/storage/auth";
 
 function getQuiz(id) {
   const { url, method } = RailsRoutes.quiz;
@@ -19,11 +21,15 @@ function getNewQuizUndertaking(id) {
   return requestHelper(url(id), method);
 }
 
-function createQuizUndertaking(id, payload) {
+async function createQuizUndertaking(id, payload) {
+  const { token } = useAuthStore();
   const { url, method } = RailsRoutes.createQuizUndertaking;
 
-return requestHelper(url(id), method, { body: payload })
-}
+  const response = await fetch(
+    client(url(id), method, { body: payload, authToken: token }),
+  );
 
+  return response;
+}
 
 export { getQuiz, getQuizzes, getNewQuizUndertaking, createQuizUndertaking };

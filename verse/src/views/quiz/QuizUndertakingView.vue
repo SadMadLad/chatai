@@ -1,19 +1,28 @@
 <script setup>
-import { computed, ref, watch } from "vue";
-import { getNewQuizUndertaking, createQuizUndertaking } from "@/services/apis/quiz";
+import { computed, reactive, ref, watch, Transition } from "vue";
+import {
+  getNewQuizUndertaking,
+  createQuizUndertaking,
+} from "@/services/apis/quiz";
 import Question from "@/components/quiz/Question.vue";
+import { useAuthStore } from "@/storage/auth";
 import { useQuizStore } from "@/storage/quiz";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
-const quizStore = useQuizStore();
+const router = useRouter();
+const { removeToken } = useAuthStore();
 
-const isResultLoading = ref(true);
-const isResultError = ref(null);
-const fetchedResultData = ref(null);
+const result = reactive({
+  isResultLoading: true,
+  isResultError: null,
+  score: null,
+});
 
-const { getAllSelectedOptions, initializeQuizzesArray } = quizStore;
-const { isLoading, isError, fetchedData } = getNewQuizUndertaking(route.params.id);
+const { getAllSelectedOptions, initializeQuizzesArray } = useQuizStore();
+const { isLoading, isError, fetchedData } = getNewQuizUndertaking(
+  route.params.id,
+);
 
 const quiz = computed(() => fetchedData.value?.quiz);
 const questions = computed(() => fetchedData.value?.quiz?.questions);
@@ -22,19 +31,25 @@ const currentQuestionIndex = ref(0);
 const isFinished = ref(false);
 
 watch(fetchedData, (data) => {
-  if (data) {
-    initializeQuizzesArray(data.quiz.questions);
-  }
+  if (data) initializeQuizzesArray(data.quiz.questions);
 });
 
 watch(isFinished, async (finished) => {
   if (finished) {
-    const { isLoading: isRLoading, isError: isRError, fetchedData: fetchedRData } =
-      await createQuizUndertaking(route.params.id, getAllSelectedOptions());
-
-    isResultLoading.value = isRLoading.value;
-    isResultError.value = isRError.value;
-    fetchedResultData.value = fetchedRData;
+    createQuizUndertaking(route.params.id, getAllSelectedOptions())
+      .then((response) => {
+        if (response.status == 401) {
+          removeToken();
+          router.push({ name: "login" });
+        } else {
+          return response.json().then((jsonResponse) => {
+            const { score } = jsonResponse;
+            result.score = score;
+          });
+        }
+      })
+      .catch(() => (result.isResultError = true))
+      .finally(() => (result.isResultLoading = false));
   }
 });
 </script>
@@ -44,21 +59,25 @@ watch(isFinished, async (finished) => {
   <div v-else-if="isError">Error...</div>
   <div v-else>
     <div v-if="isFinished">
-      <div v-if="isResultLoading">
+      <div v-if="result.isResultLoading">
         The Quiz is finished. Now I am fetching results.
       </div>
-      <div v-else-if="isResultError">
+      <div v-else-if="result.isResultError">
         Error while calculating your result.
       </div>
-      <div>
-        {{ fetchedResultData }}
+      <div v-else>
+        {{ result.score }}
+        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }">Re-take the quiz</RouterLink>
       </div>
     </div>
     <div v-else>
       <h2 class="text-2xl font-black">{{ quiz.title }}</h2>
       <div>{{ currentQuestionIndex + 1 }} / {{ questions.length }}</div>
 
-      <Question v-bind="questions[currentQuestionIndex]" :index="currentQuestionIndex" :key="currentQuestionIndex" />
+      <Transition name="fade">
+        <Question v-bind="questions[currentQuestionIndex]" :index="currentQuestionIndex" :key="currentQuestionIndex" />
+      </Transition>
+
 
       <hr />
 
@@ -82,3 +101,16 @@ watch(isFinished, async (finished) => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  position: absolute;
+}
+</style>

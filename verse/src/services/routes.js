@@ -10,8 +10,9 @@ const RailsRoutes = {
     method: "GET",
   },
   createQuizUndertaking: {
-    url: (id) => `${Rails}/quizzes/${id}/quiz_undertakings`, method: "POST"
-  }
+    url: (id) => `${Rails}/quizzes/${id}/quiz_undertakings`,
+    method: "POST",
+  },
 };
 
 export { RailsRoutes };
