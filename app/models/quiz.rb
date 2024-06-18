@@ -18,9 +18,15 @@ class Quiz < ApplicationRecord
   validates :timed, boolean: true
   validates :title, :description, presence: true
 
-  validate :publish_quiz, if: :saved_change_to_published?
+  def score(selected_options)
+    questions_array = questions.includes(:question_options)
+    total_score = 0
 
-  private
+    selected_options.each do |question_id, selected|
+      q = questions_array.find{ |question| question.id == question_id }
+      total_score += q.score(selected)  
+    end
 
-  def publish_quiz; end
+    total_score
+  end
 end

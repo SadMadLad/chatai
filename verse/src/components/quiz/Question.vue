@@ -21,21 +21,23 @@ watch(selected, (newSelected) => {
 </script>
 
 <template>
-  {{ question_text }}
+    <div>
+      {{ question_text }}
 
-  <hr />
+      <hr />
 
-  <ul v-if="multiple_answers" class="flex flex-col gap-2.5">
-    <li v-for="{ id, option_text } in question_options">
-      <input type="checkbox" :id="id" :value="id" v-model="selected" /><label>{{
-        option_text
-      }}</label>
-    </li>
-  </ul>
-  <ul v-else>
-    <li v-for="{ id, option_text } in question_options">
-      <input type="radio" :value="id" :id="id" v-model="selected" />
-      <label>{{ option_text }}</label>
-    </li>
-  </ul>
+      <ul v-if="multiple_answers" class="flex flex-col gap-2.5">
+        <li v-for="{ id, option_text } in question_options">
+          <input type="checkbox" :id="id" :value="id" v-model="selected" /><label>{{
+            option_text
+            }}</label>
+        </li>
+      </ul>
+      <ul v-else>
+        <li v-for="{ id, option_text } in question_options">
+          <input type="radio" :value="id" :id="id" v-model="selected" />
+          <label>{{ option_text }}</label>
+        </li>
+      </ul>
+    </div>
 </template>
