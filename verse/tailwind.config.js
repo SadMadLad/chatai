@@ -7,8 +7,8 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,vue}"],
   theme: {
     colors: {
-      primary: colors.sky,
-      secondary: colors.emerald,
+      primary: colors.cyan,
+      secondary: colors.amber,
       ...colors,
     },
     extend: {

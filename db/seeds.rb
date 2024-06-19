@@ -207,9 +207,9 @@ prediction_params = prediction_params.each { |param| param['ml_model_id'] = ml_m
 
 PredictionParam.create(prediction_params)
 
-# Seed Quiz, Questions and QuestionOptions
+### Seed Quiz, Questions and QuestionOptions
 
-# Chemistry Quiz
+## Chemistry Quiz
 
 quiz = Quiz.create(
   title: 'Chemistry Quiz',
@@ -220,7 +220,11 @@ quiz = Quiz.create(
   account: first_account
 )
 
+# Add appropriate tags
+
 [education_tag, chemistry_tag].each { |tag| quiz.tag_maps.find_or_create_by(tag:) }
+
+# Sodium Question
 
 question_sodium = Question.create(
   quiz_id: quiz.id,
@@ -242,6 +246,8 @@ question_options_sodium = [
 question_options_sodium.each { |option| option[:question_id] = question_sodium.id }
 
 QuestionOption.create(question_options_sodium)
+
+# Symbols Question
 
 question_symbols = Question.create(
   quiz_id: quiz.id,
@@ -268,6 +274,8 @@ question_options_symbols.each { |option| option[:question_id] = question_symbols
 
 QuestionOption.create(question_options_symbols)
 
+# Ammonia Question
+
 question_ammonia = Question.create(
   quiz_id: quiz.id,
   multiple_answers: false,
@@ -292,6 +300,8 @@ question_options_ammonia = [
 question_options_ammonia.each { |option| option[:question_id] = question_ammonia.id }
 
 QuestionOption.create(question_options_ammonia)
+
+# Radioactive Elements Question
 
 question_radioactive = Question.create(
   quiz_id: quiz.id,
@@ -322,7 +332,7 @@ question_options_radioactive.each { |option| option[:question_id] = question_rad
 
 QuestionOption.create(question_options_radioactive)
 
-# Flags Quiz
+## Flags Quiz
 
 quiz_two = Quiz.create(
   title: 'Flags Quiz',
@@ -333,7 +343,11 @@ quiz_two = Quiz.create(
   account: second_account
 )
 
+# Add Appropriate Tags
+
 [education_tag, countries_tag, flags_tag].each { |tag| quiz_two.tag_maps.find_or_create_by(tag:) }
+
+# Turkish Flag Question
 
 question_turkey = Question.create(
   quiz_id: quiz_two.id,
@@ -341,48 +355,50 @@ question_turkey = Question.create(
   question_text: 'Which country has a red flag with moon in the center?'
 )
 
+question_options_turkey = [
+  {
+    correct: true,
+    option_text: 'Turkey'
+  },
+  {
+    correct: false,
+    option_text: 'Pakistan'
+  },
+  {
+    correct: false,
+    option_text: 'India'
+  }
+]
+
+question_options_turkey.each { |option| option[:question_id] = question_turkey.id }
+
+QuestionOption.create(question_options_turkey)
+
+# Pakistani Flag Question
+
 question_pakistan = Question.create(
   quiz_id: quiz_two.id,
   multiple_answers: false,
   question_text: 'Which country has a green and white flag with moon and star?'
 )
 
-QuestionOption.create(
-  [
+question_options_pakistan = [
     {
-      question_id: question_turkey.id,
-      correct: true,
+      question_id: question_pakistan.id,
+      correct: false,
       option_text: 'Turkey'
     },
     {
-      question_id: question_turkey.id,
-      correct: false,
+      question_id: question_pakistan.id,
+      correct: true,
       option_text: 'Pakistan'
     },
     {
-      question_id: question_turkey.id,
+      question_id: question_pakistan.id,
       correct: false,
       option_text: 'India'
     }
   ]
-)
 
-QuestionOption.create(
-  [
-    {
-      question_id: question_pakistan.id,
-      correct: false,
-      option_text: 'Turkey'
-    },
-    {
-      question_id: question_pakistan.id,
-      correct: true,
-      option_text: 'Pakistan'
-    },
-    {
-      question_id: question_pakistan.id,
-      correct: false,
-      option_text: 'India'
-    }
-  ]
-)
+question_options_pakistan.each { |option| option[:question_id] = question_pakistan.id }
+

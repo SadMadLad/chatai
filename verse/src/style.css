@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .offset-box-shadow {
+    box-shadow: rgba(0, 0, 0, 0.1) 4px 4px;
+  }  
+}
+
+

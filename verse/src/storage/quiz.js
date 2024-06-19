@@ -9,7 +9,7 @@ const useQuizStore = defineStore("quiz", () => {
   });
 
   function initializeQuizzesArray(questions) {
-    quizzes.quiz_undertaking.selected_options = [];
+    resetQuizState();
 
     if (questions) {
       questions.forEach((question) => {
@@ -32,6 +32,10 @@ const useQuizStore = defineStore("quiz", () => {
 
   function getAllSelectedOptions() {
     return { ...quizzes };
+  }
+
+  function resetQuizState() {
+    quizzes.quiz_undertaking.selected_options = [];
   }
 
   return {

@@ -14,7 +14,7 @@ class Quiz < ApplicationRecord
   has_one_attached :cover
 
   validates :published, boolean: true
-  validates :timer, presence: true, comparison: { greater_than: 60 }, if: :timed?
+  validates :timer, presence: true, comparison: { greater_than: 0 }, if: :timed?
   validates :timed, boolean: true
   validates :title, :description, presence: true
 
