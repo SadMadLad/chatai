@@ -1,6 +1,9 @@
 <script setup>
-import { computed, onUnmounted, reactive, ref, Transition, watch } from "vue";
-import { getNewQuizUndertaking, createQuizUndertaking } from "@/services/apis/quiz";
+import { computed, reactive, ref, watch, Transition } from "vue";
+import {
+  getNewQuizUndertaking,
+  createQuizUndertaking,
+} from "@/services/apis/quiz";
 import Question from "@/components/quiz/Question.vue";
 import { useAuthStore } from "@/storage/auth";
 import { useQuizStore } from "@/storage/quiz";
@@ -10,8 +13,11 @@ const route = useRoute();
 const router = useRouter();
 const { removeToken } = useAuthStore();
 
-const { getAllSelectedOptions, initializeQuizzesArray } = useQuizStore();
-const { isLoading, isError, fetchedData } = getNewQuizUndertaking(route.params.id);
+const quizData = reactive({
+  quiz: null,
+  questions: null,
+  timer: null,
+});
 
 const result = reactive({
   isResultLoading: true,
@@ -19,23 +25,29 @@ const result = reactive({
   score: null,
 });
 
-const isTimed = computed(() => fetchedData.value?.quiz?.timed);
-const questions = computed(() => fetchedData.value?.quiz?.questions);
-const quiz = computed(() => fetchedData.value?.quiz);
+const isLoading = ref(true);
+const isError = ref(false);
 
-const countdownTimer = ref(null);
+const { getAllSelectedOptions, initializeQuizzesArray } = useQuizStore();
+getNewQuizUndertaking(route.params.id)
+  .then((response, quiz, questions, timer) => {
+    if (response.status === 401) {
+      removeToken();
+      router.push({ name: "login" });
+    } else {
+      quizData.quiz = quiz;
+      quizData.questions = questions;
+      quizData.timer = timer;
+    }
+  })
+  .catch(() => isError.value = true)
+  .finally(() => isLoading.value = true);
+
 const currentQuestionIndex = ref(0);
 const isFinished = ref(false);
-const timer = ref(null);
 
 watch(fetchedData, (data) => {
-  if (data) {
-    initializeQuizzesArray(data.quiz.questions);
-    if (data.quiz.timer) {
-      timer.value = data.quiz.timer;
-      countdownTimer.value = setInterval(() => timer.value--, 1000);
-    }
-  }
+  if (data) initializeQuizzesArray(data.quiz.questions);
 });
 
 watch(isFinished, async (finished) => {
@@ -54,18 +66,6 @@ watch(isFinished, async (finished) => {
       })
       .catch(() => (result.isResultError = true))
       .finally(() => (result.isResultLoading = false));
-    if (isTimed) clearInterval(countdownTimer.value);
-  }
-});
-
-watch(timer, async (timerValue) => {
-  if (timerValue && timerValue <= 0) isFinished.value = true;
-});
-
-onUnmounted(() => {
-  if (countdownTimer.value) {
-    clearInterval(countdownTimer.value);
-    countdownTimer.value = null;
   }
 });
 </script>
@@ -78,26 +78,20 @@ onUnmounted(() => {
       <div v-if="result.isResultLoading">
         The Quiz is finished. Now I am fetching results.
       </div>
-      <div v-else-if="result.isResultError">Error while calculating your result.</div>
+      <div v-else-if="result.isResultError">
+        Error while calculating your result.
+      </div>
       <div v-else>
         {{ result.score }}
-        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }"
-          >Re-take the quiz</RouterLink
-        >
+        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }">Re-take the quiz</RouterLink>
       </div>
     </div>
     <div v-else>
-      {{ timer }}
-
       <h2 class="text-2xl font-black">{{ quiz.title }}</h2>
-      <div>{{ currentQuestionIndex + 1 }} / {{ questions.length }}</div>
+      <div>{{ currentQuestionIndex + 1 }} / {{ quizData.questions.length }}</div>
 
       <Transition name="fade">
-        <Question
-          v-bind="questions[currentQuestionIndex]"
-          :index="currentQuestionIndex"
-          :key="currentQuestionIndex"
-        />
+        <Question v-bind="quizData.questions[currentQuestionIndex]" :index="currentQuestionIndex" :key="currentQuestionIndex" />
       </Transition>
 
       <hr />
@@ -106,14 +100,12 @@ onUnmounted(() => {
         <button @click="currentQuestionIndex = Math.max(currentQuestionIndex - 1, 0)">
           Back
         </button>
-        <button
-          @click="
-            currentQuestionIndex = Math.min(
-              currentQuestionIndex + 1,
-              questions.length - 1
-            )
-          "
-        >
+        <button @click="
+          currentQuestionIndex = Math.min(
+            currentQuestionIndex + 1,
+            quizData.questions.length - 1,
+          )
+          ">
           Next
         </button>
       </div>
@@ -128,7 +120,7 @@ onUnmounted(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,

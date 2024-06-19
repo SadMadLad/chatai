@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import { useAuthStore } from "@/storage/auth";
 
-const routerClass = "hover:underline transition-colors duration-300";
+const routerClass = "hover:text-secondary-500 transition-all duration-100 py-4";
 
 const userIsAuthed = computed(() => {
   const { isAuthenticated } = useAuthStore();
@@ -12,22 +12,24 @@ const userIsAuthed = computed(() => {
 
 <template>
   <header
-    class="text-primary-500 flex flex-row items-center justify-between bg-white px-12 py-2.5"
+    class="text-primary-500 flex sticky top-0 backdrop-blur bg-opacity-40 flex-row items-center justify-between bg-white px-12 border-b shadow"
   >
     <div class="flex items-center gap-8">
-      <img src="/logo.png" class="h-10 w-10" />
-      <nav class="flex gap-4 font-semibold">
+      <RouterLink :to="{ name: 'home' }">
+        <img src="/logo.png" class="h-10 w-auto" />
+      </RouterLink>
+      <nav class="flex gap-4 font-semibold items-center">
         <div class="flex flex-row gap-2.5">
           <RouterLink
             :class="routerClass"
             :to="{ name: 'home' }"
-            activeClass="text-secondary-300"
+            activeClass="border-b-2 border-b-primary-500"
             >Home</RouterLink
           >
           <RouterLink
             :class="routerClass"
             :to="{ name: 'about' }"
-            activeClass="text-secondary-300"
+            activeClass="border-b-2 border-b-primary-500"
             >About</RouterLink
           >
         </div>
@@ -35,13 +37,13 @@ const userIsAuthed = computed(() => {
           <RouterLink
             :class="routerClass"
             :to="{ name: 'dashboard' }"
-            activeClass="text-secondary-300"
+            activeClass="border-b-2 border-b-primary-500"
             >Dashboard
           </RouterLink>
           <RouterLink
             :class="routerClass"
             :to="{ name: 'quizzes' }"
-            activeClass="text-secondary-300"
+            activeClass="border-b-2 border-b-primary-500"
             >Quizzes
           </RouterLink>
         </div>
@@ -50,7 +52,7 @@ const userIsAuthed = computed(() => {
     <div>
       <div v-if="!userIsAuthed">
         <RouterLink
-          class="text-white font-semibold bg-primary-500 rounded py-2 px-3.5"
+          class="text-white font-semibold hover:bg-secondary-500 bg-primary-500 rounded py-2 px-3.5"
           :to="{ name: 'login' }"
           >Login</RouterLink
         >
