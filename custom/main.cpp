@@ -7,8 +7,9 @@
 #include "algorithms/sorting/selection_sort.cpp"
 #include "algorithms/sorting/utils.cpp"
 
-#include "problems/two_sum.cpp"
+#include "problems/coin_change.cpp"
 #include "problems/container_with_most_water.cpp"
+#include "problems/two_sum.cpp"
 
 int main() {
   test_sort("Bubble Sort", bubble_sort);
@@ -18,6 +19,7 @@ int main() {
 
   test_two_sum();
   test_container_with_most_water();
+  test_coin_change();
 
   return 0;
 }
