@@ -5,15 +5,15 @@
 
 int knapsack_01(int item_profits_count, unsigned int max_weight, const std::vector<int> &item_profits, const std::vector<int> &weights)
 {
-  std::vector<std::vector<int>> dp(item_profits_count + 1, std::vector<int>(max_weight + 1));
+  std::vector<std::vector<int>> dp(item_profits_count + 1, std::vector<int>(max_weight + 1, 0));
 
-  for (int item_profit_index = 1; item_profit_index < item_profits_count + 1; item_profit_index++)
+  for (int item_profit_index = 1; item_profit_index <= item_profits_count; item_profit_index++)
   {
-    for (int weight_index = 1; weight_index < max_weight + 1; weight_index++)
+    for (int weight_index = 1; weight_index <= max_weight; weight_index++)
     {
-      if (weights[item_profit_index] <= weight_index)
+      if (weights[item_profit_index - 1] <= weight_index)
       {
-        dp[item_profit_index][weight_index] = std::max(item_profits[item_profit_index] + dp[item_profit_index - 1][weight_index - weights[item_profit_index]], dp[item_profit_index - 1][weight_index]);
+        dp[item_profit_index][weight_index] = std::max(item_profits[item_profit_index - 1] + dp[item_profit_index - 1][weight_index - weights[item_profit_index - 1]], dp[item_profit_index - 1][weight_index]);
       }
       else
       {
