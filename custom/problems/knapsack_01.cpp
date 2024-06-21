@@ -27,6 +27,8 @@ int knapsack_01(int item_profits_count, unsigned int max_weight, const std::vect
 
 void test_knapsack_01()
 {
+  std::cout << "Testing Knapsack 01\n";
+
   std::vector<int> item_profits = {1, 2, 5, 6};
   std::vector<int> weights = {2, 3, 4, 5};
 
