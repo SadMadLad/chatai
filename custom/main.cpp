@@ -7,6 +7,7 @@
 #include "algorithms/sorting/selection_sort.cpp"
 #include "algorithms/sorting/utils.cpp"
 
+#include "problems/cf/hit_the_lottery.cpp"
 #include "problems/container_with_most_water.cpp"
 #include "problems/knapsack_01.cpp"
 #include "problems/two_sum.cpp"
@@ -20,6 +21,7 @@ int main() {
   test_two_sum();
   test_container_with_most_water();
   test_knapsack_01();
+  test_hit_the_lottery();
 
   return 0;
 }
