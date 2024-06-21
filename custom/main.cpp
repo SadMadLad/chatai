@@ -7,8 +7,8 @@
 #include "algorithms/sorting/selection_sort.cpp"
 #include "algorithms/sorting/utils.cpp"
 
-#include "problems/coin_change.cpp"
 #include "problems/container_with_most_water.cpp"
+#include "problems/knapsack_01.cpp"
 #include "problems/two_sum.cpp"
 
 int main() {
@@ -19,7 +19,7 @@ int main() {
 
   test_two_sum();
   test_container_with_most_water();
-  test_coin_change();
+  test_knapsack_01();
 
   return 0;
 }
