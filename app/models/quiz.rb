@@ -2,7 +2,7 @@
 
 # Quiz having many questions.
 class Quiz < ApplicationRecord
-  belongs_to :account
+  belongs_to :account, optional: true
 
   has_many :accounts, through: :quiz_undertakings
   has_many :question_options, through: :questions
@@ -17,6 +17,8 @@ class Quiz < ApplicationRecord
   validates :timer, presence: true, comparison: { greater_than: 0 }, if: :timed?
   validates :timed, boolean: true
   validates :title, :description, presence: true
+
+  accepts_nested_attributes_for :questions
 
   def score(selected_options)
     questions_array = questions.includes(:question_options)
