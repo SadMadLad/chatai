@@ -158,11 +158,10 @@ end
 
 # Generate Tags
 
+books_tag = Tag.create(tag: 'Books')
 education_tag = Tag.create(tag: 'Education')
-chemistry_tag = Tag.create(tag: 'Chemistry')
-Tag.create(tag: 'Physics')
-flags_tag = Tag.create(tag: 'Flags')
-countries_tag = Tag.create(tag: 'Countries')
+economics_tag = Tag.create(tag: 'Economics')
+why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail')
 
 # Seed some basic machine learning model/s and prediction params
 
@@ -209,196 +208,16 @@ PredictionParam.create(prediction_params)
 
 ### Seed Quiz, Questions and QuestionOptions
 
-## Chemistry Quiz
+def seed_quiz(quiz_json_file, tags: [])
+  quiz_data = JSON.parse File.read(Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json"))
+  quiz = Quiz.create(quiz_data)
 
-quiz = Quiz.create(
-  title: 'Chemistry Quiz',
-  description: 'Test your chemistry knowledge',
-  timed: true,
-  timer: 2000,
-  published: true,
-  account: first_account
-)
+  p quiz.errors.full_messages
 
-# Add appropriate tags
+  return if tags.blank?
 
-[education_tag, chemistry_tag].each { |tag| quiz.tag_maps.find_or_create_by(tag:) }
+  tags.each { |tag| TagMap.find_or_create(taggable: quiz, tag:) }
+end
 
-# Sodium Question
 
-question_sodium = Question.create(
-  quiz_id: quiz.id,
-  multiple_answers: false,
-  question_text: 'What is the element Na?'
-)
-
-question_options_sodium = [
-  {
-    correct: true,
-    option_text: 'Sodium'
-  },
-  {
-    correct: false,
-    option_text: 'Potassium'
-  }
-]
-
-question_options_sodium.each { |option| option[:question_id] = question_sodium.id }
-
-QuestionOption.create(question_options_sodium)
-
-# Symbols Question
-
-question_symbols = Question.create(
-  quiz_id: quiz.id,
-  multiple_answers: true,
-  question_text: 'Which elements symbol start with K?'
-)
-
-question_options_symbols = [
-  {
-    correct: true,
-    option_text: 'Krypton'
-  },
-  {
-    correct: false,
-    option_text: 'Boron'
-  },
-  {
-    correct: true,
-    option_text: 'Potassium'
-  }
-]
-
-question_options_symbols.each { |option| option[:question_id] = question_symbols.id }
-
-QuestionOption.create(question_options_symbols)
-
-# Ammonia Question
-
-question_ammonia = Question.create(
-  quiz_id: quiz.id,
-  multiple_answers: false,
-  question_text: 'Which process can create Ammonia?'
-)
-
-question_options_ammonia = [
-  {
-    correct: false,
-    option_text: 'The English Process'
-  },
-  {
-    correct: false,
-    option_text: 'Millikan\'s Process'
-  },
-  {
-    correct: true,
-    option_text: 'Haber\'s Process'
-  }
-]
-
-question_options_ammonia.each { |option| option[:question_id] = question_ammonia.id }
-
-QuestionOption.create(question_options_ammonia)
-
-# Radioactive Elements Question
-
-question_radioactive = Question.create(
-  quiz_id: quiz.id,
-  multiple_answers: true,
-  question_text: 'Which elements are radioactive?'
-)
-
-question_options_radioactive = [
-  {
-    correct: true,
-    option_text: 'Uranium'
-  },
-  {
-    correct: true,
-    option_text: 'Polonium'
-  },
-  {
-    correct: true,
-    option_text: 'Radon'
-  },
-  {
-    correct: true,
-    option_text: 'Thorium'
-  }
-]
-
-question_options_radioactive.each { |option| option[:question_id] = question_radioactive.id }
-
-QuestionOption.create(question_options_radioactive)
-
-## Flags Quiz
-
-quiz_two = Quiz.create(
-  title: 'Flags Quiz',
-  description: 'Test your knowledge of flags',
-  timed: true,
-  timer: 3000,
-  published: true,
-  account: second_account
-)
-
-# Add Appropriate Tags
-
-[education_tag, countries_tag, flags_tag].each { |tag| quiz_two.tag_maps.find_or_create_by(tag:) }
-
-# Turkish Flag Question
-
-question_turkey = Question.create(
-  quiz_id: quiz_two.id,
-  multiple_answers: false,
-  question_text: 'Which country has a red flag with moon in the center?'
-)
-
-question_options_turkey = [
-  {
-    correct: true,
-    option_text: 'Turkey'
-  },
-  {
-    correct: false,
-    option_text: 'Pakistan'
-  },
-  {
-    correct: false,
-    option_text: 'India'
-  }
-]
-
-question_options_turkey.each { |option| option[:question_id] = question_turkey.id }
-
-QuestionOption.create(question_options_turkey)
-
-# Pakistani Flag Question
-
-question_pakistan = Question.create(
-  quiz_id: quiz_two.id,
-  multiple_answers: false,
-  question_text: 'Which country has a green and white flag with moon and star?'
-)
-
-question_options_pakistan = [
-    {
-      question_id: question_pakistan.id,
-      correct: false,
-      option_text: 'Turkey'
-    },
-    {
-      question_id: question_pakistan.id,
-      correct: true,
-      option_text: 'Pakistan'
-    },
-    {
-      question_id: question_pakistan.id,
-      correct: false,
-      option_text: 'India'
-    }
-  ]
-
-question_options_pakistan.each { |option| option[:question_id] = question_pakistan.id }
-
+seed_quiz('the_making_of_prosperity_and_poverty')

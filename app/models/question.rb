@@ -10,9 +10,11 @@ class Question < ApplicationRecord
 
   belongs_to :quiz
 
+  has_one_attached :picture
+
   validates :multiple_answers, boolean: true
 
-  has_one_attached :picture
+  accepts_nested_attributes_for :question_options
 
   def score(selected_options)
     correct_options = question_options.select(&:correct?).pluck(:id)

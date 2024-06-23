@@ -1,0 +1,184 @@
+{
+  "timed": false,
+  "title": "The Making of prosperity and poverty",
+  "description": "This quiz is related to chapter 3 of Why Nations Fail.",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "Why could not Kongolese people go towards prosperity, historically speaking?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "The government provided quite few public services to its citizens.",
+          "correct": true
+        },
+        {
+          "option_text": "The colonization was the main reason of destruction",
+          "correct": false
+        },
+        {
+          "option_text": "Any increased productivity by technology would've only resulted in more plundering and expropriation from the government",
+          "correct": true
+        },
+        {
+          "option_text": "The slaves were not properly distributed in Sao Salvador and Congo which affected the slaves trade.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What was the standing army of Kongolese King in mid seventeenth century?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "5000",
+          "correct": true
+        },
+        {
+          "option_text": "3000",
+          "correct": false
+        },
+        {
+          "option_text": "4000",
+          "correct": false
+        },
+        {
+          "option_text": "3500",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What was the purpose of Zairianization program in 1973, held under Mobutu?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Political Reforms to decentralize the state and its political power",
+          "correct": false
+        },
+        {
+          "option_text": "Remove the remains and influences of the Belgian colonisation",
+          "correct": true
+        },
+        {
+          "option_text": "Foreign Aid for increase in literacy for Kongolese people",
+          "correct": false
+        },
+        {
+          "option_text": "Give the authoritarian control to the army",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What were the reason(s) that the Carribbean Islands were some of the richest areas in the sixteenth and eighteenth century?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "The working conditions of the slaves who were working for the planter elite, were much better",
+          "correct": false
+        },
+        {
+          "option_text": "The export system of these islands was good and generated a lot of money, despite the slavery and bad conditions",
+          "correct": true
+        },
+        {
+          "option_text": "The planter's elite were kind of enough to sell the planters the whole lands",
+          "correct": false
+        },
+        {
+          "option_text": "The culture consisted of hardwork, consistence and power, which was the main cause of better economic growth",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did General Park take over South Korea?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1964",
+          "correct": false
+        },
+        {
+          "option_text": "1963",
+          "correct": false
+        },
+        {
+          "option_text": "1962",
+          "correct": false
+        },
+        {
+          "option_text": "1961",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "According to the author, the economic progress of China is similar to what other state?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "United States of America after its independence",
+          "correct": false
+        },
+        {
+          "option_text": "Soviet Union in 1920s",
+          "correct": true
+        },
+        {
+          "option_text": "South Korea after the cold war",
+          "correct": false
+        },
+        {
+          "option_text": "English Industrial Revolution",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Choose the condition(s), according to the author, that can help growth under extractive institutions",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "If the elites utilize the extractive institutions, they can achieve sustained growth and prosperity in the long run.",
+          "correct": false
+        },
+        {
+          "option_text": "Political decentralization can yield better succeses with extractive institutions",
+          "correct": false
+        },
+        {
+          "option_text": "Growth is possible if resources can be allocated to high productivity activities that elites control",
+          "correct": true
+        },
+        {
+          "option_text": "Somewhat inclusive institutions despite the economy model being primarily exclusive",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "According to the author, what is the most important factor to promote economic growth, irrespective of the nature economic institutes",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Powerful economic families that can control the state",
+          "correct": false
+        },
+        {
+          "option_text": "Political Centralization to enforce law and order",
+          "correct": true
+        },
+        {
+          "option_text": "Good foreign relations and positive image internationally",
+          "correct": false
+        },
+        {
+          "option_text": "Suitable culture, nature of people and geography to promote economic growth",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}
