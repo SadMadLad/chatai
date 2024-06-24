@@ -1,0 +1,125 @@
+{
+  "timed": false,
+  "title": "The Government of Pakistan",
+  "description": "This Quiz is related to the Government Structure of Pakistan",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "What is the other name for the Federal Government of Pakistan",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The Middle",
+          "correct": true
+        },
+        {
+          "option_text": "The Center",
+          "correct": false
+        },
+        {
+          "option_text": "The Authority",
+          "correct": true
+        },
+        {
+          "option_text": "The Establishment",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which territories are part of the country but not of the federation?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Balochistan",
+          "correct": false
+        },
+        {
+          "option_text": "Islamabad Capital Territory",
+          "correct": false
+        },
+        {
+          "option_text": "Gilgit Baltistan",
+          "correct": true
+        },
+        {
+          "option_text": "Azad Kashmir",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What are the three main branches of the government?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Legislative",
+          "correct": true
+        },
+        {
+          "option_text": "Advisory",
+          "correct": false
+        },
+        {
+          "option_text": "Judicial",
+          "correct": true
+        },
+        {
+          "option_text": "Provincial",
+          "correct": false
+        },
+        {
+          "option_text": "Executive",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Which of the following statement(s) is/are true?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "China is a unitary system of government",
+          "correct": true
+        },
+        {
+          "option_text": "In unitary system, the central goverment has the authority over everything. In a federation, the power is divided between federations",
+          "correct": true
+        },
+        {
+          "option_text": "The nature of state between Pakistan and China is same",
+          "correct": false
+        },
+        {
+          "option_text": "Unitary State is an outdated concept and nowhere to be found in contemporary countries",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Mark the legislative body(s) of Pakistan?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Senate",
+          "correct": true
+        },
+        {
+          "option_text": "National Assembly",
+          "correct": true
+        },
+        {
+          "option_text": "Executive Cabinet",
+          "correct": false
+        },
+        {
+          "option_text": "Supreme Court",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": ""
+    }
+  ]
+}
