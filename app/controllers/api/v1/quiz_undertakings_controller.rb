@@ -13,7 +13,7 @@ module Api
       def create
         score = @quiz.score(formatted_quiz_undertaking_params)
         QuizUndertaking.create(correct_answers: score, quiz: @quiz, account: @account)
-        
+
         render json: { score: }
       end
 

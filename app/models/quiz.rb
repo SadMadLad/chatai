@@ -25,8 +25,8 @@ class Quiz < ApplicationRecord
     total_score = 0
 
     selected_options.each do |question_id, selected|
-      q = questions_array.find{ |question| question.id == question_id }
-      total_score += q.score(selected)  
+      q = questions_array.find { |question| question.id == question_id }
+      total_score += q.score(selected)
     end
 
     total_score

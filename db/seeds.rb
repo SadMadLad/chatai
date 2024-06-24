@@ -209,15 +209,12 @@ PredictionParam.create(prediction_params)
 ### Seed Quiz, Questions and QuestionOptions
 
 def seed_quiz(quiz_json_file, tags: [])
-  quiz_data = JSON.parse File.read(Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json"))
+  quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
   quiz = Quiz.create(quiz_data)
-
-  p quiz.errors.full_messages
 
   return if tags.blank?
 
-  tags.each { |tag| TagMap.find_or_create(taggable: quiz, tag:) }
+  tags.each { |tag| TagMap.find_or_create_by(taggable: quiz, tag:) }
 end
 
-
-seed_quiz('the_making_of_prosperity_and_poverty')
+seed_quiz('the_making_of_prosperity_and_poverty', tags: [books_tag, education_tag, economics_tag, why_nations_fail_tag])
