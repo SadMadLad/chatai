@@ -435,6 +435,28 @@
           "correct": true
         }
       ]
+    },
+    {
+      "question_text": "Who was the first ambassador of Pakistan to United States?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Hussain Haqqani",
+          "correct": false
+        },
+        {
+          "option_text": "Mirza Zia Ispahani",
+          "correct": false
+        },
+        {
+          "option_text": "Mirza Abul Hasan Ispahani",
+          "correct": true
+        },
+        {
+          "option_text": "Potras Bokhari",
+          "correct": false
+        }
+      ]
     }
   ]
 }
