@@ -1,0 +1,92 @@
+{
+  "timed": true,
+  "timer": 600,
+  "title": "General Information about Pakistan, its demographics, history, and culture.",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "Tajikistan and Pakistan are separated by which corridor?",
+      "mutliple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Durand",
+          "correct": false
+        },
+        {
+          "option_text": "Tashkent",
+          "correct": false
+        },
+        {
+          "option_text": "Wakhan",
+          "correct": true
+        },
+        {
+          "option_text": "Kashgar",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What is the population of Pakistan as of 2023?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "240 million",
+          "correct": false
+        },
+        {
+          "option_text": "241 million",
+          "correct": true
+        },
+        {
+          "option_text": "242 million",
+          "correct": false
+        },
+        {
+          "option_text": "243 million",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which organization(s) Pakistan is a part of?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Shanghai Cooperation Organization",
+          "correct": true
+        },
+        {
+          "option_text": "Commonwwealth of Nations",
+          "correct": true
+        },
+        {
+          "option_text": "Islamic Nations of South Asia (INSA)",
+          "correct": false
+        },
+        {
+          "option_text": "Organization of Islamic Cooperation",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What type of power nation Pakistan is?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Low",
+          "correct": false
+        },
+        {
+          "option_text": "Medium",
+          "correct": true
+        },
+        {
+          "option_text": "High",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

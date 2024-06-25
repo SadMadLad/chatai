@@ -1,5 +1,6 @@
 {
-  "timed": false,
+  "timed": true,
+  "timer": 180,
   "title": "The Making of prosperity and poverty",
   "description": "This quiz is related to chapter 3 of Why Nations Fail.",
   "published": true,
