@@ -1,0 +1,440 @@
+{
+  "timed": false,
+  "title": "Foreign Policy Beginnings",
+  "description": "Chapter 2 - Sattar - Pakistan's Foreign Policy: Foreign Policy Beginnings",
+  "published": true,
+  "question_attributes": [
+    {
+      "question_text": "Who was the General Secretary of Muslim League in 1930s?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Muhammad Ali Jinnah",
+          "correct": false
+        },
+        {
+          "option_text": "Fatima Jinnah",
+          "correct": false
+        },
+        {
+          "option_text": "Jogindar Nath Mendal",
+          "correct": false
+        },
+        {
+          "option_text": "Liaquat Ali Khan",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the first Governer General of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Liaquat Ali Khan",
+          "correct": false
+        },
+        {
+          "option_text": "Muhammad Ali Jinnah",
+          "correct": true
+        },
+        {
+          "option_text": "Ibrahim Ismail Chundrigar",
+          "correct": false
+        },
+        {
+          "option_text": "Khawaja Nazimuddin",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the first Foreign Minister of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Chaudhry Sir Zafrullah Kahn",
+          "correct": true
+        },
+        {
+          "option_text": "Khawaja Nazimuddin",
+          "correct": false
+        },
+        {
+          "option_text": "Ahmad Ali Bogra",
+          "correct": false
+        },
+        {
+          "option_text": "Chaudhry Rehmat Ali",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the first Prime Minister of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Liaquat Ali Khan",
+          "correct": true
+        },
+        {
+          "option_text": "Mir Muhammad Ali Bogra",
+          "correct": false
+        },
+        {
+          "option_text": "Ahmad Ali Bogra",
+          "correct": false
+        },
+        {
+          "option_text": "Khawaja Nazimuddin",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "According to the author, which feature(s) of United States did Jinnah enjoyed and sided with?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Liberal Ideology",
+          "correct": true
+        },
+        {
+          "option_text": "Atheist Ideology",
+          "correct": false
+        },
+        {
+          "option_text": "Sponsorship of Subversion",
+          "correct": false
+        },
+        {
+          "option_text": "Democracy",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "How much funds did India hold back for months?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "800 million rupees",
+          "correct": false
+        },
+        {
+          "option_text": "650 million rupees",
+          "correct": false
+        },
+        {
+          "option_text": "700 million rupees",
+          "correct": false
+        },
+        {
+          "option_text": "750 million rupees",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Out of 165000 tons of defense stores, how much has India withheld till this day?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "140000 tons",
+          "correct":false 
+        },
+        {
+          "option_text": "141000 tons",
+          "correct": false
+        },
+        {
+          "option_text": "142000 tons",
+          "correct": true
+        },
+        {
+          "option_text": "143000 tons",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When was the unjust award of Kashmir given to India?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "14 August, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "15 August, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "16 August, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "17 August, 1947",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the viceroy during the partition of the subcontinent?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Cyril Radcliffe",
+          "correct": false
+        },
+        {
+          "option_text": "Lord Mountbatten",
+          "correct": true
+        },
+        {
+          "option_text": "Lord Curzon",
+          "correct": false
+        },
+        {
+          "option_text": "Lord Rippon",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which princely state(s) were at the forefront of the persecution and extermination of the Muslim population, mentioned by Sattar?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Junagadh",
+          "correct": false
+        },
+        {
+          "option_text": "Dholpur",
+          "correct": false
+        },
+        {
+          "option_text": "Patiala",
+          "correct": true
+        },
+        {
+          "option_text": "Kapurthala",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "In April 1948, which rivers were affected by India's blockade, heavily affecting the agriculture of Pakistan?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Bias",
+          "correct": false
+        },
+        {
+          "option_text": "Ravi",
+          "correct": true
+        },
+        {
+          "option_text": "Sutlej",
+          "correct": true
+        },
+        {
+          "option_text": "Jhelum",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "According to Jinnah, who was the greatest Musalman of the modern Islamic World?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Kemal Ataturk",
+          "correct": true
+        },
+        {
+          "option_text": "Liaquat Ali Khan",
+          "correct": false
+        },
+        {
+          "option_text": "Muhammad Raza Pehlavi",
+          "correct": false
+        },
+        {
+          "option_text": "Reza Shah",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "To which US President did Jinnah sent a cable, voicing the concern for Palestinian people?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Eisenhower",
+          "correct": false
+        },
+        {
+          "option_text": "Nixon",
+          "correct": false
+        },
+        {
+          "option_text": "Truman",
+          "correct": true
+        },
+        {
+          "option_text": "Roosevelt",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the first head of state to visit Pakistan in 1950?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Reza Shah",
+          "correct": false
+        },
+        {
+          "option_text": "Muhammad Reza Pehlavi",
+          "correct": true
+        },
+        {
+          "option_text": "Sukarno",
+          "correct": false
+        },
+        {
+          "option_text": "Suharto",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which pact widened the distance between Arab states and Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Baghdad",
+          "correct": true
+        },
+        {
+          "option_text": "Tehran",
+          "correct": false
+        },
+        {
+          "option_text": "London",
+          "correct": false
+        },
+        {
+          "option_text": "Chilean",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Pakistan's role at first London conference on what antagonized Arab sentiment against Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Suez Crisis",
+          "correct": true
+        },
+        {
+          "option_text": "The Second World War",
+          "correct": false
+        },
+        {
+          "option_text": "Cold War",
+          "correct": false
+        },
+        {
+          "option_text": "The Tehran Conspiracy",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Head of Awami National Party, Asfand Yar Wali, was grandson of which person?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Sir Zafrullah Khan",
+          "correct": false
+        },
+        {
+          "option_text": "Liaquat Ali Khan",
+          "correct": false
+        },
+        {
+          "option_text": "Gulzar Alam",
+          "correct": false
+        },
+        {
+          "option_text": "Ghaffar Khan",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the leader of the party 'Khudai Khidmatgar'?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Mir Muhammad Ali Bogra",
+          "correct": false
+        },
+        {
+          "option_text": "Asfand Yar Wali",
+          "correct": false
+        },
+        {
+          "option_text": "Ghaffar Khan",
+          "correct": true
+        },
+        {
+          "option_text": "Mir Zafrullah Jamshaid",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When was Durand line declared as the boundary between Afghanistan and British India?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1893",
+          "correct": true
+        },
+        {
+          "option_text": "1906",
+          "correct": false
+        },
+        {
+          "option_text": "1884",
+          "correct": false
+        },
+        {
+          "option_text": "1911",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "On 30 September, 1947, did Afghanistan vote in favor of Pakistan's admission to the United Nations initially?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "True",
+          "correct": false
+        },
+        {
+          "option_text": "False",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}
