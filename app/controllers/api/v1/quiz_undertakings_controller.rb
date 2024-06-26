@@ -7,14 +7,13 @@ module Api
       before_action :set_quiz, only: %i[new create]
 
       def new
-        @questions = @quiz.questions.includes(:question_options, { picture_attachment: :blob }).randomize
+        @questions = @quiz.questions.includes(:question_options, { picture_attachment: :blob })
       end
 
       def create
         score = @quiz.score(formatted_quiz_undertaking_params)
-        QuizUndertaking.create(correct_answers: score, quiz: @quiz, account: @account)
-
-        render json: { score: }
+        @questions = @quiz.questions.includes(:question_options, { picture_attachment: :blob })
+        @quiz_undertaking = QuizUndertaking.create(correct_answers: score, quiz: @quiz, account: @account)
       end
 
       private

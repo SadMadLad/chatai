@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+json.score @quiz_undertaking.correct_answers
 
 json.quiz do
   json.id @quiz.id
@@ -15,6 +15,7 @@ json.quiz do
     json.question_options question.question_options do |question_option|
       json.id question_option.id
       json.option_text question_option.option_text
+      json.correct question_option.correct?
     end
   end
 end

@@ -1,12 +1,13 @@
 {
   "timed": true,
   "timer": 600,
-  "title": "General Information about Pakistan, its demographics, history, and culture.",
+  "title": "Pakistan - An Introduction",
+  "description": "General Information about Pakistan, its demographics, history, and culture.",
   "published": true,
   "questions_attributes": [
     {
       "question_text": "Tajikistan and Pakistan are separated by which corridor?",
-      "mutliple_answers": false,
+      "multiple_answers": false,
       "question_options_attributes": [
         {
           "option_text": "Durand",

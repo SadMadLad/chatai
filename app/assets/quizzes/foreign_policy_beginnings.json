@@ -3,7 +3,7 @@
   "title": "Foreign Policy Beginnings",
   "description": "Chapter 2 - Sattar - Pakistan's Foreign Policy: Foreign Policy Beginnings",
   "published": true,
-  "question_attributes": [
+  "questions_attributes": [
     {
       "question_text": "Who was the General Secretary of Muslim League in 1930s?",
       "multiple_answers": false,
@@ -142,7 +142,7 @@
       "question_options_attributes": [
         {
           "option_text": "140000 tons",
-          "correct":false 
+          "correct":false
         },
         {
           "option_text": "141000 tons",

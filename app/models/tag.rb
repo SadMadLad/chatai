@@ -6,5 +6,5 @@ class Tag < ApplicationRecord
   has_many :live_chat_rooms, through: :tag_maps, source: :taggable, source_type: 'Chat'
   has_many :quizzes, through: :tag_maps, source: :taggable, source_type: 'Quiz'
 
-  validates :tag, presence: false
+  validates :tag, presence: false, uniqueness: true
 end
