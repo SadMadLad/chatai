@@ -117,6 +117,722 @@
           "correct": false
         }
       ]
+    },
+    {
+      "question_text": "Is National Assembly called the Upper House of the bicameral legislature of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "True",
+          "correct": false
+        },
+        {
+          "option_text": "False",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Are Federal Secretaries considered to be the most influential officials in Government of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "True",
+          "correct": true
+        },
+        {
+          "option_text": "False",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "By constitutional powers, who can promulgate ordinances and pass bills?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Prime Minister",
+          "correct": false
+        },
+        {
+          "option_text": "Speaker of Parliament",
+          "correct": false
+        },
+        {
+          "option_text": "Chief Justice",
+          "correct": false
+        },
+        {
+          "option_text": "President",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What is the current Pakistani constitution being followed?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1974",
+          "correct": false
+        },
+        {
+          "option_text": "1973",
+          "correct": true
+        },
+        {
+          "option_text": "1972",
+          "correct": false
+        },
+        {
+          "option_text": "1971",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which constitution article highlights the authority of President and Prime Minister?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Article 196-97",
+          "correct": true
+        },
+        {
+          "option_text": "Article 80",
+          "correct": false
+        },
+        {
+          "option_text": "Article 200-201",
+          "correct": false
+        },
+        {
+          "option_text": "Article 202-203",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which of the following are parts of parliamentary legislation for civil and criminal laws?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Criminal Offense List",
+          "correct": false
+        },
+        {
+          "option_text": "Exit Control List",
+          "correct": true
+        },
+        {
+          "option_text": "Pakistan Penal Code",
+          "correct": true
+        },
+        {
+          "option_text": "Frontier Crimes Regulations",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "According to which article(s), the Jirga (or Panchayat) has become an institution of local governance?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "245",
+          "correct": false
+        },
+        {
+          "option_text": "246",
+          "correct": true
+        },
+        {
+          "option_text": "247",
+          "correct": true
+        },
+        {
+          "option_text": "248",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "How many members are there in the Lower House (National Assembly) of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "342",
+          "correct": true
+        },
+        {
+          "option_text": "343",
+          "correct": false
+        },
+        {
+          "option_text": "344",
+          "correct": false
+        },
+        {
+          "option_text": "345",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "How many seats are reserved for women and religious minorities respectively, in the National Assembly?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "40 and 20",
+          "correct": false
+        },
+        {
+          "option_text": "45 and 25",
+          "correct": false
+        },
+        {
+          "option_text": "55 and 15",
+          "correct": false
+        },
+        {
+          "option_text": "60 and 10",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who elects the members of the National Assembly?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The members of previous parliament",
+          "correct": false
+        },
+        {
+          "option_text": "The members of provincial assemblies",
+          "correct": false
+        },
+        {
+          "option_text": "The previous cabinet members",
+          "correct": false
+        },
+        {
+          "option_text": "The People",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who elects the members of the Senate (the Upper House)?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The members of previous parliament",
+          "correct": false
+        },
+        {
+          "option_text": "The members of provincial assemblies",
+          "correct": false
+        },
+        {
+          "option_text": "The previous cabinet members",
+          "correct": false
+        },
+        {
+          "option_text": "The People",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What is the tenure of members of the Senate?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "4 years",
+          "correct": false
+        },
+        {
+          "option_text": "5 years",
+          "correct": false
+        },
+        {
+          "option_text": "6 years",
+          "correct": true
+        },
+        {
+          "option_text": "7 years",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Does the parliament have absolute sovereignity over all the other government institutes?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "True",
+          "correct": true
+        },
+        {
+          "option_text": "False",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Can the non-members of Parliament be Cabinet Ministers?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Yes",
+          "correct": false
+        },
+        {
+          "option_text": "No",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "The Prime Minister and Cabinet Ministers are accountable to what?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The Supreme Court",
+          "correct": false
+        },
+        {
+          "option_text": "The Parliament",
+          "correct": true
+        },
+        {
+          "option_text": "The Establishment",
+          "correct": false
+        },
+        {
+          "option_text": "The President",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "How many members are there in the Upper House of the Parliament?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": 101,
+          "correct": false
+        },
+        {
+          "option_text": 102,
+          "correct": false
+        },
+        {
+          "option_text": 103,
+          "correct": false
+        },
+        {
+          "option_text": "104",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Which constitution turned Pakistan into a Presidential Republic?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1956",
+          "correct": false
+        },
+        {
+          "option_text": "1962",
+          "correct": true
+        },
+        {
+          "option_text": "1973",
+          "correct": false
+        },
+        {
+          "option_text": "LGO (Legal Framework Order) 1970",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When was the office of President created in Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "23rd May, 1958",
+          "correct": false
+        },
+        {
+          "option_text": "23rd March, 1958",
+          "correct": false
+        },
+        {
+          "option_text": "23rd May, 1956",
+          "correct": false
+        },
+        {
+          "option_text": "23rd March, 1956",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Which constitution downgraded the role of presidency and established Parliamentary democracy",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1956 Constitution",
+          "correct": false
+        },
+        {
+          "option_text": "1958 Constitution",
+          "correct": false
+        },
+        {
+          "option_text": "1962 Constitution",
+          "correct": false
+        },
+        {
+          "option_text": "1973 Constitution",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the first president of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Mir Muhammad Ali Bogra",
+          "correct": false
+        },
+        {
+          "option_text": "Iskandar Mirza",
+          "correct": true
+        },
+        {
+          "option_text": "Khawaja Nazimuddin",
+          "correct": false
+        },
+        {
+          "option_text": "Ayub Khan",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which Ammendment tranformed Pakistan into a semi-presidential state from 1985 to 2010?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "5th Ammendment",
+          "correct": false
+        },
+        {
+          "option_text": "8th Ammendment",
+          "correct": true
+        },
+        {
+          "option_text": "18th Ammendment",
+          "correct": false
+        },
+        {
+          "option_text": "25th Ammendment",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which Ammendment reverted Pakistan to a Parliamentary Democracy from Semi-Presidential Republic in 2010?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "5th Ammendment",
+          "correct": false
+        },
+        {
+          "option_text": "8th Ammendment",
+          "correct": true
+        },
+        {
+          "option_text": "18th Ammendment",
+          "correct": false
+        },
+        {
+          "option_text": "25th Ammendment",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who is the commander-in-chief of Pakistan Armed Forces?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The President",
+          "correct": true
+        },
+        {
+          "option_text": "The Prime Minister",
+          "correct": false
+        },
+        {
+          "option_text": "The Chief of Army Staff",
+          "correct": false
+        },
+        {
+          "option_text": "The Minister of Defense",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "How many Presidents have been there till 2024 in Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "10",
+          "correct": false
+        },
+        {
+          "option_text": "11",
+          "correct": false
+        },
+        {
+          "option_text": "12",
+          "correct": false
+        },
+        {
+          "option_text": "13",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What is the minimum age required to be a President in Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "45",
+          "correct": true
+        },
+        {
+          "option_text": "44",
+          "correct": false
+        },
+        {
+          "option_text": "43",
+          "correct": false
+        },
+        {
+          "option_text": "42",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which Parliamentary government model does Pakistan's Parliament follow?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Monarchy",
+          "correct": false
+        },
+        {
+          "option_text": "Cohabitational",
+          "correct": false
+        },
+        {
+          "option_text": "Westminister",
+          "correct": true
+        },
+        {
+          "option_text": "Washminister",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What is/are the conditions for choosing Cabinet Ministers?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "There must be atleast one retired PAF officer",
+          "correct": false
+        },
+        {
+          "option_text": "Only 50 members (11% of Parliament) can be inducted as Cabinet Ministers.",
+          "correct": true
+        },
+        {
+          "option_text": "Atleast one minister must be a part of opposition",
+          "correct": false
+        },
+        {
+          "option_text": "The minister must be a member of Parliament (MP)",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What is the amount of judges in Supreme Court of Pakistan according to the constitution?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "8",
+          "correct": false
+        },
+        {
+          "option_text": "12",
+          "correct": false
+        },
+        {
+          "option_text": "15",
+          "correct": false
+        },
+        {
+          "option_text": "Not Specified",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "The Civil servants are a permanent part of bureaucracy of Pakistan. Which exam do these civil servants have to pass?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "ISSB",
+          "correct": false
+        },
+        {
+          "option_text": "GR",
+          "correct": false
+        },
+        {
+          "option_text": "CSS",
+          "correct": true
+        },
+        {
+          "option_text": "FPSC",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What is the highest attainable grade for a civil servant in Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "23",
+          "correct": false
+        },
+        {
+          "option_text": "22",
+          "correct": true
+        },
+        {
+          "option_text": "21",
+          "correct": false
+        },
+        {
+          "option_text": "20",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What is the amount of specific federal secretaries which are considered most vital for Government of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "16",
+          "correct": false
+        },
+        {
+          "option_text": "14",
+          "correct": false
+        },
+        {
+          "option_text": "12",
+          "correct": true
+        },
+        {
+          "option_text": "10",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which article of the constitution highlights how Prime Minister and President can choose the chairman of FPSC?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Article 240",
+          "correct": false
+        },
+        {
+          "option_text": "Article 241",
+          "correct": false
+        },
+        {
+          "option_text": "Article 242",
+          "correct": true
+        },
+        {
+          "option_text": "Article 243",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What does FPSC stand for?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Federal Public Service Commission",
+          "correct": true
+        },
+        {
+          "option_text": "Federal Pakistan Servant Committee",
+          "correct": false
+        },
+        {
+          "option_text": "Federal Private Service Commission",
+          "correct": false
+        },
+        {
+          "option_text": "Federal Public Sector Commission",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What does CSS stand for in context of Pakistan's bureaucracy?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Civil Service Selection",
+          "correct": false
+        },
+        {
+          "option_text": "Central Superior Service",
+          "correct": true
+        },
+        {
+          "option_text": "Civil Superior Survey",
+          "correct": false
+        },
+        {
+          "option_text": "Cascading Style Sheets",
+          "correct": false
+        }
+      ]
     }
   ]
 }
