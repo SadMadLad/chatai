@@ -833,6 +833,152 @@
           "correct": false
         }
       ]
+    },
+    {
+      "question_text": "How many times has the martial law been in effect during the history of Pakistan and approved by the Supreme Court?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "3",
+          "correct": false
+        },
+        {
+          "option_text": "4",
+          "correct": true
+        },
+        {
+          "option_text": "5",
+          "correct": false
+        },
+        {
+          "option_text": "6",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which article guides the caretaker government rule when Vote of No Confidence is in effect?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Article 55",
+          "correct": false
+        },
+        {
+          "option_text": "Article 56",
+          "correct": false
+        },
+        {
+          "option_text": "Article 57",
+          "correct": false
+        },
+        {
+          "option_text": "Article 58",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Are provincial assemblies bicameral in nature?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "True",
+          "correct": false
+        },
+        {
+          "option_text": "False",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who heads the provincial government?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Prime Minister",
+          "correct": false
+        },
+        {
+          "option_text": "One of the Cabinet Ministers",
+          "correct": false
+        },
+        {
+          "option_text": "Chief Minister",
+          "correct": true
+        },
+        {
+          "option_text": "Governer",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who are the representatives opted by Prime Minister for provincial governments?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Governers",
+          "correct": true
+        },
+        {
+          "option_text": "Chief Ministers",
+          "correct": false
+        },
+        {
+          "option_text": "Cabinet Ministers",
+          "correct": false
+        },
+        {
+          "option_text": "Provincial Assemby Speakers",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What percentage of Pakistan's population pays taxes?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "0.54%",
+          "correct": false
+        },
+        {
+          "option_text": "0.55%",
+          "correct": false
+        },
+        {
+          "option_text": "0.56%",
+          "correct": false
+        },
+        {
+          "option_text": "0.57%",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Which Article of Constitution of Pakistan guides about the National Finance Commission Award (NFC)?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Article 150",
+          "correct": false
+        },
+        {
+          "option_text": "Article 160",
+          "correct": true
+        },
+        {
+          "option_text": "Article 170",
+          "correct": false
+        },
+        {
+          "option_text": "Article 180",
+          "correct": false
+        }
+      ]
     }
   ]
 }
