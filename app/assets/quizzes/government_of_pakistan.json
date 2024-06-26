@@ -10,15 +10,15 @@
       "question_options_attributes": [
         {
           "option_text": "The Middle",
-          "correct": true
-        },
-        {
-          "option_text": "The Center",
           "correct": false
         },
         {
-          "option_text": "The Authority",
+          "option_text": "The Center",
           "correct": true
+        },
+        {
+          "option_text": "The Authority",
+          "correct": false
         },
         {
           "option_text": "The Establishment",

@@ -1,10 +1,13 @@
 <script setup>
 import { computed, onUnmounted, reactive, ref, Transition, watch } from "vue";
 import { getNewQuizUndertaking, createQuizUndertaking } from "@/services/apis/quiz";
-import Question from "@/components/quiz/Question.vue";
+
 import { useAuthStore } from "@/storage/auth";
 import { useQuizStore } from "@/storage/quiz";
 import { useRoute, useRouter } from "vue-router";
+
+import CorrectedQuiz from "@/components/quiz/CorrectedQuestion.vue";
+import Question from "@/components/quiz/Question.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -13,20 +16,23 @@ const { removeToken } = useAuthStore();
 const { getAllSelectedOptions, initializeQuizzesArray } = useQuizStore();
 const { isLoading, isError, fetchedData } = getNewQuizUndertaking(route.params.id);
 
-const result = reactive({
+const countdownTimer = ref(null);
+const currentQuestionIndex = ref(0);
+const isFinished = ref(false);
+const timer = ref(null);
+
+const quizResult = reactive({
   isResultLoading: true,
   isResultError: null,
   score: null,
+  correctedQuiz: null,
+  showCorrectAnswers: false
 });
 
 const isTimed = computed(() => fetchedData.value?.quiz?.timed);
 const questions = computed(() => fetchedData.value?.quiz?.questions);
 const quiz = computed(() => fetchedData.value?.quiz);
-
-const countdownTimer = ref(null);
-const currentQuestionIndex = ref(0);
-const isFinished = ref(false);
-const timer = ref(null);
+const quizResultText = computed(() => quizResult.showCorrectAnswers ? 'Hide' : 'Show')
 
 watch(fetchedData, (data) => {
   if (data) {
@@ -47,13 +53,14 @@ watch(isFinished, async (finished) => {
           router.push({ name: "login" });
         } else {
           return response.json().then((jsonResponse) => {
-            const { score } = jsonResponse;
-            result.score = score;
+            const { score, quiz } = jsonResponse;
+            quizResult.score = score;
+            quizResult.correctedQuiz = quiz;
           });
         }
       })
-      .catch(() => (result.isResultError = true))
-      .finally(() => (result.isResultLoading = false));
+      .catch(() => (quizResult.isResultError = true))
+      .finally(() => (quizResult.isResultLoading = false));
     if (isTimed) clearInterval(countdownTimer.value);
   }
 });
@@ -75,15 +82,24 @@ onUnmounted(() => {
   <div v-else-if="isError">Error...</div>
   <div v-else>
     <div v-if="isFinished">
-      <div v-if="result.isResultLoading">
+      <div v-if="quizResult.isResultLoading">
         The Quiz is finished. Now I am fetching results.
       </div>
-      <div v-else-if="result.isResultError">Error while calculating your result.</div>
+      <div v-else-if="quizResult.isResultError">Error while calculating your result.</div>
       <div v-else>
-        {{ result.score }}
+        {{ quizResult.score }}
         <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }"
           >Re-take the quiz</RouterLink
         >
+        <button @click="quizResult.showCorrectAnswers = !quizResult.showCorrectAnswers">
+          {{ quizResultText }} Correct Answers
+        </button>
+
+        <div v-if="quizResult.showCorrectAnswers">
+          <div v-for="(question, index) in quizResult.correctedQuiz.questions">
+            <CorrectedQuiz v-bind="question" :index="index"/>
+          </div>
+        </div>
       </div>
     </div>
     <div v-else>

@@ -161,6 +161,12 @@ end
 books_tag = Tag.create(tag: 'Books')
 education_tag = Tag.create(tag: 'Education')
 economics_tag = Tag.create(tag: 'Economics')
+government_tag = Tag.create(tag: 'Government')
+history_tag = Tag.create(tag: 'History')
+international_relations_tag = Tag.create(tag: 'International Relations')
+pakistan_tag = Tag.create(tag: 'Pakistan')
+pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy')
+pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs')
 why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail')
 
 # Seed some basic machine learning model/s and prediction params
@@ -212,9 +218,23 @@ def seed_quiz(quiz_json_file, tags: [])
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
   quiz = Quiz.create(quiz_data)
 
-  return if tags.blank?
+  return quiz if tags.blank?
 
   tags.each { |tag| TagMap.find_or_create_by(taggable: quiz, tag:) }
+  quiz
 end
 
-seed_quiz('the_making_of_prosperity_and_poverty', tags: [books_tag, education_tag, economics_tag, why_nations_fail_tag])
+quiz_one_tags = [books_tag, education_tag, economics_tag, history_tag, why_nations_fail_tag]
+seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_one_tags)
+
+quiz_two_tags = [
+  international_relations_tag, education_tag, history_tag,
+  pakistan_tag, pakistan_affairs_tag, pakistan_foreign_policy_tag
+]
+seed_quiz('foreign_policy_beginnings', tags: quiz_two_tags)
+
+quiz_three_tags = [education_tag, history_tag, pakistan_tag]
+seed_quiz('pakistan_wikipedia', tags: quiz_three_tags)
+
+quiz_four_tags = [education_tag, government_tag, education_tag, pakistan_tag]
+seed_quiz('government_of_pakistan', tags: quiz_four_tags)
