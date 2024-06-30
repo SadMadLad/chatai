@@ -1,0 +1,229 @@
+{
+  "timed": true,
+  "timer": 480,
+  "title": "Small Differences and Critical Junctures: The Weight of History",
+  "description": "Chapter 4 of Why Nations Fall - by Daron Acemoglu",
+  "published": true,
+  "question_attributes": [
+    {
+      "question_text": "In which country is River Don located?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Turkey",
+          "correct": false
+        },
+        {
+          "option_text": "Greece",
+          "correct": false
+        },
+        {
+          "option_text": "Russia",
+          "correct": true
+        },
+        {
+          "option_text": "Bulgaria",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did Black Plague start?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1345",
+          "correct": false
+        },
+        {
+          "option_text": "1346",
+          "correct": true
+        },
+        {
+          "option_text": "1347",
+          "correct": false
+        },
+        {
+          "option_text": "1348",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which country was the origin of Black Plague?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Japan",
+          "correct": false
+        },
+        {
+          "option_text": "India",
+          "correct": false
+        },
+        {
+          "option_text": "Russia",
+          "correct": false
+        },
+        {
+          "option_text": "China",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When did King Edward III asked the Archbishop of Canterbury to organize prayers, and many bishops wrote letters for priests to read out in church?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1347",
+          "correct": false
+        },
+        {
+          "option_text": "1348",
+          "correct": true
+        },
+        {
+          "option_text": "1349",
+          "correct": false
+        },
+        {
+          "option_text": "1350",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Where was the first of peasants fighting against the feudal system of the society?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Eynsham Abbey",
+          "correct": true
+        },
+        {
+          "option_text": "Evesham Abbey",
+          "correct": false
+        },
+        {
+          "option_text": "Abbotsbury Abbey",
+          "correct": false
+        },
+        {
+          "option_text": "Abesbury Abbey",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "In 1351, what law did the government pass to stop the peasants' revolt against the feudal order?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Act aboloshing the kingship",
+          "correct": false
+        },
+        {
+          "option_text": "Statute of Distribution",
+          "correct": false
+        },
+        {
+          "option_text": "Statute of Laborers",
+          "correct": true
+        },
+        {
+          "option_text": "Safe Conducts Act",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did the peasants start the revolt against the feudal order, unpaid labor and its punishments?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1379",
+          "correct": false
+        },
+        {
+          "option_text": "1381",
+          "correct": true
+        },
+        {
+          "option_text": "1383",
+          "correct": false
+        },
+        {
+          "option_text": "1385",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the primary leader of the peasants revolt?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "William Hilliard",
+          "correct": false
+        },
+        {
+          "option_text": "William Walworth",
+          "correct": false
+        },
+        {
+          "option_text": "Wat Tyler",
+          "correct": true
+        },
+        {
+          "option_text": "John Ball",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What were the feature(s) of Second Serfdom in 1500s - signifying the differences between the Eastern and Western laborers?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "It was less intense version of the earlier feudal system",
+          "correct": false
+        },
+        {
+          "option_text": "It was more inclusive in nature",
+          "correct": false
+        },
+        {
+          "option_text": "It was more significant in Eastern Europe",
+          "correct": true
+        },
+        {
+          "option_text": "It made the feudal system stronger",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Which factors, according to the author, were cause of the major societal and economic differences between the Eastern and the Western blocs of Europe?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Post Black Plague was a critical juncture and the blocs managed it entirely differently",
+          "correct": true
+        },
+        {
+          "option_text": "In the East, the lords were more organized and hooked upon agricultural demands of the west",
+          "correct": true
+        },
+        {
+          "option_text": "Workers in the West were more rebellious and later were the primary cause of inclusive economy",
+          "correct": true
+        },
+        {
+          "option_text": "Towns were weaker and smaller; peasants were less organized in the East but that was not the case in the West bloc",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

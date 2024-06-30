@@ -105,6 +105,12 @@ onUnmounted(() => {
     <div v-else>
       {{ timer }}
 
+      <ul class="flex gap-1.5 items-center justify-center flex-wrap">
+        <li v-for="index in questions.length" class="text-sm cursor-pointer h-8 w-8 overflow-hidden flex-center rounded-full" :class="{'text-white font-semibold bg-green-500': currentQuestionIndex === index - 1 }" @click="currentQuestionIndex = index - 1">
+          {{ index }}
+        </li>
+      </ul>
+
       <h2 class="text-2xl font-black">{{ quiz.title }}</h2>
       <div>{{ currentQuestionIndex + 1 }} / {{ questions.length }}</div>
 

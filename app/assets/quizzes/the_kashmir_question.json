@@ -1,0 +1,185 @@
+{
+  "timed": true,
+  "timer": 600,
+  "title": "The Kashmir Question, 1947-1957",
+  "description": "Chapter 3 of Sattar - Pakistan's Foreign Policy",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "When did Kashmir announce accession to India?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "25 October, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "26 October, 1947",
+          "correct": true
+        },
+        {
+          "option_text": "27 October, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "28 October, 1947",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the Maharaja of Kashmir at the of partition?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Hari Singh",
+          "correct": true
+        },
+        {
+          "option_text": "Bhupinder Singh",
+          "correct": false
+        },
+        {
+          "option_text": "Jagatjit Singh",
+          "correct": false
+        },
+        {
+          "option_text": "Harmeet Singh",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "In Poonch and Mirpur on 17 August, who were the revolutionaries that started the revolt against Dogra armies?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Sheikh Abdullah",
+          "correct": false
+        },
+        {
+          "option_text": "Ghulam Abbas",
+          "correct": false
+        },
+        {
+          "option_text": "Sardar Mohammad Ibrahim Khan",
+          "correct": true
+        },
+        {
+          "option_text": "Sardar Abdul Qayyum Khan",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who were tribesmen from Tirah and Waziristan that entered Kashmir on 22 October?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Afridi",
+          "correct": true
+        },
+        {
+          "option_text": "Ghaffar",
+          "correct": false
+        },
+        {
+          "option_text": "Luddin",
+          "correct": false
+        },
+        {
+          "option_text": "Mahsud",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who went to Kashmir on October 26 and claimed to have signatures of Hari Singh for annexation to India?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Jawaharlal Nehru",
+          "correct": false
+        },
+        {
+          "option_text": "Secretary V. P. Menon",
+          "correct": true
+        },
+        {
+          "option_text": "Mahatama Gandhi",
+          "correct": false
+        },
+        {
+          "option_text": "Lord Mountbatten",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the commander-in-chief of Pakistan when Indian attack was happening in Kashmir?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Field Marshal Auchinleck",
+          "correct": false
+        },
+        {
+          "option_text": "Tikka Khan",
+          "correct": false
+        },
+        {
+          "option_text": "Sir Edward Barnes",
+          "correct": false
+        },
+        {
+          "option_text": "General Gracey",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did Gilgit Scouts ousted the Maharaja's governer in 1947?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "30 October",
+          "correct": true
+        },
+        {
+          "option_text": "31 October",
+          "correct": false
+        },
+        {
+          "option_text": "1st November",
+          "correct": false
+        },
+        {
+          "option_text": "2nd November",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did Liaquat Ali Khan propse that the UN should send its representatives to stop the fighting and the repression of Kashmir?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "13 November, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "14 November, 1947",
+          "correct": false
+        },
+        {
+          "option_text": "15 November, 1947",
+          "correct": false
+        },
+        {
+          "question_text": "16 November, 1947",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}
