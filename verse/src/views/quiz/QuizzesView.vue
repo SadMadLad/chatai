@@ -9,11 +9,9 @@ const { isLoading, isError, fetchedData } = getQuizzes();
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="isError">Error</div>
   <div v-else>
-    <div v-for="{ id, timed, timer } in fetchedData">
+    <div v-for="{ id, title } in fetchedData">
       <RouterLink :to="{ name: 'quiz', params: { id: id } }">
-        {{ id }}
-        {{ timed }}
-        {{ timer }}
+        {{ title }}
       </RouterLink>
     </div>
   </div>
