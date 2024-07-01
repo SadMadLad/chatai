@@ -15,5 +15,5 @@ class Tag < ApplicationRecord
   has_many :quizzes, through: :tag_maps, source: :taggable, source_type: 'Quiz'
   has_many :tag_maps, dependent: :destroy
 
-  validates :tag, presence: false, uniqueness: true
+  validates :tag, :color, presence: false, uniqueness: true
 end
