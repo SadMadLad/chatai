@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
     t.bigint "account_id", null: false
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
+    t.integer "likes_count", default: 0, null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -164,9 +165,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.integer "likes_count", default: 0, null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_posts_on_account_id"
@@ -195,6 +197,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
 
   create_table "questions", force: :cascade do |t|
     t.bigint "quiz_id", null: false
+    t.integer "score", default: 1, null: false
     t.boolean "multiple_answers", default: false, null: false
     t.text "question_text", null: false
     t.datetime "created_at", null: false
@@ -215,6 +218,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
   create_table "quizzes", force: :cascade do |t|
     t.bigint "account_id"
     t.integer "timer"
+    t.integer "questions_count", default: 0, null: false
+    t.integer "quiz_undertakings_count", default: 0, null: false
+    t.integer "ratings_count", default: 0, null: false
+    t.integer "total_score", default: 0, null: false
+    t.integer "total_rating", default: 0, null: false
     t.string "title", null: false
     t.boolean "published", default: false, null: false
     t.boolean "timed", default: false, null: false
@@ -222,6 +230,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_quizzes_on_account_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.string "rateable_type", null: false
+    t.bigint "rateable_id", null: false
+    t.integer "rating", default: 0, null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_ratings_on_account_id"
+    t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -431,6 +450,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_235709) do
   add_foreign_key "quiz_undertakings", "accounts"
   add_foreign_key "quiz_undertakings", "quizzes"
   add_foreign_key "quizzes", "accounts"
+  add_foreign_key "ratings", "accounts"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

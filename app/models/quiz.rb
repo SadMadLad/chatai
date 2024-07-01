@@ -1,13 +1,33 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: quizzes
+#
+#  id                      :bigint           not null, primary key
+#  account_id              :bigint
+#  timer                   :integer
+#  questions_count         :integer          default(0), not null
+#  quiz_undertakings_count :integer          default(0), not null
+#  rating_count            :integer          default(0), not null
+#  total_score             :integer          default(0), not null
+#  total_rating            :integer          default(0), not null
+#  title                   :string           not null
+#  published               :boolean          default(FALSE), not null
+#  timed                   :boolean          default(FALSE), not null
+#  description             :text             not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
 # Quiz having many questions.
 class Quiz < ApplicationRecord
   belongs_to :account, optional: true
 
   has_many :accounts, through: :quiz_undertakings
-  has_many :questions, dependent: :destroy, counter_cache: true
+  has_many :questions, dependent: :destroy
   has_many :question_options, through: :questions
-  has_many :quiz_undertakings, dependent: :destroy, counter_cache: true
+  has_many :quiz_undertakings, dependent: :destroy
+  has_many :ratings, as: :rateable, dependent: :destroy
   has_many :tag_maps, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_maps
 

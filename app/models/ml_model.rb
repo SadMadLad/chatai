@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
-# Machine Learning model are simple scikit models.
+# == Schema Information
+#
+# Table name: ml_models
+#
+#  id                    :bigint           not null, primary key
+#  account_id            :bigint           not null
+#  model_type            :integer          not null
+#  identifier            :string           not null
+#  title                 :string           not null
+#  description           :text             not null
+#  parameters_with_order :jsonb            not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+# Machine Learning model are simple scikit models (for now).
 class MlModel < ApplicationRecord
   AVAILABLE_MODELS = %w[titanic].freeze
   has_many :prediction_params, dependent: :destroy
