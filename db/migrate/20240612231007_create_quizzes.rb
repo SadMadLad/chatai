@@ -5,6 +5,10 @@ class CreateQuizzes < ActiveRecord::Migration[7.1]
 
       t.integer :timer
 
+      t.integer :questions_count, null: false, default: 0
+      t.integer :quiz_undertakings_count, null: false, default: 0
+      t.integer :total_score, null: false, default: 0
+
       t.string :title, null: false
       
       t.boolean :published, null: false, default: false

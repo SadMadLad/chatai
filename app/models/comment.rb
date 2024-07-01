@@ -47,7 +47,7 @@ class Comment < ApplicationRecord
     end
 
     def deep_includes_nested_hash(levels)
-      return :replies if levels.zero?
+      return :replies if levels <= 0
 
       {
         likes: [],
