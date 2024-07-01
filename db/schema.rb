@@ -372,19 +372,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
   end
 
   create_table "tag_maps", force: :cascade do |t|
+    t.bigint "tag_id", null: false
     t.string "taggable_type", null: false
     t.bigint "taggable_id", null: false
-    t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tag_id", "taggable_id", "taggable_type"], name: "index_tag_maps_on_tag_id_and_taggable_id_and_taggable_type", unique: true
     t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
     t.index ["taggable_type", "taggable_id"], name: "index_tag_maps_on_taggable"
   end
 
   create_table "tags", force: :cascade do |t|
+    t.string "color", null: false
     t.string "tag", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["color"], name: "index_tags_on_color", unique: true
     t.index ["tag"], name: "index_tags_on_tag", unique: true
   end
 

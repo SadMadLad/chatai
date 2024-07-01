@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, toRefs, ref } from "vue";
+import { toRefs, ref } from "vue";
 import { useQuizStore } from "@/storage/quiz";
 
 const { getSelected } = useQuizStore();

@@ -158,16 +158,16 @@ end
 
 # Generate Tags
 
-books_tag = Tag.create(tag: 'Books')
-education_tag = Tag.create(tag: 'Education')
-economics_tag = Tag.create(tag: 'Economics')
-government_tag = Tag.create(tag: 'Government')
-history_tag = Tag.create(tag: 'History')
-international_relations_tag = Tag.create(tag: 'International Relations')
-pakistan_tag = Tag.create(tag: 'Pakistan')
-pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy')
-pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs')
-why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail')
+books_tag = Tag.create(tag: 'Books', color: 'd5dde8')
+education_tag = Tag.create(tag: 'Education', color: 'b2ffab')
+economics_tag = Tag.create(tag: 'Economics', color: 'fff9ab')
+government_tag = Tag.create(tag: 'Government', color: 'fcb3bb')
+history_tag = Tag.create(tag: 'History', color: 'bdfcf6')
+international_relations_tag = Tag.create(tag: 'International Relations', color: 'f9bdfc')
+pakistan_tag = Tag.create(tag: 'Pakistan', color: 'a8edcf')
+pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', color: 'ffdfba')
+pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs', color: 'cde3ca')
+why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail', color: 'b2ecf7')
 
 # Seed some basic machine learning model/s and prediction params
 
@@ -214,27 +214,44 @@ PredictionParam.create(prediction_params)
 
 ### Seed Quiz, Questions and QuestionOptions
 
-def seed_quiz(quiz_json_file, tags: [])
+def seed_quiz(quiz_json_file, tags: [], give_rating: true)
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
   quiz = Quiz.create(quiz_data)
 
   return quiz if tags.blank?
 
   tags.each { |tag| TagMap.find_or_create_by(taggable: quiz, tag:) }
+
+  return quiz unless give_rating
+
+  random_ratings_ranges = [rand(1..5), rand(3..5), rand(1..3)]
+  raters = Account.where(role: :user).sample(5)
+  raters.each { |rater| quiz.ratings.create(account: rater, rating: random_ratings_ranges.sample) }
+
   quiz
 end
 
-quiz_one_tags = [books_tag, education_tag, economics_tag, history_tag, why_nations_fail_tag]
-seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_one_tags)
-
-quiz_two_tags = [
-  international_relations_tag, education_tag, history_tag,
-  pakistan_tag, pakistan_affairs_tag, pakistan_foreign_policy_tag
+quiz_one_tags = [
+  books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
+  pakistan_foreign_policy_tag
 ]
-seed_quiz('foreign_policy_beginnings', tags: quiz_two_tags)
+seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags)
+
+quiz_two_tags = [education_tag, government_tag, education_tag, pakistan_tag]
+seed_quiz('government_of_pakistan', tags: quiz_two_tags)
 
 quiz_three_tags = [education_tag, history_tag, pakistan_tag]
 seed_quiz('pakistan_wikipedia', tags: quiz_three_tags)
 
-quiz_four_tags = [education_tag, government_tag, education_tag, pakistan_tag]
-seed_quiz('government_of_pakistan', tags: quiz_four_tags)
+quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
+seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags)
+
+quiz_five_tags = [
+  books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
+  pakistan_foreign_policy_tag
+]
+seed_quiz('the_kashmir_question', tags: quiz_five_tags)
+
+quiz_six_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
+seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags)
+

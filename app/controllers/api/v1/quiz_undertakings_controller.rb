@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        score = @quiz.score(formatted_quiz_undertaking_params)
+        score = @quiz.score_selected_options(formatted_quiz_undertaking_params)
         @questions = @quiz.questions.includes(:question_options, { picture_attachment: :blob })
         @quiz_undertaking = QuizUndertaking.create(correct_answers: score, quiz: @quiz, account: @account)
       end
