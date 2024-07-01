@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: questions
+#
+#  id               :bigint           not null, primary key
+#  quiz_id          :bigint           not null
+#  score            :integer          default(1), not null
+#  multiple_answers :boolean          default(FALSE), not null
+#  question_text    :text             not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
 # A question in a quiz.
 class Question < ApplicationRecord
   SCORE_FOR_MULTIPLE_ANSWERS = 2.0
@@ -8,7 +20,7 @@ class Question < ApplicationRecord
 
   has_many :question_options, dependent: :destroy
 
-  belongs_to :quiz
+  belongs_to :quiz, counter_cache: true
 
   has_one_attached :picture
 
@@ -21,11 +33,13 @@ class Question < ApplicationRecord
   after_commit :decrease_quiz_total_score, on: :destroy
 
   def increase_quiz_total_score
-    quiz.update_column(:total_score, quiz.total_score + score)
+    the_quiz = quiz
+    the_quiz.update(total_score: the_quiz.total_score + score)
   end
 
   def decrease_quiz_total_score
-    quiz.update_column(:total_score, quiz.total_score - score)
+    the_quiz = quiz
+    the_quiz.update(total_score: the_quiz.total_score - score)
   end
 
   # The argument selected_options can be singular as well as plural

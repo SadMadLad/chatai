@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id                :bigint           not null, primary key
+#  user_id           :bigint           not null
+#  role              :integer          default("user"), not null
+#  first_name        :string           not null
+#  last_name         :string           not null
+#  username          :string           not null
+#  tagline           :text
+#  latest_message_at :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
 # A User Account
 class Account < ApplicationRecord
   include SearchBy
@@ -17,6 +32,7 @@ class Account < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :quizzes, dependent: :nullify
   has_many :quiz_undertakings, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :taken_quizzes, through: :quiz_undertakings, class_name: 'Quiz'
 
   has_one_attached :avatar, dependent: :destroy do |attachable|

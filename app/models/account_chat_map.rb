@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: account_chat_maps
+#
+#  account_id :bigint           not null, primary key
+#  chat_id    :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 # In-between association between accounts and chats.
 class AccountChatMap < ApplicationRecord
   belongs_to :account

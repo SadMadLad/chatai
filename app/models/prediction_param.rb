@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: prediction_params
+#
+#  id              :bigint           not null, primary key
+#  ml_model_id     :bigint           not null
+#  param_type      :integer          not null
+#  name            :string           not null
+#  description     :text             not null
+#  possible_values :jsonb
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 # Prediction Param are the input params for a Machine Learning model.
 class PredictionParam < ApplicationRecord
   belongs_to :ml_model

@@ -12,9 +12,6 @@
           <% unless display_only %>
             <%= link_to account, class: 'font-semibold hover:text-secondary-500 flex flex-row items-center gap-2.5', data: { turbo_frame: '_top' } do %>
               <span><%= account.full_name %></span>
-              <% if @account && @account == account %>
-                <span class="text-[0.5rem] rounded-full px-2 py-1 bg-primary-100 text-primary-600"><%= t 'op' %></span>
-              <% end %>
             <% end %>
 
             <hr class="my-1"/>

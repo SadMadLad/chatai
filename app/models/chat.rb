@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
-# Chat Model. Can be group as well as two-way.
+# == Schema Information
+#
+# Table name: chats
+#
+#  id                :bigint           not null, primary key
+#  chat_status       :integer
+#  chat_type         :integer          default("two_person"), not null
+#  chat_title        :string
+#  chat_description  :text
+#  latest_message_at :datetime         not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+# Chat Model. Can be group chat as well as two-person chat.
 class Chat < ApplicationRecord
   after_initialize { self.latest_message_at = DateTime.now if new_record? }
 

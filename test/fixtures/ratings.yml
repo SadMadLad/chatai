@@ -1,21 +1,22 @@
 # == Schema Information
 #
-# Table name: feedbacks
+# Table name: ratings
 #
 #  id            :bigint           not null, primary key
+#  rateable_type :string           not null
+#  rateable_id   :bigint           not null
+#  rating        :integer          default(0), not null
 #  account_id    :bigint           not null
-#  platform      :integer          not null
-#  feedback_body :text             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
 one:
+  rateable{polymorphic}: one
+  rating: 1
   account: one
-  feedback_body: MyText
-  platform: 1
 
 two:
+  rateable{polymorphic}: two
+  rating: 1
   account: two
-  feedback_body: MyText
-  platform: 1

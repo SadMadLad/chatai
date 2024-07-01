@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.score @quiz_undertaking.correct_answers
 
 json.quiz do

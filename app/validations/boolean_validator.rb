@@ -14,7 +14,6 @@
 #
 # model.field = true
 # model.valid? # true
-
 class BooleanValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return if value.in?([true, false])
