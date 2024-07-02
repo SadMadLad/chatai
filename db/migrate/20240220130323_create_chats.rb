@@ -5,6 +5,7 @@ class CreateChats < ActiveRecord::Migration[7.1]
       t.integer :chat_type, null: false, default: 0
 
       t.string :chat_title
+
       t.text :chat_description
 
       t.datetime :latest_message_at, null: false, default: -> { 'CURRENT_TIMESTAMP' }

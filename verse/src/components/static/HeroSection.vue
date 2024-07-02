@@ -2,9 +2,9 @@
   <section>
     <div class="flex items-center">
       <div class="flex w-2/3 flex-col items-start gap-4">
-        <h2 class="text-primary-500 text-4xl font-black">Quiz Shop</h2>
+        <h2 class="text-4xl font-black"></h2>
         <div>
-          <p class="text-primary-700 text-xl">
+          <p class="font-cursive text-xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
             dignissimos.
           </p>
@@ -15,11 +15,6 @@
               Explore Quizzes
             </button>
           </RouterLink>
-        </div>
-      </div>
-      <div class="bg-primary-500 w-1/3 border">
-        <div class="bg-white pl-8">
-          <img src="/hero-image.svg" class="h-auto w-[40rem]" />
         </div>
       </div>
     </div>

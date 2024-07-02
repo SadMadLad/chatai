@@ -197,8 +197,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
 
   create_table "questions", force: :cascade do |t|
     t.bigint "quiz_id", null: false
-    t.integer "score", default: 1, null: false
     t.boolean "multiple_answers", default: false, null: false
+    t.integer "score", default: 1, null: false
     t.text "question_text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -217,6 +217,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
 
   create_table "quizzes", force: :cascade do |t|
     t.bigint "account_id"
+    t.boolean "published", default: false, null: false
+    t.boolean "timed", default: false, null: false
     t.integer "questions_count", default: 0, null: false
     t.integer "quiz_undertakings_count", default: 0, null: false
     t.integer "ratings_count", default: 0, null: false
@@ -224,19 +226,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
     t.integer "total_score", default: 0, null: false
     t.integer "total_rating", default: 0, null: false
     t.string "title", null: false
-    t.boolean "published", default: false, null: false
-    t.boolean "timed", default: false, null: false
     t.text "description", null: false
+    t.datetime "latest_taken_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_quizzes_on_account_id"
   end
 
   create_table "ratings", force: :cascade do |t|
+    t.bigint "account_id", null: false
     t.string "rateable_type", null: false
     t.bigint "rateable_id", null: false
     t.integer "rating", default: 0, null: false
-    t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ratings_on_account_id"

@@ -11,9 +11,7 @@ const loginData = reactive({
 });
 const router = useRouter();
 
-async function handleLogin(event) {
-  event.preventDefault();
-
+async function handleLogin() {
   const { login } = useAuthStore();
   const { url, method } = RailsRoutes.login;
   const { email, password } = loginData;
@@ -33,7 +31,7 @@ async function handleLogin(event) {
 </script>
 
 <template>
-  <form @submit="handleLogin">
+  <form @submit.prevent="handleLogin">
     <label for="email">Email: </label>
     <input
       class="border"

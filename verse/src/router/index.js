@@ -3,18 +3,20 @@ import { privateRoute, publicOnlyRoute } from "@/router/guards";
 
 import AboutView from "@/views/static/AboutView.vue";
 import DashboardView from "@/views/dashboard/DashboardView.vue";
+import ExploreView from "@/views/explore/ExploreView.vue";
+import HomeView from "@/views/static/HomeView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import NotFoundView from "@/views/errors/NotFoundView.vue";
 import QuizView from "@/views/quiz/QuizView.vue";
 import QuizUndertakingView from "@/views/quiz/QuizUndertakingView.vue";
 import QuizzesView from "@/views/quiz/QuizzesView.vue";
-import RootView from "@/views/static/RootView.vue";
+import SignUpView from "@/views/auth/SignUpView.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: RootView,
+    component: HomeView,
   },
   {
     path: "/about",
@@ -31,6 +33,17 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginView,
+    beforeEnter: [publicOnlyRoute],
+  },
+  {
+    path: "/explore",
+    name: "explore",
+    component: ExploreView,
+  },
+  {
+    path: "/sign-up",
+    name: "sign-up",
+    component: SignUpView,
     beforeEnter: [publicOnlyRoute],
   },
   {

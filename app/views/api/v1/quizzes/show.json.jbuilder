@@ -5,6 +5,7 @@ json.quiz do
 
   json.cover_url rails_blob_url(@quiz.cover) if @quiz.cover.attached?
   json.description @quiz.description
+  json.latest_taken_at @quiz.latest_taken_at
   json.ratings_count @quiz.ratings_count
   json.questions_count @quiz.questions.length
   json.quiz_undertakings_count @quiz.quiz_undertakings_count

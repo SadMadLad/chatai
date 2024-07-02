@@ -14,7 +14,7 @@
 # Instance of user taking a quiz.
 class QuizUndertaking < ApplicationRecord
   belongs_to :account
-  belongs_to :quiz, counter_cache: true
+  belongs_to :quiz, counter_cache: true, touch: :latest_taken_at
 
   validates :correct_answers, presence: true, comparison: { greater_than_or_equal_to: 0 }
 end

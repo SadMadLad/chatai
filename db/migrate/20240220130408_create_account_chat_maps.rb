@@ -4,7 +4,7 @@ class CreateAccountChatMaps < ActiveRecord::Migration[7.1]
       t.belongs_to :account, null: false, foreign_key: true
       t.belongs_to :chat, null: false, foreign_key: true
 
-      t.index [:account_id, :chat_id], unique: true
+      t.index %i[account_id chat_id], unique: true
 
       t.timestamps
     end

@@ -7,13 +7,13 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,vue}"],
   theme: {
     colors: {
-      primary: colors.cyan,
+      primary: colors.lime,
       secondary: colors.amber,
       ...colors,
     },
     extend: {
       fontFamily: {
-        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
     },
   },
