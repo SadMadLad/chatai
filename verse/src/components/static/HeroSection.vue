@@ -1,22 +1,17 @@
+<script setup>
+const underlineClass =
+  "underline decoration-primary-400 decoration- decoration-8 underline-offset-2 decoration-no-skip-ink hover:decoration-primary-300 hover:text-primary-700";
+</script>
+
 <template>
   <section>
-    <div class="flex items-center">
-      <div class="flex w-2/3 flex-col items-start gap-4">
-        <h2 class="text-4xl font-black"></h2>
-        <div>
-          <p class="font-cursive text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
-            dignissimos.
-          </p>
-          <RouterLink :to="{ name: 'quizzes' }">
-            <button
-              class="bg-primary-500 hover:bg-secondary-500 rounded px-3.5 py-2.5 font-semibold text-white"
-            >
-              Explore Quizzes
-            </button>
-          </RouterLink>
-        </div>
-      </div>
+    <div class="flex-center">
+      <h2 class="relative mx-12 w-2/3 text-center text-5xl font-bold">
+        The Best Collection off Quizzes for Your
+        <span :class="underlineClass">Knowledge</span>,
+        <span :class="underlineClass">Preparation</span> and
+        <span :class="underlineClass">Enjoyment</span>
+      </h2>
     </div>
   </section>
 </template>

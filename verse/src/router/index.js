@@ -3,7 +3,6 @@ import { privateRoute, publicOnlyRoute } from "@/router/guards";
 
 import AboutView from "@/views/static/AboutView.vue";
 import DashboardView from "@/views/dashboard/DashboardView.vue";
-import ExploreView from "@/views/explore/ExploreView.vue";
 import HomeView from "@/views/static/HomeView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import NotFoundView from "@/views/errors/NotFoundView.vue";
@@ -34,11 +33,6 @@ const routes = [
     name: "login",
     component: LoginView,
     beforeEnter: [publicOnlyRoute],
-  },
-  {
-    path: "/explore",
-    name: "explore",
-    component: ExploreView,
   },
   {
     path: "/sign-up",

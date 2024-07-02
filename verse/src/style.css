@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playwrite+IT+Moderna:wght@100..400&family=Yeseva+One&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +6,9 @@
 @layer components {
   .offset-box-shadow {
     box-shadow: rgba(0, 0, 0, 0.1) 4px 4px;
+  }
+  .decoration-no-skip-ink {
+    text-decoration-skip-ink: none;
   }
 }
 

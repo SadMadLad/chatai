@@ -14,6 +14,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        serif: ["Yeseva One", ...defaultTheme.fontFamily.serif],
+        cursive: ["Playwrite IT Moderna", ...defaultTheme.fontFamily.serif],
       },
     },
   },

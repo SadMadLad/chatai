@@ -1,62 +1,94 @@
 <script setup>
 import { computed } from "vue";
+import { useRouter } from "vue-router";
+
+import SideBar from "@/components/shared/SideBar.vue";
 import { useAuthStore } from "@/storage/auth";
 
-const routerClass = "hover:text-secondary-500 transition-all duration-100 py-4";
+const router = useRouter();
 
 const userIsAuthed = computed(() => {
   const { isAuthenticated } = useAuthStore();
+
   return isAuthenticated;
 });
+
+function handleLogout() {
+  const { logout } = useAuthStore();
+  logout();
+  router.push({ name: "home" });
+}
 </script>
 
 <template>
-  <header
-    class="text-primary-500 sticky top-0 flex flex-row items-center justify-between border-b bg-white bg-opacity-40 px-12 shadow backdrop-blur"
-  >
-    <div class="flex items-center gap-8">
-      <RouterLink :to="{ name: 'home' }">
-        <img src="/logo.png" class="h-10 w-auto" />
-      </RouterLink>
-      <nav class="flex items-center gap-4 font-semibold">
-        <div class="flex flex-row gap-2.5">
-          <RouterLink
-            :class="routerClass"
-            :to="{ name: 'home' }"
-            activeClass="border-b-2 border-b-primary-500"
-            >Home</RouterLink
-          >
-          <RouterLink
-            :class="routerClass"
-            :to="{ name: 'about' }"
-            activeClass="border-b-2 border-b-primary-500"
-            >About</RouterLink
-          >
-        </div>
-        <div class="flex gap-4" v-if="userIsAuthed">
-          <RouterLink
-            :class="routerClass"
-            :to="{ name: 'dashboard' }"
-            activeClass="border-b-2 border-b-primary-500"
-            >Dashboard
-          </RouterLink>
-          <RouterLink
-            :class="routerClass"
-            :to="{ name: 'quizzes' }"
-            activeClass="border-b-2 border-b-primary-500"
-            >Quizzes
-          </RouterLink>
-        </div>
-      </nav>
-    </div>
-    <div>
-      <div v-if="!userIsAuthed">
-        <RouterLink
-          class="hover:bg-secondary-500 bg-primary-500 rounded px-3.5 py-2 font-semibold text-white"
-          :to="{ name: 'login' }"
-          >Login</RouterLink
-        >
+  <header class="bg-white bg-opacity-50 backdrop-blur-md">
+    <nav
+      class="mx-12 flex flex-row items-center justify-between text-sm font-semibold"
+    >
+      <div class="flex flex-row gap-8">
+        <RouterLink :to="{ name: 'home' }">
+          <img src="/logo.png" class="h-12 w-auto md:h-20" />
+        </RouterLink>
+        <ul class="hidden flex-row items-center gap-4 md:flex">
+          <li>
+            <RouterLink
+              :to="{ name: 'home' }"
+              class="hover:text-primary-400"
+              activeClass="text-primary-500"
+              >Home
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              :to="{ name: 'about' }"
+              class="hover:text-primary-400"
+              activeClass="text-primary-500"
+              >About
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              :to="{ name: 'quizzes' }"
+              class="hover:text-primary-400"
+              activeClass="text-primary-500"
+              >Quizzes
+            </RouterLink>
+          </li>
+        </ul>
       </div>
-    </div>
+      <ul
+        v-if="userIsAuthed"
+        class="hidden flex-row items-center gap-8 md:flex"
+      >
+        <li>
+          <button
+            @click="handleLogout"
+            class="hover:outline-primary-500 hover:text-primary-500 rounded-lg px-8 py-2.5 outline outline-2 -outline-offset-2 outline-black"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+      <ul v-else class="hidden flex-row items-center gap-8 md:flex">
+        <li>
+          <RouterLink
+            :to="{ name: 'login' }"
+            class="hover:outline-primary-500 hover:text-primary-500 rounded-lg px-8 py-2.5 outline outline-2 -outline-offset-2 outline-black"
+          >
+            Login</RouterLink
+          >
+        </li>
+        <li>
+          <RouterLink
+            :to="{ name: 'sign-up' }"
+            class="hover:bg-primary-500 rounded-lg bg-black px-8 py-2.5 text-white -outline-offset-2"
+            >Sign Up
+          </RouterLink>
+        </li>
+      </ul>
+      <div class="block md:hidden">
+        <SideBar :userIsAuthed="userIsAuthed" @logout="handleLogout" />
+      </div>
+    </nav>
   </header>
 </template>

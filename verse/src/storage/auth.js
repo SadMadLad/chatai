@@ -9,7 +9,7 @@ const useAuthStore = defineStore(
     const isAuthenticated = ref(false);
     const token = ref(null);
 
-    function removeToken() {
+    function logout() {
       avatarUrl.value = null;
       fullName.value = null;
       isAuthenticated.value = false;
@@ -23,7 +23,7 @@ const useAuthStore = defineStore(
       token.value = newToken;
     }
 
-    return { avatarUrl, isAuthenticated, fullName, token, removeToken, login };
+    return { avatarUrl, isAuthenticated, fullName, token, logout, login };
   },
   { persist: true },
 );
