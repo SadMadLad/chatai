@@ -57,7 +57,7 @@ class Question < ApplicationRecord
 
   def score_for_multiple_answers(correct_options, selected_options)
     cummulative_score = 0.0
-    score_per_correct_answer = (score / correct_options.length).to_f
+    score_per_correct_answer = score.to_f / correct_options.length
 
     selected_options.each do |selected_option|
       if correct_options.include?(selected_option)
