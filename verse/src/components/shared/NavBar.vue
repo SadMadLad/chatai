@@ -12,13 +12,13 @@ const userIsAuthed = computed(() => {
 
 <template>
   <header
-    class="text-primary-500 flex sticky top-0 backdrop-blur bg-opacity-40 flex-row items-center justify-between bg-white px-12 border-b shadow"
+    class="text-primary-500 sticky top-0 flex flex-row items-center justify-between border-b bg-white bg-opacity-40 px-12 shadow backdrop-blur"
   >
     <div class="flex items-center gap-8">
       <RouterLink :to="{ name: 'home' }">
         <img src="/logo.png" class="h-10 w-auto" />
       </RouterLink>
-      <nav class="flex gap-4 font-semibold items-center">
+      <nav class="flex items-center gap-4 font-semibold">
         <div class="flex flex-row gap-2.5">
           <RouterLink
             :class="routerClass"
@@ -52,7 +52,7 @@ const userIsAuthed = computed(() => {
     <div>
       <div v-if="!userIsAuthed">
         <RouterLink
-          class="text-white font-semibold hover:bg-secondary-500 bg-primary-500 rounded py-2 px-3.5"
+          class="hover:bg-secondary-500 bg-primary-500 rounded px-3.5 py-2 font-semibold text-white"
           :to="{ name: 'login' }"
           >Login</RouterLink
         >

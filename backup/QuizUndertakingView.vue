@@ -40,8 +40,8 @@ getNewQuizUndertaking(route.params.id)
       quizData.timer = timer;
     }
   })
-  .catch(() => isError.value = true)
-  .finally(() => isLoading.value = true);
+  .catch(() => (isError.value = true))
+  .finally(() => (isLoading.value = true));
 
 const currentQuestionIndex = ref(0);
 const isFinished = ref(false);
@@ -83,29 +83,41 @@ watch(isFinished, async (finished) => {
       </div>
       <div v-else>
         {{ result.score }}
-        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }">Re-take the quiz</RouterLink>
+        <RouterLink :to="{ name: 'quiz', params: { id: route.params.id } }"
+          >Re-take the quiz</RouterLink
+        >
       </div>
     </div>
     <div v-else>
       <h2 class="text-2xl font-black">{{ quiz.title }}</h2>
-      <div>{{ currentQuestionIndex + 1 }} / {{ quizData.questions.length }}</div>
+      <div>
+        {{ currentQuestionIndex + 1 }} / {{ quizData.questions.length }}
+      </div>
 
       <Transition name="fade">
-        <Question v-bind="quizData.questions[currentQuestionIndex]" :index="currentQuestionIndex" :key="currentQuestionIndex" />
+        <Question
+          v-bind="quizData.questions[currentQuestionIndex]"
+          :index="currentQuestionIndex"
+          :key="currentQuestionIndex"
+        />
       </Transition>
 
       <hr />
 
       <div class="flex gap-4">
-        <button @click="currentQuestionIndex = Math.max(currentQuestionIndex - 1, 0)">
+        <button
+          @click="currentQuestionIndex = Math.max(currentQuestionIndex - 1, 0)"
+        >
           Back
         </button>
-        <button @click="
-          currentQuestionIndex = Math.min(
-            currentQuestionIndex + 1,
-            quizData.questions.length - 1,
-          )
-          ">
+        <button
+          @click="
+            currentQuestionIndex = Math.min(
+              currentQuestionIndex + 1,
+              quizData.questions.length - 1,
+            )
+          "
+        >
           Next
         </button>
       </div>

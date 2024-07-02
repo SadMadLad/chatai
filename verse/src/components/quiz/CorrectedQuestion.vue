@@ -33,14 +33,35 @@ const selected = ref(getSelected(index.value));
           v-model="selected"
           disabled
         />
-        <label :for="id" :class="{ 'bg-green-500': correct && selected.some(s => s === id), 'bg-red-500': !correct && selected.some(s => s === id) }">{{ option_text }}</label>
+        <label
+          :for="id"
+          :class="{
+            'bg-green-500': correct && selected.some((s) => s === id),
+            'bg-red-500': !correct && selected.some((s) => s === id),
+          }"
+          >{{ option_text }}</label
+        >
       </li>
     </ul>
     <ul v-else>
       <li v-for="{ id, option_text, correct } in question_options">
         <span v-show="correct">C</span>
-        <input :name="id" type="radio" :value="id" :id="id" v-model="selected" disabled/>
-        <label :for="id" :class="{ 'bg-green-500': correct && selected === id, 'bg-red-500': !correct && selected === id }">{{ option_text }}</label>
+        <input
+          :name="id"
+          type="radio"
+          :value="id"
+          :id="id"
+          v-model="selected"
+          disabled
+        />
+        <label
+          :for="id"
+          :class="{
+            'bg-green-500': correct && selected === id,
+            'bg-red-500': !correct && selected === id,
+          }"
+          >{{ option_text }}</label
+        >
       </li>
     </ul>
   </div>

@@ -1,5 +1,5 @@
 <script setup>
-  import HeroSection from "@/components/static/HeroSection.vue";
+import HeroSection from "@/components/static/HeroSection.vue";
 </script>
 <template>
   <HeroSection />

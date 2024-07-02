@@ -12,8 +12,6 @@
 
 @layer utilities {
   .flex-center {
-    @apply flex items-center justify-center
+    @apply flex items-center justify-center;
   }
 }
-
-

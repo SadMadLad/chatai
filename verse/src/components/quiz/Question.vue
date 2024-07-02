@@ -39,7 +39,13 @@ watch(selected, (newSelected) => {
     </ul>
     <ul v-else>
       <li v-for="{ id, option_text } in question_options">
-        <input :name="id" type="radio" :value="id" :id="id" v-model="selected" />
+        <input
+          :name="id"
+          type="radio"
+          :value="id"
+          :id="id"
+          v-model="selected"
+        />
         <label :for="id">{{ option_text }}</label>
       </li>
     </ul>
