@@ -217,10 +217,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
 
   create_table "quizzes", force: :cascade do |t|
     t.bigint "account_id"
-    t.integer "timer"
     t.integer "questions_count", default: 0, null: false
     t.integer "quiz_undertakings_count", default: 0, null: false
     t.integer "ratings_count", default: 0, null: false
+    t.integer "timer"
     t.integer "total_score", default: 0, null: false
     t.integer "total_rating", default: 0, null: false
     t.string "title", null: false

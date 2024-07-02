@@ -180,6 +180,328 @@
           "correct": true
         }
       ]
+    },
+    {
+      "question_text": "Who confessed in a letter in 1964 that the plebiscite was never meant to happen in Kashmir?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "V. P. Menon",
+          "correct": true
+        },
+        {
+          "option_text": "Jawaharlal Nehru",
+          "correct": false
+        },
+        {
+          "option_text": "Karan Singh",
+          "correct": false
+        },
+        {
+          "option_text": "Sheikh Abdullah",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did Pakistan raise the issue of Kashmir's so-called 'Constitutional Assembly' before UN's Security Council?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "25 January, 1957",
+          "correct": false
+        },
+        {
+          "option_text": "24 January, 1957",
+          "correct": true
+        },
+        {
+          "option_text": "23 January, 1957",
+          "correct": false
+        },
+        {
+          "option_text": "22 January, 1957",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who vetoed the proposal from Pakistan in favor of India - refraining the Security Council from doing anything?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "France",
+          "correct": false
+        },
+        {
+          "option_text": "USA",
+          "correct": false
+        },
+        {
+          "option_text": "UK",
+          "correct": false
+        },
+        {
+          "option_text": "USSR",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What factors could've motivated veto of Pakistan's proposal before Security Council?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "USA had always a pro-Indian stance in the United Nations and was the reason of veto",
+          "correct": false
+        },
+        {
+          "option_text": "USSR was not happy with Pakistan's Defence pact with USA",
+          "correct": true
+        },
+        {
+          "option_text": "India used USSR's anger against Pakistan",
+          "correct": true
+        },
+        {
+          "option_text": "British pro-Indian stance in the United Nations was the key reason",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "\"The Members of the United Nations agree to accept and carry out the decisions of the Security Council in accordance with the present Charter\", which article of United Nations Charter it is?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Article 22",
+          "correct": false
+        },
+        {
+          "option_text": "Article 23",
+          "correct": false
+        },
+        {
+          "option_text": "Article 24",
+          "correct": false
+        },
+        {
+          "option_text": "Article 25",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When did Pakistan and USA consider a defence pact?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1951",
+          "correct": false
+        },
+        {
+          "option_text": "1952",
+          "correct": false
+        },
+        {
+          "option_text": "1953",
+          "correct": true
+        },
+        {
+          "option_text": "1954",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did Muhammad Ali Bogra and Jawaharlal Nehru met in Delhi in June 1953?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "June 1953",
+          "correct": true
+        },
+        {
+          "option_text": "July 1953",
+          "correct": false
+        },
+        {
+          "option_text": "August 1953",
+          "correct": false
+        },
+        {
+          "option_text": "September 1953",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Was there any opposition in the Constituent Assembly of Kashmir in 1951?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Yes",
+          "correct": false
+        },
+        {
+          "option_text": "No",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who were the two representatives nominated by United Nations for the Kashmir Issue?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Sergey Kryslytsya",
+          "correct": false
+        },
+        {
+          "option_text": "Judge Owen Dixon",
+          "correct": true
+        },
+        {
+          "option_text": "Frank P. Graham",
+          "correct": true
+        },
+        {
+          "option_text": "Dennis Francis",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What does UNCIP stands for in context of Kashmir issue?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "United Nations Commission of International Politics",
+          "correct": false
+        },
+        {
+          "option_text": "United Nations Council for India and Pakistan",
+          "correct": false
+        },
+        {
+          "option_text": "United Nations Commission for India and Pakistan",
+          "correct": true
+        },
+        {
+          "option_text": "United Nations Council of International Politics",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "From Pakistan, who was the representative for Kashmir issue, and spoke for 5 hours refuting the Indian allegations?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Mohammad Ali Jinnah",
+          "correct": false
+        },
+        {
+          "option_text": "Mohammad Ali Bogra",
+          "correct": false
+        },
+        {
+          "option_text": "Abdur Rab Nishtar",
+          "correct": false
+        },
+        {
+          "option_text": "Chaudhry Zafrullah Khan",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When was UNCIP established?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1 January, 1948",
+          "correct": false
+        },
+        {
+          "option_text": "20 January, 1948",
+          "correct": true
+        },
+        {
+          "option_text": "1 June, 1948",
+          "correct": false
+        },
+        {
+          "option_text": "20 June, 1948",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did the Security Council pass the first substantive resolution?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "21 April, 1948",
+          "correct": true
+        },
+        {
+          "option_text": "20 April, 1948",
+          "correct": false
+        },
+        {
+          "option_text": "19 April, 1948",
+          "correct": false
+        },
+        {
+          "option_text": "18 April, 1948",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When was ceasefire ordered between India and Pakistan, and a three-part resolution was elaborated?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "11 August, 1948",
+          "correct": false
+        },
+        {
+          "option_text": "12 August, 1948",
+          "correct": false
+        },
+        {
+          "option_text": "13 August, 1948",
+          "correct": true
+        },
+        {
+          "option_text": "14 August, 1948",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which were the main point(s) of the proposals presented by either the UNCIP or the representatives throught 1947 to 1957?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Free and Impartial Plebiscite in the public to direct the course of Jammu and Kashmir",
+          "correct": true
+        },
+        {
+          "option_text": "Pakistan and India should thin down their numbers in the area of Jammu and Kashmir",
+          "correct": true
+        },
+        {
+          "option_text": "Both Ccountries, India and Pakistan should enter consultations and assure fair and equitable conditions for free expression",
+          "correct": true
+        },
+        {
+          "option_text": "Regional plebiscites by partition of some areas to Pakistan and some to India",
+          "correct": true
+        }
+      ]
     }
   ]
 }
