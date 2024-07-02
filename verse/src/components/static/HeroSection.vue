@@ -6,7 +6,7 @@ const underlineClass =
 <template>
   <section>
     <div class="flex-center">
-      <h2 class="relative mx-12 w-2/3 text-center text-5xl font-bold">
+      <h2 class="-z-10 relative mx-12 w-2/3 text-center text-5xl font-bold">
         The Best Collection off Quizzes for Your
         <span :class="underlineClass">Knowledge</span>,
         <span :class="underlineClass">Preparation</span> and
