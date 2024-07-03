@@ -21,10 +21,10 @@ async function handleLogin() {
     }),
   );
 
-  const { token, full_name, avatar_url } = await response.json();
+  const { token, full_name, avatar_url, username } = await response.json();
 
   if (token) {
-    login(avatar_url, full_name, token);
+    login(avatar_url, full_name, token, username);
     router.push({ name: "dashboard" });
   }
 }

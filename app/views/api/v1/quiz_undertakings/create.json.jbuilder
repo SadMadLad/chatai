@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-json.score @quiz_undertaking.correct_answers
+json.score @quiz_undertaking.score
 
 json.quiz do
   json.id @quiz.id

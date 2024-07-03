@@ -78,11 +78,11 @@ function handleLogout() {
     <div
       v-if="isOpen"
       @click.stop="isOpen = false"
-      class="fixed left-0 top-0 z-10 h-screen w-screen bg-black bg-opacity-50"
+      class="fixed left-0 top-0 h-screen w-screen bg-black bg-opacity-50"
     ></div>
   </Transition>
   <Transition name="sidebar">
-    <aside v-if="isOpen" class="fixed left-0 top-0 z-20 h-screen bg-white p-4">
+    <aside v-if="isOpen" class="fixed left-0 top-0 h-screen bg-white p-4">
       <button class="absolute right-2.5 top-2.5" @click.stop="isOpen = false">
         <PhX />
       </button>

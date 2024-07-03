@@ -14,7 +14,7 @@ json.array! @quizzes do |quiz|
   json.total_rating quiz.total_rating
 
   json.tags quiz.tags do |tag|
-    json.color tag.color
     json.tag tag.tag
+    json.tag_type tag.tag_type
   end
 end

@@ -10,6 +10,12 @@
   .decoration-no-skip-ink {
     text-decoration-skip-ink: none;
   }
+  .-underline-offset-6 {
+    text-underline-offset: -6px;
+  }
+  .decoration-12 {
+    text-decoration-thickness: 12px;
+  }
 }
 
 @layer utilities {

@@ -1,17 +1,45 @@
 <script setup>
+import { PhClover, PhQuotes, PhSparkle } from "@phosphor-icons/vue";
+
 const underlineClass =
-  "underline decoration-primary-400 decoration- decoration-8 underline-offset-2 decoration-no-skip-ink hover:decoration-primary-300 hover:text-primary-700";
+  "decoration-primary-400 decoration-12 -underline-offset-6 decoration-no-skip-ink underline";
 </script>
 
 <template>
-  <section>
-    <div class="flex-center">
-      <h2 class="-z-10 relative mx-12 w-2/3 text-center text-5xl font-bold">
-        The Best Collection off Quizzes for Your
+  <section class="my-24">
+    <div class="flex flex-col items-center gap-6">
+      <h4
+        class="relative mx-6 w-full text-balance text-center text-2xl font-semibold md:w-2/3 md:text-3xl lg:w-3/5 lg:text-4xl"
+      >
+        The Best Collection of Quizzes for Your
         <span :class="underlineClass">Knowledge</span>,
         <span :class="underlineClass">Preparation</span> and
         <span :class="underlineClass">Enjoyment</span>
-      </h2>
+        <PhQuotes
+          size="32"
+          class="text-primary-500 absolute -top-10 right-12"
+        />
+        <PhSparkle
+          size="32"
+          class="text-primary-500 absolute -top-12 left-16"
+        />
+      </h4>
+      <div
+        class="relative mx-6 flex w-full flex-col items-center gap-2 text-center text-lg md:w-2/3 lg:w-3/5"
+      >
+        <p class="text-balance">
+          Write your own quizzes, take any quiz, prepare and have a good time!
+        </p>
+        <RouterLink
+          :to="{ name: 'quizzes' }"
+          class="bg-primary-500 hover:bg-primary-400 rounded px-6 py-1.5 font-semibold text-white"
+          >Explore Quizzes
+        </RouterLink>
+        <PhClover
+          size="32"
+          class="text-primary-500 absolute bottom-0 left-4 sm:left-20"
+        />
+      </div>
     </div>
   </section>
 </template>

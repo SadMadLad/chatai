@@ -11,9 +11,13 @@
 #
 # Tags categories associated with different records.
 class Tag < ApplicationRecord
-  has_many :live_chat_rooms, through: :tag_maps, source: :taggable, source_type: 'Chat'
-  has_many :quizzes, through: :tag_maps, source: :taggable, source_type: 'Quiz'
   has_many :tag_maps, dependent: :destroy
 
-  validates :tag, :color, presence: false, uniqueness: true
+  has_many :live_chat_rooms, through: :tag_maps, source: :taggable, source_type: 'Chat'
+  has_many :quizzes, through: :tag_maps, source: :taggable, source_type: 'Quiz'
+
+  validates :tag, presence: false, uniqueness: true
+  validates :tag_type, presence: true
+
+  enum :tag_type, { display: 0, meta: 1 }
 end

@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from "vue";
+
 defineProps({
   id: Number,
   questions_count: Number,
@@ -9,10 +11,16 @@ defineProps({
   tags: Array,
 });
 
-const quizUndertakingCountDisplay = (count) =>
-  `${count} ${count === 1 ? "time" : "times"}`;
-const quizQuestionsCountDisplay = (count) =>
-  `${count} ${count === 1 ? "question" : "questions"}`;
+const quizUndertakingCountDisplay = computed(
+  () => (count) => `${count} ${count === 1 ? "time" : "times"}`,
+);
+const quizQuestionsCountDisplay = computed(
+  () => (count) => `${count} ${count === 1 ? "question" : "questions"}`,
+);
+
+const filteredTags = computed(
+  () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
+);
 </script>
 
 <template>
@@ -28,11 +36,12 @@ const quizQuestionsCountDisplay = (count) =>
     </div>
     <div class="flex flex-wrap gap-2">
       <span
-        v-for="{ tag, color } in tags"
-        :style="{ backgroundColor: '#' + color }"
-        class="rounded-full px-3.5 py-1.5 text-xs font-semibold"
+        v-for="{ tag, tag_type } in filteredTags(tags)"
+        class="bg-primary-200 rounded-full px-3.5 py-1.5 text-xs font-semibold shadow-sm"
       >
-        {{ tag }}
+        <span>
+          {{ tag }}
+        </span>
       </span>
     </div>
   </RouterLink>

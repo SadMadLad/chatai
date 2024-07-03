@@ -11,56 +11,70 @@ import QuizUndertakingView from "@/views/quiz/QuizUndertakingView.vue";
 import QuizzesView from "@/views/quiz/QuizzesView.vue";
 import SignUpView from "@/views/auth/SignUpView.vue";
 
+import ApplicationLayout from "@/layouts/ApplicationLayout.vue";
+import SessionsLayout from "@/layouts/SessionsLayout.vue";
+
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: AboutView,
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardView,
-    beforeEnter: [privateRoute],
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: LoginView,
+    path: "/sessions",
+    component: SessionsLayout,
     beforeEnter: [publicOnlyRoute],
-  },
-  {
-    path: "/sign-up",
-    name: "sign-up",
-    component: SignUpView,
-    beforeEnter: [publicOnlyRoute],
-  },
-  {
-    path: "/quizzes",
-    beforeEnter: [privateRoute],
     children: [
       {
-        path: "",
-        name: "quizzes",
-        component: QuizzesView,
+        path: "/login",
+        name: "login",
+        component: LoginView,
       },
       {
-        path: ":id",
+        path: "/sign-up",
+        name: "sign-up",
+        component: SignUpView,
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: ApplicationLayout,
+    children: [
+      {
+        path: "/",
+        name: "home",
+        component: HomeView,
+      },
+      {
+        path: "/about",
+        name: "about",
+        component: AboutView,
+      },
+      {
+        path: "/dashboard",
+        name: "dashboard",
+        component: DashboardView,
+        beforeEnter: [privateRoute],
+      },
+      {
+        path: "/quizzes",
+        beforeEnter: [privateRoute],
         children: [
           {
             path: "",
-            name: "quiz",
-            component: QuizView,
+            name: "quizzes",
+            component: QuizzesView,
           },
           {
-            path: "undertaking",
-            name: "quiz-undertaking",
-            component: QuizUndertakingView,
+            path: ":id",
+            children: [
+              {
+                path: "",
+                name: "quiz",
+                component: QuizView,
+              },
+              {
+                path: "undertaking",
+                name: "quiz-undertaking",
+                component: QuizUndertakingView,
+              },
+            ],
           },
         ],
       },

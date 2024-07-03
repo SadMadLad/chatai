@@ -47,7 +47,6 @@ module Api
           full_name: @account.full_name,
           username: @account.username,
           avatar_url: @account.avatar.attached? ? url_for(@account.avatar) : nil,
-          is_admin: @account.can_moderate?
         }
       end
     end

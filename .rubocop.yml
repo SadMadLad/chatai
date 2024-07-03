@@ -12,9 +12,6 @@ AllCops:
     - config/initializers/**/*
     - config/environments/**/*
 
-    # TEMP: These files are ignored temporarily.
-    - app/models/structures/**/*
-
 require:
   - rubocop-capybara
   - rubocop-minitest
@@ -28,8 +25,6 @@ Metrics/BlockLength:
   Exclude:
     # Routes are typically going to grow quite a lot
     - config/routes.rb
-    # Seed generation can be complex. Its safe to ignore this rule for seeds.rb.
-    - db/seeds.rb
 
 Rails/SkipsModelValidations:
   Exclude:

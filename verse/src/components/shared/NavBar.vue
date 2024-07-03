@@ -13,6 +13,35 @@ const userIsAuthed = computed(() => {
   return isAuthenticated;
 });
 
+const authEnum = {
+  publicOnly: 1,
+  privateOnly: 2,
+  both: 3,
+};
+
+const navLinks = [
+  {
+    name: "home",
+    text: "Home",
+    auth: authEnum.both,
+  },
+  {
+    name: "about",
+    text: "About",
+    auth: authEnum.both,
+  },
+  {
+    name: "dashboard",
+    text: "Dashboard",
+    auth: authEnum.privateOnly,
+  },
+  {
+    name: "quizzes",
+    text: "Quizzes",
+    auth: authEnum.privateOnly,
+  },
+];
+
 function handleLogout() {
   const { logout } = useAuthStore();
   logout();
@@ -21,7 +50,7 @@ function handleLogout() {
 </script>
 
 <template>
-  <header class="bg-white bg-opacity-50 backdrop-blur-md">
+  <header class="sticky top-0 z-50 bg-white bg-opacity-50 backdrop-blur-md">
     <nav
       class="mx-12 flex flex-row items-center justify-between text-sm font-semibold"
     >
@@ -30,29 +59,18 @@ function handleLogout() {
           <img src="/logo.png" class="h-12 w-auto md:h-20" />
         </RouterLink>
         <ul class="hidden flex-row items-center gap-4 md:flex">
-          <li>
+          <li v-for="{ name, text, auth } in navLinks">
             <RouterLink
-              :to="{ name: 'home' }"
-              class="hover:text-primary-400"
-              activeClass="text-primary-500"
-              >Home
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              :to="{ name: 'about' }"
-              class="hover:text-primary-400"
-              activeClass="text-primary-500"
-              >About
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              :to="{ name: 'quizzes' }"
-              class="hover:text-primary-400"
-              activeClass="text-primary-500"
-              >Quizzes
-            </RouterLink>
+              v-if="
+                auth === authEnum.both ||
+                (auth === authEnum.privateOnly && userIsAuthed) ||
+                (auth === authEnum.publicOnly && !userIsAuthed)
+              "
+              :to="{ name: name }"
+              class="hover:text-primary-400 cursor-pointer"
+              exactActiveClass="text-primary-500"
+              >{{ text }}</RouterLink
+            >
           </li>
         </ul>
       </div>

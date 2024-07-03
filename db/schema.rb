@@ -208,7 +208,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
   create_table "quiz_undertakings", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "quiz_id", null: false
-    t.float "correct_answers", default: 0.0, null: false
+    t.float "score", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_quiz_undertakings_on_account_id"
@@ -384,11 +384,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "color", null: false
+    t.integer "tag_type", default: 0, null: false
     t.string "tag", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["color"], name: "index_tags_on_color", unique: true
     t.index ["tag"], name: "index_tags_on_tag", unique: true
   end
 

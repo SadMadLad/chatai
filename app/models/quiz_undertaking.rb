@@ -16,5 +16,13 @@ class QuizUndertaking < ApplicationRecord
   belongs_to :account
   belongs_to :quiz, counter_cache: true, touch: :latest_taken_at
 
-  validates :correct_answers, presence: true, comparison: { greater_than_or_equal_to: 0 }
+  validates :score, presence: true
+
+  validate :score_within_range
+
+  def score_within_range
+    return if score.between?(0, quiz.total_score)
+
+    errors.add(:score, 'must be within 0 and the total score')
+  end
 end

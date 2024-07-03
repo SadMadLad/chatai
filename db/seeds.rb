@@ -158,16 +158,17 @@ end
 
 # Generate Tags
 
-books_tag = Tag.create(tag: 'Books', color: 'd5dde8')
-education_tag = Tag.create(tag: 'Education', color: 'b2ffab')
-economics_tag = Tag.create(tag: 'Economics', color: 'fff9ab')
-government_tag = Tag.create(tag: 'Government', color: 'fcb3bb')
-history_tag = Tag.create(tag: 'History', color: 'bdfcf6')
-international_relations_tag = Tag.create(tag: 'International Relations', color: 'f9bdfc')
-pakistan_tag = Tag.create(tag: 'Pakistan', color: 'a8edcf')
-pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', color: 'ffdfba')
-pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs', color: 'cde3ca')
-why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail', color: 'b2ecf7')
+books_tag = Tag.create(tag: 'Books')
+education_tag = Tag.create(tag: 'Education')
+economics_tag = Tag.create(tag: 'Economics')
+government_tag = Tag.create(tag: 'Government')
+history_tag = Tag.create(tag: 'History')
+pakistan_tag = Tag.create(tag: 'Pakistan')
+
+international_relations_tag = Tag.create(tag: 'International Relations', tag_type: :meta)
+pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', tag_type: :meta)
+pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs', tag_type: :meta)
+why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail', tag_type: :meta)
 
 # Seed some basic machine learning model/s and prediction params
 
@@ -235,23 +236,38 @@ quiz_one_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags)
+quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags)
 
 quiz_two_tags = [education_tag, government_tag, education_tag, pakistan_tag]
-seed_quiz('government_of_pakistan', tags: quiz_two_tags)
+quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags)
 
 quiz_three_tags = [education_tag, history_tag, pakistan_tag]
-seed_quiz('pakistan_wikipedia', tags: quiz_three_tags)
+quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags)
 
 quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
-seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags)
+quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags)
 
 quiz_five_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-seed_quiz('the_kashmir_question', tags: quiz_five_tags)
+quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags)
 
 quiz_six_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
-seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags)
+quiz_six = seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags)
 
+quizzes = [quiz_one, quiz_two, quiz_three, quiz_four, quiz_five, quiz_six]
+
+### Seed Some Quiz Undertaking
+def generate_quiz_undertaking(quiz, account, random_created_at: false)
+  if random_created_at
+    QuizUndertaking.create(quiz:, account:, score: rand(0..quiz.total_score), created_at: rand(1...100).days.ago)
+  else
+    QuizUndertaking.create(quiz:, account:, score: rand(0..quiz.total_score))
+  end
+end
+
+quizzes.each do |quiz|
+  generate_quiz_undertaking(quiz, normal_accounts.sample)
+  10.times { generate_quiz_undertaking(quiz, first_account, random_created_at: true) }
+end
