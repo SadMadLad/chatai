@@ -16,7 +16,6 @@ interface AuthTokenState {
     newUsername: string,
   ) => void;
   removeAuthToken: () => void;
-  verifySession: (signal: AbortSignal) => Promise<boolean>;
 }
 
 const useAuthStore = create<AuthTokenState>()(
@@ -48,32 +47,6 @@ const useAuthStore = create<AuthTokenState>()(
           username: null,
           isAuthed: false,
         }),
-      verifySession: async (signal: AbortSignal) => {
-        const token = get().authToken;
-        if (!token) return false;
-
-        const { method, url } = RailsRoutes.verifySession;
-        const response = await fetch(
-          client(url, method, { authToken: token }),
-          { signal },
-        );
-
-        if (!response.ok) {
-          get().removeAuthToken();
-        } else {
-          const { full_name, avatar_url, username } =
-            await response.json();
-
-          set({
-            fullName: full_name,
-            avatarUrl: avatar_url,
-            username: username,
-            isAuthed: true,
-          });
-        }
-
-        return response.ok;
-      },
     }),
     {
       name: "auth-storage",

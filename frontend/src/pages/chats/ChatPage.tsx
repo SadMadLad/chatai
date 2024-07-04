@@ -62,11 +62,18 @@ export default function ChatPage() {
     chatPresence.onSync(() => {
       const presentUsers = Object.values(
         chatPresence.list((_, { metas: [presentUser] }) => presentUser),
-      ).filter((presentUser) => !!presentUser.username);
+      ).filter((presentUser, index, self) => {
+        // Filter based on the presence of username and uniqueness
+        return (
+          !!presentUser.username &&
+          // Check if the current username is the first occurrence in the array
+          self.findIndex((user) => user.username === presentUser.username) ===
+            index
+        );
+      });
 
       setLiveUsers(presentUsers);
     });
-
     chatChannel.on("create:message", (newMessage: Message) =>
       setChatMessages((prevMessages) => [...prevMessages, newMessage]),
     );

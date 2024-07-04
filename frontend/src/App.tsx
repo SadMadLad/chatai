@@ -33,21 +33,20 @@ function PublicRoutes() {
 }
 
 function App() {
-  const { authToken, fullName, avatarUrl, isAuthed, verifySession } =
+  const { authToken, fullName, avatarUrl, isAuthed } =
     useAuthStore();
   const { subscribeSocket, unsubscribeSocket } = useSocketStore();
   const { subscribeChannel, subscribePresence, unsubscribePresence } =
     usePresenceStore();
 
-  const prepareSockets = async (signal: AbortSignal): Promise<boolean> => {
-    const verifiedSession = await verifySession(signal);
-    if (!verifiedSession || !authToken || !fullName) return false;
+  const prepareSockets = async (): Promise<boolean> => {
+    if (!authToken || !fullName) return false;
 
     subscribeSocket(authToken);
     subscribeChannel(fullName, authToken, avatarUrl);
     subscribePresence();
 
-    return verifiedSession;
+    return true;
   };
 
   const removeSockets = () => {
@@ -57,9 +56,8 @@ function App() {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const signal = abortController.signal;
 
-    prepareSockets(signal).then((isVerified) => {
+    prepareSockets().then((isVerified) => {
       if (!isVerified) removeSockets();
     });
 

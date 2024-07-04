@@ -14,10 +14,6 @@ const Rails = `${import.meta.env.VITE_RAILS_URL}/api/v1`;
 const RailsRoutes: RailsRoutes = {
   login: { url: `${Rails}/sessions`, method: "POST" },
   logout: { url: `${Rails}/sessions`, method: "DELETE" },
-  verifySession: {
-    url: `${Rails}/sessions/verify_session`,
-    method: "POST",
-  },
   chats: { url: `${Rails}/chats`, method: "GET" },
   accounts: { url: `${Rails}/accounts`, method: "GET" },
 };
