@@ -2,6 +2,7 @@
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
+const containerQueries = require("@tailwindcss/container-queries");
 
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,vue}"],
@@ -19,5 +20,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [containerQueries],
 };

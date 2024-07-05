@@ -25,26 +25,34 @@ const filteredTags = computed(
 </script>
 
 <template>
-  <RouterLink :to="{ name: 'quiz', params: { id: id } }">
-    <img :src="cover_url" />
-    <div class="flex flex-col gap-1">
-      <h4 class="font-xl font-black">{{ title }}</h4>
-      <p>The quiz has {{ quizQuestionsCountDisplay(questions_count) }}</p>
-      <p class="text-xs">{{ total_rating / ratings_count }} / 5</p>
-      <p class="text-xs">
-        The quiz was taken
-        {{ quizUndertakingCountDisplay(quiz_undertakings_count) }}.
-      </p>
-    </div>
-    <div class="flex flex-wrap gap-2">
-      <span
-        v-for="{ tag, tag_type } in filteredTags(tags)"
-        class="bg-primary-200 rounded-full px-3.5 py-1.5 text-xs font-semibold shadow-sm"
-      >
-        <span>
-          {{ tag }}
-        </span>
-      </span>
-    </div>
-  </RouterLink>
+  <div class="group mb-6 overflow-hidden rounded-lg border shadow-lg">
+    <RouterLink :to="{ name: 'quiz', params: { id: id } }">
+      <div v-if="cover_url" class="max-h-56 w-auto overflow-hidden">
+        <img :src="cover_url" class="h-full w-full object-cover" />
+      </div>
+      <div class="p-6">
+        <div class="flex flex-col gap-1">
+          <h4 class="font-xl font-black group-has-[:hover]:text-lime-500">
+            {{ title }}
+          </h4>
+          <p>The quiz has {{ quizQuestionsCountDisplay(questions_count) }}</p>
+          <p class="text-xs">{{ total_rating / ratings_count }} / 5</p>
+          <p class="text-xs">
+            The quiz was taken
+            {{ quizUndertakingCountDisplay(quiz_undertakings_count) }}.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span
+            v-for="{ tag, tag_type } in filteredTags(tags)"
+            class="bg-primary-200 rounded-full px-3.5 py-1.5 text-xs font-semibold shadow-sm"
+          >
+            <span>
+              {{ tag }}
+            </span>
+          </span>
+        </div>
+      </div>
+    </RouterLink>
+  </div>
 </template>

@@ -33,8 +33,7 @@ function PublicRoutes() {
 }
 
 function App() {
-  const { authToken, fullName, avatarUrl, isAuthed } =
-    useAuthStore();
+  const { authToken, fullName, avatarUrl, isAuthed } = useAuthStore();
   const { subscribeSocket, unsubscribeSocket } = useSocketStore();
   const { subscribeChannel, subscribePresence, unsubscribePresence } =
     usePresenceStore();
