@@ -215,7 +215,7 @@ PredictionParam.create(prediction_params)
 
 ### Seed Quiz, Questions and QuestionOptions
 
-def seed_quiz(quiz_json_file, tags: [], give_rating: true)
+def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil)
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
   quiz = Quiz.create(quiz_data)
 
@@ -229,6 +229,13 @@ def seed_quiz(quiz_json_file, tags: [], give_rating: true)
   raters = Account.where(role: :user).sample(5)
   raters.each { |rater| quiz.ratings.create(account: rater, rating: random_ratings_ranges.sample) }
 
+  return quiz unless cover_image.present?
+
+  quiz.cover.attach(
+    io: File.open(Rails.root.join("app/assets/images/faker/quiz/#{cover_image}")),
+    filename: cover_image
+  )
+
   quiz
 end
 
@@ -236,22 +243,22 @@ quiz_one_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags)
+quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags, cover_image: 'abstract-1.jpg')
 
 quiz_two_tags = [education_tag, government_tag, education_tag, pakistan_tag]
-quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags)
+quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags, cover_image: 'abstract-2.jpg')
 
 quiz_three_tags = [education_tag, history_tag, pakistan_tag]
-quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags)
+quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, cover_image: 'abstract-3.jpg')
 
 quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
-quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags)
+quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags, cover_image: 'abstract-4.jpg')
 
 quiz_five_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags)
+quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags, cover_image: 'abstract-5.jpg')
 
 quiz_six_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
 quiz_six = seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags)

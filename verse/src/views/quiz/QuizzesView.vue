@@ -8,7 +8,7 @@ const { isLoading, isError, fetchedData } = getQuizzes();
 <template>
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="isError">Error</div>
-  <div v-else class="flex flex-col gap-5">
+  <div v-else class="grid grid-cols-3">
     <Quiz v-for="quiz in fetchedData" v-bind="quiz" />
   </div>
 </template>

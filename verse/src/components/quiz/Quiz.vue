@@ -3,6 +3,7 @@ import { computed } from "vue";
 
 defineProps({
   id: Number,
+  cover_url: String,
   questions_count: Number,
   quiz_undertakings_count: Number,
   ratings_count: Number,
@@ -25,6 +26,7 @@ const filteredTags = computed(
 
 <template>
   <RouterLink :to="{ name: 'quiz', params: { id: id } }">
+    <img :src="cover_url" />
     <div class="flex flex-col gap-1">
       <h4 class="font-xl font-black">{{ title }}</h4>
       <p>The quiz has {{ quizQuestionsCountDisplay(questions_count) }}</p>
