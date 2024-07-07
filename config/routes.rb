@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :api, format: :json do
     namespace :v1 do
       resource :sessions, only: %i[create destroy]
-      
+
       resources :accounts, param: :username do
         member { get :public }
       end

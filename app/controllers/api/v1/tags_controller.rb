@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class TagsController < Api::AuthenticatedController
       def index
-        @tags = Tag.where(tag_type: :display).pluck(:tag)
+        @tags = Tag.where(tag_type: :display).order(:tag).pluck(:tag)
 
         render json: @tags
       end

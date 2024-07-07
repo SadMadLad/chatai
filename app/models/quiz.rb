@@ -22,7 +22,7 @@
 # Quiz having many questions.
 class Quiz < ApplicationRecord
   include SearchBy
-  
+
   belongs_to :account, optional: true
 
   has_many :accounts, through: :quiz_undertakings

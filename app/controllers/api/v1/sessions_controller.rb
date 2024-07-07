@@ -36,7 +36,7 @@ module Api
           token: encode(@account_token.id),
           full_name: @account.full_name,
           username: @account.username,
-          avatar_url: @account.avatar.attached? ? url_for(@account.avatar) : nil,
+          avatar_url: @account.avatar.attached? ? url_for(@account.avatar) : nil
         }
       end
     end

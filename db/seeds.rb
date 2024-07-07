@@ -229,10 +229,10 @@ def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has
   raters = Account.where(role: :user).sample(5)
   raters.each { |rater| quiz.ratings.create(account: rater, rating: random_ratings_ranges.sample) }
 
-  return quiz unless cover_image.present?
+  return quiz if cover_image.blank?
 
   quiz.cover.attach(
-    io: File.open(Rails.root.join("app/assets/images/faker/quiz/#{cover_image}")),
+    io: Rails.root.join("app/assets/images/faker/quiz/#{cover_image}").open,
     filename: cover_image
   )
 
@@ -256,7 +256,8 @@ quiz_three_tags = [education_tag, history_tag, pakistan_tag]
 quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, cover_image: 'abstract-3.jpg')
 
 quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
-quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags, cover_image: 'abstract-4.jpg')
+quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags,
+                                                                                        cover_image: 'abstract-4.jpg')
 
 quiz_five_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
