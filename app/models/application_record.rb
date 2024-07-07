@@ -16,6 +16,8 @@ class ApplicationRecord < ActiveRecord::Base
     end
 
     def search_by_params(params)
+      return all if params.blank?
+      
       @params = params.is_a?(Hash) ? params.with_indifferent_access : params
 
       supported_col_types = %i[integer datetime boolean string]

@@ -1,7 +1,8 @@
+import { stringify } from "qs";
+
 function client(route, method, clientOptions) {
   // Prepare headers
   const headers = new Headers();
-
   headers.append("Content-Type", "application/json");
 
   // Append Auth Token in headers if provided
@@ -17,14 +18,11 @@ function client(route, method, clientOptions) {
   }
 
   // Configure params and the body
-  const { params, body } = clientOptions;
+  const { body } = clientOptions;
   const requestOptions = { method: method, headers: headers };
   if (method !== "GET") requestOptions.body = JSON.stringify(body);
 
-  const fullRoute =
-    route + `${params ? "?" + new URLSearchParams(params).toString() : ""}`;
-
-  const request = new Request(fullRoute, requestOptions);
+  const request = new Request(route, requestOptions);
   return request;
 }
 

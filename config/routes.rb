@@ -13,16 +13,16 @@ Rails.application.routes.draw do
 
   namespace :api, format: :json do
     namespace :v1 do
-      resource :sessions, only: %i[create destroy] do
-        collection { post :verify_session }
-      end
-      resources :chats, only: %i[index show]
+      resource :sessions, only: %i[create destroy]
+      
       resources :accounts, param: :username do
         member { get :public }
       end
+      resources :chats, only: %i[index show]
       resources :quizzes, only: %i[index show] do
         resources :quiz_undertakings, only: %i[new create]
       end
+      resources :tags, only: :index
     end
   end
 

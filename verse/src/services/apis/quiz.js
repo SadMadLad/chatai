@@ -1,24 +1,18 @@
 import { client } from "@/services/clients";
 import { RailsRoutes } from "@/services/routes";
-import { requestHelper } from "@/services/utils";
+import { useFetch } from "@/services/utils";
 import { useAuthStore } from "@/storage/auth";
 
 function getQuiz(id) {
   const { url, method } = RailsRoutes.quiz;
 
-  return requestHelper(url(id), method);
-}
-
-function getQuizzes() {
-  const { url, method } = RailsRoutes.quizzes;
-
-  return requestHelper(url(), method);
+  return useFetch(url(id), method);
 }
 
 function getNewQuizUndertaking(id) {
   const { url, method } = RailsRoutes.newQuizUndertaking;
 
-  return requestHelper(url(id), method);
+  return useFetch(url(id), method);
 }
 
 async function createQuizUndertaking(id, payload) {
@@ -32,4 +26,4 @@ async function createQuizUndertaking(id, payload) {
   return response;
 }
 
-export { getQuiz, getQuizzes, getNewQuizUndertaking, createQuizUndertaking };
+export { getQuiz, getNewQuizUndertaking, createQuizUndertaking };

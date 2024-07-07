@@ -1,40 +1,42 @@
 import { client } from "@/services/clients";
-import { ref, reactive } from "vue";
+import { ref, toValue, watchEffect } from "vue";
 import { useAuthStore } from "@/storage/auth";
 import { useRouter } from "vue-router";
 
-function requestHelper(url, method, clientOptions = {}) {
+function useFetch(url, method, clientOptions = {}) {
   const { token, removeToken } = useAuthStore();
   const router = useRouter();
 
   const isLoading = ref(true);
-  const isError = ref(false);
+  const error = ref(null);
   const fetchedData = ref(null);
 
-  const mergedOptions = { ...{ authToken: token }, ...clientOptions };
-  fetch(client(url, method, mergedOptions))
-    .then((response) => {
+  watchEffect(async () => {
+    const urlValue = toValue(url);
+    const clientOptionsValue = toValue(clientOptions);
+
+    const mergedOptions = { ...{ authToken: token }, ...clientOptionsValue };
+
+    isLoading.value = true;
+    error.value = null;
+    fetchedData.value = null;
+
+    try {
+      const response = await fetch(client(urlValue, method, mergedOptions));
       if (response.status === 401) {
         removeToken();
         router.push({ name: "login" });
       } else {
-        return response.json().then((responseJson) => {
-          if (response.status >= 400) {
-            isError.value = true;
-          } else {
-            fetchedData.value = responseJson;
-          }
-        });
+        fetchedData.value = await response.json();
       }
-    })
-    .catch(() => {
-      isError.value = true;
-    })
-    .finally(() => {
+    } catch (e) {
+      error.value = e;
+    } finally {
       isLoading.value = false;
-    });
+    }
+  });
 
-  return { isLoading, isError, fetchedData };
+  return { isLoading, error, fetchedData };
 }
 
-export { requestHelper };
+export { useFetch };

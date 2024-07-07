@@ -215,7 +215,7 @@ PredictionParam.create(prediction_params)
 
 ### Seed Quiz, Questions and QuestionOptions
 
-def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil)
+def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has_user: false)
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
   quiz = Quiz.create(quiz_data)
 
@@ -235,6 +235,10 @@ def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil)
     io: File.open(Rails.root.join("app/assets/images/faker/quiz/#{cover_image}")),
     filename: cover_image
   )
+
+  return quiz unless has_user
+
+  quiz.update(account: raters.sample)
 
   quiz
 end

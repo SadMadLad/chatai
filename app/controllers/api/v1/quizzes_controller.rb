@@ -7,7 +7,10 @@ module Api
       before_action :set_quiz, only: :show
 
       def index
-        @quizzes = Quiz.where(published: true).includes(:tags, { cover_attachment: :blob }).all
+        @quizzes = Quiz.where(published: true)
+                       .includes(:tags, { cover_attachment: :blob })
+                       .search_by_params(params[:search].present? ? quiz_search_params : nil)
+                       .search_by_tags
       end
 
       def show
@@ -15,6 +18,11 @@ module Api
       end
 
       private
+
+      def quiz_search_params
+        params[:search] ||= {}
+        params.require(:search).permit(:title_like, tags: [])
+      end
 
       def set_quiz
         @quiz = Quiz.find(params[:id])

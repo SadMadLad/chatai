@@ -12,20 +12,24 @@ import { useRoute, useRouter } from "vue-router";
 import CorrectedQuiz from "@/components/quiz/CorrectedQuestion.vue";
 import Question from "@/components/quiz/Question.vue";
 
+// Hooks
 const route = useRoute();
 const router = useRouter();
 const { removeToken } = useAuthStore();
 
+// Initial Data
 const { getAllSelectedOptions, initializeQuizzesArray } = useQuizStore();
 const { isLoading, isError, fetchedData } = getNewQuizUndertaking(
   route.params.id,
 );
 
+// Refs
 const countdownTimer = ref(null);
 const currentQuestionIndex = ref(0);
 const isFinished = ref(false);
 const timer = ref(null);
 
+// Reactives
 const quizResult = reactive({
   isResultLoading: true,
   isResultError: null,
@@ -34,6 +38,7 @@ const quizResult = reactive({
   showCorrectAnswers: false,
 });
 
+// Computed Values
 const isTimed = computed(() => fetchedData.value?.quiz?.timed);
 const questions = computed(() => fetchedData.value?.quiz?.questions);
 const quiz = computed(() => fetchedData.value?.quiz);
@@ -41,6 +46,7 @@ const quizResultText = computed(() =>
   quizResult.showCorrectAnswers ? "Hide" : "Show",
 );
 
+// Watchers
 watch(fetchedData, (data) => {
   if (data) {
     initializeQuizzesArray(data.quiz.questions);
@@ -76,6 +82,7 @@ watch(timer, async (timerValue) => {
   if (timerValue && timerValue <= 0) isFinished.value = true;
 });
 
+// Lifecycle Methods
 onUnmounted(() => {
   if (countdownTimer.value) {
     clearInterval(countdownTimer.value);

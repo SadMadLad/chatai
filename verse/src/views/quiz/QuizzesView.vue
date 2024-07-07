@@ -1,33 +1,60 @@
 <script setup>
-import { ref } from "vue";
-import { PhSlidersHorizontal, PhX } from "@phosphor-icons/vue";
+import { computed, ref, reactive } from "vue";
+import { stringify } from "qs";
+
+import CurrentQuizFilters from "@/components/quiz/CurrentQuizFilters.vue";
+import { PhSlidersHorizontal } from "@phosphor-icons/vue";
+import QuizFiltersSidebar from "@/components/quiz/QuizFiltersSidebar.vue";
+import { RailsRoutes } from "@/services/routes";
+import { useFetch } from "@/services/utils";
 
 import Quiz from "@/components/quiz/Quiz.vue";
-import { getQuizzes } from "@/services/apis/quiz";
 
-const { isLoading, isError, fetchedData } = getQuizzes();
+const { url, method } = RailsRoutes.quizzes;
 
+const searchParams = reactive({ search: { title_like: null, tags: [] } });
+const currentSearchParams = reactive({
+  search: { title_like: null, tags: [] },
+});
+
+const quizzesUrl = ref(url());
 const isFilterSidebarOpen = ref(true);
+
+const { isLoading, error, fetchedData } = useFetch(quizzesUrl, method);
+
+const isQuizzesEmpty = computed(
+  () => fetchedData.value === null || fetchedData.value?.length === 0,
+);
+
+function handleSearch() {
+  quizzesUrl.value = url(
+    stringify({ ...searchParams }, { arrayFormat: "brackets" }),
+  );
+
+  currentSearchParams.search = { ...searchParams.search };
+}
+
+function removeFilter(filter_param) {
+  searchParams.search[filter_param] = null;
+  handleSearch();
+}
+
+function removeTagFilter(filter_tag) {
+  searchParams.search.tags = searchParams.search.tags.filter(
+    (t) => t !== filter_tag,
+  );
+  handleSearch();
+}
 </script>
 
 <template>
-  <div v-if="isLoading">Loading...</div>
-  <div v-else-if="isError">Error</div>
-  <section v-else class="flex flex-col items-center sm:flex-row sm:items-start">
+  <section class="flex flex-col items-center sm:flex-row sm:items-start">
     <Transition name="filters">
-      <aside
+      <QuizFiltersSidebar
         v-if="isFilterSidebarOpen"
-        class="relative top-0 w-60 flex-shrink-0 sm:sticky sm:top-12 md:top-20"
-      >
-        <div class="overflow-auto px-4">
-          <div class="flex justify-between">
-            <h4 class="text-xl font-bold">Filters</h4>
-            <button @click="isFilterSidebarOpen = false">
-              <PhX size="16" />
-            </button>
-          </div>
-        </div>
-      </aside>
+        :search-params="searchParams"
+        @handle-search="handleSearch"
+      />
     </Transition>
     <div class="@container w-full flex-grow px-8">
       <button
@@ -37,8 +64,18 @@ const isFilterSidebarOpen = ref(true);
         <PhSlidersHorizontal :size="20" />
         Filters
       </button>
-      <div class="@3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4">
-        <Quiz v-for="quiz in fetchedData" v-bind="quiz" />
+      <CurrentQuizFilters
+        v-bind="currentSearchParams.search"
+        @remove-filter="removeFilter"
+        @remove-tag-filter="removeTagFilter"
+      />
+      <div v-if="isLoading">Loading...</div>
+      <div v-else-if="error">Error</div>
+      <div v-else class="@3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4">
+        <div v-if="isQuizzesEmpty">No Quizzes Found</div>
+        <div v-else>
+          <Quiz v-for="quiz in fetchedData" v-bind="quiz" />
+        </div>
       </div>
     </div>
   </section>

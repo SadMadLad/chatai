@@ -21,7 +21,7 @@ module SearchBy
           return all unless any_param_exists? [key_symbol]
 
           string_search_query = "%#{sanitize_sql_like @params[key_symbol]}%"
-          where("#{column_name} ILIKE ?", string_search_query)
+          where("LOWER(#{column_name}) ILIKE ?", string_search_query)
         else
           return all unless any_param_exists? [:"min_#{column_name}", :"max_#{column_name}"]
 

@@ -21,6 +21,8 @@
 #
 # Quiz having many questions.
 class Quiz < ApplicationRecord
+  include SearchBy
+  
   belongs_to :account, optional: true
 
   has_many :accounts, through: :quiz_undertakings
@@ -50,5 +52,13 @@ class Quiz < ApplicationRecord
     end
 
     total_score
+  end
+
+  class << self
+    def search_by_tags
+      return all unless any_param_exists? [:tags]
+
+      joins(:tags).where(tags: { tag: @params[:tags] })
+    end
   end
 end
