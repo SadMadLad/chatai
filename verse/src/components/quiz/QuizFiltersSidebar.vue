@@ -1,12 +1,21 @@
 <script setup>
-import { computed, ref } from "vue";
-import { getTags } from "@/services/apis/tag";
+import { computed, ref, toRefs } from "vue";
+import { PhX } from "@phosphor-icons/vue";
 
-const props = defineProps({ searchParams: Object });
+const props = defineProps({
+  areTagsLoading: Boolean,
+  errorWhenLoadingTags: Object,
+  searchParams: Object,
+  tags: Array,
+});
+
+const tagClass =
+  "bg-primary-300 flex cursor-pointer flex-row items-center gap-0.5 rounded-full px-3 py-1 text-xs";
+
 const { searchParams } = props;
-defineEmits(["handleSearch"]);
+const { areTagsLoading, errorWhenLoading, tags } = toRefs(props);
 
-const { error, fetchedData: tags } = getTags();
+const emits = defineEmits(["addTag", "handleSearch", "removeTag"]);
 
 const tagToAdd = ref(null);
 
@@ -16,20 +25,8 @@ const searchTagsArePresent = computed(
 );
 
 function addTag() {
-  const currentSearchTags = [...searchParams.search.tags];
-  currentSearchTags.unshift(tagToAdd.value);
-
-  const selectedTagsSet = new Set(currentSearchTags);
-  const tagsSet = new Set(tags.value);
-
+  emits("addTag", tagToAdd.value);
   tagToAdd.value = null;
-  tags.value = [...tagsSet.difference(selectedTagsSet)];
-  searchParams.search.tags = [...selectedTagsSet];
-}
-
-function removeTag(tag) {
-  tags.value.unshift(tag);
-  searchParams.search.tags = searchParams.search.tags.filter((t) => t !== tag);
 }
 </script>
 
@@ -44,20 +41,23 @@ function removeTag(tag) {
           @submit.prevent="$emit('handleSearch')"
           class="flex flex-col gap-2.5 text-sm"
         >
+          <div v-if="areTagsLoading">Loading Tag Filters</div>
           <div
-            v-if="!error && (tagsArePresent || searchTagsArePresent)"
+            v-else-if="
+              !errorWhenLoading && (tagsArePresent || searchTagsArePresent)
+            "
             class="flex flex-col gap-1"
           >
             <label class="font-semibold" for="tags">Tags</label>
             <div class="flex flex-wrap gap-1">
               <span
                 v-for="tag in searchParams.search.tags"
-                class="bg-purple-500"
-                @click="removeTag(tag)"
-                >{{ tag }}</span
-              >
+                :class="tagClass"
+                @click="$emit('removeTag', tag)"
+                ><span>{{ tag }}</span
+                ><PhX size="12"
+              /></span>
             </div>
-            <button type="button" @click="addTag"></button>
             <div v-if="tagsArePresent" class="relative w-full">
               <select
                 v-model="tagToAdd"

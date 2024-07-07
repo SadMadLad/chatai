@@ -19,14 +19,16 @@ defineEmits(["removeFilter", "removeTagFilter"]);
       :class="tagClass"
       @click="$emit('removeFilter', 'title_like')"
     >
-      <PhX size="12" /><span>{{ title_like }}</span>
+      <span>{{ title_like }}</span
+      ><PhX size="12" />
     </span>
     <span
       v-for="tag in tags"
       :class="tagClass"
       @click="$emit('removeTagFilter', tag)"
     >
-      <PhX size="12" /><span>{{ tag }}</span>
+      <span>{{ tag }}</span
+      ><PhX size="12" />
     </span>
   </div>
 </template>
