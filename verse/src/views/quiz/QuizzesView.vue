@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, reactive } from "vue";
+import { computed, ref, reactive, watchEffect, onMounted } from "vue";
 import { stringify } from "qs";
 
 import { getTags } from "@/services/apis/tag";
@@ -14,19 +14,19 @@ import QuizFiltersSidebar from "@/components/quiz/QuizFiltersSidebar.vue";
 const { url, method } = RailsRoutes.quizzes;
 
 // Refs
-const quizzesUrl = ref(url());
 const isFilterSidebarOpen = ref(true);
 
-// Reactives
 const searchParams = reactive({
   search: { title_like: null, tags: [] },
 });
 const currentSearchParams = reactive({
   search: { title_like: null, tags: [] },
 });
+const quizzesUrl = ref(queryParams());
 
 // Fetching Data
 const { isLoading, error, fetchedData: quizzes } = useFetch(quizzesUrl, method);
+
 const {
   isLoading: areTagsLoading,
   error: errorWhenLoadingTags,
@@ -39,10 +39,14 @@ const isQuizzesEmpty = computed(
 );
 
 // Methods
+function queryParams() {
+  return url(
+    stringify({ ...searchParams }, { arrayFormat: "brackets" })
+  )
+}
+
 function handleSearch() {
-  quizzesUrl.value = url(
-    stringify({ ...searchParams }, { arrayFormat: "brackets" }),
-  );
+  quizzesUrl.value = queryParams();
 
   currentSearchParams.search = { ...searchParams.search };
 }

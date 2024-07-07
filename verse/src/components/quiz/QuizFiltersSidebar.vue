@@ -41,6 +41,15 @@ function addTag() {
           @submit.prevent="$emit('handleSearch')"
           class="flex flex-col gap-2.5 text-sm"
         >
+          <div class="flex flex-col gap-1">
+            <label class="font-semibold" for="title_like">Title</label>
+            <input
+              v-model="searchParams.search.title_like"
+              id="title_like"
+              name="title_like"
+              class="focus:outline-primary-500 h-8 max-w-full rounded border border-black px-2.5"
+            />
+          </div>
           <div v-if="areTagsLoading">Loading Tag Filters</div>
           <div
             v-else-if="
@@ -70,15 +79,6 @@ function addTag() {
               </select>
             </div>
             <div v-else>You've selected all the tags</div>
-          </div>
-          <div class="flex flex-col gap-1">
-            <label class="font-semibold" for="title_like">Title</label>
-            <input
-              v-model="searchParams.search.title_like"
-              id="title_like"
-              name="title_like"
-              class="focus:outline-primary-500 h-8 max-w-full rounded border border-black px-2.5"
-            />
           </div>
           <button
             type="submit"

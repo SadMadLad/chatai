@@ -58,7 +58,10 @@ class Quiz < ApplicationRecord
     def search_by_tags
       return all unless any_param_exists? [:tags]
 
-      joins(:tags).where(tags: { tag: @params[:tags] })
+      joins(:tags)
+        .where(tags: { tag: @params[:tags] })
+        .group(:id)
+        .having('COUNT(DISTINCT tags.id) = ?', @params[:tags].length)
     end
   end
 end

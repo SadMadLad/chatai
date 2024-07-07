@@ -8,9 +8,11 @@ module Api
 
       def index
         @quizzes = Quiz.where(published: true)
-                       .includes(:tags, { cover_attachment: :blob })
                        .search_by_params(params[:search].present? ? quiz_search_params : nil)
                        .search_by_tags
+                       .pluck(:id)
+
+        @quizzes = Quiz.where(id: @quizzes).includes(:tags, { cover_attachment: :blob }).all
       end
 
       def show

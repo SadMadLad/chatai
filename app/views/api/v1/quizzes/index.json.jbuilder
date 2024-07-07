@@ -12,6 +12,7 @@ json.array! @quizzes do |quiz|
   json.timer quiz.timer
   json.title quiz.title
   json.total_rating quiz.total_rating
+  json.total_score quiz.total_score
 
   json.tags quiz.tags do |tag|
     json.tag tag.tag
