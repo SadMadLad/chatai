@@ -5,11 +5,11 @@
 # Table name: tags
 #
 #  id         :bigint           not null, primary key
+#  tag_type   :integer          default("display"), not null
 #  tag        :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Tags categories associated with different records.
 class Tag < ApplicationRecord
   has_many :tag_maps, dependent: :destroy
 

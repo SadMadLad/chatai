@@ -8,11 +8,11 @@
 #  account_id       :bigint           not null
 #  commentable_type :string           not null
 #  commentable_id   :bigint           not null
+#  likes_count      :integer          default(0), not null
 #  body             :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
-# User Comment to a post or as a reply.
 class Comment < ApplicationRecord
   attr_accessor :depth
 

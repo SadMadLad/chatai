@@ -31,7 +31,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-# Weather report of a city/location.
 class WeatherReport < ApplicationRecord
   validates :name, :region, :country, :latitude, :longitude, :temperature, :wind_kph, presence: true
 end

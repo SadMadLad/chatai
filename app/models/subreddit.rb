@@ -12,7 +12,6 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
-# A reddit subreddit
 class Subreddit < ApplicationRecord
   has_many :subreddit_posts, dependent: :destroy
 

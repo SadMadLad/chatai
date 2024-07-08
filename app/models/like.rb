@@ -11,7 +11,6 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-# Liked things by a user.
 class Like < ApplicationRecord
   belongs_to :account
   belongs_to :likeable, polymorphic: true, counter_cache: :likes_count

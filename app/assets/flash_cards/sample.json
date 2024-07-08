@@ -1,0 +1,23 @@
+[
+  {
+    "answer": "Ruby on Rails",
+    "prompt": "Web Framework built on top of Ruby?",
+    "color": "#f43f5e",
+    "published": true,
+    "card_style": "fancy"
+  },
+  {
+    "answer": "Phoenix",
+    "prompt": "Web Framework built on top of Elixir?",
+    "color": "#a855f7",
+    "published": true,
+    "card_style": "brutalism"
+  },
+  {
+    "answer": "Lawlessness",
+    "prompt": "Anarchy",
+    "color": "#84cc16",
+    "published": true,
+    "card_style": "basic"
+  }
+]

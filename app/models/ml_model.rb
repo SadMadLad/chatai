@@ -14,7 +14,6 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
-# Machine Learning model are simple scikit models (for now).
 class MlModel < ApplicationRecord
   AVAILABLE_MODELS = %w[titanic].freeze
   has_many :prediction_params, dependent: :destroy

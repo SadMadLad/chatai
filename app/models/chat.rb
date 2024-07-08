@@ -13,7 +13,6 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
-# Chat Model. Can be group chat as well as two-person chat.
 class Chat < ApplicationRecord
   after_initialize { self.latest_message_at = DateTime.now if new_record? }
 

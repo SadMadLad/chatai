@@ -4,16 +4,17 @@
 #
 #  id                      :bigint           not null, primary key
 #  account_id              :bigint
-#  timer                   :integer
+#  published               :boolean          default(FALSE), not null
+#  timed                   :boolean          default(FALSE), not null
 #  questions_count         :integer          default(0), not null
 #  quiz_undertakings_count :integer          default(0), not null
-#  rating_count            :integer          default(0), not null
+#  ratings_count           :integer          default(0), not null
+#  timer                   :integer
 #  total_score             :integer          default(0), not null
 #  total_rating            :integer          default(0), not null
 #  title                   :string           not null
-#  published               :boolean          default(FALSE), not null
-#  timed                   :boolean          default(FALSE), not null
 #  description             :text             not null
+#  latest_taken_at         :datetime
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #

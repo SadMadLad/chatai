@@ -18,7 +18,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-# A Devise User. Each user must have an account.
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -32,6 +31,7 @@ class User < ApplicationRecord
   has_many :account_tokens, through: :account, dependent: :destroy
   has_many :chats, through: :account, dependent: :destroy
   has_many :feedback, through: :account, dependent: :destroy
+  has_many :flash_cards, through: :account, dependent: :destroy
   has_many :likes, through: :account, dependent: :destroy
   has_many :posts, through: :account, dependent: :destroy
   has_many :messages, through: :account, dependent: :destroy

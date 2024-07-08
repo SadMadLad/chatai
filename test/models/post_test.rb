@@ -2,12 +2,13 @@
 #
 # Table name: posts
 #
-#  id         :bigint           not null, primary key
-#  title      :string           not null
-#  body       :text             not null
-#  account_id :bigint           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  account_id  :bigint           not null
+#  likes_count :integer          default(0), not null
+#  title       :string           not null
+#  body        :text             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 require "test_helper"
 

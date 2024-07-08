@@ -5,20 +5,20 @@ import { getQuiz } from "@/services/apis/quiz";
 
 const route = useRoute();
 
-const { isLoading, isError, fetchedData } = getQuiz(route.params.id);
-const quiz = computed(() => fetchedData.value?.quiz);
+const { isLoading, error, fetchedData: fetchedQuiz } = getQuiz(route.params.id);
+const quiz = computed(() => fetchedQuiz.value?.quiz);
 </script>
 
 <template>
   <div v-if="isLoading">Loading...</div>
-  <div v-else-if="isError">Error</div>
+  <div v-else-if="error">Error</div>
   <div v-else>
     {{ quiz.title }}
     {{ quiz.cover_url }}
     {{ quiz.description }}
     {{ quiz.questions_count }}
     <hr />
-    <RouterLink :to="{ name: 'quiz-undertaking', params: { id: quiz.id } }"
+    <RouterLink :to="{ name: 'quiz-undertaking', params: { id: quiz?.id } }"
       >Take the Quiz</RouterLink
     >
   </div>

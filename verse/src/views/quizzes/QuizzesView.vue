@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, reactive, watchEffect, onMounted } from "vue";
+import { computed, ref, reactive } from "vue";
 import { stringify } from "qs";
 
 import { getTags } from "@/services/apis/tag";
@@ -36,6 +36,9 @@ const {
 // Computed
 const isQuizzesEmpty = computed(
   () => quizzes.value === null || quizzes.value?.length === 0,
+);
+const resultsText = computed(
+  () => (resultCount) => `${resultCount} ${resultCount === 1 ? 'result' : 'results'}`
 );
 
 // Methods
@@ -110,6 +113,7 @@ function removeTag(tag) {
         @remove-filter="removeFilter"
         @remove-tag-filter="removeTagFilter"
       />
+      <span v-if="quizzes?.length">{{ resultsText(quizzes.length) }}</span>
       <div v-if="isLoading">Loading...</div>
       <div v-else-if="error">Error</div>
       <div v-else class="@3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4">

@@ -2,13 +2,14 @@ import { createWebHistory, createRouter } from "vue-router";
 import { privateRoute, publicOnlyRoute } from "@/router/guards";
 
 import AboutView from "@/views/static/AboutView.vue";
-import DashboardView from "@/views/dashboard/DashboardView.vue";
+import DashboardView from "@/views/dashboards/DashboardView.vue";
+import FlashCardsView from "@/views/flash_cards/FlashCardsView.vue";
 import HomeView from "@/views/static/HomeView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import NotFoundView from "@/views/errors/NotFoundView.vue";
-import QuizView from "@/views/quiz/QuizView.vue";
-import QuizUndertakingView from "@/views/quiz/QuizUndertakingView.vue";
-import QuizzesView from "@/views/quiz/QuizzesView.vue";
+import QuizView from "@/views/quizzes/QuizView.vue";
+import QuizUndertakingView from "@/views/quizzes/QuizUndertakingView.vue";
+import QuizzesView from "@/views/quizzes/QuizzesView.vue";
 import SignUpView from "@/views/auth/SignUpView.vue";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout.vue";
@@ -50,6 +51,12 @@ const routes = [
         path: "/dashboard",
         name: "dashboard",
         component: DashboardView,
+        beforeEnter: [privateRoute],
+      },
+      {
+        path: "/flash_cards",
+        name: "flash-cards",
+        component: FlashCardsView,
         beforeEnter: [privateRoute],
       },
       {

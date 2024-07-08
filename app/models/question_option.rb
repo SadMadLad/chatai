@@ -11,7 +11,6 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-# Single option of a quiz
 class QuestionOption < ApplicationRecord
   scope :randomize, -> { order('random()') }
 

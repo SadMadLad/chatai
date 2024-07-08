@@ -164,6 +164,8 @@ economics_tag = Tag.create(tag: 'Economics')
 government_tag = Tag.create(tag: 'Government')
 history_tag = Tag.create(tag: 'History')
 pakistan_tag = Tag.create(tag: 'Pakistan')
+Tag.create(tag: 'Programming')
+Tag.create(tag: 'Vocabulary')
 
 international_relations_tag = Tag.create(tag: 'International Relations', tag_type: :meta)
 pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', tag_type: :meta)
@@ -219,26 +221,22 @@ def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
   quiz = Quiz.create(quiz_data)
 
-  return quiz if tags.blank?
+  tags.each { |tag| TagMap.find_or_create_by(taggable: quiz, tag:) } if tags.present?
 
-  tags.each { |tag| TagMap.find_or_create_by(taggable: quiz, tag:) }
+  if give_rating
+    random_ratings_ranges = [rand(1..5), rand(3..5), rand(1..3)]
+    raters = Account.where(role: :user).sample(5)
+    raters.each { |rater| quiz.ratings.create(account: rater, rating: random_ratings_ranges.sample) }
+  end
 
-  return quiz unless give_rating
+  if cover_image.present?
+    quiz.cover.attach(
+      io: Rails.root.join("app/assets/images/faker/quiz/#{cover_image}").open,
+      filename: cover_image
+    )
+  end
 
-  random_ratings_ranges = [rand(1..5), rand(3..5), rand(1..3)]
-  raters = Account.where(role: :user).sample(5)
-  raters.each { |rater| quiz.ratings.create(account: rater, rating: random_ratings_ranges.sample) }
-
-  return quiz if cover_image.blank?
-
-  quiz.cover.attach(
-    io: Rails.root.join("app/assets/images/faker/quiz/#{cover_image}").open,
-    filename: cover_image
-  )
-
-  return quiz unless has_user
-
-  quiz.update(account: raters.sample)
+  quiz.update(account: raters.sample) if has_user
 
   quiz
 end
@@ -253,7 +251,7 @@ quiz_two_tags = [education_tag, government_tag, education_tag, pakistan_tag]
 quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags, cover_image: 'abstract-2.jpg')
 
 quiz_three_tags = [education_tag, history_tag, pakistan_tag]
-quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, cover_image: 'abstract-3.jpg')
+quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, give_rating: false, cover_image: 'abstract-3.jpg')
 
 quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
 quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags,
@@ -283,3 +281,12 @@ quizzes.each do |quiz|
   generate_quiz_undertaking(quiz, normal_accounts.sample)
   10.times { generate_quiz_undertaking(quiz, first_account, random_created_at: true) }
 end
+
+### Seed Some Flash Cards
+
+def seed_flash_card(flash_card_json_file)
+  flash_cards_data = JSON.parse Rails.root.join("app/assets/flash_cards/#{flash_card_json_file}.json").read
+  FlashCard.create(flash_cards_data)
+end
+
+seed_flash_card('sample')

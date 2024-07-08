@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_08_003248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -127,6 +127,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_feedbacks_on_account_id"
+  end
+
+  create_table "flash_cards", force: :cascade do |t|
+    t.bigint "account_id"
+    t.integer "card_style", default: 0, null: false
+    t.string "color", default: "#84cc16", null: false
+    t.text "answer", null: false
+    t.text "prompt", null: false
+    t.boolean "published", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_flash_cards_on_account_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -444,6 +456,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_095122) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "accounts"
   add_foreign_key "feedbacks", "accounts"
+  add_foreign_key "flash_cards", "accounts"
   add_foreign_key "likes", "accounts"
   add_foreign_key "messages", "accounts"
   add_foreign_key "messages", "chats"

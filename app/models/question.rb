@@ -6,13 +6,12 @@
 #
 #  id               :bigint           not null, primary key
 #  quiz_id          :bigint           not null
-#  score            :integer          default(1), not null
 #  multiple_answers :boolean          default(FALSE), not null
+#  score            :integer          default(1), not null
 #  question_text    :text             not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
-# A question in a quiz.
 class Question < ApplicationRecord
   SCORE_FOR_MULTIPLE_ANSWERS = 2.0
 

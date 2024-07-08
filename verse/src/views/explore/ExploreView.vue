@@ -1,1 +1,0 @@
-<template>Explore View</template>

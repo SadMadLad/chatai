@@ -15,7 +15,6 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
-# A User Account
 class Account < ApplicationRecord
   include SearchBy
 
@@ -24,6 +23,7 @@ class Account < ApplicationRecord
   has_many :chats, through: :account_chat_maps
   has_many :comments, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
+  has_many :flash_cards, dependent: :nullify
   has_many :likes, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :ml_models, dependent: :destroy

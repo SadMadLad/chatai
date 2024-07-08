@@ -1,7 +1,11 @@
 const Rails = `${import.meta.env.VITE_RAILS_URL}/api/v1`;
 
 const RailsRoutes = {
+  // Sessions Routes
   login: { url: () => `${Rails}/sessions`, method: "POST" },
+
+  // Flash Card Routes
+  flash_cards: { url: () => `${Rails}/flash_cards`, method: "GET" },
 
   // Quiz Routes
   quizzes: {

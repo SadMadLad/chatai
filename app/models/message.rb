@@ -12,7 +12,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Message belonging to a chat
 class Message < ApplicationRecord
   belongs_to :chat, touch: :latest_message_at
   belongs_to :account, touch: :latest_message_at, optional: true

@@ -13,7 +13,6 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-# Prediction Param are the input params for a Machine Learning model.
 class PredictionParam < ApplicationRecord
   belongs_to :ml_model
 

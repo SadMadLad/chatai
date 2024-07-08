@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         member { get :public }
       end
       resources :chats, only: %i[index show]
+      resources :flash_cards, only: :index
       resources :quizzes, only: %i[index show] do
         resources :quiz_undertakings, only: %i[new create]
       end
