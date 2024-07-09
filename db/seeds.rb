@@ -284,9 +284,20 @@ end
 
 ### Seed Some Flash Cards
 
-def seed_flash_card(flash_card_json_file)
-  flash_cards_data = JSON.parse Rails.root.join("app/assets/flash_cards/#{flash_card_json_file}.json").read
-  FlashCard.create(flash_cards_data)
+def seed_flash_cards(flash_card_json_file)
+  flash_cards = JSON.parse Rails.root.join("app/assets/flash_cards/#{flash_card_json_file}.json").read
+
+  flash_cards.map do |flash_card_hash|
+    flash_card_hash = flash_card_hash.with_indifferent_access
+    tags = flash_card_hash.delete(:tags)
+
+    flash_card = FlashCard.create(flash_card_hash)
+
+    if tags.present?
+      tags = tags.map{ |tag| Tag.find_or_create_by(tag:) }
+      tags.each { |tag| TagMap.create(taggable: flash_card, tag:) }
+    end
+  end
 end
 
-seed_flash_card('sample')
+seed_flash_cards('sample')

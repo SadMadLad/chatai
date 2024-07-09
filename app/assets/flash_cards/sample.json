@@ -4,20 +4,23 @@
     "prompt": "Web Framework built on top of Ruby?",
     "color": "#f43f5e",
     "published": true,
-    "card_style": "fancy"
+    "card_style": "fancy",
+    "tags": ["Education", "Software", "Web Development", "Ruby", "Ruby on Rails"]
   },
   {
     "answer": "Phoenix",
     "prompt": "Web Framework built on top of Elixir?",
     "color": "#a855f7",
     "published": true,
-    "card_style": "brutalism"
+    "card_style": "brutalism",
+    "tags": ["Education", "Software", "Web Development", "Phoenix", "Elixir"]
   },
   {
     "answer": "Lawlessness",
     "prompt": "Anarchy",
     "color": "#84cc16",
     "published": true,
-    "card_style": "basic"
+    "card_style": "basic",
+    "tags": ["Vocabulary", "English"]
   }
 ]

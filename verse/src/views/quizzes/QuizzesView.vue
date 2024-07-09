@@ -113,7 +113,7 @@ function removeTag(tag) {
         @remove-filter="removeFilter"
         @remove-tag-filter="removeTagFilter"
       />
-      <span v-if="quizzes?.length">{{ resultsText(quizzes.length) }}</span>
+      <p v-if="quizzes?.length" class="text-right mb-2">{{ resultsText(quizzes.length) }}</p>
       <div v-if="isLoading">Loading...</div>
       <div v-else-if="error">Error</div>
       <div v-else class="@3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4">
