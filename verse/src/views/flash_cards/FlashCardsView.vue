@@ -30,26 +30,12 @@ function cardFrontStyle(cardStyle, color) {
 <template>
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="error">Error</div>
-  <section v-else class="@container w-full">
+  <section v-else class="container my-8 @container w-full">
     <div v-if="isFlashCardsEmpty">No Flash Card found</div>
     <div
       v-else
       class="@7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 mx-4 grid grid-cols-1 gap-4"
     >
-      <FlashCard
-        v-for="card in flashCards"
-        :key="card.id"
-        v-bind="card"
-        :front-class="cardFrontClass(card.card_style)"
-        :front-style="cardFrontStyle(card.card_style, card.color)"
-      />
-      <FlashCard
-        v-for="card in flashCards"
-        :key="card.id"
-        v-bind="card"
-        :front-class="cardFrontClass(card.card_style)"
-        :front-style="cardFrontStyle(card.card_style, card.color)"
-      />
       <FlashCard
         v-for="card in flashCards"
         :key="card.id"

@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
 
   create_table "accounts", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.integer "favorites_count", default: 0, null: false
     t.integer "role", default: 0, null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -163,6 +164,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
   create_table "flash_cards", force: :cascade do |t|
     t.bigint "account_id"
     t.integer "card_style", default: 0, null: false
+    t.integer "collectable_maps_count", default: 0, null: false
+    t.integer "favorites_count", default: 0, null: false
     t.string "color", default: "#84cc16", null: false
     t.text "answer", null: false
     t.text "prompt", null: false
@@ -262,6 +265,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
     t.bigint "account_id"
     t.boolean "published", default: false, null: false
     t.boolean "timed", default: false, null: false
+    t.integer "collectable_maps_count", default: 0, null: false
+    t.integer "favorites_count", default: 0, null: false
     t.integer "questions_count", default: 0, null: false
     t.integer "quiz_undertakings_count", default: 0, null: false
     t.integer "ratings_count", default: 0, null: false

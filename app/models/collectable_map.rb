@@ -12,6 +12,11 @@
 #  updated_at       :datetime         not null
 #
 class CollectableMap < ApplicationRecord
+  # The supported collectables should have a column named :collectable_maps_count
+  SUPPORTED_COLLECTABLES = %w[FlashCard Quiz].freeze
+
   belongs_to :collection, counter_cache: :collectable_maps_count
-  belongs_to :collectable, polymorphic: true
+  belongs_to :collectable, polymorphic: true, counter_cache: :collectable_maps_count
+
+  validates :collectable_type, inclusion: { in: SUPPORTED_COLLECTABLES }
 end

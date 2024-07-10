@@ -4,6 +4,8 @@ class CreateFlashCards < ActiveRecord::Migration[7.1]
       t.belongs_to :account, null: true, foreign_key: true
 
       t.integer :card_style, null: false, default: 0
+      t.integer :collectable_maps_count, null: false, default: 0
+      t.integer :favorites_count, null: false, default: 0
 
       t.string :color, null: false, default: '#84cc16'
 

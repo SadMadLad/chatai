@@ -6,6 +6,8 @@ class CreateQuizzes < ActiveRecord::Migration[7.1]
       t.boolean :published, null: false, default: false
       t.boolean :timed, null: false, default: false
 
+      t.integer :collectable_maps_count, null: false, default: 0
+      t.integer :favorites_count, null: false, default: 0
       t.integer :questions_count, null: false, default: 0
       t.integer :quiz_undertakings_count, null: false, default: 0
       t.integer :ratings_count, null: false, default: 0

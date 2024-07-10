@@ -6,6 +6,8 @@
 #  account_id              :bigint
 #  published               :boolean          default(FALSE), not null
 #  timed                   :boolean          default(FALSE), not null
+#  collectable_maps_count  :integer          default(0), not null
+#  favorites_count         :integer          default(0), not null
 #  questions_count         :integer          default(0), not null
 #  quiz_undertakings_count :integer          default(0), not null
 #  ratings_count           :integer          default(0), not null

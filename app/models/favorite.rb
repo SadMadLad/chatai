@@ -12,6 +12,11 @@
 #  updated_at       :datetime         not null
 #
 class Favorite < ApplicationRecord
-  belongs_to :account
-  belongs_to :favoritable, polymorphic: true
+  # Each supported favoritable model must have a favorites_count column
+  SUPPORTED_FAVORITABLES = %w[FlashCard Quiz].freeze
+
+  belongs_to :account, counter_cache: :favorites_count
+  belongs_to :favoritable, polymorphic: true, counter_cache: :favorites_count
+
+  validates :favoritable_type, inclusion: { in: SUPPORTED_FAVORITABLES }
 end

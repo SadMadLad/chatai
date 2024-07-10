@@ -8,6 +8,8 @@
 #  account_id              :bigint
 #  published               :boolean          default(FALSE), not null
 #  timed                   :boolean          default(FALSE), not null
+#  collectable_maps_count  :integer          default(0), not null
+#  favorites_count         :integer          default(0), not null
 #  questions_count         :integer          default(0), not null
 #  quiz_undertakings_count :integer          default(0), not null
 #  ratings_count           :integer          default(0), not null
@@ -25,19 +27,25 @@ class Quiz < ApplicationRecord
 
   belongs_to :account, optional: true
 
+  has_many :collectable_maps, as: :collectable, dependent: :destroy
+  has_many :collections, through: :collectable_maps
+  has_many :collected_accounts, through: :collections, source: :account
+  has_many :favorites, as: :favoritable, dependent: :destroy
+  has_many :favorited_accounts, through: :favorites, source: :account
+  has_many :tag_maps, as: :taggable, dependent: :destroy
+  has_many :tags, through: :tag_maps
+
   has_many :accounts, through: :quiz_undertakings
   has_many :questions, dependent: :destroy
   has_many :question_options, through: :questions
   has_many :quiz_undertakings, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
-  has_many :tag_maps, as: :taggable, dependent: :destroy
-  has_many :tags, through: :tag_maps
 
   has_one_attached :cover
 
   validates :published, boolean: true
-  validates :timer, presence: true, comparison: { greater_than: 0 }, if: :timed?
   validates :timed, boolean: true
+  validates :timer, presence: true, comparison: { greater_than: 0 }, if: :timed?
   validates :title, :description, presence: true
 
   accepts_nested_attributes_for :questions

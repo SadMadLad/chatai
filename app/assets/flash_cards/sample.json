@@ -1,10 +1,10 @@
 [
   {
     "answer": "Ruby on Rails",
-    "prompt": "Web Framework built on top of Ruby?",
-    "color": "#f43f5e",
-    "published": true,
     "card_style": "fancy",
+    "color": "#f43f5e",
+    "prompt": "Web Framework built on top of Ruby?",
+    "published": true,
     "tags": [
       "Education",
       "Software",
@@ -15,18 +15,42 @@
   },
   {
     "answer": "Phoenix",
-    "prompt": "Web Framework built on top of Elixir?",
-    "color": "#a855f7",
-    "published": true,
     "card_style": "brutalism",
+    "color": "#a855f7",
+    "prompt": "Web Framework built on top of Elixir?",
+    "published": true,
     "tags": ["Education", "Software", "Web Development", "Phoenix", "Elixir"]
   },
   {
     "answer": "Lawlessness",
-    "prompt": "Anarchy",
-    "color": "#84cc16",
-    "published": true,
     "card_style": "basic",
+    "color": "#84cc16",
+    "prompt": "Anarchy",
+    "published": true,
     "tags": ["Vocabulary", "English"]
+  },
+  {
+    "answer": "Iskander Mirza",
+    "card_style": "brutalism",
+    "color": "#14b8a6",
+    "prompt": "Who was the first President of Pakistan?",
+    "published": true,
+    "tags": ["Pakistan", "Government"]
+  },
+  {
+    "answer": "Talinn",
+    "card_style": "fancy",
+    "color": "#6366f1",
+    "prompt": "What is the capital of Estonia?",
+    "published": true,
+    "tags": ["Capitals", "Countries", "Estonia"]
+  },
+  {
+    "answer": "Helsinki",
+    "card_style": "basic",
+    "color": "#0ea5e9",
+    "prompt": "What is the capital of Finland?",
+    "published": true,
+    "tags": ["Countries", "Capitals", "Finland"]
   }
 ]

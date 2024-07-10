@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-PROFILE_PICS = Dir['app/assets/images/faker/profile_pics/*']
+AI_CHATS_COUNT = 5
 COVER_PICS = Dir['app/assets/images/faker/covers/*']
+NORMAL_USERS_COUNT = 20
+PROFILE_PICS = Dir['app/assets/images/faker/profile_pics/*']
+TWO_WAY_CHATS_COUNT = 10
 
 def generate_account_attributes(index)
   { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, role: 0, username: "#{Random.hex}#{index}" }
@@ -27,7 +30,7 @@ super_admin_user = User.create(
 )
 super_admin_user.account.account_tokens.create(scope: :frontend)
 
-normal_users = Array.new(20) do |i|
+normal_users = Array.new(NORMAL_USERS_COUNT) do |i|
   { email: "user@#{i}.com", password:, account_attributes: generate_account_attributes(i) }
 end
 
@@ -47,9 +50,8 @@ Rails.logger.debug '...Chats and Messages'
 first_account = normal_accounts.first
 second_account = normal_accounts.second
 
-n = 10
-last_n_accounts = normal_accounts.last(n)
-first_n_accounts = normal_accounts.first(n)
+last_n_accounts = normal_accounts.last(TWO_WAY_CHATS_COUNT)
+first_n_accounts = normal_accounts.first(TWO_WAY_CHATS_COUNT)
 
 chats_accounts = last_n_accounts.map { |account| [first_account, account] }
 chats_accounts.each do |accounts|
@@ -65,7 +67,7 @@ end
 
 Rails.logger.debug '...AI Chats and Messages'
 
-5.times do |i|
+AI_CHATS_COUNT.times do |i|
   chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat, chat_status: 0)
   AccountChatMap.create(chat:, account: first_account)
 

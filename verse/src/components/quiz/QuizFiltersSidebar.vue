@@ -47,7 +47,7 @@ function addTag() {
               v-model="searchParams.search.title_like"
               id="title_like"
               name="title_like"
-              class="focus:outline-primary-500 h-8 max-w-full rounded border border-black px-2.5"
+              class="focus:outline-primary-500 h-8 max-w-full rounded border border-gray-500 px-2.5"
             />
           </div>
           <div v-if="areTagsLoading">Loading Tag Filters</div>
@@ -73,7 +73,7 @@ function addTag() {
                 id="tags"
                 name="tags"
                 @change="addTag"
-                class="focus:outline-primary-500 h-8 w-full rounded border border-black bg-white px-2.5"
+                class="focus:outline-primary-500 h-8 w-full rounded border border-gray-500 bg-white px-2.5"
               >
                 <option v-for="tag in tags">{{ tag }}</option>
               </select>

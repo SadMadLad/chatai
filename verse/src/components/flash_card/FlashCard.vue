@@ -52,8 +52,8 @@ const filteredTags = computed(
         <ul class="flex flex-wrap gap-1">
           <span
             v-for="{ tag } in filteredTags(tags)"
-            class="rounded-lg px-1.5 py-1 text-xs bg-opacity-25"
-            :style="{ backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.33)` }"
+            class="rounded-lg px-1.5 py-1 text-xs"
+            :style="{ backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.5)` }"
           >
             {{ tag }}
           </span>

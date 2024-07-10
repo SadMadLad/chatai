@@ -4,6 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  user_id           :bigint           not null
+#  favorites_count   :integer          default(0), not null
 #  role              :integer          default("user"), not null
 #  first_name        :string           not null
 #  last_name         :string           not null
