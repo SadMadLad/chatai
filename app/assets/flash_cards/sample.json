@@ -5,7 +5,13 @@
     "color": "#f43f5e",
     "published": true,
     "card_style": "fancy",
-    "tags": ["Education", "Software", "Web Development", "Ruby", "Ruby on Rails"]
+    "tags": [
+      "Education",
+      "Software",
+      "Web Development",
+      "Ruby",
+      "Ruby on Rails"
+    ]
   },
   {
     "answer": "Phoenix",

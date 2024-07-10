@@ -19,9 +19,13 @@ class Account < ApplicationRecord
   include SearchBy
 
   has_many :account_chat_maps, dependent: :destroy
+  has_many :quiz_undertakings, dependent: :destroy
+
   has_many :account_tokens, dependent: :destroy
   has_many :chats, through: :account_chat_maps
+  has_many :collections, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
   has_many :flash_cards, dependent: :nullify
   has_many :likes, dependent: :destroy
@@ -31,7 +35,6 @@ class Account < ApplicationRecord
                                inverse_of: :commenter
   has_many :posts, dependent: :destroy
   has_many :quizzes, dependent: :nullify
-  has_many :quiz_undertakings, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :taken_quizzes, through: :quiz_undertakings, class_name: 'Quiz'
 

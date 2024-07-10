@@ -38,14 +38,13 @@ const isQuizzesEmpty = computed(
   () => quizzes.value === null || quizzes.value?.length === 0,
 );
 const resultsText = computed(
-  () => (resultCount) => `${resultCount} ${resultCount === 1 ? 'result' : 'results'}`
+  () => (resultCount) =>
+    `${resultCount} ${resultCount === 1 ? "result" : "results"}`,
 );
 
 // Methods
 function queryParams() {
-  return url(
-    stringify({ ...searchParams }, { arrayFormat: "brackets" })
-  )
+  return url(stringify({ ...searchParams }, { arrayFormat: "brackets" }));
 }
 
 function handleSearch() {
@@ -113,10 +112,15 @@ function removeTag(tag) {
         @remove-filter="removeFilter"
         @remove-tag-filter="removeTagFilter"
       />
-      <p v-if="quizzes?.length" class="text-right mb-2">{{ resultsText(quizzes.length) }}</p>
+      <p v-if="quizzes?.length" class="mb-2 text-right">
+        {{ resultsText(quizzes.length) }}
+      </p>
       <div v-if="isLoading">Loading...</div>
       <div v-else-if="error">Error</div>
-      <div v-else class="@3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4">
+      <div
+        v-else
+        class="@5xl:columns-4 @3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4"
+      >
         <div v-if="isQuizzesEmpty">No Quizzes Found</div>
         <div v-else>
           <Quiz v-for="quiz in quizzes" v-bind="quiz" />

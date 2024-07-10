@@ -1,17 +1,17 @@
 # == Schema Information
 #
-# Table name: favorites
+# Table name: collectable_maps
 #
 #  id               :bigint           not null, primary key
-#  account_id       :bigint           not null
-#  favoritable_type :string           not null
-#  favoritable_id   :bigint           not null
+#  collectable_type :string           not null
+#  collectable_id   :bigint           not null
+#  collection_id    :bigint           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
 require "test_helper"
 
-class FavoriteTest < ActiveSupport::TestCase
+class CollectableMapTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

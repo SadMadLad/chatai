@@ -7,6 +7,12 @@ def generate_account_attributes(index)
   { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, role: 0, username: "#{Random.hex}#{index}" }
 end
 
+### TODO: Feed feedbacks
+
+p 'Seeding...'
+
+p '...Users and Accounts'
+
 password = 'password'
 
 admin_account_attributes = { first_name: 'Admin', last_name: 'Admin', role: 1, username: 'admin' }
@@ -36,7 +42,7 @@ normal_accounts.each do |account|
   )
 end
 
-# Creating Chat Messages
+p '...Chats and Messages'
 
 first_account = normal_accounts.first
 second_account = normal_accounts.second
@@ -57,7 +63,7 @@ end
   chat.messages.create(group_chat_accounts.map { |account| { account:, content: Faker::Movies::TheRoom.quote } })
 end
 
-# Creating AI chats
+p '...AI Chats and Messages'
 
 5.times do |i|
   chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat, chat_status: 0)
@@ -69,18 +75,18 @@ end
   end
 end
 
-# Creating account tokens
+p '...Account Tokens for Some Accounts'
 
 first_n_accounts.each do |account|
   account.account_tokens.create([{ scope: :frontend }, { scope: :verse }])
 end
 
-# Creating subreddits
+p '...Subreddits'
 
 Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
 Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
 
-# Creating Live chats
+p '...Live Chats with Messages'
 
 chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies', chat_description: 'Hello')
 chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence', chat_description: 'Hello 2')
@@ -99,6 +105,8 @@ end
 
 last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote) }
 
+p '...Posts'
+
 posters = normal_accounts.first(3)
 account_ids = normal_accounts.pluck(:id)
 
@@ -114,13 +122,15 @@ posters.each_with_index do |poster, index|
 
     post.save
 
-    # Create Likes
+    p '...Likes'
+
     likers = account_ids.sample Array(1..10).sample
     likes_data = likers.map { |l| { account_id: l, likeable_type: 'Post', likeable_id: post.id } }
 
     post.likes.create(likes_data)
 
-    # Create Comments
+    p '...Comments'
+
     commenters = account_ids.sample Array(1..10).sample
     commenters_data = commenters.map do |c|
       { account_id: c, commentable_type: 'Post', commentable_id: post.id, body: Faker::Movies::TheRoom.quote }
@@ -128,7 +138,8 @@ posters.each_with_index do |poster, index|
 
     comments = post.comments.create(commenters_data)
 
-    # Create Replies
+    p '...Replies'
+
     comments.sample(Array(1..10).sample).each do |comment|
       reply = Comment.new(
         account_id: account_ids.sample,
@@ -156,7 +167,8 @@ posters.each_with_index do |poster, index|
   end
 end
 
-# Generate Tags
+
+p '...Tags'
 
 books_tag = Tag.create(tag: 'Books')
 education_tag = Tag.create(tag: 'Education')
@@ -172,7 +184,7 @@ pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', tag_
 pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs', tag_type: :meta)
 why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail', tag_type: :meta)
 
-# Seed some basic machine learning model/s and prediction params
+p '...ML Models'
 
 ml_model = MlModel.create(
   title: 'Titanic',
@@ -196,6 +208,8 @@ ml_model = MlModel.create(
   ]
 )
 
+p '...Prediction Params for ML Models'
+
 prediction_params = [{ 'param_type' => 'integer', 'name' => 'PassengerId', 'description' => 'Ok',
                        'possible_values' => nil },
                      { 'param_type' => 'options', 'name' => 'Pclass', 'description' => 'ok',
@@ -215,11 +229,11 @@ prediction_params = prediction_params.each { |param| param['ml_model_id'] = ml_m
 
 PredictionParam.create(prediction_params)
 
-### Seed Quiz, Questions and QuestionOptions
+p '...Quizzes, its Questions and Question Options'
 
-def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has_user: false)
+def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has_user: false, account: nil)
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
-  quiz = Quiz.create(quiz_data)
+  quiz = Quiz.create(**quiz_data, account:)
 
   tags.each { |tag| TagMap.find_or_create_by(taggable: quiz, tag:) } if tags.present?
 
@@ -245,13 +259,13 @@ quiz_one_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags, cover_image: 'abstract-1.jpg')
+quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags, cover_image: 'abstract-1.jpg', account: first_account)
 
 quiz_two_tags = [education_tag, government_tag, education_tag, pakistan_tag]
-quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags, cover_image: 'abstract-2.jpg')
+quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags, cover_image: 'abstract-2.jpg', account: first_account)
 
 quiz_three_tags = [education_tag, history_tag, pakistan_tag]
-quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, give_rating: false, cover_image: 'abstract-3.jpg')
+quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, give_rating: false, cover_image: 'abstract-3.jpg', account: first_account)
 
 quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
 quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags,
@@ -261,14 +275,15 @@ quiz_five_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags, cover_image: 'abstract-5.jpg')
+quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags, cover_image: 'abstract-5.jpg', account: first_account)
 
 quiz_six_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
-quiz_six = seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags)
+quiz_six = seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags, account: first_account)
 
 quizzes = [quiz_one, quiz_two, quiz_three, quiz_four, quiz_five, quiz_six]
 
-### Seed Some Quiz Undertaking
+p '...Quiz Undertakings'
+
 def generate_quiz_undertaking(quiz, account, random_created_at: false)
   if random_created_at
     QuizUndertaking.create(quiz:, account:, score: rand(0..quiz.total_score), created_at: rand(1...100).days.ago)
@@ -282,22 +297,48 @@ quizzes.each do |quiz|
   10.times { generate_quiz_undertaking(quiz, first_account, random_created_at: true) }
 end
 
-### Seed Some Flash Cards
+p '...Flash Cards'
 
-def seed_flash_cards(flash_card_json_file)
+def seed_flash_cards(flash_card_json_file, account: nil)
   flash_cards = JSON.parse Rails.root.join("app/assets/flash_cards/#{flash_card_json_file}.json").read
 
   flash_cards.map do |flash_card_hash|
     flash_card_hash = flash_card_hash.with_indifferent_access
     tags = flash_card_hash.delete(:tags)
 
-    flash_card = FlashCard.create(flash_card_hash)
+    flash_card = FlashCard.create(**flash_card_hash, account:)
 
     if tags.present?
       tags = tags.map{ |tag| Tag.find_or_create_by(tag:) }
       tags.each { |tag| TagMap.create(taggable: flash_card, tag:) }
     end
+
+    flash_card
   end
 end
 
-seed_flash_cards('sample')
+flash_cards = seed_flash_cards('sample', account: first_account)
+
+p '...Favorites'
+
+flash_cards.sample(2).each { |flash_card| Favorite.create(favoritable: flash_card, account: first_account) }
+quizzes.sample(4).each { |quiz| Favorite.create(favoritable: quiz, account: first_account) }
+
+p '...Collections'
+
+flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection')
+quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection')
+mixed_collection = Collection.create(account: first_account, title: 'Mixed Collection')
+
+p '...Collectable Maps'
+
+flash_cards.each do |flash_card|
+  CollectableMap.create(collection: flash_card_only_collection, collectable: flash_card)
+end
+
+quizzes.each { |quiz| CollectableMap.create(collection: quiz_only_collection, collectable: quiz) }
+
+(flash_cards.sample(2) + quizzes.sample(3)).each do |collectable|
+  CollectableMap.create(collection: mixed_collection, collectable:)
+end 
+

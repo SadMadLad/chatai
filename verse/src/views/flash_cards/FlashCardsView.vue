@@ -10,19 +10,19 @@ const isFlashCardsEmpty = computed(
 
 function cardFrontClass(cardStyle) {
   const cardFrontClasses = {
-    basic: 'text-white font-bold rounded-xl shadow-xl',
-    fancy: 'font-serif font-bold border border-8 font-bold',
-    brutalism: 'font-cursive font-semibold text-white offset-box-shadow',
-  }
+    basic: "text-white font-bold rounded-xl shadow-xl",
+    fancy: "font-serif font-bold border border-8 font-bold",
+    brutalism: "font-cursive font-semibold text-white offset-box-shadow",
+  };
   return cardFrontClasses[cardStyle];
 }
 
 function cardFrontStyle(cardStyle, color) {
   const cardFrontStyles = {
-    basic: { backgroundColor: color, text: 'white' },
+    basic: { backgroundColor: color, text: "white" },
     fancy: { borderColor: color, color: color },
-    brutalism: { backgroundColor: color, text: 'white' },
-  }
+    brutalism: { backgroundColor: color, text: "white" },
+  };
   return cardFrontStyles[cardStyle];
 }
 </script>
@@ -32,7 +32,10 @@ function cardFrontStyle(cardStyle, color) {
   <div v-else-if="error">Error</div>
   <section v-else class="@container w-full">
     <div v-if="isFlashCardsEmpty">No Flash Card found</div>
-    <div v-else class="grid @7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 grid-cols-1 gap-4 mx-4">
+    <div
+      v-else
+      class="@7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 mx-4 grid grid-cols-1 gap-4"
+    >
       <FlashCard
         v-for="card in flashCards"
         :key="card.id"

@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: collectable_maps
+#
+#  id               :bigint           not null, primary key
+#  collectable_type :string           not null
+#  collectable_id   :bigint           not null
+#  collection_id    :bigint           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+one:
+  collection: one
+  collectable: one
+  collectable_type: Collectable
+
+two:
+  collection: two
+  collectable: two
+  collectable_type: Collectable

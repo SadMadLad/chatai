@@ -28,16 +28,16 @@ class User < ApplicationRecord
 
   has_one :account, dependent: :destroy
 
-  has_many :account_tokens, through: :account, dependent: :destroy
-  has_many :chats, through: :account, dependent: :destroy
-  has_many :feedback, through: :account, dependent: :destroy
-  has_many :flash_cards, through: :account, dependent: :destroy
-  has_many :likes, through: :account, dependent: :destroy
-  has_many :posts, through: :account, dependent: :destroy
-  has_many :messages, through: :account, dependent: :destroy
-  has_many :ml_models, through: :account, dependent: :destroy
-  has_many :quizzes, through: :account, dependent: :destroy
-  has_many :quiz_undertakings, through: :account, dependent: :destroy
+  %i[
+    account_tokens account_chat_maps chats collections comments feedback favorites likes messages ml_models 
+    quiz_undertakings posts ratings
+  ].each do |associated_records|
+    has_many associated_records, through: :account, dependent: :destroy
+  end
+
+  %i[flash_cards quizzes].each do |associated_records|
+    has_many associated_records, through: :account, dependent: :nullify
+  end
 
   scope :admins, -> { where(role: %i[superadmin admin]) }
 

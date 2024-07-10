@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  account_id :bigint
-#  style      :integer          default("basic"), not null
+#  card_style :integer          default("basic"), not null
 #  color      :string           default("#84cc16"), not null
 #  answer     :text             not null
 #  prompt     :text             not null

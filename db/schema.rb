@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_08_003248) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -108,6 +108,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_003248) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "collectable_maps", force: :cascade do |t|
+    t.string "collectable_type", null: false
+    t.bigint "collectable_id", null: false
+    t.bigint "collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collectable_type", "collectable_id"], name: "index_collectable_maps_on_collectable"
+    t.index ["collection_id"], name: "index_collectable_maps_on_collection_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.boolean "public", default: true, null: false
+    t.integer "collectable_maps_count", default: 0, null: false
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_collections_on_account_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "commentable_type", null: false
@@ -118,6 +139,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_003248) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_comments_on_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "favoritable_type", null: false
+    t.bigint "favoritable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_favorites_on_account_id"
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -454,7 +485,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_08_003248) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collectable_maps", "collections"
+  add_foreign_key "collections", "accounts"
   add_foreign_key "comments", "accounts"
+  add_foreign_key "favorites", "accounts"
   add_foreign_key "feedbacks", "accounts"
   add_foreign_key "flash_cards", "accounts"
   add_foreign_key "likes", "accounts"
