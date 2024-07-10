@@ -7,11 +7,11 @@ def generate_account_attributes(index)
   { first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, role: 0, username: "#{Random.hex}#{index}" }
 end
 
-### TODO: Feed feedbacks
+### TODO: Seed feedbacks
 
-p 'Seeding...'
+Rails.logger.debug 'Seeding...'
 
-p '...Users and Accounts'
+Rails.logger.debug '...Users and Accounts'
 
 password = 'password'
 
@@ -42,7 +42,7 @@ normal_accounts.each do |account|
   )
 end
 
-p '...Chats and Messages'
+Rails.logger.debug '...Chats and Messages'
 
 first_account = normal_accounts.first
 second_account = normal_accounts.second
@@ -63,7 +63,7 @@ end
   chat.messages.create(group_chat_accounts.map { |account| { account:, content: Faker::Movies::TheRoom.quote } })
 end
 
-p '...AI Chats and Messages'
+Rails.logger.debug '...AI Chats and Messages'
 
 5.times do |i|
   chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat, chat_status: 0)
@@ -75,18 +75,18 @@ p '...AI Chats and Messages'
   end
 end
 
-p '...Account Tokens for Some Accounts'
+Rails.logger.debug '...Account Tokens for Some Accounts'
 
 first_n_accounts.each do |account|
   account.account_tokens.create([{ scope: :frontend }, { scope: :verse }])
 end
 
-p '...Subreddits'
+Rails.logger.debug '...Subreddits'
 
 Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
 Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
 
-p '...Live Chats with Messages'
+Rails.logger.debug '...Live Chats with Messages'
 
 chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies', chat_description: 'Hello')
 chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence', chat_description: 'Hello 2')
@@ -105,7 +105,7 @@ end
 
 last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote) }
 
-p '...Posts'
+Rails.logger.debug '...Posts'
 
 posters = normal_accounts.first(3)
 account_ids = normal_accounts.pluck(:id)
@@ -122,14 +122,14 @@ posters.each_with_index do |poster, index|
 
     post.save
 
-    p '...Likes'
+    Rails.logger.debug '...Likes'
 
     likers = account_ids.sample Array(1..10).sample
     likes_data = likers.map { |l| { account_id: l, likeable_type: 'Post', likeable_id: post.id } }
 
     post.likes.create(likes_data)
 
-    p '...Comments'
+    Rails.logger.debug '...Comments'
 
     commenters = account_ids.sample Array(1..10).sample
     commenters_data = commenters.map do |c|
@@ -138,7 +138,7 @@ posters.each_with_index do |poster, index|
 
     comments = post.comments.create(commenters_data)
 
-    p '...Replies'
+    Rails.logger.debug '...Replies'
 
     comments.sample(Array(1..10).sample).each do |comment|
       reply = Comment.new(
@@ -167,8 +167,7 @@ posters.each_with_index do |poster, index|
   end
 end
 
-
-p '...Tags'
+Rails.logger.debug '...Tags'
 
 books_tag = Tag.create(tag: 'Books')
 education_tag = Tag.create(tag: 'Education')
@@ -184,7 +183,7 @@ pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', tag_
 pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs', tag_type: :meta)
 why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail', tag_type: :meta)
 
-p '...ML Models'
+Rails.logger.debug '...ML Models'
 
 ml_model = MlModel.create(
   title: 'Titanic',
@@ -208,7 +207,7 @@ ml_model = MlModel.create(
   ]
 )
 
-p '...Prediction Params for ML Models'
+Rails.logger.debug '...Prediction Params for ML Models'
 
 prediction_params = [{ 'param_type' => 'integer', 'name' => 'PassengerId', 'description' => 'Ok',
                        'possible_values' => nil },
@@ -229,7 +228,7 @@ prediction_params = prediction_params.each { |param| param['ml_model_id'] = ml_m
 
 PredictionParam.create(prediction_params)
 
-p '...Quizzes, its Questions and Question Options'
+Rails.logger.debug '...Quizzes, its Questions and Question Options'
 
 def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has_user: false, account: nil)
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
@@ -259,13 +258,16 @@ quiz_one_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags, cover_image: 'abstract-1.jpg', account: first_account)
+quiz_one = seed_quiz('foreign_policy_beginnings', tags: quiz_one_tags, cover_image: 'abstract-1.jpg',
+                                                  account: first_account)
 
 quiz_two_tags = [education_tag, government_tag, education_tag, pakistan_tag]
-quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags, cover_image: 'abstract-2.jpg', account: first_account)
+quiz_two = seed_quiz('government_of_pakistan', tags: quiz_two_tags, cover_image: 'abstract-2.jpg',
+                                               account: first_account)
 
 quiz_three_tags = [education_tag, history_tag, pakistan_tag]
-quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, give_rating: false, cover_image: 'abstract-3.jpg', account: first_account)
+quiz_three = seed_quiz('pakistan_wikipedia', tags: quiz_three_tags, give_rating: false, cover_image: 'abstract-3.jpg',
+                                             account: first_account)
 
 quiz_four_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
 quiz_four = seed_quiz('small_differences_and_critical_junctures_the_weight_of_history', tags: quiz_four_tags,
@@ -275,14 +277,15 @@ quiz_five_tags = [
   books_tag, international_relations_tag, education_tag, history_tag, pakistan_tag, pakistan_affairs_tag,
   pakistan_foreign_policy_tag
 ]
-quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags, cover_image: 'abstract-5.jpg', account: first_account)
+quiz_five = seed_quiz('the_kashmir_question', tags: quiz_five_tags, cover_image: 'abstract-5.jpg',
+                                              account: first_account)
 
 quiz_six_tags = [books_tag, economics_tag, education_tag, history_tag, why_nations_fail_tag]
 quiz_six = seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags, account: first_account)
 
 quizzes = [quiz_one, quiz_two, quiz_three, quiz_four, quiz_five, quiz_six]
 
-p '...Quiz Undertakings'
+Rails.logger.debug '...Quiz Undertakings'
 
 def generate_quiz_undertaking(quiz, account, random_created_at: false)
   if random_created_at
@@ -297,7 +300,7 @@ quizzes.each do |quiz|
   10.times { generate_quiz_undertaking(quiz, first_account, random_created_at: true) }
 end
 
-p '...Flash Cards'
+Rails.logger.debug '...Flash Cards'
 
 def seed_flash_cards(flash_card_json_file, account: nil)
   flash_cards = JSON.parse Rails.root.join("app/assets/flash_cards/#{flash_card_json_file}.json").read
@@ -309,7 +312,7 @@ def seed_flash_cards(flash_card_json_file, account: nil)
     flash_card = FlashCard.create(**flash_card_hash, account:)
 
     if tags.present?
-      tags = tags.map{ |tag| Tag.find_or_create_by(tag:) }
+      tags = tags.map { |tag| Tag.find_or_create_by(tag:) }
       tags.each { |tag| TagMap.create(taggable: flash_card, tag:) }
     end
 
@@ -319,18 +322,18 @@ end
 
 flash_cards = seed_flash_cards('sample', account: first_account)
 
-p '...Favorites'
+Rails.logger.debug '...Favorites'
 
 flash_cards.sample(2).each { |flash_card| Favorite.create(favoritable: flash_card, account: first_account) }
 quizzes.sample(4).each { |quiz| Favorite.create(favoritable: quiz, account: first_account) }
 
-p '...Collections'
+Rails.logger.debug '...Collections'
 
 flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection')
 quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection')
 mixed_collection = Collection.create(account: first_account, title: 'Mixed Collection')
 
-p '...Collectable Maps'
+Rails.logger.debug '...Collectable Maps'
 
 flash_cards.each do |flash_card|
   CollectableMap.create(collection: flash_card_only_collection, collectable: flash_card)
@@ -340,5 +343,4 @@ quizzes.each { |quiz| CollectableMap.create(collection: quiz_only_collection, co
 
 (flash_cards.sample(2) + quizzes.sample(3)).each do |collectable|
   CollectableMap.create(collection: mixed_collection, collectable:)
-end 
-
+end

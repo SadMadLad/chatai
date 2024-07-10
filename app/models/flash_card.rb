@@ -22,6 +22,7 @@ class FlashCard < ApplicationRecord
   ].freeze
   belongs_to :account, optional: true
 
+  has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :tag_maps, as: :taggable, dependent: :destroy
   has_many :tags, through: :tag_maps
 

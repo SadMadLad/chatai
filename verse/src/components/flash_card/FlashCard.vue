@@ -18,8 +18,6 @@ const { color } = defineProps({
 const colorRef = toRef(color);
 const invertedColorHex = (16777215 - Number(`0x${colorRef.value.substring(1)}`)).toString(16).padStart(6, '0');
 
-console.log(invertedColorHex);
-
 const filteredTags = computed(
   () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
 );

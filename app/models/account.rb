@@ -25,7 +25,7 @@ class Account < ApplicationRecord
   has_many :chats, through: :account_chat_maps
   has_many :collections, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :favorites, as: :favoritable, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
   has_many :flash_cards, dependent: :nullify
   has_many :likes, dependent: :destroy
