@@ -5,6 +5,7 @@ module Api
     class FlashCardsController < Api::AuthenticatedController
       def index
         @flash_cards = FlashCard.includes(:tags).all
+        @favorites_hash = FlashCard.favorites(account: @account).pluck(:id, :favoritable_id).to_h
       end
     end
   end

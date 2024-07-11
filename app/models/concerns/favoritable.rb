@@ -7,8 +7,16 @@ module Favoritable
   end
 
   class_methods do
-    def favorites
-      Favorite.where(favoritable_type: self.to_s)
+    def favorites(account: nil)
+      if account.present?
+        Favorite.where(favoritable: all, account:)
+      else
+        Favorite.where(favoritable: all)
+      end
+    end
+
+    def favorites_hash(account: nil)
+      favorites(account:).pluck(:id, :account_id).to_h
     end
   end
 end
