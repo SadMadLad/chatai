@@ -12,8 +12,8 @@
 #
 class Tag < ApplicationRecord
   TAGGABLE_MODELS = %w[Chat Collection FlashCard Quiz].freeze
-  
-  normalizes :tag, with: -> tag { tag.capitalize }
+
+  normalizes :tag, with: -> tag { tag.titleize }
 
   has_many :tag_maps, dependent: :destroy
 
