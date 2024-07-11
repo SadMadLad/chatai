@@ -352,8 +352,17 @@ end
 Rails.logger.debug '...Favorites'
 
 normal_accounts.last(6).each do |account|
-  flash_cards.sample(2).each { |flash_card| Favorite.create(favoritable: flash_card, account:) }
-  quizzes.sample(4).each { |quiz| Favorite.create(favoritable: quiz, account:) }
-  collections.sample(2).each { |collection| Favorite.create(favoritable: collection, account:) }
+  flash_cards.sample(2).each do |flash_card|
+    Favorite.create(favoritable: flash_card, account:)
+    Favorite.create(favoritable: flash_card, account: first_account)
+  end
+  quizzes.sample(4).each do |quiz|
+    Favorite.create(favoritable: quiz, account:)
+    Favorite.create(favoritable: quiz, account: first_account)
+  end
+  collections.sample(2).each do |collection|
+    Favorite.create(favoritable: collection, account:)
+    Favorite.create(favoritable: collection, account: first_account)
+  end
 end
 

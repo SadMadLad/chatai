@@ -53,7 +53,7 @@ const filteredTags = computed(
           <span
             v-for="{ tag } in filteredTags(tags)"
             class="rounded-lg px-1.5 py-1 text-xs"
-            :style="{ backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.5)` }"
+            :style="{ backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.4)` }"
           >
             {{ tag }}
           </span>
@@ -65,7 +65,7 @@ const filteredTags = computed(
 
 <style scoped>
 .flip-enter-from {
-  transform: rotateY(-90deg);
+  transform: rotateY(90deg);
 }
 
 .flip-enter-active,
