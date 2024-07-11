@@ -19,13 +19,13 @@ class Collection < ApplicationRecord
   include Favoritable
   include Taggable
 
-  COLLECTABLE_ITEMS = %w[Collection CollectableMap Quiz]
+  COLLECTABLE_MODELS = %w[Collection CollectableMap Quiz]
 
   belongs_to :account
 
   has_many :items, dependent: :destroy, class_name: 'CollectableMap'
 
-  COLLECTABLE_ITEMS.each do |model|
+  COLLECTABLE_MODELS.each do |model|
     has_many model.downcase.pluralize.to_sym, through: :items, source: :collectable, source_type: model
   end
 

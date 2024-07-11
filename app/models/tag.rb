@@ -11,11 +11,15 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
+  TAGGABLE_MODELS = %w[Chat Collection FlashCard Quiz].freeze
+  
+  normalizes :tag, with: -> tag { tag.capitalize }
+
   has_many :tag_maps, dependent: :destroy
 
-  has_many :flash_cards, through: :tag_maps, source: :taggable, source_type: 'FlashCard'
-  has_many :live_chat_rooms, through: :tag_maps, source: :taggable, source_type: 'Chat'
-  has_many :quizzes, through: :tag_maps, source: :taggable, source_type: 'Quiz'
+  TAGGABLE_MODELS.each do |model|
+    has_many model.downcase.pluralize.to_sym, through: :tag_maps, source: :taggable, source_type: model
+  end
 
   validates :tag, presence: false, uniqueness: true
   validates :tag_type, presence: true
