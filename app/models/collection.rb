@@ -8,18 +8,26 @@
 #  account_id             :bigint           not null
 #  public                 :boolean          default(TRUE), not null
 #  collectable_maps_count :integer          default(0), not null
+#  favorites_count        :integer          default(0), not null
 #  title                  :string           not null
 #  description            :text
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
 class Collection < ApplicationRecord
+  include Collectable
+  include Favoritable
+  include Taggable
+
+  COLLECTABLE_ITEMS = %w[Collection CollectableMap Quiz]
+
   belongs_to :account
 
-  has_many :collectable_maps, dependent: :destroy
+  has_many :items, dependent: :destroy, class_name: 'CollectableMap'
 
-  has_many :flash_cards, through: :collectable_maps, source: :collectable, source_type: 'FlashCard'
-  has_many :quizzes, through: :collectable_maps, source: :collectable, source_type: 'Quiz'
+  COLLECTABLE_ITEMS.each do |model|
+    has_many model.downcase.pluralize.to_sym, through: :items, source: :collectable, source_type: model
+  end
 
   validates :public, boolean: true
   validates :title, presence: true

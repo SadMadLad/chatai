@@ -23,17 +23,12 @@
 #  updated_at              :datetime         not null
 #
 class Quiz < ApplicationRecord
+  include Collectable
+  include Favoritable
   include SearchBy
+  include Taggable
 
   belongs_to :account, optional: true
-
-  has_many :collectable_maps, as: :collectable, dependent: :destroy
-  has_many :collections, through: :collectable_maps
-  has_many :collected_accounts, through: :collections, source: :account
-  has_many :favorites, as: :favoritable, dependent: :destroy
-  has_many :favorited_accounts, through: :favorites, source: :account
-  has_many :tag_maps, as: :taggable, dependent: :destroy
-  has_many :tags, through: :tag_maps
 
   has_many :accounts, through: :quiz_undertakings
   has_many :questions, dependent: :destroy
@@ -63,13 +58,6 @@ class Quiz < ApplicationRecord
   end
 
   class << self
-    def search_by_tags
-      return all unless any_param_exists? [:tags]
 
-      joins(:tags)
-        .where(tags: { tag: @params[:tags] })
-        .group(:id)
-        .having('COUNT(DISTINCT tags.id) = ?', @params[:tags].length)
-    end
   end
 end

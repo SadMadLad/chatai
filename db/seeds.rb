@@ -324,16 +324,14 @@ end
 
 flash_cards = seed_flash_cards('sample', account: first_account)
 
-Rails.logger.debug '...Favorites'
-
-flash_cards.sample(2).each { |flash_card| Favorite.create(favoritable: flash_card, account: first_account) }
-quizzes.sample(4).each { |quiz| Favorite.create(favoritable: quiz, account: first_account) }
-
 Rails.logger.debug '...Collections'
 
 flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection')
 quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection')
 mixed_collection = Collection.create(account: first_account, title: 'Mixed Collection')
+cool_collection = Collection.create(account: first_account, title: 'Cool Collection')
+
+collections = [flash_card_only_collection, quiz_only_collection, mixed_collection, cool_collection]
 
 Rails.logger.debug '...Collectable Maps'
 
@@ -346,3 +344,16 @@ quizzes.each { |quiz| CollectableMap.create(collection: quiz_only_collection, co
 (flash_cards.sample(2) + quizzes.sample(3)).each do |collectable|
   CollectableMap.create(collection: mixed_collection, collectable:)
 end
+
+(flash_cards.sample(2) + quizzes.sample(2) + collections.sample(2)).each do |collectable|
+  CollectableMap.create(collection: cool_collection, collectable:)
+end
+
+Rails.logger.debug '...Favorites'
+
+normal_accounts.last(6).each do |account|
+  flash_cards.sample(2).each { |flash_card| Favorite.create(favoritable: flash_card, account:) }
+  quizzes.sample(4).each { |quiz| Favorite.create(favoritable: quiz, account:) }
+  collections.sample(2).each { |collection| Favorite.create(favoritable: collection, account:) }
+end
+

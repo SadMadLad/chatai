@@ -13,10 +13,11 @@
 #
 class Favorite < ApplicationRecord
   # Each supported favoritable model must have a favorites_count column
-  SUPPORTED_FAVORITABLES = %w[FlashCard Quiz].freeze
+  SUPPORTED_FAVORITABLES = %w[Collection FlashCard Quiz].freeze
 
   belongs_to :account, counter_cache: :favorites_count
   belongs_to :favoritable, polymorphic: true, counter_cache: :favorites_count
 
   validates :favoritable_type, inclusion: { in: SUPPORTED_FAVORITABLES }
+  validates :account_id, uniqueness: { scope: %i[favoritable_id favoritable_type] }
 end

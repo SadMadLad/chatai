@@ -6,6 +6,7 @@ class CreateCollections < ActiveRecord::Migration[7.1]
       t.boolean :public, null: false, default: true
 
       t.integer :collectable_maps_count, null: false, default: 0
+      t.integer :favorites_count, null: false, default: 0
 
       t.string :title, null: false
 

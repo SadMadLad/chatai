@@ -6,6 +6,7 @@
 #  account_id             :bigint           not null
 #  public                 :boolean          default(TRUE), not null
 #  collectable_maps_count :integer          default(0), not null
+#  favorites_count        :integer          default(0), not null
 #  title                  :string           not null
 #  description            :text
 #  created_at             :datetime         not null

@@ -123,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
     t.bigint "account_id", null: false
     t.boolean "public", default: true, null: false
     t.integer "collectable_maps_count", default: 0, null: false
+    t.integer "favorites_count", default: 0, null: false
     t.string "title", null: false
     t.text "description"
     t.datetime "created_at", null: false

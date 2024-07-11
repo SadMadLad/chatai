@@ -18,6 +18,10 @@
 #
 
 class FlashCard < ApplicationRecord
+  include Collectable
+  include Favoritable
+  include Taggable
+
   COLORS = %w[
     #f43f5e #ec4899 #d946ef #a855f7 #8b5cf6 #6366f1 #3b82f6 #0ea5e9 #06b6d4 #14b8a6 #10b981
     #22c55e #84cc16 #eab308 #f59e0b #f97316 #ef4444 #78716c #737373 #71717a #6b7280 #64748b
@@ -28,10 +32,6 @@ class FlashCard < ApplicationRecord
   has_many :collectable_maps, as: :collectable, dependent: :destroy
   has_many :collections, through: :collectable_maps
   has_many :collected_accounts, through: :collections, source: :account
-  has_many :favorites, as: :favoritable, dependent: :destroy
-  has_many :favorited_accounts, through: :favorites, source: :account
-  has_many :tag_maps, as: :taggable, dependent: :destroy
-  has_many :tags, through: :tag_maps
 
   has_one_attached :image
 
