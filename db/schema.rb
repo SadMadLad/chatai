@@ -147,7 +147,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
   create_table "embeddings", force: :cascade do |t|
     t.string "embeddable_type", null: false
     t.bigint "embeddable_id", null: false
-    t.vector "embedding", limit: 768
+    t.vector "embedding", limit: 768, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["embeddable_type", "embeddable_id"], name: "index_embeddings_on_embeddable"

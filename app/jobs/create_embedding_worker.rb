@@ -5,12 +5,11 @@ class CreateEmbeddingWorker < ApplicationJob
   rescue_from Faraday::TimeoutError, with: -> { logger('job_errors.timeout_error') }
 
   def perform(embeddable)
-    has_embedding_already = embeddable.embedding.present?
+    previous_embedding = embeddable.embedding
     new_embedding = Clients::ApiClient.new.embedding(embeddable.embeddable_text)
 
-    if has_embedding_already
-      embedding = embeddable.embedding
-      embedding.update(embedding: new_embedding)
+    if previous_embedding.present?
+      previous_embedding.update(embedding: new_embedding)
     else
       Embedding.create(embeddable:, embedding: new_embedding)
     end

@@ -5,14 +5,26 @@ module Embeddable
     attr_accessor :skip_embedding_callbacks
 
     has_one :embedding, as: :embeddable, dependent: :destroy
-  
-    after_commit :feed_embedding, on: %i[create update]
+
+    after_commit :feed_embedding, on: :create
   end
 
   def feed_embedding
     return if skip_embedding_callbacks
 
     CreateEmbeddingWorker.perform_later(self)
+  end
+
+  def neighbors(distance: :euclidean)
+    instance_embedding = embedding
+
+    neighbor_ids = self.class
+      .all_embeddings
+      .nearest_neighbors(:embedding, instance_embedding.embedding, distance:)
+      .excluding(instance_embedding)
+      .pluck(:embeddable_id)
+
+    self.class.find(neighbor_ids)
   end
 
   class_methods do
