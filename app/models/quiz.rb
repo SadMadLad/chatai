@@ -24,6 +24,7 @@
 #
 class Quiz < ApplicationRecord
   include Collectable
+  include Embeddable
   include Favoritable
   include SearchBy
   include Taggable
@@ -37,6 +38,7 @@ class Quiz < ApplicationRecord
   has_many :ratings, as: :rateable, dependent: :destroy
 
   has_one_attached :cover
+  embeddable_text columns: %i[title description]
 
   validates :published, boolean: true
   validates :timed, boolean: true
@@ -55,9 +57,5 @@ class Quiz < ApplicationRecord
     end
 
     total_score
-  end
-
-  class << self
-
   end
 end

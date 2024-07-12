@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+  enable_extension "vector"
 
   create_table "account_chat_maps", primary_key: ["account_id", "chat_id"], force: :cascade do |t|
     t.bigint "account_id", null: false
@@ -141,6 +142,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_09_231140) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_comments_on_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
+
+  create_table "embeddings", force: :cascade do |t|
+    t.string "embeddable_type", null: false
+    t.bigint "embeddable_id", null: false
+    t.vector "embedding", limit: 768
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embeddable_type", "embeddable_id"], name: "index_embeddings_on_embeddable"
   end
 
   create_table "favorites", force: :cascade do |t|

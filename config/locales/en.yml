@@ -51,7 +51,9 @@ en:
   failed_destroy: Unable to destroy %{model}
 
   job_errors:
+    connection_failed: Connection failed to the service.
     json_parse: Scraping failed. Could not parse JSON Response for %{job}
+    timeout_error: Connection timed out. Try again later.
     unknown_attribute: Scraping failed for %{job}. Unknown attribute detected when saving record. Possible that the API changed?
 
   # Controllers

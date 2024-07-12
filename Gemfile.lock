@@ -203,6 +203,8 @@ GEM
     minitest (5.24.1)
     msgpack (1.7.2)
     mutex_m (0.2.0)
+    neighbor (0.4.0)
+      activerecord (>= 6.1)
     net-http (0.4.1)
       uri
     net-imap (0.4.14)
@@ -223,6 +225,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.6)
+    pgvector (0.3.1)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -409,8 +412,10 @@ DEPENDENCIES
   letter_opener
   lookbook
   mime-types
+  neighbor
   pagy
   pg (~> 1.1)
+  pgvector
   pry-rails
   puma (>= 5.0)
   pundit

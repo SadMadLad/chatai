@@ -19,6 +19,7 @@
 
 class FlashCard < ApplicationRecord
   include Collectable
+  include Embeddable
   include Favoritable
   include Taggable
 
@@ -27,11 +28,9 @@ class FlashCard < ApplicationRecord
     #22c55e #84cc16 #eab308 #f59e0b #f97316 #ef4444 #78716c #737373 #71717a #6b7280 #64748b
   ].freeze
 
-  belongs_to :account, optional: true
+  embeddable_text columns: %i[answer prompt]
 
-  has_many :collectable_maps, as: :collectable, dependent: :destroy
-  has_many :collections, through: :collectable_maps
-  has_many :collected_accounts, through: :collections, source: :account
+  belongs_to :account, optional: true
 
   has_one_attached :image
 
