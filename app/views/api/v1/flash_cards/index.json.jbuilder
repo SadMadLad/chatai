@@ -4,7 +4,7 @@ json.array! @flash_cards do |flash_card|
   json.id flash_card.id
 
   json.answer flash_card.answer
-  json.liked @favorites_hash[flash_card.id].present?
+  json.favorited @favorites_hash[flash_card.id].present?
   json.card_style flash_card.card_style
   json.color flash_card.color
   json.prompt flash_card.prompt

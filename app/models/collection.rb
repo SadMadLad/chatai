@@ -19,7 +19,7 @@ class Collection < ApplicationRecord
   include Favoritable
   include Taggable
 
-  COLLECTABLE_MODELS = %w[Collection CollectableMap Quiz]
+  COLLECTABLE_MODELS = %w[Collection CollectableMap Quiz].freeze
 
   belongs_to :account
 

@@ -1,10 +1,11 @@
 <script setup>
+import FavoriteButton from "@/components/favorites/FavoriteButton.vue";
 import { computed, ref, toRef } from "vue";
 import { PhArrowBendUpLeft } from "@phosphor-icons/vue";
 
 const isFlipped = ref(false);
 
-const { color } = defineProps({
+const { color, card_style } = defineProps({
   id: Number,
   answer: String,
   buttonClass: String,
@@ -12,25 +13,35 @@ const { color } = defineProps({
   color: String,
   frontClass: String,
   frontStyle: Object,
+  favorited: Boolean,
   prompt: String,
   tags: Array,
 });
 
 const colorRef = toRef(color);
-const invertedColorHex = (16777215 - Number(`0x${colorRef.value.substring(1)}`)).toString(16).padStart(6, '0');
+const invertedColorHex = (16777215 - Number(`0x${colorRef.value.substring(1)}`))
+  .toString(16)
+  .padStart(6, "0");
 
 const filteredTags = computed(
   () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
 );
+const buttonColor = computed(() => card_style === 'fancy' ? `#${color}` : 'white');
 </script>
 
 <template>
   <Transition name="flip" mode="out-in">
-    <div v-if="!isFlipped" class="flex-center mx-auto mb-6 h-72 w-60 p-4" :class="frontClass"
+    <div v-if="!isFlipped" class="flex-center mx-auto mb-6 h-72 w-60 p-4 relative" :class="frontClass"
       :style="frontStyle">
-      <div class="flex flex-col gap-2 items-center">
+      <span class="absolute right-6 top-6">
+        <FavoriteButton :favorited="favorited" :favoritable-id="id" favoritable-type="FlashCard"/>
+      </span>
+      <div class="flex flex-col items-center gap-2">
         <p class="text-center text-xl">{{ prompt }}</p>
-        <button :class="buttonClass" :style="{ color: card_style === 'fancy' ? `#${color}` : 'white' }" @click="isFlipped = true">Flip Card</button>
+        <button :class="buttonClass" :style="{ color: buttonColor, borderColor: frontStyle.borderColor }"
+          @click="isFlipped = true">
+          Flip Card
+        </button>
       </div>
     </div>
     <div v-else class="flex-center relative mx-auto mb-6 h-72 w-60 p-4" :class="frontClass" :style="frontStyle">
@@ -38,8 +49,9 @@ const filteredTags = computed(
       <div class="flex flex-col items-center gap-4">
         <p>{{ answer }}</p>
         <ul class="flex flex-wrap gap-1">
-          <span v-for="{ tag } in filteredTags(tags)" class="rounded-lg px-1.5 py-1 text-xs"
-            :style="{ backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.33)` }">
+          <span v-for="{ tag } in filteredTags(tags)" class="rounded-lg px-1.5 py-1 text-xs" :style="{
+            backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.33)`,
+          }">
             {{ tag }}
           </span>
         </ul>

@@ -12,10 +12,7 @@ module Clients
           'Content-Type' => 'application/json',
           'Authorization' => "Bearer #{ENV.fetch('API_CLIENT_SECRET', nil)}"
         }
-      ) do |faraday|
-        faraday.response :logger # log requests and responses
-        faraday.adapter Faraday.default_adapter
-      end
+      )
     end
 
     def autocomplete(messages)

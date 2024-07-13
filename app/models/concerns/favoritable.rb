@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Concern for managing polymorphic model - embedding
 module Favoritable
   extend ActiveSupport::Concern
 
@@ -7,16 +10,8 @@ module Favoritable
   end
 
   class_methods do
-    def favorites(account: nil)
-      if account.present?
-        Favorite.where(favoritable: all, account:)
-      else
-        Favorite.where(favoritable: all)
-      end
-    end
-
-    def favorites_hash(account: nil)
-      favorites(account:).pluck(:id, :account_id).to_h
+    def all_favorites
+      Favorite.where(favoritable: self.to_s)
     end
   end
 end

@@ -18,5 +18,5 @@ class Subreddit < ApplicationRecord
   validates :latest_scraped_at, presence: true, on: :update
   validates :subreddit, presence: true, uniqueness: true
   validates :subreddit_url, presence: true, uniqueness: true,
-                            format: { with: %r{https://www\.reddit\.com/r/[a-zA-Z0-9_]+} }
+                            format: { with: %r{\Ahttps://www\.reddit\.com/r/[a-zA-Z0-9_]+\z} }
 end

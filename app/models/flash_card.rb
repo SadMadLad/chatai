@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #
 
+# Flash Card
 class FlashCard < ApplicationRecord
   include Collectable
   include Embeddable

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # Ability to favorite/unfavorite flash cards, quizzes and collections
     class FavoritesController < Api::AuthenticatedController
       def create
         @favorite = Favorite.new(favorite_params)
@@ -12,14 +15,14 @@ module Api
       end
 
       def destroy
-        @favorite = Favorite.find(params[:id])
-        @favorite.destroy
+        @favorite = Favorite.find_by(favorite_params)
+        @favorite.destroy if @favorite.present?
       end
 
       private
 
       def favorite_params
-        params.require(:favorite).permit(:favoritable_type, :favoritable_id).merge(account: current_account)
+        params.require(:favorite).permit(:favoritable_type, :favoritable_id).merge(account: @account)
       end
     end
   end

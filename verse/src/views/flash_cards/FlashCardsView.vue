@@ -32,17 +32,17 @@ function cardFlipButtonClass(cardStyle) {
   const cardFlipButtonClasses = {
     basic: "font-sans hover:bg-white/30",
     fancy: "font-serif hover:bg-black/10",
-    brutalism: "font-cursive hover:bg-white/30"
-  }
+    brutalism: "font-cursive hover:bg-white/30",
+  };
 
-  return `px-2 py-1 text-sm rounded border-2 shadow font-bold ${cardFlipButtonClasses[cardStyle]}`
+  return `px-2 py-1 text-sm rounded border-2 font-bold ${cardFlipButtonClasses[cardStyle]}`;
 }
 </script>
 
 <template>
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="error">Error</div>
-  <section v-else class="container my-8 @container w-full">
+  <section v-else class="@container container my-8 w-full">
     <div v-if="isFlashCardsEmpty">No Flash Card found</div>
     <div
       v-else

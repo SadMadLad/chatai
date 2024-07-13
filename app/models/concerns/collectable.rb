@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Concern for using polymorphic model Collection with CollectableMap
 module Collectable
   extend ActiveSupport::Concern
 

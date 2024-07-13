@@ -15,12 +15,8 @@ class LikesController < AuthenticatedController
   end
 
   def destroy
-    if @like.present?
-      @likeable = @like.likeable
-      @like.destroy
-    else
-      @likeable = params[:likeable_type].constantize.find(params[:likeable_id])
-    end
+    @likeable = @like.likeable
+    @like.destroy
   end
 
   private

@@ -4,6 +4,8 @@ class CreateCollectableMaps < ActiveRecord::Migration[7.1]
       t.belongs_to :collectable, polymorphic: true, null: false
       t.belongs_to :collection, null: false, foreign_key: true
 
+      t.index %i[collectable_id collectable_type], unique: true
+      
       t.timestamps
     end
   end

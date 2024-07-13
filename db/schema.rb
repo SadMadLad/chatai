@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
     t.bigint "collection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["collectable_id", "collectable_type"], name: "index_collectable_maps_on_collectable_id_and_collectable_type", unique: true
     t.index ["collectable_type", "collectable_id"], name: "index_collectable_maps_on_collectable"
     t.index ["collection_id"], name: "index_collectable_maps_on_collection_id"
   end
@@ -150,6 +151,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
     t.vector "embedding", limit: 768, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["embeddable_id", "embeddable_type"], name: "index_embeddings_on_embeddable_id_and_embeddable_type", unique: true
     t.index ["embeddable_type", "embeddable_id"], name: "index_embeddings_on_embeddable"
   end
 
@@ -159,6 +161,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
     t.bigint "favoritable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id", "favoritable_id", "favoritable_type"], name: "idx_on_account_id_favoritable_id_favoritable_type_a8ff303bb6", unique: true
     t.index ["account_id"], name: "index_favorites_on_account_id"
     t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable"
   end

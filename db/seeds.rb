@@ -365,4 +365,3 @@ normal_accounts.last(6).each do |account|
     Favorite.create(favoritable: collection, account: first_account)
   end
 end
-

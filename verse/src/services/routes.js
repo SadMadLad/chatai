@@ -4,8 +4,12 @@ const RailsRoutes = {
   // Sessions Routes
   login: { url: () => `${Rails}/sessions`, method: "POST" },
 
+  // Favorites
+  createFavorite: { url: () => `${Rails}/favorites`, method: "POST" },
+  destroyFavorite: { url: () => `${Rails}/favorites`, method: "DELETE" },
+
   // Flash Card Routes
-  flash_cards: { url: () => `${Rails}/flash_cards`, method: "GET" },
+  flashCards: { url: () => `${Rails}/flash_cards`, method: "GET" },
 
   // Quiz Routes
   quizzes: {

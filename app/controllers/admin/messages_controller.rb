@@ -51,7 +51,7 @@ module Admin
     private
 
     def message_params
-      params.require(:message).permit(:account_id, :chat_id, :content)
+      params.require(:message).permit(:chat_id, :content).merge(account: @account)
     end
 
     def set_message

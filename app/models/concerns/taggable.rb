@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Concern for using polymorphic model Tag with TagMap.
 module Taggable
   extend ActiveSupport::Concern
 
@@ -8,13 +11,13 @@ module Taggable
 
   class_methods do
     def search_by_tags(search_by_or: false, tags: [])
-      return all if tags.blank? && !(any_param_exists? [:tags]) 
+      return all if tags.blank? && !(any_param_exists? [:tags])
 
       search_tags = @params&.[](:tags) || tags
 
       tagged_records = joins(:tags).where(tags: { tag: search_tags })
       return tagged_records if search_by_or
-      
+
       tagged_records.group(:id).having('COUNT(DISTINCT tags.id) = ?', search_tags.length)
     end
   end

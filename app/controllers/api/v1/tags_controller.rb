@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Controller for tags
     class TagsController < Api::AuthenticatedController
       def index
         @tags = Tag.where(tag_type: :display).order(:tag).pluck(:tag)

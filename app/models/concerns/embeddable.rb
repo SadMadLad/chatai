@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Concern with helper methods to use polymorphic embedding model
 module Embeddable
   extend ActiveSupport::Concern
 
@@ -19,17 +22,17 @@ module Embeddable
     instance_embedding = embedding
 
     neighbor_ids = self.class
-      .all_embeddings
-      .nearest_neighbors(:embedding, instance_embedding.embedding, distance:)
-      .excluding(instance_embedding)
-      .pluck(:embeddable_id)
+                       .all_embeddings
+                       .nearest_neighbors(:embedding, instance_embedding.embedding, distance:)
+                       .excluding(instance_embedding)
+                       .pluck(:embeddable_id)
 
     self.class.find(neighbor_ids)
   end
 
   class_methods do
     def all_embeddings
-      Embedding.where(embeddable_type: self.to_s)
+      Embedding.where(embeddable_type: to_s)
     end
 
     def embeddable_text(*args, &block)
@@ -39,13 +42,10 @@ module Embeddable
       embeddable_columns = options[:columns]
 
       define_method(:embeddable_text) do
-        if block_given?
-          instance_exec(&block)
-        elsif embeddable_column.present?
-          self[embeddable_column]
-        else
-          embeddable_columns.map{ |col| self[col] }.join(' ')
-        end
+        return instance_exec(&block) if block
+        return self[embeddable_column] if embeddable_column.present?
+
+        embeddable_columns.map { |col| self[col] }.join(' ')
       end
     end
 

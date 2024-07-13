@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Worker to send the request to FastAPI and feed the embedding.
 class CreateEmbeddingWorker < ApplicationJob
   queue_as :default
 

@@ -4,7 +4,7 @@ import { useAuthStore } from "@/storage/auth";
 import { useRouter } from "vue-router";
 
 function useFetch(url, method, clientOptions = {}) {
-  const { token, removeToken } = useAuthStore();
+  const { token, logout } = useAuthStore();
   const router = useRouter();
 
   const isLoading = ref(true);
@@ -24,8 +24,8 @@ function useFetch(url, method, clientOptions = {}) {
     try {
       const response = await fetch(client(urlValue, method, mergedOptions));
       if (response.status === 401) {
-        removeToken();
-        router.push({ name: "login" });
+        logout();
+        router.push({ name: "home" });
       } else {
         fetchedData.value = await response.json();
       }
