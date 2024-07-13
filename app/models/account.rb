@@ -64,6 +64,10 @@ class Account < ApplicationRecord
     admin? || superadmin?
   end
 
+  def favorites_hash(favoritable_type)
+    favorites.where(favoritable_type:).pluck(:favoritable_id, :id).to_h
+  end
+
   def sidebar_stream_id(chat_type: :two_person)
     "account_#{id}_chat_sidebar#{'_group' if chat_type == :multi_person}"
   end

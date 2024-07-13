@@ -6,15 +6,18 @@ async function createFavorite(body) {
   const { token } = useAuthStore();
   const { url, method } = RailsRoutes.createFavorite;
 
-  return fetch(client(url(), method, { body: { favorite: body }, authToken: token }));
+  return fetch(
+    client(url(), method, { body: { favorite: body }, authToken: token }),
+  );
 }
 
 async function destroyFavorite(body) {
   const { token } = useAuthStore();
   const { url, method } = RailsRoutes.destroyFavorite;
 
-  return fetch(client(url(), method, { body: { favorite: body }, authToken: token }));
+  return fetch(
+    client(url(), method, { body: { favorite: body }, authToken: token }),
+  );
 }
 
-export { createFavorite, destroyFavorite }
-
+export { createFavorite, destroyFavorite };

@@ -1,10 +1,12 @@
 <script setup>
-import { computed } from "vue";
+import FavoriteButton from "@/components/favorites/FavoriteButton.vue";
+import { computed, ref } from "vue";
 import RatingStar from "@/components/shared/RatingStar.vue";
 
-defineProps({
+const { favorited } = defineProps({
   id: Number,
   cover_url: String,
+  favorited: Boolean,
   questions_count: Number,
   quiz_undertakings_count: Number,
   ratings_count: Number,
@@ -13,6 +15,8 @@ defineProps({
   total_score: Number,
   tags: Array,
 });
+
+const isFavorited = ref(favorited);
 
 const quizUndertakingCountDisplay = computed(
   () => (count) => `${count} ${count === 1 ? "time" : "times"}`,
@@ -27,16 +31,28 @@ const filteredTags = computed(
 </script>
 
 <template>
-  <div class="group mb-6 overflow-hidden rounded-lg border shadow-lg">
-    <RouterLink :to="{ name: 'quiz', params: { id: id } }">
+  <div class="relative mb-6 overflow-hidden rounded-lg border shadow-lg">
+    <div>
+      <span class="absolute right-6 top-6">
+        <FavoriteButton
+          v-model="isFavorited"
+          :favoritable-id="id"
+          favoritable-type="Quiz"
+          :style-class="'text-rose-500'"
+        />
+      </span>
       <div v-if="cover_url" class="max-h-56 w-auto overflow-hidden">
         <img :src="cover_url" class="h-full w-full object-cover" />
       </div>
-      <div class="flex flex-col gap-2.5 p-6">
+      <div
+        :class="`${!(cover_url && cover_url.isPresent()) ? 'mt-8' : ''} flex flex-col gap-2.5 p-6`"
+      >
         <div class="flex flex-col gap-1">
-          <h4 class="font-xl font-black group-has-[:hover]:text-lime-500">
-            {{ title }}
-          </h4>
+          <RouterLink :to="{ name: 'quiz', params: { id: id } }">
+            <h4 class="font-xl font-black hover:text-lime-500">
+              {{ title }}
+            </h4>
+          </RouterLink>
           <p class="text-sm">
             <span class="text-primary-600 font-semibold">{{
               questions_count
@@ -76,6 +92,6 @@ const filteredTags = computed(
           </span>
         </div>
       </div>
-    </RouterLink>
+    </div>
   </div>
 </template>

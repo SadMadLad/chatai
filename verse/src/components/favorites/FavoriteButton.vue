@@ -14,32 +14,46 @@ const { favoritableId, favoritableType } = defineProps({
   favoritableId: Number,
   favoritableType: String,
   favorited: Boolean,
+  styleClass: String,
 });
 
 const isProcessing = ref(false);
 const error = ref(null);
 
 async function favorite() {
-  const body = { favoritable_id: favoritableId, favoritable_type: favoritableType };
+  const body = {
+    favoritable_id: favoritableId,
+    favoritable_type: favoritableType,
+  };
   try {
     isProcessing.value = true;
-    const response = favoritedModel.value === true ? await destroyFavorite(body) : await createFavorite(body);
+    const response =
+      favoritedModel.value === true
+        ? await destroyFavorite(body)
+        : await createFavorite(body);
 
     if (response.status === 401) {
       logout();
-      router.push({ name: 'login' });
+      router.push({ name: "login" });
     } else {
       favoritedModel.value = !favoritedModel.value;
     }
-  } catch(e) {
+  } catch (e) {
     error.value = e;
   } finally {
     isProcessing.value = false;
   }
-};
+}
 </script>
 
 <template>
   <PhSpinnerGap class="animate-spin" v-if="isProcessing" :size="32" />
-  <PhHeart v-else class="cursor-pointer drop-shadow" @click="favorite" :weight="favoritedModel ? 'fill' : 'duotone'" size="32"/>
+  <PhHeart
+    v-else
+    class="cursor-pointer drop-shadow"
+    :class="styleClass"
+    @click="favorite"
+    :weight="favoritedModel ? 'fill' : 'duotone'"
+    size="32"
+  />
 </template>

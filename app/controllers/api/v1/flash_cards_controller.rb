@@ -6,7 +6,7 @@ module Api
     class FlashCardsController < Api::AuthenticatedController
       def index
         @flash_cards = FlashCard.includes(:tags).all.order(:created_at)
-        @favorites_hash = @account.favorites.where(favoritable_type: 'FlashCard').pluck(:favoritable_id, :id).to_h
+        @favorites_hash = @account.favorites_hash('FlashCard')
       end
     end
   end

@@ -5,6 +5,7 @@ json.array! @quizzes do |quiz|
 
   json.cover_url quiz.cover.attached? ? rails_blob_url(quiz.cover) : nil
   json.description quiz.description
+  json.favorited @favorites_hash[quiz.id].present?
   json.questions_count quiz.questions_count
   json.quiz_undertakings_count quiz.quiz_undertakings_count
   json.ratings_count quiz.ratings_count
