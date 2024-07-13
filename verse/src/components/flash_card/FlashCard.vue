@@ -5,7 +5,7 @@ import { PhArrowBendUpLeft } from "@phosphor-icons/vue";
 
 const isFlipped = ref(false);
 
-const { color, card_style } = defineProps({
+const { color, card_style, favorited } = defineProps({
   id: Number,
   answer: String,
   buttonClass: String,
@@ -17,6 +17,8 @@ const { color, card_style } = defineProps({
   prompt: String,
   tags: Array,
 });
+
+const isFavorited = ref(favorited);
 
 const colorRef = toRef(color);
 const invertedColorHex = (16777215 - Number(`0x${colorRef.value.substring(1)}`))
@@ -34,7 +36,7 @@ const buttonColor = computed(() => card_style === 'fancy' ? `#${color}` : 'white
     <div v-if="!isFlipped" class="flex-center mx-auto mb-6 h-72 w-60 p-4 relative" :class="frontClass"
       :style="frontStyle">
       <span class="absolute right-6 top-6">
-        <FavoriteButton :favorited="favorited" :favoritable-id="id" favoritable-type="FlashCard"/>
+        <FavoriteButton v-model="isFavorited" :favoritable-id="id" favoritable-type="FlashCard"/>
       </span>
       <div class="flex flex-col items-center gap-2">
         <p class="text-center text-xl">{{ prompt }}</p>
