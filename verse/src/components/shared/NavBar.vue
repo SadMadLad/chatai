@@ -45,6 +45,11 @@ const navLinks = [
     text: "Flash Cards",
     auth: authEnum.privateOnly,
   },
+  {
+    name: "collections",
+    text: "Collections",
+    auth: authEnum.privateOnly,
+  }
 ];
 
 function handleLogout() {

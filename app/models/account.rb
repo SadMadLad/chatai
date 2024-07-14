@@ -65,7 +65,7 @@ class Account < ApplicationRecord
   end
 
   def favorites_hash(favoritable_type)
-    favorites.where(favoritable_type:).pluck(:favoritable_id, :id).to_h
+    favorites.where(favoritable_type: favoritable_type.to_s).pluck(:favoritable_id, :id).to_h
   end
 
   def sidebar_stream_id(chat_type: :two_person)

@@ -1,0 +1,32 @@
+{
+  "timed": false,
+  "title": "Software Engineering",
+  "description": "Quiz about software processes, engineering, models, testing, design and implementation",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "Which activity(es) are important in a software process?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Software Specification",
+          "correct": true
+        },
+        {
+          "option_text": "Software Design and Implementation",
+          "correct": true
+        },
+        {
+          "option_text": "Software Validation",
+          "correct": true
+        },
+        {
+          "option_text": "Software Evolution",
+          "correct": true
+        }
+      ]
+    },
+    {
+    }
+  ]
+}

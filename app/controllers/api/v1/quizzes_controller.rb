@@ -13,7 +13,7 @@ module Api
                        .pluck(:id)
 
         @quizzes = Quiz.where(id: @quizzes).includes(:tags, { cover_attachment: :blob }).all
-        @favorites_hash = @account.favorites_hash('Quiz')
+        @favorites_hash = @account.favorites_hash(Quiz)
       end
 
       def show

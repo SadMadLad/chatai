@@ -1,5 +1,5 @@
 <script setup>
-import FavoriteButton from "@/components/favorites/FavoriteButton.vue";
+import FavoriteButton from "@/components/favorite/FavoriteButton.vue";
 import { computed, ref } from "vue";
 import RatingStar from "@/components/shared/RatingStar.vue";
 

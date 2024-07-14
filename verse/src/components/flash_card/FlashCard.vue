@@ -1,5 +1,5 @@
 <script setup>
-import FavoriteButton from "@/components/favorites/FavoriteButton.vue";
+import FavoriteButton from "@/components/favorite/FavoriteButton.vue";
 import { computed, ref, toRef } from "vue";
 import { PhArrowBendUpLeft } from "@phosphor-icons/vue";
 
@@ -46,6 +46,7 @@ const buttonColor = computed(() =>
           v-model="isFavorited"
           :favoritable-id="id"
           favoritable-type="FlashCard"
+          style-class='text-rose-500'
         />
       </span>
       <div class="flex flex-col items-center gap-2">

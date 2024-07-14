@@ -1,17 +1,21 @@
 const Rails = `${import.meta.env.VITE_RAILS_URL}/api/v1`;
 
 const RailsRoutes = {
-  // Sessions Routes
+  // Sessions
   login: { url: () => `${Rails}/sessions`, method: "POST" },
+
+  // Collections
+  collections: { url: () => `${Rails}/collections`, method: "GET" },
+  collection: { url: (id) => `${Rails}/collections/${id}`, method: "GET" },
 
   // Favorites
   createFavorite: { url: () => `${Rails}/favorites`, method: "POST" },
   destroyFavorite: { url: () => `${Rails}/favorites`, method: "DELETE" },
 
-  // Flash Card Routes
+  // Flash Card
   flashCards: { url: () => `${Rails}/flash_cards`, method: "GET" },
 
-  // Quiz Routes
+  // Quiz
   quizzes: {
     url: (params = null) => `${Rails}/quizzes?${params ? params : ""}`,
     method: "GET",
@@ -26,7 +30,7 @@ const RailsRoutes = {
     method: "POST",
   },
 
-  // Tags Routes
+  // Tags
   tags: { url: () => `${Rails}/tags`, method: "GET" },
 };
 

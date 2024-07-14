@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import { privateRoute, publicOnlyRoute } from "@/router/guards";
 
 import AboutView from "@/views/static/AboutView.vue";
+import CollectionsView from "@/views/collections/CollectionsView.vue";
 import DashboardView from "@/views/dashboards/DashboardView.vue";
 import FlashCardsView from "@/views/flash_cards/FlashCardsView.vue";
 import HomeView from "@/views/static/HomeView.vue";
@@ -57,6 +58,12 @@ const routes = [
         path: "/flash_cards",
         name: "flash-cards",
         component: FlashCardsView,
+        beforeEnter: [privateRoute],
+      },
+      {
+        path: "/collections",
+        name: "collections",
+        component: CollectionsView,
         beforeEnter: [privateRoute],
       },
       {

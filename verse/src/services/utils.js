@@ -36,7 +36,7 @@ function useFetch(url, method, clientOptions = {}) {
     }
   });
 
-  return { isLoading, error, fetchedData };
+  return { isLoading, error, fetchedData, router };
 }
 
 export { useFetch };
