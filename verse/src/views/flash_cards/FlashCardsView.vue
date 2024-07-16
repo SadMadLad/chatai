@@ -1,5 +1,6 @@
 <script setup>
 import FlashCard from "@/components/flash_card/FlashCard.vue";
+import { FlashCardStyler } from "@/services/styler";
 import { getFlashCards } from "@/services/apis/flash_card";
 import { computed } from "vue";
 
@@ -8,35 +9,7 @@ const isFlashCardsEmpty = computed(
   () => flashCards.value === null || flashCards.value?.length === 0,
 );
 
-function cardFrontClass(cardStyle) {
-  const cardFrontClasses = {
-    basic: "text-white font-bold rounded-xl shadow-xl",
-    fancy: "font-serif font-bold border border-8 font-bold",
-    brutalism: "font-cursive font-semibold text-white offset-box-shadow",
-  };
-
-  return cardFrontClasses[cardStyle];
-}
-
-function cardFrontStyle(cardStyle, color) {
-  const cardFrontStyles = {
-    basic: { backgroundColor: color, color: "white" },
-    fancy: { borderColor: color, color: color },
-    brutalism: { backgroundColor: color, color: "white" },
-  };
-
-  return cardFrontStyles[cardStyle];
-}
-
-function cardFlipButtonClass(cardStyle) {
-  const cardFlipButtonClasses = {
-    basic: "font-sans hover:bg-white/30",
-    fancy: "font-serif hover:bg-black/10",
-    brutalism: "font-cursive hover:bg-white/30",
-  };
-
-  return `px-2 py-1 text-sm rounded border-2 font-bold ${cardFlipButtonClasses[cardStyle]}`;
-}
+const flashCardStyler = new FlashCardStyler();
 </script>
 
 <template>
@@ -52,9 +25,9 @@ function cardFlipButtonClass(cardStyle) {
         v-for="card in flashCards"
         :key="card.id"
         v-bind="card"
-        :button-class="cardFlipButtonClass(card.card_style)"
-        :front-class="cardFrontClass(card.card_style)"
-        :front-style="cardFrontStyle(card.card_style, card.color)"
+        :button-class="flashCardStyler.buttonClass(card)"
+        :front-class="flashCardStyler.frontClass(card)"
+        :tag-class="flashCardStyler.tagClass(card)"
       />
     </div>
   </section>

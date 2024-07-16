@@ -326,10 +326,10 @@ flash_cards = seed_flash_cards('sample', account: first_account)
 
 p '...Collections'
 
-flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection')
-quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection')
-mixed_collection = Collection.create(account: first_account, title: 'Mixed Collection')
-cool_collection = Collection.create(account: first_account, title: 'Cool Collection')
+flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection', color: 'rose')
+quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection', color: 'indigo')
+mixed_collection = Collection.create(account: first_account, title: 'Mixed Collection', color: 'emerald')
+cool_collection = Collection.create(account: first_account, title: 'Cool Collection', color: 'orange')
 
 collections = [flash_card_only_collection, quiz_only_collection, mixed_collection, cool_collection]
 

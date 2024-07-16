@@ -1,6 +1,6 @@
 <script setup>
 import FavoriteButton from "@/components/favorite/FavoriteButton.vue";
-import { computed, ref, toRef } from "vue";
+import { computed, ref } from "vue";
 import { PhArrowBendUpLeft } from "@phosphor-icons/vue";
 
 const isFlipped = ref(false);
@@ -13,23 +13,15 @@ const { color, card_style, favorited } = defineProps({
   color: String,
   favorited: Boolean,
   frontClass: String,
-  frontStyle: Object,
   prompt: String,
+  tagClass: String,
   tags: Array,
 });
 
 const isFavorited = ref(favorited);
 
-const colorRef = toRef(color);
-const invertedColorHex = (16777215 - Number(`0x${colorRef.value.substring(1)}`))
-  .toString(16)
-  .padStart(6, "0");
-
 const filteredTags = computed(
   () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
-);
-const buttonColor = computed(() =>
-  card_style === "fancy" ? `#${color}` : "white",
 );
 </script>
 
@@ -39,7 +31,6 @@ const buttonColor = computed(() =>
       v-if="!isFlipped"
       class="flex-center relative mx-auto mb-6 h-72 w-60 p-4"
       :class="frontClass"
-      :style="frontStyle"
     >
       <span class="absolute right-6 top-6">
         <FavoriteButton
@@ -50,11 +41,7 @@ const buttonColor = computed(() =>
       </span>
       <div class="flex flex-col items-center gap-2">
         <p class="text-center text-xl">{{ prompt }}</p>
-        <button
-          :class="buttonClass"
-          :style="{ color: buttonColor, borderColor: frontStyle.borderColor }"
-          @click="isFlipped = true"
-        >
+        <button :class="buttonClass" @click="isFlipped = true">
           Flip Card
         </button>
       </div>
@@ -63,7 +50,6 @@ const buttonColor = computed(() =>
       v-else
       class="flex-center relative mx-auto mb-6 h-72 w-60 p-4"
       :class="frontClass"
-      :style="frontStyle"
     >
       <PhArrowBendUpLeft
         :size="32"
@@ -73,13 +59,7 @@ const buttonColor = computed(() =>
       <div class="flex flex-col items-center gap-4">
         <p>{{ answer }}</p>
         <ul class="flex flex-wrap gap-1">
-          <span
-            v-for="{ tag } in filteredTags(tags)"
-            class="rounded-lg px-1.5 py-1 text-xs"
-            :style="{
-              backgroundColor: `rgb(from #${invertedColorHex} r g b / 0.33)`,
-            }"
-          >
+          <span v-for="{ tag } in filteredTags(tags)" :class="tagClass">
             {{ tag }}
           </span>
         </ul>

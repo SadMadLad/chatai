@@ -3,6 +3,7 @@
 json.array! @collections do |collection|
   json.id collection.id
 
+  json.color collection.color
   json.description collection.description
   json.favorited @favorites_hash[collection.id].present?
   json.items_count collection.collectable_maps_count

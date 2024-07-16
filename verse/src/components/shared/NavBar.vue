@@ -49,7 +49,7 @@ const navLinks = [
     name: "collections",
     text: "Collections",
     auth: authEnum.privateOnly,
-  }
+  },
 ];
 
 function handleLogout() {

@@ -20,14 +20,10 @@
 # Flash Card
 class FlashCard < ApplicationRecord
   include Collectable
+  include Colors
   include Embeddable
   include Favoritable
   include Taggable
-
-  COLORS = %w[
-    #f43f5e #ec4899 #d946ef #a855f7 #8b5cf6 #6366f1 #3b82f6 #0ea5e9 #06b6d4 #14b8a6 #10b981
-    #22c55e #84cc16 #eab308 #f59e0b #f97316 #ef4444 #78716c #737373 #71717a #6b7280 #64748b
-  ].freeze
 
   embeddable_text columns: %i[answer prompt]
 
@@ -36,7 +32,6 @@ class FlashCard < ApplicationRecord
   has_one_attached :image
 
   validates :answer, :prompt, presence: true
-  validates :color, presence: true, inclusion: { in: COLORS }
   validates :published, boolean: true
 
   enum :card_style, { basic: 0, fancy: 1, brutalism: 2 }
