@@ -11,7 +11,6 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-# Polymorphic Embedding Model that can be utilized with Embeddable Concern Module
 class Embedding < ApplicationRecord
   SUPPORTED_EMBEDDABLES = %w[FlashCard Quiz].freeze
 

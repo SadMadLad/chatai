@@ -126,6 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
     t.boolean "public", default: true, null: false
     t.integer "collectable_maps_count", default: 0, null: false
     t.integer "favorites_count", default: 0, null: false
+    t.integer "items_count", default: 0, null: false
     t.string "color", null: false
     t.string "title", null: false
     t.text "description"

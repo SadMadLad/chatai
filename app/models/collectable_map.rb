@@ -12,7 +12,7 @@
 #  updated_at       :datetime         not null
 #
 class CollectableMap < ApplicationRecord
-  belongs_to :collection, counter_cache: :collectable_maps_count
+  belongs_to :collection, counter_cache: :items_count
   belongs_to :collectable, polymorphic: true, counter_cache: :collectable_maps_count
 
   validates :collectable_type, inclusion: { in: Collection::COLLECTABLE_MODELS }

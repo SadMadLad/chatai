@@ -11,7 +11,7 @@ const { isLoading, error, fetchedData: collections } = getCollections();
 <template>
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="error">Error</div>
-  <section v-else class="flex flex-wrap justify-center gap-8">
+  <section v-else class="flex flex-wrap justify-center gap-8 mx-8">
     <Collection
       v-for="collection in collections"
       v-bind="collection"
