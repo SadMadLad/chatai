@@ -116,8 +116,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
     t.bigint "collection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["collectable_id", "collectable_type"], name: "index_collectable_maps_on_collectable_id_and_collectable_type", unique: true
     t.index ["collectable_type", "collectable_id"], name: "index_collectable_maps_on_collectable"
+    t.index ["collection_id", "collectable_id", "collectable_type"], name: "idx_on_collection_id_collectable_id_collectable_typ_702ff00160", unique: true
     t.index ["collection_id"], name: "index_collectable_maps_on_collection_id"
   end
 

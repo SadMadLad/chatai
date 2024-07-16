@@ -14,10 +14,9 @@ const isFavorited = ref(favorited);
 </script>
 
 <template>
-  <div class="bg-red-500 p-8 shadow-xl">
-    {{ title }}
+  <div class="p-8 border rounded-xl shadow-xl">
     <span>
-      <FavoriteButton v-model="isFavorited" :favoritable-id="id" favoritable-type="Collection" />
+      <FavoriteButton v-model="isFavorited" :favoritable-id="id" favoritable-type="Collection" style-class="text-rose-500" />
     </span>
   </div>
 </template>

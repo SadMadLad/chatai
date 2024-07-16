@@ -12,9 +12,9 @@ end
 
 ### TODO: Seed feedbacks
 
-Rails.logger.debug 'Seeding...'
+p 'Seeding...'
 
-Rails.logger.debug '...Users and Accounts'
+p '...Users and Accounts'
 
 password = 'password'
 
@@ -45,7 +45,7 @@ normal_accounts.each do |account|
   )
 end
 
-Rails.logger.debug '...Chats and Messages'
+p '...Chats and Messages'
 
 first_account = normal_accounts.first
 second_account = normal_accounts.second
@@ -65,7 +65,7 @@ end
   chat.messages.create(group_chat_accounts.map { |account| { account:, content: Faker::Movies::TheRoom.quote } })
 end
 
-Rails.logger.debug '...AI Chats and Messages'
+p '...AI Chats and Messages'
 
 AI_CHATS_COUNT.times do |i|
   chat = Chat.create(chat_title: "AI Chat: #{i}", chat_type: :ai_chat, chat_status: 0)
@@ -77,18 +77,18 @@ AI_CHATS_COUNT.times do |i|
   end
 end
 
-Rails.logger.debug '...Account Tokens for Some Accounts'
+p '...Account Tokens for Some Accounts'
 
 first_n_accounts.each do |account|
   account.account_tokens.create([{ scope: :frontend }, { scope: :verse }])
 end
 
-Rails.logger.debug '...Subreddits'
+p '...Subreddits'
 
 Subreddit.create(subreddit: 'r/rails', subreddit_url: 'https://www.reddit.com/r/rails')
 Subreddit.create(subreddit: 'r/reactjs', subreddit_url: 'https://www.reddit.com/r/reactjs')
 
-Rails.logger.debug '...Live Chats with Messages'
+p '...Live Chats with Messages'
 
 chat_seagal = Chat.create(chat_type: 'live_room', chat_title: 'Steven Seagal Amazing Movies', chat_description: 'Hello')
 chat_breen = Chat.create(chat_type: 'live_room', chat_title: 'Breen Cadence', chat_description: 'Hello 2')
@@ -107,7 +107,7 @@ end
 
 last_n_accounts.each { |account| chat_breen.messages.create(account:, content: Faker::Movies::TheRoom.quote) }
 
-Rails.logger.debug '...Posts'
+p '...Posts'
 
 posters = normal_accounts.first(3)
 account_ids = normal_accounts.pluck(:id)
@@ -124,14 +124,14 @@ posters.each_with_index do |poster, index|
 
     post.save
 
-    Rails.logger.debug '...Likes'
+    p '...Likes'
 
     likers = account_ids.sample Array(1..10).sample
     likes_data = likers.map { |l| { account_id: l, likeable_type: 'Post', likeable_id: post.id } }
 
     post.likes.create(likes_data)
 
-    Rails.logger.debug '...Comments'
+    p '...Comments'
 
     commenters = account_ids.sample Array(1..10).sample
     commenters_data = commenters.map do |c|
@@ -140,7 +140,7 @@ posters.each_with_index do |poster, index|
 
     comments = post.comments.create(commenters_data)
 
-    Rails.logger.debug '...Replies'
+    p '...Replies'
 
     comments.sample(Array(1..10).sample).each do |comment|
       reply = Comment.new(
@@ -169,7 +169,7 @@ posters.each_with_index do |poster, index|
   end
 end
 
-Rails.logger.debug '...Tags'
+p '...Tags'
 
 books_tag = Tag.create(tag: 'Books')
 education_tag = Tag.create(tag: 'Education')
@@ -185,7 +185,7 @@ pakistan_foreign_policy_tag = Tag.create(tag: 'Pakistan\'s Foreign Policy', tag_
 pakistan_affairs_tag = Tag.create(tag: 'Pakistan\'s Affairs', tag_type: :meta)
 why_nations_fail_tag = Tag.create(tag: 'Why Nations Fail', tag_type: :meta)
 
-Rails.logger.debug '...ML Models'
+p '...ML Models'
 
 ml_model = MlModel.create(
   title: 'Titanic',
@@ -209,7 +209,7 @@ ml_model = MlModel.create(
   ]
 )
 
-Rails.logger.debug '...Prediction Params for ML Models'
+p '...Prediction Params for ML Models'
 
 prediction_params = [{ 'param_type' => 'integer', 'name' => 'PassengerId', 'description' => 'Ok',
                        'possible_values' => nil },
@@ -230,7 +230,7 @@ prediction_params = prediction_params.each { |param| param['ml_model_id'] = ml_m
 
 PredictionParam.create(prediction_params)
 
-Rails.logger.debug '...Quizzes, its Questions and Question Options'
+p '...Quizzes, its Questions and Question Options'
 
 def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has_user: false, account: nil)
   quiz_data = JSON.parse Rails.root.join("app/assets/quizzes/#{quiz_json_file}.json").read
@@ -287,7 +287,7 @@ quiz_six = seed_quiz('the_making_of_prosperity_and_poverty', tags: quiz_six_tags
 
 quizzes = [quiz_one, quiz_two, quiz_three, quiz_four, quiz_five, quiz_six]
 
-Rails.logger.debug '...Quiz Undertakings'
+p '...Quiz Undertakings'
 
 def generate_quiz_undertaking(quiz, account, random_created_at: false)
   if random_created_at
@@ -302,7 +302,7 @@ quizzes.each do |quiz|
   10.times { generate_quiz_undertaking(quiz, first_account, random_created_at: true) }
 end
 
-Rails.logger.debug '...Flash Cards'
+p '...Flash Cards'
 
 def seed_flash_cards(flash_card_json_file, account: nil)
   flash_cards = JSON.parse Rails.root.join("app/assets/flash_cards/#{flash_card_json_file}.json").read
@@ -324,7 +324,7 @@ end
 
 flash_cards = seed_flash_cards('sample', account: first_account)
 
-Rails.logger.debug '...Collections'
+p '...Collections'
 
 flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection')
 quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection')
@@ -333,7 +333,7 @@ cool_collection = Collection.create(account: first_account, title: 'Cool Collect
 
 collections = [flash_card_only_collection, quiz_only_collection, mixed_collection, cool_collection]
 
-Rails.logger.debug '...Collectable Maps'
+p '...Collectable Maps'
 
 flash_cards.each do |flash_card|
   CollectableMap.create(collection: flash_card_only_collection, collectable: flash_card)
@@ -349,7 +349,7 @@ end
   CollectableMap.create(collection: cool_collection, collectable:)
 end
 
-Rails.logger.debug '...Favorites'
+p '...Favorites'
 
 normal_accounts.last(6).each do |account|
   flash_cards.sample(2).each do |flash_card|

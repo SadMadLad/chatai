@@ -19,14 +19,14 @@ class Collection < ApplicationRecord
   include Favoritable
   include Taggable
 
-  COLLECTABLE_MODELS = %w[Collection CollectableMap Quiz].freeze
+  COLLECTABLE_MODELS = %w[Collection FlashCard Quiz].freeze
 
   belongs_to :account
 
   has_many :items, dependent: :destroy, class_name: 'CollectableMap'
 
   COLLECTABLE_MODELS.each do |model|
-    has_many model.downcase.pluralize.to_sym, through: :items, source: :collectable, source_type: model
+    has_many model.underscore.pluralize.to_sym, through: :items, source: :collectable, source_type: model
   end
 
   validates :public, boolean: true
