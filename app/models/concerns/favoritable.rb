@@ -11,7 +11,7 @@ module Favoritable
 
   class_methods do
     def all_favorites
-      Favorite.where(favoritable: self.to_s)
+      Favorite.where(favoritable: to_s)
     end
   end
 end

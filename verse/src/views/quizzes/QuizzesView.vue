@@ -86,50 +86,48 @@ function removeTag(tag) {
 </script>
 
 <template>
-  <section class="container">
-    <div class="flex flex-col items-center sm:flex-row sm:items-start">
-      <Transition name="filters">
-        <QuizFiltersSidebar
-          v-show="isFilterSidebarOpen"
-          :are-tags-loading="areTagsLoading"
-          :error-when-loading-tags="errorWhenLoadingTags"
-          :search-params="searchParams"
-          :tags="tags"
-          @add-tag="addTag"
-          @handle-search="handleSearch"
-          @remove-tag="removeTag"
-        />
-      </Transition>
-      <div class="@container w-full flex-grow px-8">
-        <button
-          @click="isFilterSidebarOpen = !isFilterSidebarOpen"
-          class="text-primary-500 border-primary-500 relative top-0 z-10 mb-4 flex items-center gap-2 rounded border bg-white px-3 py-1.5 shadow-lg backdrop-blur-md sm:sticky sm:top-12 md:top-20"
-        >
-          <PhSlidersHorizontal :size="20" />
-          Filters
-        </button>
-        <CurrentQuizFilters
-          v-bind="currentSearchParams.search"
-          @remove-filter="removeFilter"
-          @remove-tag-filter="removeTagFilter"
-        />
-        <p v-if="quizzes?.length" class="mb-2 text-right">
-          {{ resultsText(quizzes.length) }}
-        </p>
-        <div v-if="isLoading">Loading...</div>
-        <div v-else-if="error">Error</div>
-        <div
-          v-else
-          class="@5xl:columns-4 @3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4"
-        >
-          <div v-if="isQuizzesEmpty">No Quizzes Found</div>
-          <div v-else>
-            <Quiz v-for="quiz in quizzes" v-bind="quiz" />
-          </div>
+  <div class="flex flex-col items-center sm:flex-row sm:items-start">
+    <Transition name="filters">
+      <QuizFiltersSidebar
+        v-show="isFilterSidebarOpen"
+        :are-tags-loading="areTagsLoading"
+        :error-when-loading-tags="errorWhenLoadingTags"
+        :search-params="searchParams"
+        :tags="tags"
+        @add-tag="addTag"
+        @handle-search="handleSearch"
+        @remove-tag="removeTag"
+      />
+    </Transition>
+    <div class="@container w-full flex-grow px-8">
+      <button
+        @click="isFilterSidebarOpen = !isFilterSidebarOpen"
+        class="text-primary-500 border-primary-500 relative top-0 z-10 mb-4 flex items-center gap-2 rounded border bg-white px-3 py-1.5 shadow-lg backdrop-blur-md sm:sticky sm:top-12 md:top-20"
+      >
+        <PhSlidersHorizontal :size="20" />
+        Filters
+      </button>
+      <CurrentQuizFilters
+        v-bind="currentSearchParams.search"
+        @remove-filter="removeFilter"
+        @remove-tag-filter="removeTagFilter"
+      />
+      <p v-if="quizzes?.length" class="mb-2 text-right">
+        {{ resultsText(quizzes.length) }}
+      </p>
+      <div v-if="isLoading">Loading...</div>
+      <div v-else-if="error">Error</div>
+      <div
+        v-else
+        class="@5xl:columns-4 @3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4"
+      >
+        <div v-if="isQuizzesEmpty">No Quizzes Found</div>
+        <div v-else>
+          <Quiz v-for="quiz in quizzes" v-bind="quiz" />
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <style scoped>

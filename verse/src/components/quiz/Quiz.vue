@@ -24,10 +24,6 @@ const quizUndertakingCountDisplay = computed(
 const quizQuestionsCountDisplay = computed(
   () => (count) => `${count === 1 ? "question" : "questions"}`,
 );
-
-const filteredTags = computed(
-  () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
-);
 </script>
 
 <template>
@@ -84,7 +80,7 @@ const filteredTags = computed(
         </div>
         <div class="flex flex-wrap gap-2">
           <span
-            v-for="{ tag } in filteredTags(tags)"
+            v-for="{ tag } in tags"
             class="bg-primary-200 rounded-full px-3.5 py-1.5 text-xs font-semibold shadow-sm"
           >
             <span>

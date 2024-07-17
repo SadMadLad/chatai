@@ -19,9 +19,6 @@ const favoritesCount = ref(favorites_count);
 const itemsCount = computed(
   () => `${items_count} ${items_count.isOne() ? "item" : "items"}`,
 );
-const filteredTags = computed(
-  () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
-);
 </script>
 
 <template>
@@ -53,33 +50,10 @@ const filteredTags = computed(
         v-if="tags.isPresent()"
         class="flex flex-row flex-wrap justify-center gap-1"
       >
-        <span v-for="{ tag } in filteredTags(tags)" :class="tagClass">
+        <span v-for="{ tag } in tags" :class="tagClass">
           {{ tag }}
         </span>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.folder {
-  width: 150px;
-  height: 105px;
-  margin: 0 auto;
-  margin-top: 50px;
-  position: relative;
-  background-color: #708090;
-  border-radius: 0 6px 6px 6px;
-}
-
-.folder:before {
-  content: "";
-  width: 50%;
-  height: 12px;
-  border-radius: 0 20px 0 0;
-  background-color: #708090;
-  position: absolute;
-  top: -12px;
-  left: 0px;
-}
-</style>

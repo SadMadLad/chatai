@@ -10,7 +10,7 @@ json.array! @collections do |collection|
   json.items_count collection.items_count
   json.title collection.title
 
-  json.tags collection.tags do |tag|
+  json.tags collection.tags.filter(&:display?) do |tag|
     json.tag tag.tag
     json.tag_type tag.tag_type
   end

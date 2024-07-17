@@ -9,7 +9,7 @@ json.array! @flash_cards do |flash_card|
   json.color flash_card.color
   json.prompt flash_card.prompt
 
-  json.tags flash_card.tags do |tag|
+  json.tags flash_card.tags.filter(&:display?) do |tag|
     json.tag tag.tag
     json.tag_type tag.tag_type
   end

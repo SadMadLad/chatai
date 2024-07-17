@@ -1,6 +1,6 @@
 <script setup>
 import FavoriteButton from "@/components/favorite/FavoriteButton.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { PhArrowBendUpLeft } from "@phosphor-icons/vue";
 
 const isFlipped = ref(false);
@@ -19,10 +19,6 @@ const { color, card_style, favorited } = defineProps({
 });
 
 const isFavorited = ref(favorited);
-
-const filteredTags = computed(
-  () => (tags) => tags.filter((tag) => tag.tag_type === "display"),
-);
 </script>
 
 <template>
@@ -60,7 +56,7 @@ const filteredTags = computed(
       <div class="flex flex-col items-center gap-4">
         <p>{{ answer }}</p>
         <ul class="flex flex-wrap gap-1">
-          <span v-for="{ tag } in filteredTags(tags)" :class="tagClass">
+          <span v-for="{ tag } in tags" :class="tagClass">
             {{ tag }}
           </span>
         </ul>

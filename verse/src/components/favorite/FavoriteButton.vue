@@ -68,6 +68,6 @@ async function favorite() {
       :size="iconSize || 32"
       @click.stop="favorite"
     />
-    <span v-if="hasFavoritesCount" class="text-xs">{{ favoritesCount }}</span>
+    <span v-if="hasFavoritesCount" class="text-xs" :class="styleClass">{{ favoritesCount }}</span>
   </span>
 </template>

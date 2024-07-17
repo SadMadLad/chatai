@@ -68,6 +68,15 @@ class Account < ApplicationRecord
     favorites.where(favoritable_type: favoritable_type.to_s).pluck(:favoritable_id, :id).to_h
   end
 
+  def polymorphic_favorites_hash(favoritables)
+    favorites_array = favorites.where(favoritable: favoritables).pluck(:favoritable_id, :favoritable_type, :id)
+
+    favorites_array.each_with_object({}) do |subarray, favorites_hash|
+      value = subarray.pop
+      favorites_hash[subarray] = value
+    end
+  end
+
   def sidebar_stream_id(chat_type: :two_person)
     "account_#{id}_chat_sidebar#{'_group' if chat_type == :multi_person}"
   end

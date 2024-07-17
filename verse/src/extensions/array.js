@@ -4,6 +4,10 @@ Array.prototype.isBlank = function () {
   return false;
 };
 
+Array.prototype.isEmpty = function() {
+  return this.isBlank();
+}
+
 Array.prototype.isOne = function () {
   if (this.length === 1) return true;
 
