@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import { privateRoute, publicOnlyRoute } from "@/router/guards";
 
 import AboutView from "@/views/static/AboutView.vue";
+import CollectionView from "@/views/collections/CollectionView.vue";
 import CollectionsView from "@/views/collections/CollectionsView.vue";
 import DashboardView from "@/views/dashboards/DashboardView.vue";
 import FlashCardsView from "@/views/flash_cards/FlashCardsView.vue";
@@ -62,9 +63,19 @@ const routes = [
       },
       {
         path: "/collections",
-        name: "collections",
-        component: CollectionsView,
         beforeEnter: [privateRoute],
+        children: [
+          {
+            path: "",
+            name: "collections",
+            component: CollectionsView,
+          },
+          {
+            path: ":id",
+            name: "collection",
+            component: CollectionView,
+          },
+        ],
       },
       {
         path: "/quizzes",

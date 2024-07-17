@@ -14,6 +14,7 @@ const { favoritableId, favoritableType } = defineProps({
   favoritableId: Number,
   favoritableType: String,
   favorited: Boolean,
+  iconSize: Number,
   styleClass: String,
 });
 
@@ -47,13 +48,17 @@ async function favorite() {
 </script>
 
 <template>
-  <PhSpinnerGap class="animate-spin" v-if="isProcessing" :size="32" />
+  <PhSpinnerGap
+    class="animate-spin"
+    v-if="isProcessing"
+    :size="iconSize || 32"
+  />
   <PhHeart
     v-else
     class="cursor-pointer drop-shadow"
     :class="styleClass"
-    @click="favorite"
+    @click.stop="favorite"
     :weight="favoritedModel ? 'fill' : 'duotone'"
-    size="32"
+    :size="iconSize || 32"
   />
 </template>

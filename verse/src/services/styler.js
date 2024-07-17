@@ -462,7 +462,13 @@ class CollectionStyler extends Styler {
   displayClass(collection) {
     const { color } = collection;
 
-    return `border-t-4 ${this.backgroundColor(color, "light")} ${this.borderColor(color)} ${this.beforeBackgroundColor(color)} ${this.textColor(color)}`;
+    return `border-t-4 border-b ${this.backgroundColor(color, "light")} ${this.borderColor(color)} ${this.beforeBackgroundColor(color)} ${this.textColor(color)}`;
+  }
+
+  tagClass(collection) {
+    const { color } = collection;
+
+    return `rounded-lg px-1.5 py-1 text-xs ${this.backgroundColor(color)} ${this.textColor(color, "light")}`;
   }
 }
 

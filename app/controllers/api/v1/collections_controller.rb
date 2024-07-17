@@ -8,6 +8,10 @@ module Api
 
       def show
         @collection = Collection.find(params[:id])
+
+        @flash_cards = @collection.flash_cards
+        @collections = @collection.collections
+        @quizzes = @collection.quizzes
       end
     end
   end

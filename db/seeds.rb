@@ -326,10 +326,21 @@ flash_cards = seed_flash_cards('sample', account: first_account)
 
 p '...Collections'
 
-flash_card_only_collection = Collection.create(account: first_account, title: 'Flash Card Collection', color: 'rose')
-quiz_only_collection = Collection.create(account: first_account, title: 'Quiz Collection', color: 'indigo')
-mixed_collection = Collection.create(account: first_account, title: 'Mixed Collection', color: 'emerald')
-cool_collection = Collection.create(account: first_account, title: 'Cool Collection', color: 'orange')
+def seed_collection(account, title, color, description: nil, tags: [])
+  collection = Collection.create(account:, title:, color:, description:)
+
+  if tags.present?
+    tags = tags.map { |tag| Tag.find_or_create_by(tag:) }
+    tags.each { |tag| TagMap.create(taggable: collection, tag:) }
+  end
+
+  collection
+end
+
+flash_card_only_collection = seed_collection(first_account, 'Flash Card Collection', 'rose', description: 'This collection only contains different flash cards', tags: ['Flash Cards', 'Education', 'Variety'])
+quiz_only_collection = seed_collection(first_account, 'Quiz Collection', 'cyan', description: 'This collection contains different quizzes', tags: ['Quizzes', 'Education', 'Collection'])
+mixed_collection = seed_collection(first_account, 'Mixed Collection', 'emerald', description: 'Mixed collection of flash cards and quizzes', tags: ['Flash Cards', 'Collection', 'Variety', 'Quizzes'])
+cool_collection = seed_collection(first_account, 'Cool Collection', 'red', description: 'Cool Collection that includes flash cards, quizzes, and collections as well', tags: ['Quizzes', 'Education', 'Flash Cards', 'Collecton', 'Variety', 'Education'])
 
 collections = [flash_card_only_collection, quiz_only_collection, mixed_collection, cool_collection]
 

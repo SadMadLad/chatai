@@ -11,6 +11,7 @@ AllCops:
     - config.ru
     - config/initializers/**/*
     - config/environments/**/*
+    - db/seeds.rb
 
 require:
   - rubocop-capybara
@@ -23,7 +24,6 @@ Metrics/ParameterLists:
 
 Metrics/BlockLength:
   Exclude:
-    # Routes are typically going to grow quite a lot
     - config/routes.rb
 
 Rails/SkipsModelValidations:
