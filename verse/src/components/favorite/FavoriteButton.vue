@@ -8,12 +8,14 @@ import { useAuthStore } from "@/storage/auth";
 const { logout } = useAuthStore();
 const router = useRouter();
 
-const favoritedModel = defineModel();
+const favorited = defineModel('favorited');
+const favoritesCount = defineModel('favoritesCount')
 
-const { favoritableId, favoritableType } = defineProps({
+const { favoritableId, favoritableType, hasFavoritesCount } = defineProps({
   favoritableId: Number,
   favoritableType: String,
-  favorited: Boolean,
+  favorites_count: Number,
+  hasFavoritesCount: Boolean,
   iconSize: Number,
   styleClass: String,
 });
@@ -29,7 +31,7 @@ async function favorite() {
   try {
     isProcessing.value = true;
     const response =
-      favoritedModel.value === true
+      favorited.value === true
         ? await destroyFavorite(body)
         : await createFavorite(body);
 
@@ -37,7 +39,11 @@ async function favorite() {
       logout();
       router.push({ name: "login" });
     } else {
-      favoritedModel.value = !favoritedModel.value;
+      if (hasFavoritesCount) {
+        favorited.value === true ? favoritesCount.value-- : favoritesCount.value++;
+      }
+      favorited.value = !favorited.value;
+
     }
   } catch (e) {
     error.value = e;
@@ -48,17 +54,20 @@ async function favorite() {
 </script>
 
 <template>
-  <PhSpinnerGap
+  <span class="flex flex-col items-center gap-0">
+    <PhSpinnerGap
     class="animate-spin"
     v-if="isProcessing"
     :size="iconSize || 32"
-  />
-  <PhHeart
-    v-else
-    class="cursor-pointer drop-shadow"
-    :class="styleClass"
-    @click.stop="favorite"
-    :weight="favoritedModel ? 'fill' : 'duotone'"
-    :size="iconSize || 32"
-  />
+    />
+    <PhHeart
+      v-else
+      class="cursor-pointer drop-shadow"
+      :class="styleClass"
+      :weight="favorited ? 'fill' : 'duotone'"
+      :size="iconSize || 32"
+      @click.stop="favorite"
+    />
+    <span v-if="hasFavoritesCount" class="text-xs">{{ favoritesCount }}</span>
+  </span>
 </template>

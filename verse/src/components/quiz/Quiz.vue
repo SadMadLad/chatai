@@ -35,10 +35,11 @@ const filteredTags = computed(
     <div>
       <span class="absolute right-6 top-6">
         <FavoriteButton
-          v-model="isFavorited"
+          v-model:favorited="isFavorited"
           :favoritable-id="id"
+          :has-favorites-count="false"
           favoritable-type="Quiz"
-          :style-class="'text-rose-500'"
+          style-class="text-rose-500"
         />
       </span>
       <div v-if="cover_url" class="max-h-56 w-auto overflow-hidden">

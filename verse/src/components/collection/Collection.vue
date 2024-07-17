@@ -2,9 +2,10 @@
 import { computed, ref } from "vue";
 import FavoriteButton from "@/components/favorite/FavoriteButton.vue";
 
-const { items_count, favorited, tags } = defineProps({
+const { items_count, favorited, favorites_count, tags } = defineProps({
   id: Number,
   favorited: Boolean,
+  favorites_count: Number,
   items_count: Number,
   styleClass: String,
   tagClass: String,
@@ -13,6 +14,8 @@ const { items_count, favorited, tags } = defineProps({
 });
 
 const isFavorited = ref(favorited);
+const favoritesCount = ref(favorites_count);
+
 const itemsCount = computed(
   () => `${items_count} ${items_count.isOne() ? "item" : "items"}`,
 );
@@ -37,7 +40,9 @@ const filteredTags = computed(
         </RouterLink>
         <span>
           <FavoriteButton
-            v-model="isFavorited"
+            v-model:favorited="isFavorited"
+            v-model:favorites-count="favoritesCount"
+            :has-favorites-count="true"
             :favoritable-id="id"
             :icon-size="24"
             favoritable-type="Collection"

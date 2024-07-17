@@ -34,7 +34,8 @@ const filteredTags = computed(
     >
       <span class="absolute right-6 top-6">
         <FavoriteButton
-          v-model="isFavorited"
+          v-model:favorited="isFavorited"
+          :has-favorites-count="false"
           :favoritable-id="id"
           favoritable-type="FlashCard"
         />
