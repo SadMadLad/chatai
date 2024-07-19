@@ -11,7 +11,7 @@ module Api
         if user.nil? || !user.valid_password?(sign_in_params[:password])
           render json: { error: 'Invalid email or password' }, status: :unauthorized
         else
-          @account_token = AccountToken.find_by(account: user.account, scope: sign_in_params[:scope])
+          @current_account_token = AccountToken.find_by(account: user.account, scope: sign_in_params[:scope])
           authenticate_token
         end
       end
@@ -23,8 +23,8 @@ module Api
       end
 
       def authenticate_token
-        if @account_token.present?
-          @account = @account_token.account
+        if @current_account_token.present?
+          @current_account = @current_account_token.account
           render json: response_payload
         else
           render json: { error: 'Please create the API from the main portal' }, status: :unauthorized
@@ -33,10 +33,10 @@ module Api
 
       def response_payload
         {
-          token: encode(@account_token.id),
-          full_name: @account.full_name,
-          username: @account.username,
-          avatar_url: @account.avatar.attached? ? url_for(@account.avatar) : nil
+          token: encode(@current_account_token.id),
+          full_name: @current_account.full_name,
+          username: @current_account.username,
+          avatar_url: @current_account.avatar.attached? ? url_for(@current_account.avatar) : nil
         }
       end
     end

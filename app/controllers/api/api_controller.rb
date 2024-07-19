@@ -4,8 +4,19 @@ module Api
   # Base Controller for API only.
   class ApiController < ActionController::API
     include JwtService
+    include Pundit::Authorization
 
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
+    helper_method :current_account
+
+    def pundit_user
+      current_account
+    end
+
+    def current_account
+      @current_account
+    end
 
     def authenticate_account_token!
       token = parse_auth_header
@@ -40,8 +51,8 @@ module Api
       if Time.zone.at(decoded_token[:exp]) <= DateTime.now
         render json: { error: 'Your session has expired' }, status: :unauthorized
       else
-        @account_token = AccountToken.find(decoded_token[:sub])
-        @account = @account_token.account
+        @current_account_token = AccountToken.find(decoded_token[:sub])
+        @current_account = @current_account_token.account
       end
     end
   end

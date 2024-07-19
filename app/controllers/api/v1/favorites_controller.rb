@@ -5,7 +5,7 @@ module Api
     # Ability to favorite/unfavorite flash cards, quizzes and collections
     class FavoritesController < Api::AuthenticatedController
       def create
-        @favorite = Favorite.new(favorite_params)
+        @favorite = Favorite.find_or_create_by(favorite_params)
 
         if @favorite.save
           render json: @favorite
@@ -22,7 +22,7 @@ module Api
       private
 
       def favorite_params
-        params.require(:favorite).permit(:favoritable_type, :favoritable_id).merge(account: @account)
+        params.require(:favorite).permit(:favoritable_type, :favoritable_id).merge(account: current_account)
       end
     end
   end

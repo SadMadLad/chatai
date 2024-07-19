@@ -5,7 +5,7 @@ module Api
     class CollectionsController < Api::AuthenticatedController
       def index
         @collections = Collection.where(public: true).includes(:tags).all
-        @favorites_hash = @account.favorites_hash(Collection)
+        @favorites_hash = current_account.favorites_hash(Collection)
       end
 
       def show
@@ -16,7 +16,7 @@ module Api
         @quizzes = @collection.quizzes.includes(:tags, { cover_attachment: :blob })
         @tags = @collection.tags.where(tag_type: :display)
 
-        @favorites_hash = @account.polymorphic_favorites_hash(@collections + @flash_cards + @quizzes + [@collection])
+        @favorites_hash = current_account.polymorphic_favorites_hash(@collections + @flash_cards + @quizzes + [@collection])
       end
     end
   end
