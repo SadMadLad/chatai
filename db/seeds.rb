@@ -340,7 +340,7 @@ end
 flash_card_only_collection = seed_collection(first_account, 'Flash Card Collection', 'rose', description: 'This collection only contains different flash cards', tags: ['Flash Cards', 'Education', 'Variety'])
 quiz_only_collection = seed_collection(first_account, 'Quiz Collection', 'cyan', description: 'This collection contains different quizzes', tags: ['Quizzes', 'Education', 'Collection'])
 mixed_collection = seed_collection(first_account, 'Mixed Collection', 'emerald', description: 'Mixed collection of flash cards and quizzes', tags: ['Flash Cards', 'Collection', 'Variety', 'Quizzes'])
-cool_collection = seed_collection(first_account, 'Cool Collection', 'red', description: 'Cool Collection that includes flash cards, quizzes, and collections as well', tags: ['Quizzes', 'Education', 'Flash Cards', 'Collecton', 'Variety', 'Education'])
+cool_collection = seed_collection(first_account, 'Cool Collection', 'red', description: 'Cool Collection that includes flash cards, quizzes, and collections as well', tags: ['Quizzes', 'Education', 'Flash Cards', 'Collection', 'Variety', 'Education'])
 
 collections = [flash_card_only_collection, quiz_only_collection, mixed_collection, cool_collection]
 
