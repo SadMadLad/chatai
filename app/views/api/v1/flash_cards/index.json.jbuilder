@@ -11,6 +11,5 @@ json.array! @flash_cards do |flash_card|
 
   json.tags flash_card.tags.filter(&:display?) do |tag|
     json.tag tag.tag
-    json.tag_type tag.tag_type
   end
 end

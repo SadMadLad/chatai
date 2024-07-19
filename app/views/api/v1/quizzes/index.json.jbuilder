@@ -17,6 +17,5 @@ json.array! @quizzes do |quiz|
 
   json.tags quiz.tags.filter(&:display?) do |tag|
     json.tag tag.tag
-    json.tag_type tag.tag_type
   end
 end

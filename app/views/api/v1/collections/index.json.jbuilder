@@ -12,6 +12,5 @@ json.array! @collections do |collection|
 
   json.tags collection.tags.filter(&:display?) do |tag|
     json.tag tag.tag
-    json.tag_type tag.tag_type
   end
 end

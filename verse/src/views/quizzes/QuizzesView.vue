@@ -1,4 +1,6 @@
 <script setup>
+// TODO: Cleanup this view. There is duplication of searchParams and currentSearchParams.
+// Use v-model for this for bi-directional data flow
 import { computed, ref, reactive } from "vue";
 import { stringify } from "qs";
 

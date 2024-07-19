@@ -55,7 +55,7 @@ const isFavorited = ref(favorited);
       />
       <div class="flex flex-col items-center gap-4">
         <p>{{ answer }}</p>
-        <ul class="flex flex-wrap gap-1">
+        <ul class="flex flex-wrap justify-center gap-1">
           <span v-for="{ tag } in tags" :class="tagClass">
             {{ tag }}
           </span>
