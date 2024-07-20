@@ -322,7 +322,8 @@ def seed_flash_cards(flash_card_json_file, account: nil)
   end
 end
 
-flash_cards = seed_flash_cards('sample', account: first_account)
+flash_cards = seed_flash_cards('sample', account: normal_accounts.sample)
+flash_cards = seed_flash_cards('vocabulary', account: normal_accounts.sample)
 
 p '...Collections'
 

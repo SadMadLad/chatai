@@ -1,0 +1,35 @@
+### Flash Card
+
+{
+  "answer": ,
+  "card_style": ,
+  "color": ,
+  "prompt": ,
+  "published": ,
+  "tags": 
+}
+
+### Question
+
+{
+  "question_text": ,
+  "multiple_answers": ,
+  "question_options_attributes": [
+    {
+      "option_text": ,
+      "correct": 
+    },
+    {
+      "option_text": ,
+      "correct": 
+    },
+    {
+      "option_text": ,
+      "correct": 
+    },
+    {
+      "option_text": ,
+      "correct": 
+    }
+  ]
+}

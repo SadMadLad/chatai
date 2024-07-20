@@ -1,0 +1,162 @@
+{
+  "timed": false,
+  "title": "The Search for Security",
+  "description": "Chapter 4 - Sattar - Pakistan's Foreign Policy: Foreign Policy Beginnings.",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "Which political party was in charge of Britian when Pakistan gained independence?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The Congress",
+          "correct": false
+        },
+        {
+          "option_text": "The Republican",
+          "correct": false
+        },
+        {
+          "option_text": "Labor Party",
+          "correct": true
+        },
+        {
+          "option_text": "The Democratic Party",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the Prime Minister in Britian at the time of Independence of Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Winston Churchill",
+          "correct": false
+        },
+        {
+          "option_text": "Clement Attlee",
+          "correct": true
+        },
+        {
+          "option_text": "Anthony Eden",
+          "correct": false
+        },
+        {
+          "option_text": "Harold Wilson",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What were the reason(s) that made USSR less appealing to Pakistani ministers for foreign relations?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "The communist ideology was considered antithetical to Islam",
+          "correct": true 
+        },
+        {
+          "option_text": "USSR did not take any initiative to establish an embassy in Pakistan",
+          "correct": true
+        },
+        {
+          "option_text": "The Pakistani administration was nurtured under British strategic view - which opposed USSR ideology",
+          "correct": true
+        },
+        {
+          "option_text": "USSR's economy was devastated and was hardly in a position to assist other states",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When did President Harry Truman invite Nehru to visit United States?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "May 1949",
+          "correct": true
+        },
+        {
+          "option_text": "March 1949",
+          "correct": false
+        },
+        {
+          "option_text": "May 1948",
+          "correct": false
+        },
+        {
+          "option_text": "March 1948",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "In which year were Ispahani and Begum Jahanara Shah Nawaz were sent to Washington to educate US of the Muslim League demand?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1943",
+          "correct": false
+        },
+        {
+          "option_text": "1944",
+          "correct": false
+        },
+        {
+          "option_text": "1945",
+          "correct": false
+        },
+        {
+          "option_text": "1946",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "North Korean forces moved across the 38th Parallel on?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "25 June, 1950",
+          "correct": true
+        },
+        {
+          "option_text": "25 June, 1951",
+          "correct": false
+        },
+        {
+          "option_text": "25 June, 1952",
+          "correct": false
+        },
+        {
+          "option_text": "25 June, 1953",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When did China gain independence?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1 October, 1949",
+          "correct": true
+        },
+        {
+          "option_text": "1 October, 1950",
+          "correct": false
+        },
+        {
+          "option_text": "14 August, 1949",
+          "correct": false
+        },
+        {
+          "option_text": "14 August, 1950",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

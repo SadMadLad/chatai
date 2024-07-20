@@ -1,0 +1,137 @@
+[
+  {
+    "answer": "Lawlessness",
+    "card_style": "basic",
+    "color": "lime",
+    "prompt": "Anarchy",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Supporter of government of Russia, Dictatorship",
+    "card_style": "fancy",
+    "color": "violet",
+    "prompt": "Czarist",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Disruptive, Intended to destabilize",
+    "card_style": "brutalism",
+    "color": "zinc",
+    "prompt": "Subversive",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Policy of extending a country's power with colonization, military or other means",
+    "card_style": "fancy",
+    "color": "pink",
+    "prompt": "Imperialism",
+    "published": true,
+    "tags": [
+      "English",
+      "Vocabulary",
+      "Politics"
+    ]
+  },
+  {
+    "answer": "Belief that all people are equal and should have equal rights",
+    "card_style": "basic",
+    "color": "emerald",
+    "prompt": "Egalitarianism",
+    "published": true,
+    "tags": [
+      "English",
+      "Vocabulary",
+      "Politics",
+      "Philosophy"
+    ]
+  },
+  {
+    "answer": "Irritation, usually caused by one's pride",
+    "card_style": "brutalism",
+    "color": "fuchsia",
+    "prompt": "Pique",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Ask for or try to obtain something from someone",
+    "card_style": "fancy",
+    "color": "cyan",
+    "prompt": "Solicit",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Liking because of similarity in qualities",
+    "card_style": "brutalism",
+    "color": "gray",
+    "prompt": "Congenial",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Hasty, casual, not thorough",
+    "card_style": "basic",
+    "color": "red",
+    "prompt": "Cursory",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Bias towards, stong liking towards something",
+    "card_style": "fancy",
+    "color": "stone",
+    "prompt": "Predilection",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Hesitate, Be unwilling the accept",
+    "card_style": "basic",
+    "color": "rose",
+    "prompt": "Balk",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Abstain from" ,
+    "card_style": "fancy",
+    "color": "amber",
+    "prompt": "Eschew",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  }
+]

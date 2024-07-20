@@ -22,14 +22,6 @@
     "tags": ["Education", "Software", "Web Development", "Phoenix", "Elixir"]
   },
   {
-    "answer": "Lawlessness",
-    "card_style": "basic",
-    "color": "lime",
-    "prompt": "Anarchy",
-    "published": true,
-    "tags": ["Vocabulary", "English"]
-  },
-  {
     "answer": "Iskander Mirza",
     "card_style": "brutalism",
     "color": "cyan",
