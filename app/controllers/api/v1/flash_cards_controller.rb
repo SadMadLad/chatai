@@ -5,7 +5,7 @@ module Api
     # Controller for flash cards.
     class FlashCardsController < Api::AuthenticatedController
       def index
-        @flash_cards = FlashCard.includes(:tags).order(:created_at)
+        @flash_cards = FlashCard.includes(:tags)
         @favorites_hash = current_account.favorites_hash(FlashCard)
       end
     end
