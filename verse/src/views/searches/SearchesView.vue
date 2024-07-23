@@ -36,10 +36,10 @@ function handleSubmit() {
 <template>
   <h1 class="text-4xl font-black text-center mx-4 my-12">Check Out our AI Search and get recommended resources</h1>
   <section class="flex-center">
-      <div class="mx-auto flex flex-row gap-2.5 items-center">
+      <form class="flex flex-row gap-2.5 items-center">
         <input class="px-2 h-10 border border-gray-400 focus:outline-primary-500 rounded-lg w-80" placeholder="Query your search" v-model="searchParams.recommendation_search.search_text"/>
         <button @click="handleSubmit" :disabled="isLoading || error" class="inline-block rounded-xl text-white font-bold px-3.5 py-2.5 bg-primary-500 hover:bg-primary-400 disabled:bg-primary-200">Send</button>
-      </div>
+      </form>
     </section>
   <span v-if="isLoading">isLoading</span>
   <span v-else-if="error">Error</span>

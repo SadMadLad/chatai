@@ -35,7 +35,7 @@ module Embeddable
       Embedding.where(embeddable_type: to_s)
     end
 
-    def neighbors(search_embedding, limit: 3, distance: :euclidean)
+    def neighbors(search_embedding, limit: 5, distance: :euclidean)
       neighbor_ids = all_embeddings
                       .nearest_neighbors(:embedding, search_embedding, distance:)
                       .limit(limit)
