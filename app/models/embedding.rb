@@ -12,6 +12,7 @@
 #  updated_at      :datetime         not null
 #
 class Embedding < ApplicationRecord
+  # The order metters here (in the polymorphic_neighbors class method)
   SUPPORTED_EMBEDDABLES = %w[FlashCard Quiz].freeze
 
   has_neighbors :embedding, dimensions: 768
@@ -20,4 +21,16 @@ class Embedding < ApplicationRecord
 
   validates :embeddable_type, presence: true, uniqueness: { scope: :embeddable_id },
                               inclusion: { in: SUPPORTED_EMBEDDABLES }
+  class << self
+    def polymorphic_neighbors(search_embedding, distance: :euclidean, limit: nil, include_tags: true)
+      where(embeddable_type: Embedding::SUPPORTED_EMBEDDABLES)
+      .includes(include_tags ? { embeddable: [tag_maps: :tag] } : :embeddable)
+      .nearest_neighbors(:embedding, search_embedding, distance: :euclidean)
+      .limit(limit)
+      .group_by(&:embeddable_type)
+      .map { |model, recommendations| [model, recommendations.map(&:embeddable)] }
+      .to_h
+      .values_at(*SUPPORTED_EMBEDDABLES)
+    end 
+  end
 end

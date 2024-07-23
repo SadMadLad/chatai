@@ -112,3 +112,10 @@ Currently, it has some of these features:
   Arrange the grouped fields alphabetically.
   <br />
   **Note:** Ignore the auto-generated migrations (typically gem dependent) migrations as it is (like `users` table and `solid_queue` and `action_text` migrations etc.)
+
+---
+
+### TODOs:
+
+- Pagination for data in APIs.
+

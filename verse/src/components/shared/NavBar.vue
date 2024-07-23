@@ -31,13 +31,18 @@ const navLinks = [
     auth: authEnum.both,
   },
   {
-    name: "dashboard",
-    text: "Dashboard",
+    name: "quizzes",
+    text: "Quizzes",
     auth: authEnum.privateOnly,
   },
   {
-    name: "quizzes",
-    text: "Quizzes",
+    name: "collections",
+    text: "Collections",
+    auth: authEnum.privateOnly,
+  },
+  {
+    name: "dashboard",
+    text: "Dashboard",
     auth: authEnum.privateOnly,
   },
   {
@@ -46,10 +51,10 @@ const navLinks = [
     auth: authEnum.privateOnly,
   },
   {
-    name: "collections",
-    text: "Collections",
+    name: "searches",
+    text: "Search",
     auth: authEnum.privateOnly,
-  },
+  }
 ];
 
 function handleLogout() {

@@ -16,14 +16,14 @@ import QuizFiltersSidebar from "@/components/quiz/QuizFiltersSidebar.vue";
 const { url, method } = RailsRoutes.quizzes;
 
 // Refs
-const isFilterSidebarOpen = ref(true);
-
 const searchParams = reactive({
   search: { title_like: null, tags: [] },
 });
 const currentSearchParams = reactive({
   search: { title_like: null, tags: [] },
 });
+
+const isFilterSidebarOpen = ref(true);
 const quizzesUrl = ref(queryParams());
 
 // Fetching Data

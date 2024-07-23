@@ -30,6 +30,12 @@ const RailsRoutes = {
     method: "POST",
   },
 
+  // Searches
+  searches: {
+    url: (params = null) => `${Rails}/searches?${params ? params : ''}`,
+    method: "GET"
+  },
+
   // Tags
   tags: { url: () => `${Rails}/tags`, method: "GET" },
 };

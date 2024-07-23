@@ -12,6 +12,7 @@ import NotFoundView from "@/views/errors/NotFoundView.vue";
 import QuizView from "@/views/quizzes/QuizView.vue";
 import QuizUndertakingView from "@/views/quizzes/QuizUndertakingView.vue";
 import QuizzesView from "@/views/quizzes/QuizzesView.vue";
+import SearchesView from "@/views/searches/SearchesView.vue";
 import SignUpView from "@/views/auth/SignUpView.vue";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout.vue";
@@ -59,6 +60,12 @@ const routes = [
         path: "/flash_cards",
         name: "flash-cards",
         component: FlashCardsView,
+        beforeEnter: [privateRoute],
+      },
+      {
+        path: "/searches",
+        name: "searches",
+        component: SearchesView,
         beforeEnter: [privateRoute],
       },
       {

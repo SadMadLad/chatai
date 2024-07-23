@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :quizzes, only: %i[index show] do
         resources :quiz_undertakings, only: %i[new create]
       end
+      resources :searches, only: :index
       resources :tags, only: :index
     end
   end
