@@ -8,8 +8,8 @@ import { useAuthStore } from "@/storage/auth";
 const { logout } = useAuthStore();
 const router = useRouter();
 
-const favorited = defineModel('favorited');
-const favoritesCount = defineModel('favoritesCount')
+const favorited = defineModel("favorited");
+const favoritesCount = defineModel("favoritesCount");
 
 const { favoritableId, favoritableType, hasFavoritesCount } = defineProps({
   favoritableId: Number,
@@ -40,10 +40,11 @@ async function favorite() {
       router.push({ name: "login" });
     } else {
       if (hasFavoritesCount) {
-        favorited.value === true ? favoritesCount.value-- : favoritesCount.value++;
+        favorited.value === true
+          ? favoritesCount.value--
+          : favoritesCount.value++;
       }
       favorited.value = !favorited.value;
-
     }
   } catch (e) {
     error.value = e;
@@ -56,9 +57,9 @@ async function favorite() {
 <template>
   <span class="flex flex-col items-center gap-0">
     <PhSpinnerGap
-    class="animate-spin"
-    v-if="isProcessing"
-    :size="iconSize || 32"
+      class="animate-spin"
+      v-if="isProcessing"
+      :size="iconSize || 32"
     />
     <PhHeart
       v-else
@@ -68,6 +69,8 @@ async function favorite() {
       :size="iconSize || 32"
       @click.stop="favorite"
     />
-    <span v-if="hasFavoritesCount" class="text-xs" :class="styleClass">{{ favoritesCount }}</span>
+    <span v-if="hasFavoritesCount" class="text-xs" :class="styleClass">{{
+      favoritesCount
+    }}</span>
   </span>
 </template>

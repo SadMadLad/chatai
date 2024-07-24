@@ -1,4 +1,5 @@
 <script setup>
+import CollectableButton from "@/components/collection/CollectableButton.vue";
 import FavoriteButton from "@/components/favorite/FavoriteButton.vue";
 import { ref } from "vue";
 import { PhArrowBendUpLeft } from "@phosphor-icons/vue";
@@ -28,7 +29,12 @@ const isFavorited = ref(favorited);
       class="flex-center relative mx-auto mb-6 h-72 w-60 p-4"
       :class="frontClass"
     >
-      <span class="absolute right-6 top-6">
+      <span class="absolute right-6 top-6 flex flex-row gap-2.5">
+        <CollectableButton
+          :collectable-id="id"
+          :collectable-title="`Add Flash Card ${prompt} to a collection`"
+          collectable-type="FlashCard"
+        />
         <FavoriteButton
           v-model:favorited="isFavorited"
           :has-favorites-count="false"

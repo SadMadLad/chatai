@@ -17,6 +17,22 @@ module Api
 
         @favorites_hash = current_account.polymorphic_favorites_hash(@collections + @flash_cards + @quizzes + [@collection])
       end
+
+      def create
+        @collection = Collection.new(collection_params)
+
+        if @collection.save
+          render json: @collection, status: :created
+        else
+          render json: @collection.errors.full_messages, status: :unprocessable_entity
+        end
+      end
+
+      private
+
+      def collection_params
+        params.require(:collection).perimit(:title, :description)
+      end
     end
   end
 end

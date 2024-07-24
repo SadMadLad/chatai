@@ -24,13 +24,12 @@ class Embedding < ApplicationRecord
   class << self
     def polymorphic_neighbors(search_embedding, distance: :euclidean, limit: nil, include_tags: true)
       where(embeddable_type: Embedding::SUPPORTED_EMBEDDABLES)
-      .includes(include_tags ? { embeddable: [tag_maps: :tag] } : :embeddable)
-      .nearest_neighbors(:embedding, search_embedding, distance: :euclidean)
-      .limit(limit)
-      .group_by(&:embeddable_type)
-      .map { |model, recommendations| [model, recommendations.map(&:embeddable)] }
-      .to_h
-      .values_at(*SUPPORTED_EMBEDDABLES)
-    end 
+        .includes(include_tags ? { embeddable: [tag_maps: :tag] } : :embeddable)
+        .nearest_neighbors(:embedding, search_embedding, distance: :euclidean)
+        .limit(limit)
+        .group_by(&:embeddable_type)
+        .transform_values { |recommendations| recommendations.map(&:embeddable) }
+        .values_at(*SUPPORTED_EMBEDDABLES)
+    end
   end
 end

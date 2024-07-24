@@ -14,9 +14,7 @@ module Api
       current_account
     end
 
-    def current_account
-      @current_account
-    end
+    attr_reader :current_account
 
     def authenticate_account_token!
       token = parse_auth_header

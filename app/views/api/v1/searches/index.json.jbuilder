@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.recommendations do
   json.flash_cards @flash_cards do |flash_card|
     json.partial! 'api/v1/flash_cards/flash_card', flash_card:, polymorphic_favorites_hash: true

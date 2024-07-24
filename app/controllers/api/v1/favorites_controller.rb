@@ -8,7 +8,7 @@ module Api
         @favorite = Favorite.find_or_create_by(favorite_params)
 
         if @favorite.save
-          render json: @favorite
+          render json: @favorite, status: :created
         else
           render json: @favorite.errors.full_messages, status: :unprocessable_entity
         end

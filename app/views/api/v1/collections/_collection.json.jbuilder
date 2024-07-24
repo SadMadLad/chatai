@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id collection.id
 
 json.color collection.color

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id flash_card.id
 
 json.answer flash_card.answer

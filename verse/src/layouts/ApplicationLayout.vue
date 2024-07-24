@@ -1,4 +1,5 @@
 <script setup>
+import CollectableDialog from "@/components/shared/CollectableDialog.vue";
 import NavBar from "@/components/shared/NavBar.vue";
 </script>
 
@@ -9,4 +10,5 @@ import NavBar from "@/components/shared/NavBar.vue";
       <RouterView />
     </div>
   </main>
+  <CollectableDialog />
 </template>

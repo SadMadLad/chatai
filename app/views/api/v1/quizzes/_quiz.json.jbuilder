@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id quiz.id
 
 json.cover_url quiz.cover.attached? ? rails_blob_url(quiz.cover) : nil

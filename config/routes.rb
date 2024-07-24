@@ -18,7 +18,8 @@ Rails.application.routes.draw do
       resources :accounts, param: :username do
         member { get :public }
       end
-      resources :collections, only: %i[index show]
+      resources :collectable_maps, only: %i[index create destroy]
+      resources :collections, only: %i[index show create]
       resources :chats, only: %i[index show]
       resource :favorites, only: %i[create destroy]
       resources :flash_cards, only: :index

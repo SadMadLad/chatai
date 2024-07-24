@@ -468,7 +468,7 @@ class CollectionStyler extends Styler {
   tagClass(collection) {
     const { color } = collection;
 
-    return `rounded-lg px-1.5 py-1 text-xs ${this.backgroundColor(color)} ${this.textColor(color, 'light')}`;
+    return `rounded-lg px-1.5 py-1 text-xs ${this.backgroundColor(color)} ${this.textColor(color, "light")}`;
   }
 }
 

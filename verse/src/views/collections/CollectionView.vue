@@ -24,7 +24,10 @@ const flashCards = computed(() => collection.value?.flash_cards);
 const quizzes = computed(() => collection.value?.quizzes);
 const tags = computed(() => collection.value?.tags);
 
-watch(() => route.params.id, (newId) => urlRef.value = url(newId));
+watch(
+  () => route.params.id,
+  (newId) => (urlRef.value = url(newId)),
+);
 </script>
 
 <template>
@@ -32,47 +35,85 @@ watch(() => route.params.id, (newId) => urlRef.value = url(newId));
   <div v-else-if="error">Error</div>
   <section v-else>
     <div class="mx-8">
-      <section class="flex flex-col items-center gap-2.5 mt-16 mb-12">
-        <div class="flex flex-row gap-4 justify-center items-center">
-          <h1 class="text-4xl font-extrabold text-center" :class="collectionStyler.textColor(collection.color)">{{ collection.title }}</h1>
-          <FavoriteButton v-model:favorited="collection.favorited" v-model:favorites-count="collection.favorites_count"
-            :has-favorites-count="true" :favoritable-id="collection.id" favoritable-type="Collection"
-            :style-class="collectionStyler.textColor(collection.color)" />
+      <section class="mb-12 mt-16 flex flex-col items-center gap-2.5">
+        <div class="flex flex-row items-center justify-center gap-4">
+          <h1
+            class="text-center text-4xl font-extrabold"
+            :class="collectionStyler.textColor(collection.color)"
+          >
+            {{ collection.title }}
+          </h1>
+          <FavoriteButton
+            v-model:favorited="collection.favorited"
+            v-model:favorites-count="collection.favorites_count"
+            :has-favorites-count="true"
+            :favoritable-id="collection.id"
+            favoritable-type="Collection"
+            :style-class="collectionStyler.textColor(collection.color)"
+          />
         </div>
-        <p v-if="collection.description.isPresent()" class="text-xl text-center">
+        <p
+          v-if="collection.description.isPresent()"
+          class="text-center text-xl"
+        >
           {{ collection.description }}
         </p>
         <div class="flex flex-row flex-wrap justify-center gap-2">
-          <span v-for="{ tag } in tags" class="text-xs" :class="`${collectionStyler.tagClass(collection)}`">
+          <span
+            v-for="{ tag } in tags"
+            class="text-xs"
+            :class="`${collectionStyler.tagClass(collection)}`"
+          >
             {{ tag }}
           </span>
         </div>
       </section>
       <div class="flex flex-col gap-6">
-        <section v-if="collections.isEmpty() && quizzes.isEmpty() && flashCards.isEmpty()" class="text-center">
+        <section
+          v-if="
+            collections.isEmpty() && quizzes.isEmpty() && flashCards.isEmpty()
+          "
+          class="text-center"
+        >
           The Collection is Empty
         </section>
-        <section v-if="quizzes.isPresent()" class="@container flex flex-col gap-4">
+        <section
+          v-if="quizzes.isPresent()"
+          class="@container flex flex-col gap-4"
+        >
           <h4 class="text-2xl font-bold">Quizzes</h4>
-          <div class="@5xl:columns-4 @3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4">
+          <div
+            class="@5xl:columns-4 @3xl:columns-3 @xl:columns-2 break-inside-avoid gap-4"
+          >
             <Quiz v-for="quiz in quizzes" v-bind="quiz" />
           </div>
         </section>
         <section v-if="flashCards.isPresent()" class="@container">
           <h4 class="text-2xl font-bold">Flash Cards</h4>
-          <div class="my-4 @7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 mx-4 grid grid-cols-1 gap-4">
-            <FlashCard v-for="card in flashCards" :key="card.id" v-bind="card"
-              :button-class="flashCardStyler.buttonClass(card)" :front-class="flashCardStyler.frontClass(card)"
-              :tag-class="flashCardStyler.tagClass(card)" />
+          <div
+            class="@7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 mx-4 my-4 grid grid-cols-1 gap-4"
+          >
+            <FlashCard
+              v-for="card in flashCards"
+              :key="card.id"
+              v-bind="card"
+              :button-class="flashCardStyler.buttonClass(card)"
+              :front-class="flashCardStyler.frontClass(card)"
+              :tag-class="flashCardStyler.tagClass(card)"
+            />
           </div>
         </section>
         <section v-if="collections.isPresent()" class="@container">
           <h4 class="text-2xl font-bold">Collections</h4>
           <div
-            class="my-4 @7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 mx-4 grid grid-cols-1 gap-4 place-items-center">
-            <Collection v-for="collection in collections" v-bind="collection"
+            class="@7xl:grid-cols-4 @4xl:grid-cols-3 @3xl:grid-cols-2 mx-4 my-4 grid grid-cols-1 place-items-center gap-4"
+          >
+            <Collection
+              v-for="collection in collections"
+              v-bind="collection"
               :style-class="collectionStyler.displayClass(collection)"
-              :tag-class="collectionStyler.tagClass(collection)" />
+              :tag-class="collectionStyler.tagClass(collection)"
+            />
           </div>
         </section>
       </div>

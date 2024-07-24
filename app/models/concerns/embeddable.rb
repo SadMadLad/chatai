@@ -37,9 +37,9 @@ module Embeddable
 
     def neighbors(search_embedding, limit: 5, distance: :euclidean)
       neighbor_ids = all_embeddings
-                      .nearest_neighbors(:embedding, search_embedding, distance:)
-                      .limit(limit)
-                      .pluck(:embeddable_id)
+                     .nearest_neighbors(:embedding, search_embedding, distance:)
+                     .limit(limit)
+                     .pluck(:embeddable_id)
 
       where(id: neighbor_ids).in_order_of(:id, neighbor_ids)
     end
@@ -53,7 +53,8 @@ module Embeddable
       define_method(:embeddable_text) do
         return instance_exec(&block) if block
         return self[embeddable_column] if embeddable_column.present?
-        return embeddable_columns.map { |col| self[col] }.join(' ') if embeddable_columns.present?
+
+        embeddable_columns.map { |col| self[col] }.join(' ') if embeddable_columns.present?
       end
     end
 

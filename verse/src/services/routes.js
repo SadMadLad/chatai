@@ -1,8 +1,15 @@
 const Rails = `${import.meta.env.VITE_RAILS_URL}/api/v1`;
 
+// TODO: (Probably,) use qs.stringify() here instead of in other components
 const RailsRoutes = {
   // Sessions
   login: { url: () => `${Rails}/sessions`, method: "POST" },
+
+  // CollectableMaps
+  collectable_maps: {
+    url: (params) => `${Rails}/collectable_maps?${params}`,
+    method: "GET",
+  },
 
   // Collections
   collections: { url: () => `${Rails}/collections`, method: "GET" },
@@ -32,8 +39,8 @@ const RailsRoutes = {
 
   // Searches
   searches: {
-    url: (params = null) => `${Rails}/searches?${params ? params : ''}`,
-    method: "GET"
+    url: (params = null) => `${Rails}/searches?${params ? params : ""}`,
+    method: "GET",
   },
 
   // Tags

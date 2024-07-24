@@ -54,7 +54,7 @@ const navLinks = [
     name: "searches",
     text: "Search",
     auth: authEnum.privateOnly,
-  }
+  },
 ];
 
 function handleLogout() {
