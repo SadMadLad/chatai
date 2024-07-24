@@ -93,6 +93,20 @@
     "color": "amber",
     "prompt": "Eschew",
     "published": true,
-    "tags": ["Vocabulary", "English"]
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
+  },
+  {
+    "answer": "Sanctity of Life, The fact of having to be respected",
+    "card_style": "brutalism",
+    "color": "red",
+    "prompt": "Inviolability",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
   }
 ]
