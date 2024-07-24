@@ -32,7 +32,7 @@ const isFavorited = ref(favorited);
       <span class="absolute right-6 top-6 flex flex-row gap-2.5">
         <CollectableButton
           :collectable-id="id"
-          :collectable-title="`Add Flash Card ${prompt} to a collection`"
+          :collectable-title="`Add Flash Card '${prompt}' to a collection`"
           collectable-type="FlashCard"
         />
         <FavoriteButton

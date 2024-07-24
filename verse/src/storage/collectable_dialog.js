@@ -7,10 +7,14 @@ const useCollectableDialogStore = defineStore("collectable_dialog", () => {
   const collectableItemTitle = ref(null);
   const collectableItemId = ref(null);
   const collectableItemType = ref(null);
+  const collectionMaps = ref([]);
   const isDialogOpen = ref(false);
   const isProcessing = ref(false);
 
   // Computed
+  const computedCollectableItemId = computed(() => collectableItemId);
+  const computedCollectableItemType = computed(() => collectableItemType);
+  const computedCollectionMaps = computed(() => collectionMaps);
   const computedIsDialogOpen = computed(() => isDialogOpen);
   const computedIsProcessing = computed(() => isProcessing);
   const computedItemTitle = computed(() => collectableItemTitle);
@@ -35,7 +39,7 @@ const useCollectableDialogStore = defineStore("collectable_dialog", () => {
           collectable_id: newItemId,
           collectable_type: newItemType,
         });
-        const collections = await response.json();
+        collectionMaps.value = await response.json();
       } catch (e) {
         console.log(e);
       } finally {
@@ -46,6 +50,9 @@ const useCollectableDialogStore = defineStore("collectable_dialog", () => {
 
   return {
     closeDialog,
+    computedCollectableItemId,
+    computedCollectableItemType,
+    computedCollectionMaps,
     computedIsDialogOpen,
     computedItemTitle,
     computedIsProcessing,

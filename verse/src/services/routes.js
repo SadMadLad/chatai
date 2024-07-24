@@ -6,10 +6,12 @@ const RailsRoutes = {
   login: { url: () => `${Rails}/sessions`, method: "POST" },
 
   // CollectableMaps
-  collectable_maps: {
+  collectableMaps: {
     url: (params) => `${Rails}/collectable_maps?${params}`,
     method: "GET",
   },
+  createCollectableMap: { url: () => `${Rails}/collectable_maps`, method: "POST" },
+  destroyCollectableMap: { url: () => `${Rails}/collectable_maps`, method: "DELETE" },
 
   // Collections
   collections: { url: () => `${Rails}/collections`, method: "GET" },
