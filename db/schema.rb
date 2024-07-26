@@ -311,6 +311,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
   create_table "request_logs", force: :cascade do |t|
     t.bigint "account_id"
     t.bigint "user_id"
+    t.boolean "should_be_kept", default: false, null: false
+    t.integer "status", null: false
+    t.float "db_runtime", null: false
+    t.float "total_runtime", null: false
+    t.float "view_runtime", null: false
     t.string "action", null: false
     t.string "controller", null: false
     t.string "full_url", null: false

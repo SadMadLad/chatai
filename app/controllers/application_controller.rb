@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def log_request
-    CreateRequestLogJob.perform_later(request.original_url, params.to_unsafe_h, current_account)
+    CreateRequestLogJob.perform_later(
+      request.original_url, params.to_unsafe_h, current_account, db_runtime, view_runtime, response.status
+    )
   end
 
   def define_model_name(model_name)
