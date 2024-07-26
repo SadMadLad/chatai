@@ -19,11 +19,16 @@
 class Account < ApplicationRecord
   include SearchBy
 
+  # Assocations that have has_many :through associations
   has_many :account_chat_maps, dependent: :destroy
   has_many :quiz_undertakings, dependent: :destroy
 
-  has_many :account_tokens, dependent: :destroy
+  # has_many :through associations
   has_many :chats, through: :account_chat_maps
+  has_many :taken_quizzes, through: :quiz_undertakings, class_name: 'Quiz'
+
+  # Other has_many assocations
+  has_many :account_tokens, dependent: :destroy
   has_many :collections, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -37,7 +42,7 @@ class Account < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :quizzes, dependent: :nullify
   has_many :ratings, dependent: :destroy
-  has_many :taken_quizzes, through: :quiz_undertakings, class_name: 'Quiz'
+  has_many :request_logs, dependent: :nullify
 
   has_one_attached :avatar, dependent: :destroy do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100], preprocessed: true

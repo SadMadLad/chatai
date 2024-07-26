@@ -310,13 +310,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
 
   create_table "request_logs", force: :cascade do |t|
     t.bigint "account_id"
+    t.bigint "user_id"
     t.string "action", null: false
     t.string "controller", null: false
-    t.string "original_url", null: false
+    t.string "full_url", null: false
+    t.string "user_email"
     t.jsonb "extra_params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_request_logs_on_account_id"
+    t.index ["user_id"], name: "index_request_logs_on_user_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -534,6 +537,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
   add_foreign_key "quizzes", "accounts"
   add_foreign_key "ratings", "accounts"
   add_foreign_key "request_logs", "accounts"
+  add_foreign_key "request_logs", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

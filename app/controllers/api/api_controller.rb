@@ -36,7 +36,7 @@ module Api
     protected
 
     def log_request
-      CreateRequestLogJob.perform_later(request.original_url, params.to_unsafe_h, current_account, current_user)
+      CreateRequestLogJob.perform_later(request.original_url, params.to_unsafe_h, current_account)
     end
 
     private

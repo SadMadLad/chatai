@@ -28,6 +28,8 @@ class User < ApplicationRecord
 
   has_one :account, dependent: :destroy
 
+  has_many :request_logs, dependent: :nullify
+
   %i[
     account_tokens account_chat_maps chats collections comments favorites feedback flash_cards likes
     messages ml_models quizzes quiz_undertakings posts ratings
