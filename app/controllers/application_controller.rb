@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_account
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_action :log_request
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -18,6 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def log_request
+    CreateRequestLogJob.perform_later(request.original_url, params.to_unsafe_h, current_account, current_user)
+  end
 
   def define_model_name(model_name)
     @model = model_name

@@ -6,6 +6,10 @@ module Api
     include JwtService
     include Pundit::Authorization
 
+    attr_reader :current_account
+
+    after_action :log_request
+
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     helper_method :current_account
@@ -13,8 +17,6 @@ module Api
     def pundit_user
       current_account
     end
-
-    attr_reader :current_account
 
     def authenticate_account_token!
       token = parse_auth_header
@@ -29,6 +31,12 @@ module Api
 
     def not_found
       render json: { error: 'Record not found' }, status: :not_found
+    end
+
+    protected
+
+    def log_request
+      CreateRequestLogJob.perform_later(request.original_url, params.to_unsafe_h, current_account, current_user)
     end
 
     private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -308,6 +308,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
     t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
   end
 
+  create_table "request_logs", force: :cascade do |t|
+    t.bigint "account_id"
+    t.string "action", null: false
+    t.string "controller", null: false
+    t.string "original_url", null: false
+    t.jsonb "extra_params"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_request_logs_on_account_id"
+  end
+
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.string "queue_name", null: false
@@ -522,6 +533,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_221815) do
   add_foreign_key "quiz_undertakings", "quizzes"
   add_foreign_key "quizzes", "accounts"
   add_foreign_key "ratings", "accounts"
+  add_foreign_key "request_logs", "accounts"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

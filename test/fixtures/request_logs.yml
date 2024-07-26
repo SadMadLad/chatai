@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  controller: MyString
+  action: MyString
+  extra_params: 
+  account: one
+  user: one
+  original_url: MyString
+
+two:
+  controller: MyString
+  action: MyString
+  extra_params: 
+  account: two
+  user: two
+  original_url: MyString
