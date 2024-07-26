@@ -3,4 +3,5 @@ class RequestLog < ApplicationRecord
   belongs_to :user, optional: true
 
   validates_presence_of :action, :controller, :db_runtime, :full_url, :view_runtime
+  validates :should_be_kept, boolean: true
 end
