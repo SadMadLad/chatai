@@ -12,9 +12,11 @@ class CreateRequestLogs < ActiveRecord::Migration[7.1]
       t.float :total_runtime, null: false
       t.float :view_runtime, null: false
 
+      t.string :remote_ip, null: false
       t.string :action, null: false
       t.string :controller, null: false
       t.string :full_url, null: false
+      t.string :user_agent
       t.string :user_email
 
       t.jsonb :extra_params

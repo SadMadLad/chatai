@@ -21,7 +21,7 @@ Currently, it has some of these features:
 
 ### Rails
 
-* Ruby version 3.3.3
+* Ruby version 3.3.4
 * Tailwind
 * Hotwire (StimulusJS + Turbo)
 * Redis Server

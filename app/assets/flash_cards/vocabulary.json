@@ -108,5 +108,16 @@
       "Vocabulary",
       "English"
     ]
+  },
+  {
+    "answer": "Having limited or narrow outlook",
+    "card_style": "basic",
+    "color": "pink",
+    "prompt": "Parochial",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
   }
 ]

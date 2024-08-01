@@ -8,8 +8,8 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,vue}"],
   theme: {
     colors: {
-      primary: colors.lime,
-      secondary: colors.amber,
+      primary: colors.fuchsia,
+      secondary: colors.pink,
       ...colors,
     },
     extend: {
