@@ -119,5 +119,16 @@
       "Vocabulary",
       "English"
     ]
+  },
+  {
+    "answer": "Pointless or Unnecessary",
+    "card_style": "fancy",
+    "color": "orange",
+    "prompt": "Infructuous",
+    "published": true,
+    "tags": [
+      "Vocabulary",
+      "English"
+    ]
   }
 ]

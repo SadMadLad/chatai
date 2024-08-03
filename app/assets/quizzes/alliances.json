@@ -1,0 +1,448 @@
+{
+  "timed": false,
+  "title": "Foreign Policy Beginnings",
+  "description": "Chapter 2 - Sattar - Pakistan's Foreign Policy: Foreign Policy Beginnings",
+  "published": true,
+  "questions_attributes": [
+    {
+      "question_text": "Who was the Finance Minister in October, 1949?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Syed Amjad Ali",
+          "correct": false
+        },
+        {
+          "option_text": "Chaudhry Muhammad Ali",
+          "correct": false
+        },
+        {
+          "option_text": "Ghulam Mohammad",
+          "correct": true 
+        },
+        {
+          "option_text": "Abdul Qadir Sanjrani",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who opposed the Middle East Defence Organization (MEDO) in 1952, endorsed by Truman Administration?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Abdel Gamal Nasser",
+          "correct": true
+        },
+        {
+          "option_text": "Abdallah Ibrahim",
+          "correct": false
+        },
+        {
+          "option_text": "Ahmed Balafrej",
+          "correct": false
+        },
+        {
+          "option_text": "Jawaharlal Nehru",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "Who became the President of United States in January, 1953?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Richard Nixon",
+          "correct": false
+        },
+        {
+          "option_text": "Dwight D. Eisenhower",
+          "correct": true
+        },
+        {
+          "option_text": "John F. Kennedy",
+          "correct": false
+        },
+        {
+          "option_text": "Harry S. Truman",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What was the assessment of John Foster Dulles, the Secretary of State of USA, when he visited Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Pakistan is a spirited nation which can resist communism",
+          "correct": true
+        },
+        {
+          "option_text": "India was more hospitable and a better component for defence in Middle East",
+          "correct": false
+        },
+        {
+          "option_text": "Pakistan will soon join the Soviet Union and will be a threat to USA",
+          "correct": false 
+        },
+        {
+          "option_text": "Pakistan's armed forces are not efficient enough for the defense",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Who was the US Ambassador to India during 1950s?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Karen Bass",
+          "correct": false
+        },
+        {
+          "option_text": "Mark Fuhrman", 
+          "correct": false
+        },
+        {
+          "option_text": "Chester Bowles",
+          "correct": true
+        },
+        {
+          "option_text": "Eric Garcetti",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What was the cause of some friction between USA and Chester Bowles (and British as well)?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Aid to Pakistan will antagonize India which is far more powerful and better prospect",
+          "correct": true
+        },
+        {
+          "option_text": "There was no friction between the parties when it comes to Pakistan",
+          "correct": false
+        },
+        {
+          "option_text": "Chester Bowles believed that antagonizing democratic India is a mistake as it will counter communist China",
+          "correct": true
+        },
+        {
+          "option_text": "Eisenhower did not like the tone of Chester Bowles and the British Policy",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What were the reason(s) due to which USA's military aid to Pakistan was halted?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "British was the only and main reason behind the halting of the aid",
+          "correct": false
+        },
+        {
+          "option_text": "Dulles and Eisenhower did not want to antagonize India",
+          "correct": true
+        },
+        {
+          "option_text": "Nehru's arguments and 'rebuttals' 'backed the US Administration into a corner'",
+          "correct": true
+        },
+        {
+          "option_text": "The USA's administration within was not inclined to provide the aid to Pakistan",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Which people were in favor of giving Pakistan the military aid?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Richard Nixon",
+          "correct": true
+        },
+        {
+          "option_text": "Charles Bowles",
+          "correct": false
+        },
+        {
+          "option_text": "Dwight D. Eisenhower",
+          "correct": true
+        },
+        {
+          "option_text": "John Foster Dulles",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When was the mutual defence argument signed between Pakistan and USA?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "19 March 1953",
+          "correct": false
+        },
+        {
+          "option_text": "19 May 1952",
+          "correct": false
+        },
+        {
+          "option_text": "19 May 1953",
+          "correct": false
+        },
+        {
+          "option_text": "19 May 1954",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What was the main motivation of SEATO in 1954 (South East Asia Treaty Organization)?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Promote peace within the Middle East",
+          "correct": false
+        },
+        {
+          "option_text": "Iranian Revolution",
+          "correct": false
+        },
+        {
+          "option_text": "The French Defeat in Dien Bien Phu",
+          "correct": true
+        },
+        {
+          "option_text": "Jawaharlal Nehru's agreements with UK",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What were the main reservations of Pakistan against SEATO?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "USA allocated little budget to Pakistan for the defence",
+          "correct": true
+        },
+        {
+          "option_text": "USA only covered East Pakistan and not the whole area of Pakistan",
+          "correct": true
+        },
+        {
+          "option_text": "USA asked Pakistan to not join SEATO if it is to appease USA only",
+          "correct": true
+        },
+        {
+          "option_text": "SEATO will only provide consultancy and not military action, unlike NATO",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When did Pakistan leave SEATO?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "November, 1971",
+          "correct": false
+        },
+        {
+          "option_text": "December, 1971",
+          "correct": false
+        },
+        {
+          "option_text": "November, 1972",
+          "correct": true
+        },
+        {
+          "option_text": "December, 1972",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What were the main reservations of Pakistan against signing Baghdad Pact?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "Pakistan was disappointed in USA's military aid and did not want to participate in any more pacts",
+          "correct": true
+        },
+        {
+          "option_text": "Pakistan did not like that India was joining the pact",
+          "correct": false
+        },
+        {
+          "option_text": "Turkey had recognized Israel which goes against Pakistan's policy",
+          "correct": true
+        },
+        {
+          "option_text": "Egypt's Nasser had denounced the Baghdad Pact",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "When did Pakistan sign CENTO (Baghdad Pact)?",
+      "multiple_answers": true,
+      "question_options_attributes": [
+        {
+          "option_text": "23 March, 1955",
+          "correct": false
+        },
+        {
+          "option_text": "23 September, 1955",
+          "correct": true
+        },
+        {
+          "option_text": "23 December, 1955",
+          "correct": false
+        },
+        {
+          "option_text": "23 October, 1955",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "Why was the Baghdad Pact named to CENTO in 1959?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Because India gave the suggestion to do so",
+          "correct": false
+        },
+        {
+          "option_text": "Due to more budget allocation of USA and UK",
+          "correct": false
+        },
+        {
+          "option_text": "Because of Iraqi Coup in 1958 which denounced the Baghdad Pact",
+          "correct": true
+        },
+        {
+          "option_text": "Due to suggestion of the NATO and integration of CENTO and NATO",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What was the name of base established by United States in 1957 in Pakistan, as reported by Prime Minister Suhrawardy?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "PAF Base, Nur Khan",
+          "correct": false
+        },
+        {
+          "option_text": "Dalbandin Airport, Balochistan",
+          "correct": false
+        },
+        {
+          "option_text": "Shamsi Airfield, Balochistan",
+          "correct": false
+        }, 
+        {
+          "option_text": "Badaber Base, Peshawer",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_text": "What was the purpose of the Badaber Base?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "Provide military assistance to Pakistan",
+          "correct": false
+        },
+        {
+          "option_text": "Eavesdropping on the Soviet Union and China",
+          "correct": true
+        },
+        {
+          "option_text": "Provide assistance in selling weapons",
+          "correct": false
+        },
+        {
+          "option_text": "Insurge Afghanistan",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When was Bilateral Defence Cooperation Agreement signed between USA and Pakistan?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "1960",
+          "correct": false
+        },
+        {
+          "option_text": "1959",
+          "correct": true
+        },
+        {
+          "option_text": "1958",
+          "correct": false
+        },
+        {
+          "option_text": "1957",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "What was response of USA when Pakistan brought up the Defence Pact in 1965 and 1971 against Indian aggression?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "The pact was in light of Communist aggression only",
+          "correct": true
+        },
+        {
+          "option_text": "India is a friendly member of USA",
+          "correct": false
+        },
+        {
+          "option_text": "Kashmir was never an interest of USA",
+          "correct": false
+        },
+        {
+          "option_text": "The military aid was transactional only",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_text": "When was the U-2 Plane (from Badaber base) show down by Soviet Union?",
+      "multiple_answers": false,
+      "question_options_attributes": [
+        {
+          "option_text": "7 May, 1960",
+          "correct": true
+        },
+        {
+          "option_text": "7 May, 1959" ,
+          "correct": false
+        },
+        {
+          "option_text": "7 March, 1959",
+          "correct": false
+        },
+        {
+          "option_text": "7 May 1959",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}
