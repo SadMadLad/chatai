@@ -251,8 +251,6 @@ def seed_quiz(quiz_json_file, tags: [], give_rating: true, cover_image: nil, has
     )
   end
 
-  quiz.update(account: raters.sample) if has_user
-
   quiz
 end
 

@@ -23,6 +23,7 @@
 #  updated_at              :datetime         not null
 #
 class Quiz < ApplicationRecord
+  include ActivityLoggable
   include Collectable
   include Embeddable
   include Favoritable
@@ -38,12 +39,16 @@ class Quiz < ApplicationRecord
   has_many :ratings, as: :rateable, dependent: :destroy
 
   has_one_attached :cover
-  embeddable_text columns: %i[title description]
 
   validates :published, boolean: true
   validates :timed, boolean: true
   validates :timer, presence: true, comparison: { greater_than: 0 }, if: :timed?
   validates :title, :description, presence: true
+
+  before_create -> { @create_log_text = "Created quiz titled: #{title}" }
+  before_destroy -> { @destroy_log_text = "Deleted quiz titled: #{title}" }
+
+  embeddable_text columns: %i[title description]
 
   accepts_nested_attributes_for :questions
 

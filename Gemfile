@@ -34,6 +34,7 @@ gem 'solid_queue'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
+gem 'thruster'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 

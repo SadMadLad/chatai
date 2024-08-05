@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_05_095053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -87,6 +87,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "activity_logs", force: :cascade do |t|
+    t.string "activity_loggable_type", null: false
+    t.bigint "activity_loggable_id", null: false
+    t.bigint "account_id", null: false
+    t.string "log_text", null: false
+    t.boolean "visible", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_activity_logs_on_account_id"
+    t.index ["activity_loggable_type", "activity_loggable_id"], name: "index_activity_logs_on_activity_loggable"
   end
 
   create_table "admin_comments", force: :cascade do |t|
@@ -179,13 +191,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
 
   create_table "flash_cards", force: :cascade do |t|
     t.bigint "account_id"
+    t.boolean "published", default: false, null: false
     t.integer "card_style", default: 0, null: false
     t.integer "collectable_maps_count", default: 0, null: false
     t.integer "favorites_count", default: 0, null: false
     t.string "color", default: "#84cc16", null: false
     t.text "answer", null: false
     t.text "prompt", null: false
-    t.boolean "published", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_flash_cards_on_account_id"
@@ -311,14 +323,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
   create_table "request_logs", force: :cascade do |t|
     t.bigint "account_id"
     t.bigint "user_id"
-    t.boolean "should_be_kept", default: false, null: false
+    t.boolean "preserve", default: false, null: false
     t.integer "status", null: false
     t.float "db_runtime", null: false
     t.float "total_runtime", null: false
     t.float "view_runtime", null: false
+    t.string "remote_ip", null: false
     t.string "action", null: false
     t.string "controller", null: false
     t.string "full_url", null: false
+    t.string "user_agent"
     t.string "user_email"
     t.jsonb "extra_params"
     t.datetime "created_at", null: false
@@ -525,6 +539,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_101748) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activity_logs", "accounts"
   add_foreign_key "collectable_maps", "collections"
   add_foreign_key "collections", "accounts"
   add_foreign_key "comments", "accounts"

@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Add / Remove items from collections
     class CollectableMapsController < Api::AuthenticatedController
       before_action :verify_collectable_type, :fetch_collectable_item, only: :index
 

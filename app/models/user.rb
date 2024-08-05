@@ -31,8 +31,8 @@ class User < ApplicationRecord
   has_many :request_logs, dependent: :nullify
 
   %i[
-    account_tokens account_chat_maps chats collections comments favorites feedback flash_cards likes
-    messages ml_models quizzes quiz_undertakings posts ratings
+    account_tokens account_chat_maps activity_logs chats collections comments favorites feedback flash_cards
+    likes messages ml_models quizzes quiz_undertakings posts ratings
   ].each do |associated_records|
     has_many associated_records, through: :account
   end

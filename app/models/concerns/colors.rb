@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Colors Concern
 module Colors
   extend ActiveSupport::Concern
 

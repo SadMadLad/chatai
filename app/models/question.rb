@@ -28,17 +28,17 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :question_options
 
-  after_commit :increase_quiz_total_score, on: :create
-  after_commit :decrease_quiz_total_score, on: :destroy
+  after_create_commit :increase_quiz_total_score, on: :create
+  after_destroy_commit :decrease_quiz_total_score, on: :destroy
 
   def increase_quiz_total_score
     the_quiz = quiz
-    the_quiz.update(total_score: the_quiz.total_score + score)
+    the_quiz.update_column(:total_score, the_quiz.total_score + score)
   end
 
   def decrease_quiz_total_score
     the_quiz = quiz
-    the_quiz.update(total_score: the_quiz.total_score - score)
+    the_quiz.update_column(:total_score, the_quiz.total_score - score)
   end
 
   # The argument selected_options can be singular as well as plural

@@ -17,7 +17,9 @@
 #  updated_at             :datetime         not null
 #
 class Collection < ApplicationRecord
+  include ActivityLoggable
   include Collectable
+  include Colors
   include Favoritable
   include Taggable
 
@@ -26,6 +28,9 @@ class Collection < ApplicationRecord
   belongs_to :account
 
   has_many :items, dependent: :destroy, class_name: 'CollectableMap'
+
+  before_create -> { @create_log_text = "Created Collection: #{title}" }
+  before_destroy -> { @destroy_log_text = "Deleted Collection: #{title}" }
 
   COLLECTABLE_MODELS.each do |model|
     has_many model.underscore.pluralize.to_sym, through: :items, source: :collectable, source_type: model

@@ -2,8 +2,6 @@
 
 # Autocomplete that AI chat and generate its response.
 class AutocompletionJob < ApplicationJob
-  queue_as :default
-
   rescue_from Faraday::ConnectionFailed, with: -> { logger('job_errors.connection_failed') }
   rescue_from Faraday::TimeoutError, with: -> { logger('job_errors.timeout_error') }
 

@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Controller to manage collections
     class CollectionsController < Api::AuthenticatedController
       def index
         @collections = Collection.where(public: true).includes(:tags)

@@ -2,8 +2,6 @@
 
 # Worker to send the request to FastAPI and feed the embedding.
 class CreateEmbeddingWorker < ApplicationJob
-  queue_as :default
-
   rescue_from Faraday::ConnectionFailed, with: -> { logger('job_errors.connection_failed') }
   rescue_from Faraday::TimeoutError, with: -> { logger('job_errors.timeout_error') }
 

@@ -2,6 +2,7 @@
 
 module Api
   module V1
+    # Carry out Embedding Search
     class SearchesController < Api::AuthenticatedController
       def index
         if recommendation_search_params[:search_text].blank?

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Log the request data
 class CreateRequestLogJob < ApplicationJob
   def perform(full_url, params, account, db_runtime, view_runtime, status, remote_ip, user_agent)
     controller, action = params.values_at(:controller, :action)
@@ -11,7 +12,7 @@ class CreateRequestLogJob < ApplicationJob
 
     RequestLog.create(
       account:, action:, controller:, db_runtime:, extra_params:, full_url:, remote_ip:,
-      status:, total_runtime:, user:, user_agent:, user_email:, view_runtime:, 
+      status:, total_runtime:, user:, user_agent:, user_email:, view_runtime:
     )
   end
 end

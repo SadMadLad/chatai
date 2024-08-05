@@ -25,7 +25,7 @@ class Embedding < ApplicationRecord
     def polymorphic_neighbors(search_embedding, distance: :euclidean, limit: nil, include_tags: true)
       where(embeddable_type: Embedding::SUPPORTED_EMBEDDABLES)
         .includes(include_tags ? { embeddable: [tag_maps: :tag] } : :embeddable)
-        .nearest_neighbors(:embedding, search_embedding, distance: :euclidean)
+        .nearest_neighbors(:embedding, search_embedding, distance:)
         .limit(limit)
         .group_by(&:embeddable_type)
         .transform_values { |recommendations| recommendations.map(&:embeddable) }
