@@ -5,10 +5,9 @@ module Api
   class ApiController < ActionController::API
     include JwtService
     include Pundit::Authorization
+    include RequestLogger
 
     attr_reader :current_account
-
-    after_action :log_request
 
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
@@ -31,14 +30,6 @@ module Api
 
     def not_found
       render json: { error: 'Record not found' }, status: :not_found
-    end
-
-    protected
-
-    def log_request
-      CreateRequestLogJob.perform_later(
-        request.original_url, params.to_unsafe_h, current_account, db_runtime, view_runtime, response.status
-      )
     end
 
     private

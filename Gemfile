@@ -48,6 +48,7 @@ group :development, :test do
   gem 'rubocop-minitest'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
+  gem 'ruby-lsp'
 end
 
 group :development do

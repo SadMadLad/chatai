@@ -19,7 +19,10 @@ function createCollectableMap(body) {
   const { url, method } = RailsRoutes.createCollectableMap;
 
   return fetch(
-    client(url(), method, { body: { collectable_map: body }, authToken: token })
+    client(url(), method, {
+      body: { collectable_map: body },
+      authToken: token,
+    }),
   );
 }
 
@@ -28,8 +31,11 @@ function destroyCollectableMap(body) {
   const { url, method } = RailsRoutes.destroyCollectableMap;
 
   return fetch(
-    client(url(), method, { body: { collectable_map: body }, authToken: token })
-  )
+    client(url(), method, {
+      body: { collectable_map: body },
+      authToken: token,
+    }),
+  );
 }
 
 export { getCollectableMaps, createCollectableMap, destroyCollectableMap };

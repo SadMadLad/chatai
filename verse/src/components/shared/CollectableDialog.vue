@@ -19,7 +19,7 @@ watch(computedIsDialogOpen, (isDialogOpen) => {
 </script>
 
 <template>
-  <dialog ref="dialog" class="fixed rounded-lg max-w-xs">
+  <dialog ref="dialog" class="fixed max-w-xs rounded-lg">
     <div class="h-full w-full p-8">
       <PhX
         class="absolute right-4 top-4 cursor-pointer"
