@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_05_095053) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_112740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -87,18 +87,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_095053) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "activity_logs", force: :cascade do |t|
-    t.string "activity_loggable_type", null: false
-    t.bigint "activity_loggable_id", null: false
-    t.bigint "account_id", null: false
-    t.string "log_text", null: false
-    t.boolean "visible", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_activity_logs_on_account_id"
-    t.index ["activity_loggable_type", "activity_loggable_id"], name: "index_activity_logs_on_activity_loggable"
   end
 
   create_table "admin_comments", force: :cascade do |t|
@@ -414,6 +402,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_095053) do
     t.index ["queue_name", "priority", "job_id"], name: "index_solid_queue_poll_by_queue"
   end
 
+  create_table "solid_queue_recurring_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.string "task_key", null: false
+    t.datetime "run_at", null: false
+    t.datetime "created_at", null: false
+    t.index ["job_id"], name: "index_solid_queue_recurring_executions_on_job_id", unique: true
+    t.index ["task_key", "run_at"], name: "index_solid_queue_recurring_executions_on_task_key_and_run_at", unique: true
+  end
+
   create_table "solid_queue_scheduled_executions", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.string "queue_name", null: false
@@ -539,7 +536,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_095053) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "activity_logs", "accounts"
   add_foreign_key "collectable_maps", "collections"
   add_foreign_key "collections", "accounts"
   add_foreign_key "comments", "accounts"
@@ -562,6 +558,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_095053) do
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "subreddit_posts", "subreddits"
   add_foreign_key "tag_maps", "tags"

@@ -19,7 +19,6 @@
 
 # Flash Card
 class FlashCard < ApplicationRecord
-  include ActivityLoggable
   include Collectable
   include Colors
   include Embeddable
@@ -32,9 +31,6 @@ class FlashCard < ApplicationRecord
 
   validates :answer, :prompt, presence: true
   validates :published, boolean: true
-
-  before_create -> { @create_log_text = "Created Flash Card: #{prompt}" }
-  before_destroy -> { @destroy_log_text = "Deleted Flash Card: #{prompt}" }
 
   embeddable_text columns: %i[answer prompt]
 

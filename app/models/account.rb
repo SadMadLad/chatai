@@ -29,7 +29,6 @@ class Account < ApplicationRecord
 
   # Other has_many assocations
   has_many :account_tokens, dependent: :destroy
-  has_many :activity_logs, dependent: :destroy
   has_many :collections, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
