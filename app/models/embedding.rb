@@ -12,7 +12,7 @@
 #  updated_at      :datetime         not null
 #
 class Embedding < ApplicationRecord
-  # The order metters here (in the polymorphic_neighbors class method)
+  # Embeddables must have: associated tags and favorites_count column.
   SUPPORTED_EMBEDDABLES = %w[FlashCard Quiz].freeze
 
   has_neighbors :embedding, dimensions: 768
@@ -21,15 +21,20 @@ class Embedding < ApplicationRecord
 
   validates :embeddable_type, presence: true, uniqueness: { scope: :embeddable_id },
                               inclusion: { in: SUPPORTED_EMBEDDABLES }
+
+  SUPPORTED_EMBEDDABLES.each do |_embeddable_type|
+    define_method(:"of_#{_embeddable_type.underscore}?") { embeddable_type == _embeddable_type }
+  end
+
   class << self
-    def polymorphic_neighbors(search_embedding, distance: :euclidean, limit: nil, include_tags: true)
-      where(embeddable_type: Embedding::SUPPORTED_EMBEDDABLES)
-        .includes(include_tags ? { embeddable: [tag_maps: :tag] } : :embeddable)
-        .nearest_neighbors(:embedding, search_embedding, distance:)
+    def polymorphic_neighbors(search_embedding, distance: :euclidean, limit: nil)
+      nearest_neighbors(:embedding, search_embedding, distsance:)
+        .includes(embeddable: :tags)
         .limit(limit)
-        .group_by(&:embeddable_type)
-        .transform_values { |recommendations| recommendations.map(&:embeddable) }
-        .values_at(*SUPPORTED_EMBEDDABLES)
+    end
+
+    SUPPORTED_EMBEDDABLES.each do |embeddable_type|
+      define_method(:"#{embeddable_type.underscore.pluralize}") { where(embeddable_type:) }
     end
   end
 end
