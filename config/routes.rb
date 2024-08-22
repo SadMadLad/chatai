@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   namespace :api, format: :json do
     namespace :v1 do
+      controller :dashboard do
+        get :my
+        get :settings
+      end
+
       resource :sessions, only: %i[create destroy]
 
       resources :accounts, param: :username do
@@ -20,11 +25,16 @@ Rails.application.routes.draw do
       end
       resources :collectable_maps, only: :index
       resource :collectable_maps, only: %i[create destroy]
-      resources :collections, only: %i[index show create]
+      resources :collections, only: %i[index show create] do
+        collection { get :my }
+      end
       resources :chats, only: %i[index show]
       resource :favorites, only: %i[create destroy]
-      resources :flash_cards, only: :index
+      resources :flash_cards, only: :index do
+        collection { get :my }
+      end
       resources :quizzes, only: %i[index show] do
+        collection { get :my }
         resources :quiz_undertakings, only: %i[new create]
       end
       resources :searches, only: :index

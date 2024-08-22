@@ -11,9 +11,17 @@
 - ☐ Add a page to create, update and delete flash cards for users.
 - ☐ Add a page to create collections for users.
 - ☐ Move the chat components to verse.
-- ☐ Docker support with docker-compose
+- ☐ Docker support for development.
+- ☐ Docker supprot for production.
+- ☐ Update `Readme.md`.
+- ☐ Update UI of the quiz undertakings.
+- ☐ Add Searching for Flash Cards
+- ☐ Add Searching for Collections
+- ☐ Add authorizations for verse.
 
-### Unsure
+### Backstage
 
-- Rethink the recommendation searches.
+- ☐ Remove the `frontend/` code and move some of its features to `verse/`.
+- ☐ Rethink and redesign the recommendation searches.
+- ☐ Have some cool data science stuff.
 

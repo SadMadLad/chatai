@@ -16,7 +16,8 @@ module Api
         @flash_cards = @collection.flash_cards.includes(:tags)
         @quizzes = @collection.quizzes.includes(:tags, { cover_attachment: :blob })
 
-        @favorites_hash = current_account.polymorphic_favorites_hash(@collections + @flash_cards + @quizzes + [@collection])
+        collectables = @collections + @flash_cards + @quizzes + [@collection]
+        @favorites_hash = current_account.polymorphic_favorites_hash(collectables)
       end
 
       def create
