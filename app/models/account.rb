@@ -21,15 +21,16 @@ class Account < ApplicationRecord
 
   # Assocations that have has_many :through associations
   has_many :account_chat_maps, dependent: :destroy
+  has_many :collections, dependent: :destroy
   has_many :quiz_undertakings, dependent: :destroy
 
   # has_many :through associations
   has_many :chats, through: :account_chat_maps
-  has_many :taken_quizzes, through: :quiz_undertakings, class_name: 'Quiz'
+  has_many :collected_items, through: :collections, source: :items
+  has_many :taken_quizzes, through: :quiz_undertakings, source: :quiz
 
   # Other has_many assocations
   has_many :account_tokens, dependent: :destroy
-  has_many :collections, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
@@ -101,6 +102,10 @@ class Account < ApplicationRecord
         .where(chats: { id: chats })
         .excluding(account)
         .order('chats.latest_message_at DESC')
+    end
+
+    def latest_taken_quizzes(limit: nil)
+      taken_quizzes.order('quiz_undertakings.created_at DESC').limit(limit)
     end
   end
 end

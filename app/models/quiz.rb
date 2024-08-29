@@ -44,6 +44,9 @@ class Quiz < ApplicationRecord
   validates :timer, presence: true, comparison: { greater_than: 0 }, if: :timed?
   validates :title, :description, presence: true
 
+  scope :published, -> { where(published: true) }
+  scope :drafted, -> { where(published: false) }
+
   embeddable_text columns: %i[title description]
 
   accepts_nested_attributes_for :questions

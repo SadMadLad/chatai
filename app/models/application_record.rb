@@ -2,6 +2,8 @@
 
 # Base Record
 class ApplicationRecord < ActiveRecord::Base
+  include TimestampQueries
+
   attr_accessor :skip_broadcast_callbacks, :skip_callbacks
 
   primary_abstract_class

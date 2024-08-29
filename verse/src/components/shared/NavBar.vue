@@ -65,9 +65,9 @@ function handleLogout() {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-white bg-opacity-50 backdrop-blur-md">
+  <header class="sticky top-0 z-50 bg-white bg-opacity-50 backdrop-blur-md flex-center">
     <nav
-      class="mx-12 flex flex-row items-center justify-between text-sm font-semibold"
+      class="mx-12 flex flex-row items-center justify-between text-sm font-semibold container"
     >
       <div class="flex flex-row gap-8">
         <RouterLink :to="{ name: 'home' }">

@@ -7,7 +7,7 @@ module Api
       before_action :set_quiz, only: :show
 
       def index
-        @quizzes = Quiz.where(published: true)
+        @quizzes = Quiz.published
                        .search_by_params(params[:search].present? ? quiz_search_params : nil)
                        .search_by_tags
                        .pluck(:id)

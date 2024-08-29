@@ -13,32 +13,30 @@ Rails.application.routes.draw do
 
   namespace :api, format: :json do
     namespace :v1 do
-      controller :dashboard do
-        get :my
-        get :settings
+      namespace :dashboard do
+        get :dashboard, to: 'dashboard#index'
+        resources :settings, only: :index
       end
 
-      resource :sessions, only: %i[create destroy]
+      resource :sessions, only: :create
 
-      resources :accounts, param: :username do
-        member { get :public }
-      end
       resources :collectable_maps, only: :index
       resource :collectable_maps, only: %i[create destroy]
-      resources :collections, only: %i[index show create] do
-        collection { get :my }
-      end
-      resources :chats, only: %i[index show]
+      resources :collections, only: %i[index show create]
       resource :favorites, only: %i[create destroy]
-      resources :flash_cards, only: :index do
-        collection { get :my }
-      end
+      resources :flash_cards, only: :index
       resources :quizzes, only: %i[index show] do
-        collection { get :my }
         resources :quiz_undertakings, only: %i[new create]
       end
       resources :searches, only: :index
       resources :tags, only: :index
+
+      # TODO: Frontend only routes - Need to be removed later on.
+
+      resources :accounts, param: :username do
+        member { get :public }
+      end
+      resources :chats, only: %i[index show]
     end
   end
 
@@ -55,7 +53,7 @@ Rails.application.routes.draw do
         get :details
         post :autocomplete
       end
-      resources :messages, only: %i[index create edit update destroy]
+      resources :messages, except: :new
     end
 
     # TODO: Implement the functionality to destroy comments

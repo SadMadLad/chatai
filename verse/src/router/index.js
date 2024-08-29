@@ -16,6 +16,7 @@ import QuizUndertakingView from "@/views/quizzes/QuizUndertakingView.vue";
 import QuizzesDashboardView from "@/views/dashboards/quizzes/QuizzesDashboardView.vue";
 import QuizzesView from "@/views/quizzes/QuizzesView.vue";
 import SearchesView from "@/views/searches/SearchesView.vue";
+import SettingsDashboardView from "@/views/dashboards/SettingsDashboardView.vue";
 import SignUpView from "@/views/auth/SignUpView.vue";
 
 import ApplicationLayout from "@/layouts/ApplicationLayout.vue";
@@ -79,6 +80,11 @@ const routes = [
             name: "quizzes-dashboard",
             component: QuizzesDashboardView,
           },
+          {
+            path: "settings",
+            name: "settings-dashboard",
+            component: SettingsDashboardView,
+          }
         ]
       },
       {
