@@ -26,6 +26,7 @@ class Quiz < ApplicationRecord
   include Collectable
   include Embeddable
   include Favoritable
+  include Rateable
   include SearchBy
   include Taggable
 
@@ -35,7 +36,6 @@ class Quiz < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :question_options, through: :questions
   has_many :quiz_undertakings, dependent: :destroy
-  has_many :ratings, as: :rateable, dependent: :destroy
 
   has_one_attached :cover
 

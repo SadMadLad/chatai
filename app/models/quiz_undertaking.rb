@@ -24,4 +24,10 @@ class QuizUndertaking < ApplicationRecord
 
     errors.add(:score, 'must be within 0 and the total score')
   end
+
+  class << self
+    def quiz_undertakings_for_account(account)
+      joins(:quiz).where(quizzes: { account: })
+    end
+  end
 end

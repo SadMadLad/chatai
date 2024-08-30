@@ -22,6 +22,7 @@
 ### Backstage
 
 - ☐ Remove the `frontend/` code and move some of its features to `verse/`.
+- ☐ Move some of the functionality of ChatAI
 - ☐ Rethink and redesign the recommendation searches.
 - ☐ Have some cool data science stuff.
 

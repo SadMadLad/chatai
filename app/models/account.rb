@@ -54,6 +54,7 @@ class Account < ApplicationRecord
   enum :role, { user: 0, admin: 1, superadmin: 2 }
 
   scope :admins, -> { where(role: %i[superadmin admin]) }
+  scope :distinct_taken_quizzes, -> { taken_quizzes.distinct }
 
   validates :first_name, :last_name, :role, :username, presence: true
   validates :username, uniqueness: true

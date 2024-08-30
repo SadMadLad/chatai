@@ -6,7 +6,9 @@ module TimestampQueries
       scope :"#{timestamp}_today", -> { where(timestamp => day_range) }
       scope :"#{timestamp}_yesterday", -> { where(timestamp => day_range(offset: 1.days)) }
       scope :"#{timestamp}_n_days_before", -> (n) { where(timestamp => day_range(offset: n.days)) }
-      scope :"grouped_by_#{timestamp}_at", -> { group("DATE(#{timestamp})").count }
+      scope :"grouped_by_#{timestamp}_at", -> do
+        group("DATE(#{klass.name.underscore.pluralize}.#{timestamp}_at)").count
+      end
     end
   end
 
