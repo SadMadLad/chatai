@@ -8,6 +8,7 @@ module Clients
 
     def initialize
       super
+
       @client = Faraday.new(
         url: WEATHER_API_URL,
         headers: { 'Content-Type' => 'application/json' }

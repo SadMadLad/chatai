@@ -8,3 +8,7 @@ String.prototype.isBlank = function () {
 String.prototype.isPresent = function () {
   return !this.isBlank();
 };
+
+String.prototype.toDate = function() {
+  return new Date(this);
+}

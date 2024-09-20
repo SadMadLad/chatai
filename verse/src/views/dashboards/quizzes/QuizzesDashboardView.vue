@@ -1,6 +1,3 @@
-<script setup>
-</script>
+<script setup></script>
 
-<template>
-  Quizzes Dashboard
-</template>
+<template>Quizzes Dashboard</template>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :api, format: :json do
     namespace :v1 do
       namespace :dashboard do
-        get :dashboard, to: 'dashboard#index'
+        get '/', to: 'dashboard#index'
         resources :settings, only: :index
       end
 

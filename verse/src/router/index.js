@@ -84,8 +84,8 @@ const routes = [
             path: "settings",
             name: "settings-dashboard",
             component: SettingsDashboardView,
-          }
-        ]
+          },
+        ],
       },
       {
         path: "/flash_cards",

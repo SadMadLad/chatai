@@ -11,6 +11,7 @@ AllCops:
     - config.ru
     - config/initializers/**/*
     - config/environments/**/*
+    - config/queue_schema.rb
     - db/seeds.rb
 
 require:

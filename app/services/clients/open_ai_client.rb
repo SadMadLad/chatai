@@ -10,6 +10,7 @@ module Clients
 
     def initialize(messages: [])
       super
+
       @client = Faraday.new(
         url: COMPLETIONS_ENDPOINT,
         headers: {

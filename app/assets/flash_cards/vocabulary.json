@@ -101,10 +101,7 @@
     "color": "red",
     "prompt": "Inviolability",
     "published": true,
-    "tags": [
-      "Vocabulary",
-      "English"
-    ]
+    "tags": ["Vocabulary", "English"]
   },
   {
     "answer": "Having limited or narrow outlook",
@@ -112,10 +109,7 @@
     "color": "pink",
     "prompt": "Parochial",
     "published": true,
-    "tags": [
-      "Vocabulary",
-      "English"
-    ]
+    "tags": ["Vocabulary", "English"]
   },
   {
     "answer": "Pointless or Unnecessary",
@@ -123,9 +117,6 @@
     "color": "orange",
     "prompt": "Infructuous",
     "published": true,
-    "tags": [
-      "Vocabulary",
-      "English"
-    ]
+    "tags": ["Vocabulary", "English"]
   }
 ]

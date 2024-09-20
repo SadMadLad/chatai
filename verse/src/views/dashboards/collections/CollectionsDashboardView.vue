@@ -1,6 +1,3 @@
-<script setup>
-</script>
+<script setup></script>
 
-<template>
-  Collections Dashboard
-</template>
+<template>Collections Dashboard</template>

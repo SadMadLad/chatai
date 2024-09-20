@@ -1,6 +1,3 @@
-<script setup>
-</script>
+<script setup></script>
 
-<template>
-  Flash Cards Dashboard
-</template>
+<template>Flash Cards Dashboard</template>

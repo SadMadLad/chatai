@@ -1,6 +1,3 @@
-<script setup>
-</script>
+<script setup></script>
 
-<template>
-  Settings Dashboard
-</template>
+<template>Settings Dashboard</template>

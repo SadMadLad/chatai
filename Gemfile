@@ -8,6 +8,7 @@ gem 'rails', '~> 7.2.1'
 
 gem 'awesome_print'
 gem 'bootsnap', require: false
+gem 'countries'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'faker'

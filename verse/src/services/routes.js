@@ -19,11 +19,12 @@ const RailsRoutes = {
     method: "DELETE",
   },
 
-  // Dashboards
-
   // Collections
   collections: { url: () => `${Rails}/collections`, method: "GET" },
   collection: { url: (id) => `${Rails}/collections/${id}`, method: "GET" },
+
+  // Dashboard
+  dashboard: { url: () => `${Rails}/dashboard`, method: "GET" },
 
   // Favorites
   createFavorite: { url: () => `${Rails}/favorites`, method: "POST" },
