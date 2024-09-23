@@ -19,11 +19,11 @@
     "postcss": "^8.4.47",
     "qs": "^6.13.0",
     "tailwindcss": "^3.4.12",
-    "vue": "^3.5.6",
+    "vue": "^3.5.7",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
-    "vite": "^5.4.6"
+    "vite": "^5.4.7"
   }
 }

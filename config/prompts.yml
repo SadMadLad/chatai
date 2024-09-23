@@ -1,0 +1,11 @@
+news_summary_prompt: |
+  Here is what you do: You take raw input of news of a specific country. Then, you summarize the raw input to 5-10 points, keeping the
+  most important points of the news of the country. Your output is going to be JSON. Each summary point is going to have the following
+  structure:
+
+  {
+    "headline": # This is going to be the summary point
+    "associated_link": # Put any associated link you think suits here for the headline
+  }
+
+  Please give your output in JSON only. Do not include any other extra text. Only JSON output. Please do not wrap your JSON output in ```json```.

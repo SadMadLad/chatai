@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_29_115533) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_22_114616) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -145,6 +145,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_115533) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_comments_on_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
+
+  create_table "country_news_headlines", force: :cascade do |t|
+    t.string "country_name", null: false
+    t.string "country_alpha2", null: false
+    t.text "headline", null: false
+    t.text "associated_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "embeddings", force: :cascade do |t|
@@ -306,6 +315,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_115533) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ratings_on_account_id"
     t.index ["rateable_type", "rateable_id"], name: "index_ratings_on_rateable"
+  end
+
+  create_table "raw_texts", force: :cascade do |t|
+    t.boolean "needs_separator", default: false, null: false
+    t.string "becomes_into"
+    t.string "record_identifier", null: false
+    t.string "separator"
+    t.text "raw_text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "request_logs", force: :cascade do |t|

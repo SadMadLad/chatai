@@ -119,6 +119,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    domain_name (0.6.20240107)
     dotenv (3.1.4)
     dotenv-rails (3.1.4)
       dotenv (= 3.1.4)
@@ -152,6 +153,8 @@ GEM
     high_voltage (4.0.0)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
+    http-cookie (1.0.7)
+      domain_name (~> 0.5)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     image_processing (1.13.0)
@@ -200,6 +203,19 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    mechanize (2.12.1)
+      addressable (~> 2.8)
+      base64
+      domain_name (~> 0.5, >= 0.5.20190701)
+      http-cookie (~> 1.0, >= 1.0.3)
+      mime-types (~> 3.0)
+      net-http-digest_auth (~> 1.4, >= 1.4.1)
+      net-http-persistent (>= 2.5.2, < 5.0.dev)
+      nkf
+      nokogiri (~> 1.11, >= 1.11.2)
+      rubyntlm (~> 0.6, >= 0.6.3)
+      webrick (~> 1.7)
+      webrobots (~> 0.1.2)
     method_source (1.1.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
@@ -212,6 +228,9 @@ GEM
       activerecord (>= 6.1)
     net-http (0.4.1)
       uri
+    net-http-digest_auth (1.4.1)
+    net-http-persistent (4.0.4)
+      connection_pool (~> 2.2)
     net-imap (0.4.16)
       date
       net-protocol
@@ -222,6 +241,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
+    nkf (0.2.0)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     ollama-ai (1.3.0)
@@ -331,12 +351,12 @@ GEM
     rubocop-performance (1.22.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.26.1)
+    rubocop-rails (2.26.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    ruby-lsp (0.18.0)
+    ruby-lsp (0.18.1)
       language_server-protocol (~> 3.17.0)
       prism (~> 1.0)
       rbs (>= 3, < 4)
@@ -345,11 +365,13 @@ GEM
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
+    rubyntlm (0.6.5)
+      base64
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
     securerandom (0.3.1)
-    selenium-webdriver (4.24.0)
+    selenium-webdriver (4.25.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -362,7 +384,7 @@ GEM
       fugit (~> 1.11.0)
       railties (>= 7.1)
       thor (~> 1.3.1)
-    sorbet-runtime (0.5.11572)
+    sorbet-runtime (0.5.11577)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -402,6 +424,7 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     webrick (1.8.1)
+    webrobots (0.1.2)
     websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -436,8 +459,10 @@ DEPENDENCIES
   jwt
   letter_opener
   lookbook
+  mechanize
   mime-types
   neighbor
+  nokogiri
   ollama-ai
   pagy
   pg (~> 1.1)

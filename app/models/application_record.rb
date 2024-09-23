@@ -2,6 +2,9 @@
 
 # Base Record
 class ApplicationRecord < ActiveRecord::Base
+  TABLE_NAMES = connection.tables
+  MODEL_NAMES = TABLE_NAMES.map { |table| table.singularize.camelize }
+
   include TimestampQueries
 
   attr_accessor :skip_broadcast_callbacks, :skip_callbacks

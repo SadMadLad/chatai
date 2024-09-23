@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  needs_separator: false
+  separator: MyString
+  raw_text: MyText
+  becomes_into: MyString
+
+two:
+  needs_separator: false
+  separator: MyString
+  raw_text: MyText
+  becomes_into: MyString
