@@ -3,8 +3,5 @@
 class CountryNewsHeadline < ApplicationRecord
   include BelongsToCountry
 
-  validates :headline, presence: true
-
-  class << self
-  end
+  validates :headline, :description, presence: true
 end

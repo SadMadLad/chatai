@@ -51,6 +51,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'lookbook'
   gem 'pry-rails'
+  gem 'reek'
   gem 'rubocop-capybara'
   gem 'rubocop-minitest'
   gem 'rubocop-performance'

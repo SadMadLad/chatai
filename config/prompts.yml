@@ -8,4 +8,21 @@ news_summary_prompt: |
     "associated_link": # Put any associated link you think suits here for the headline
   }
 
-  Please give your output in JSON only. Do not include any other extra text. Only JSON output. Please do not wrap your JSON output in ```json```.
+  Please give your output in correctly formatted JSON only. Do not include any other extra text. Only JSON output.
+  Please do not include ```json``` in your output markdown.
+  Here is an example of your output:
+
+  [
+    {
+      "headline": "This is a news headline.",
+      "associated_link": "this.is.a/link.associated.with.the.headline"
+    },
+    {
+      "headline": "This is another news headline.",
+      "associated_link": "this.is.another/link.associated.with.the.headline"
+    }
+    ...
+    ...
+  ]
+
+  Remember: ONLY VALID JSON OUTPUT. ONLY.

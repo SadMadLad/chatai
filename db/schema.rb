@@ -150,8 +150,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_22_114616) do
   create_table "country_news_headlines", force: :cascade do |t|
     t.string "country_name", null: false
     t.string "country_alpha2", null: false
-    t.text "headline", null: false
     t.text "associated_link"
+    t.text "description", null: false
+    t.text "headline", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -31,7 +31,7 @@ class WeatherReportJob < ApplicationJob
   def perform(scope: :current, location: 'Lahore')
     weather_response = Clients::WeatherApiClient.new.query_weather(scope, location)
     weather_response = JSON.parse(weather_response.body)
-    weather_response = ResponseModelParser.new(weather_response, MAPPER).parse
+    weather_response = HashMapper.new(weather_response, MAPPER).parse
 
     weather_report = WeatherReport.new(weather_response)
     weather_report.save

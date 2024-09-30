@@ -2,7 +2,7 @@
 
 module Calculations
   # Manage calculations of an account and show them to their dashboard.
-  class DashboardStatisticsService < BaseService
+  class DashboardStatisticsService < ApplicationService
     ASSOCIATIONS_GROUPED_BY_CREATED_AT = %i[collections favorites flash_cards collected_items quizzes
                                             quiz_undertakings].freeze
 

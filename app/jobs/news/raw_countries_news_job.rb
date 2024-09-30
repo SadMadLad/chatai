@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class CountriesNewsJob < ApplicationJob
+module News
+  class RawCountriesNewsJob < ApplicationJob
   def perform(countries: Country.all)
     countries.each do |country|
       country_name = country.iso_short_name
@@ -12,5 +13,6 @@ class CountriesNewsJob < ApplicationJob
         record_identifier: country_name
       )
     end
+  end
   end
 end

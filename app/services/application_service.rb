@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BaseService
+class ApplicationService
   def call
     raise NotImplementedError
   end
